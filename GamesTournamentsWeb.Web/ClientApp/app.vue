@@ -1,5 +1,5 @@
 <template>
   <div>
-    <NuxtWelcome />
+    <InputText value="fffs" />
   </div>
 </template>
