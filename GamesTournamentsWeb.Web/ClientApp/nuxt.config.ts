@@ -2,10 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: [
-      "@nuxtjs/tailwindcss",
-      "nuxt-primevue"
-  ],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
   primevue: {
     unstyled: true,
     importPT: { from: '@/presets/wind/', as: 'wind' },
