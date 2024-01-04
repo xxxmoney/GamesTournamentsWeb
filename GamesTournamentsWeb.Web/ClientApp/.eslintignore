@@ -1,0 +1,12 @@
+/dist
+/.quasar
+/node_modules
+.eslintrc.js
+babel.config.js
+postcss.config.js
+tailwind.config.js
+vue.config.js
+nuxt.config.ts
+main.js
+/presets
+/.nuxt
