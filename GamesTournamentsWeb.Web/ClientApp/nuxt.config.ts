@@ -5,11 +5,13 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-primevue',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/i18n'
   ],
+  css: ['~/assets/css/main.css'],
   primevue: {
     unstyled: true,
     importPT: { from: '@/presets/wind/', as: 'wind' }
   },
-  css: ['~/assets/css/main.css']
+  i18n: {}
 })
