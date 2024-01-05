@@ -8,7 +8,3 @@
     <h1>{{ $t('test') }}</h1>
   </div>
 </template>
-
-<style scoped>
-
-</style>
