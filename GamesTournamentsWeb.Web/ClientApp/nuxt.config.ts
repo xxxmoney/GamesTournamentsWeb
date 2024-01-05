@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt'
   ],
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', 'primeicons/primeicons.css'],
   primevue: {
     unstyled: true,
     importPT: { from: '@/presets/wind/', as: 'wind' }
