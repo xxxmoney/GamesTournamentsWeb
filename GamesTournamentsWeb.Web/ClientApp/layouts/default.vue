@@ -8,7 +8,7 @@
       <LayoutDefaultHeader />
     </header>
 
-    <main class="active-area relative flex-1 my-4 lg:my-16">
+    <main class="active-area relative flex-1 my-4 lg:my-16 flex col">
       <slot />
     </main>
 

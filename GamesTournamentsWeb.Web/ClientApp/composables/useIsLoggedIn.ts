@@ -1,2 +1,6 @@
 // TODO
-export const useIsLoggedIn = () => ref(false)
+
+export const useIsLoggedIn = () => {
+  const store = useMainStore()
+  return computed(() => store.isLoggedIn)
+}

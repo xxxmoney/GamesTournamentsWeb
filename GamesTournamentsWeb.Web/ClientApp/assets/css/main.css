@@ -154,4 +154,8 @@ html, body, #__nuxt {
     @apply inline-flex gap;
 }
 
+.form-container {
+    @apply inline-flex flex-col gap;
+}
+
 

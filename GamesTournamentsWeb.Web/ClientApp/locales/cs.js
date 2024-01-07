@@ -1,7 +1,12 @@
 export default {
   test: 'Test CS',
   common: {
-    pages: 'Stránky'
+    pages: 'Stránky',
+    email: 'E-mail',
+    password: 'Heslo',
+    login: 'Přihlásit se',
+    logout: 'Odhlásit se',
+    register: 'Registrovat se'
   },
 
   pages: {
@@ -17,5 +22,12 @@ export default {
     contact: 'Kontakt',
     privacy: 'Soukromí',
     terms: 'Podmínky'
+  },
+
+  password: {
+    prompt: 'Zadejte heslo',
+    weak: 'Slabé',
+    medium: 'Průměrné',
+    strong: 'Silné'
   }
 }
