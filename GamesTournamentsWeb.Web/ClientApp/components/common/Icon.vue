@@ -13,8 +13,9 @@ const { size, icon } = defineProps({
 const iconClass = computed(() => {
   return `text-${size} text-black pi ${icon}`
 })
+
 </script>
 
 <template>
-  <i :class="iconClass"></i>
+  <i :class="iconClass" class="cursor-pointer" @click=""></i>
 </template>
