@@ -1,6 +1,8 @@
 export default {
   test: 'Test CS',
-  common: {},
+  common: {
+    pages: 'Stránky'
+  },
 
   pages: {
     home: 'Domů',

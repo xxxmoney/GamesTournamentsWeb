@@ -25,8 +25,8 @@ const isLoggedIn = useIsLoggedIn()
         {{ $t('pages.games') }}
       </NuxtLink>
     </li>
-    <li>
-      <NuxtLink v-if="isLoggedIn" to="/dashboard">
+    <li v-if="isLoggedIn">
+      <NuxtLink to="/dashboard">
         {{ $t('pages.dashboard') }}
       </NuxtLink>
     </li>

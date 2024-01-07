@@ -1,13 +1,25 @@
 <script lang="ts" setup>
-const { orientation } = defineProps({
-  orientation: useFlexByOrientationPropsParam()
+const { orientation, bypassMobile } = defineProps({
+  orientation: useFlexByOrientationPropsParam(),
+  bypassMobile: {
+    type: Boolean,
+    default: false
+  }
 })
 
-const containerClass = useFlexByOrientationClass(orientation)
+const flexClass = useFlexByOrientationClass(orientation)
+const mobileClass = computed(() => bypassMobile ? '' : 'invisible lg:visible')
+
+const containerClass = computed(() => {
+  return [
+    flexClass.value,
+    mobileClass.value
+  ].join(' ')
+})
 </script>
 
 <template>
-  <ul :class="containerClass" class="ul-links invisible lg:visible">
+  <ul :class="containerClass" class="ul-links">
     <li>
       <NuxtLink to="/about">
         {{ $t('pages.about') }}

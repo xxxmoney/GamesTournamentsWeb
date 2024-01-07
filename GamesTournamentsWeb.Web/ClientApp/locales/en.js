@@ -1,6 +1,8 @@
 export default {
   test: 'Test EN',
-  common: {},
+  common: {
+    pages: 'Pages'
+  },
 
   pages: {
     home: 'Home',

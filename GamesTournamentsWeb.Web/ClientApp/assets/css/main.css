@@ -26,7 +26,9 @@
     --surface-950: 19 19 19;
 
     --margin-x: 25px;
-    --margin-y: 10px;
+    --margin-x-double: calc(var(--margin-x) * 2);
+    --margin-y: 8px;
+    --margin-y-double: calc(var(--margin-y) * 2);
 
     --active-area: 1200px;
 }
@@ -76,37 +78,72 @@ html, body, #__nuxt {
     @apply gap-x-[var(--margin-x)];
 }
 
+.gap-x-double {
+    @apply gap-x-[var(--margin-x-double)];
+}
+
 .mx {
     @apply mx-[var(--margin-x)];
+}
+
+.mx-double {
+    @apply mx-[var(--margin-x-double)];
 }
 
 .ml {
     @apply ml-[var(--margin-x)];
 }
 
+.ml-double {
+    @apply ml-[var(--margin-x-double)];
+}
+
 .mr {
     @apply mr-[var(--margin-x)];
+}
+
+.mr-double {
+    @apply mr-[var(--margin-x-double)];
 }
 
 .gap-y {
     @apply gap-y-[var(--margin-y)];
 }
 
+.gap-y-double {
+    @apply gap-y-[var(--margin-y-double)];
+}
+
 .my {
     @apply my-[var(--margin-y)];
+}
+
+.my-double {
+    @apply my-[var(--margin-y-double)];
 }
 
 .mt {
     @apply mt-[var(--margin-y)];
 }
 
+.mt-double {
+    @apply mt-[var(--margin-y-double)];
+}
+
 .mb {
     @apply mb-[var(--margin-y)];
 }
 
+.mb-double {
+    @apply mb-[var(--margin-y-double)];
+}
 
 .gap {
     @apply gap-x gap-y;
+}
+
+.gap-double {
+    @apply gap-x-double gap-y-double;
 }
 
 .active-area {
