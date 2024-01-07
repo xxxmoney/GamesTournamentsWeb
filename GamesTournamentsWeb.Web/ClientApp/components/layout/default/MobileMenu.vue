@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const visible = ref(true)
+const visible = useMobileMenuActive()
 </script>
 
 <template>
@@ -15,7 +15,9 @@ const visible = ref(true)
         <LayoutDefaultAccountControlsLinks bypassMobile orientation="col" />
         <LayoutDefaultOtherLinks bypassMobile orientation="col" />
       </div>
-      <div></div>
+      <div>
+        <CommonLogo />
+      </div>
     </div>
   </Dialog>
 </template>

@@ -2,6 +2,6 @@ export const useFlexByOrientationPropsParam = () => ({
   orientation: {
     type: String,
     default: 'row',
-    validator: (value) => ['row', 'col'].includes(value)
+    validator: (value: string) => ['row', 'col'].includes(value)
   }
 })

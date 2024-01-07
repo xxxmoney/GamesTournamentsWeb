@@ -1,1 +1,1 @@
-export const useFlexByOrientationClass = (orientation) => computed(() => `flex-${orientation}`)
+export const useFlexByOrientationClass = (orientation: string) => computed(() => `flex-${orientation}`)
