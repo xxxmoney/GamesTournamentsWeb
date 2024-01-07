@@ -3,17 +3,21 @@
 </script>
 
 <template>
-  <header>
-    <div />
-  </header>
+  <div class="flex flex-col h-full">
+    <header class="flex-grow-0 sticky">
+      <LayoutDefaultHeader />
+    </header>
 
-  <main>
-    <slot />
-  </main>
+    <main class="active-area relative flex-1 my-4 lg:my-16">
+      <slot />
+    </main>
 
-  <footer>
-    <div />
-  </footer>
+    <footer class="flex-grow-0">
+      <LayoutDefaultFooter />
+    </footer>
+  </div>
+
+  <LayoutDefaultMobileMenu />
 </template>
 
 <style scoped>

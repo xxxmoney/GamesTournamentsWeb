@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 :root {
     --primary-50: 232 241 244;
     --primary-100: 217 236 232;
@@ -22,4 +24,97 @@
     --surface-800: 56 56 56;
     --surface-900: 38 38 38;
     --surface-950: 19 19 19;
+
+    --margin-x: 25px;
+    --margin-y: 10px;
+
+    --active-area: 1200px;
 }
+
+.heading {
+    font-size: 30px;
+    line-height: 120%;
+    letter-spacing: -0.1rem;
+}
+
+.subheading {
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: -0.1rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /*min-height: 100vh;*/
+    /*min-width: 100vw;*/
+    background-color: rgb(var(--surface-100));
+    color: black;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0rem;
+    position: relative;
+}
+
+html, body, #__nuxt {
+    width: 100%;
+    height: 100%;
+}
+
+#__nuxt {
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+#__nuxt {
+    @apply px-8 py-2 lg:px-16 lg:py-4;
+}
+
+.gap-x {
+    @apply gap-x-[var(--margin-x)];
+}
+
+.mx {
+    @apply mx-[var(--margin-x)];
+}
+
+.ml {
+    @apply ml-[var(--margin-x)];
+}
+
+.mr {
+    @apply mr-[var(--margin-x)];
+}
+
+.gap-y {
+    @apply gap-y-[var(--margin-y)];
+}
+
+.my {
+    @apply my-[var(--margin-y)];
+}
+
+.mt {
+    @apply mt-[var(--margin-y)];
+}
+
+.mb {
+    @apply mb-[var(--margin-y)];
+}
+
+
+.gap {
+    @apply gap-x gap-y;
+}
+
+.active-area {
+    @apply lg:w-[var(--active-area)] lg:mx-auto;
+}
+
+.ul-links {
+    @apply inline-flex gap;
+}
+
+

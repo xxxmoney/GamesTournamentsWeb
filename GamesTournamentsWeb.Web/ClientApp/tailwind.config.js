@@ -2,7 +2,7 @@
 export default {
   darkMode: 'class',
   content: [
-    "presets/**/*.{js,vue,ts}"
+    'presets/**/*.{js,vue,ts}'
   ],
   theme: {
     extend: {
@@ -34,4 +34,3 @@ export default {
     }
   }
 }
-
