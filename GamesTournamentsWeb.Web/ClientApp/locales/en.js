@@ -4,9 +4,11 @@ export default {
     pages: 'Pages',
     email: 'E-mail',
     password: 'Password',
+    confirm_password: 'Confirm password',
     login: 'Login',
     logout: 'Logout',
-    register: 'Register'
+    register: 'Register',
+    username: 'Username'
   },
 
   pages: {

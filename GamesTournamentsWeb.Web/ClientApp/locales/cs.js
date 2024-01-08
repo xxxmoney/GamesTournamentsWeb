@@ -4,9 +4,11 @@ export default {
     pages: 'Stránky',
     email: 'E-mail',
     password: 'Heslo',
+    confirm_password: 'Potvrzení hesla',
     login: 'Přihlásit se',
     logout: 'Odhlásit se',
-    register: 'Registrovat se'
+    register: 'Registrovat se',
+    username: 'Uživatelské jméno'
   },
 
   pages: {
