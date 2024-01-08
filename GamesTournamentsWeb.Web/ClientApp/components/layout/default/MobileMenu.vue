@@ -10,7 +10,7 @@ const visible = useMobileMenuActive()
     modal
   >
     <div class="flex flex-row justify-between">
-      <div class="flex flex-col gap-y-double">
+      <div class="flex flex-col gap-y-lg">
         <LayoutDefaultMainPagesLinks orientation="col" />
         <LayoutDefaultAccountControlsLinks bypassMobile orientation="col" />
         <LayoutDefaultOtherLinks bypassMobile orientation="col" />

@@ -3,6 +3,8 @@
 </script>
 
 <template>
-  <div>
+  <div class="inline-flex flex-col items-center mx-auto gap-y-xl">
+    <PageHomeHero />
+    <PageHomeFeatures />
   </div>
 </template>
