@@ -4,6 +4,9 @@ export default {
   content: [
     'presets/**/*.{js,vue,ts}'
   ],
+  plugins: [
+    require('daisyui')
+  ],
   theme: {
     extend: {
       colors: {

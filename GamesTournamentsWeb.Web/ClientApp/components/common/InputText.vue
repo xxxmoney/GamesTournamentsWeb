@@ -1,7 +1,13 @@
 <script lang="ts" setup>
 const { modelValue, label, showLabel } = defineProps({
-  modelValue: String,
-  label: String,
+  modelValue: {
+    type: String,
+    required: true
+  },
+  label: {
+    type: String,
+    default: ''
+  },
   showLabel: {
     type: Boolean,
     default: true

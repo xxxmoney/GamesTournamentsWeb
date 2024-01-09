@@ -17,5 +17,5 @@ const iconClass = computed(() => {
 </script>
 
 <template>
-  <i :class="iconClass" class="cursor-pointer" @click=""></i>
+  <i :class="iconClass" class="cursor-pointer"></i>
 </template>
