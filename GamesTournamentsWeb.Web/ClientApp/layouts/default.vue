@@ -4,7 +4,7 @@
 
 <template>
   <div class="flex flex-col h-full">
-    <header class="flex-grow-0 sticky">
+    <header class="flex-grow-0 sticky top-0">
       <LayoutDefaultHeader />
     </header>
 
