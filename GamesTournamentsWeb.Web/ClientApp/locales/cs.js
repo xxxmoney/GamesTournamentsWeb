@@ -9,7 +9,11 @@ export default {
     logout: 'Odhlásit se',
     register: 'Registrovat se',
     username: 'Uživatelské jméno',
-    try_now: 'Vyzkoušejte nyní'
+    try_now: 'Vyzkoušejte nyní',
+    name: 'Jméno',
+    surname: 'Příjmení',
+    message: 'Zpráva',
+    submit: 'Odeslat'
   },
 
   pages: {
@@ -56,6 +60,11 @@ export default {
         title: 'Statistiky a postřehy',
         description: 'Ponořte se do minulých turnajů s komplexními statistikami a přehledy, které vám pomohou činit informovaná rozhodnutí.'
       }
+    },
+    contact_form: {
+      title: 'Kontaktujte nás',
+      subtitle: 'Rádi od vás uslyšíme!',
+      info: 'Pole s * jsou povinná.'
     }
   }
 }

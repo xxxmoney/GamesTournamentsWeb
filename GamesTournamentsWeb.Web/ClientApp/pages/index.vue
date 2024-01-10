@@ -7,5 +7,6 @@
     <PageHomeHero />
     <PageHomeFeatures />
     <PageHomeCarousel />
+    <PageHomeContactForm />
   </div>
 </template>

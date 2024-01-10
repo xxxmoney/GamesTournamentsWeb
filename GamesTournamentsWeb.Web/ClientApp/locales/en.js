@@ -9,7 +9,11 @@ export default {
     logout: 'Logout',
     register: 'Register',
     username: 'Username',
-    try_now: 'Try now'
+    try_now: 'Try now',
+    name: 'Name',
+    surname: 'Surname',
+    message: 'Message',
+    submit: 'Submit'
   },
 
   pages: {
@@ -56,6 +60,11 @@ export default {
         title: 'Stats & Insights',
         description: 'Dive deep into past tournaments with comprehensive stats and insights, helping you make informed decisions.'
       }
+    },
+    contact_form: {
+      title: 'Contact us',
+      subtitle: 'We\'d love to hear from you!',
+      info: 'Fields with * are required.'
     }
   }
 
