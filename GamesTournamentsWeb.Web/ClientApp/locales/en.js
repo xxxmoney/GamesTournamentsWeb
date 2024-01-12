@@ -14,7 +14,8 @@ export default {
     surname: 'Surname',
     message: 'Message',
     submit: 'Submit',
-    genre: 'Genre'
+    genre: 'Genre',
+    detail: 'Detail'
   },
 
   pages: {

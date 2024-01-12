@@ -206,8 +206,20 @@ html, body, #__nuxt {
     @apply inline-flex gap;
 }
 
+.max-w {
+    @apply max-w-xs;
+}
+
 .container-width {
-    @apply w-full max-w-xs
+    @apply w-full max-w
+}
+
+.aspect-card {
+    @apply aspect-[6/8]
+}
+
+.hover {
+    @apply hover:opacity-80 transition ease-in-out
 }
 
 .form-container {

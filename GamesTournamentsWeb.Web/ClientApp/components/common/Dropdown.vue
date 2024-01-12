@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { modelValue, label, showLabel } = defineProps({
+const { modelValue, options, optionLabel, optionValue, label, showLabel, filter, showClear } = defineProps({
   modelValue: {
     type: String,
     required: true
@@ -47,7 +47,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
       :filter="filter"
       :optionLabel="optionLabel"
       :optionValue="optionValue"
-      :options="options"
+      :options="options as any[]"
       :placeholder="label as string"
       :showClear="showClear"
     />
@@ -56,6 +56,6 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 
 <style>
 :deep(.p-dropdown) {
-  width: 100% !important;
+  @apply !w-full
 }
 </style>

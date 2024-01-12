@@ -7,16 +7,17 @@ await gamesStore.initialize()
 </script>
 
 <template>
-  <div class="inline-flex flex-col items-center gap-lg m-auto">
+  <div class="inline-flex flex-col items-center gap-xl m-auto">
     <PageGamesFilter />
 
-    <div class="grid gap grid-cols-1 lg:grid-cols-3">
+    <div class="grid gap-lg grid-cols-1 lg:grid-cols-3">
       <PageGamesGame
         v-for="game in games"
         :id="game.id"
         :key="`game-${game.id}`"
-        :name="game.name"
       />
     </div>
+
+    <Paginator :rows="10" :totalRecords="120"></Paginator>
   </div>
 </template>
