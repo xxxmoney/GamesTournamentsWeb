@@ -13,7 +13,8 @@ export default {
     name: 'Name',
     surname: 'Surname',
     message: 'Message',
-    submit: 'Submit'
+    submit: 'Submit',
+    genre: 'Genre'
   },
 
   pages: {

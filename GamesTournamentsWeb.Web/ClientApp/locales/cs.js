@@ -13,7 +13,8 @@ export default {
     name: 'Jméno',
     surname: 'Příjmení',
     message: 'Zpráva',
-    submit: 'Odeslat'
+    submit: 'Odeslat',
+    genre: 'Žánr'
   },
 
   pages: {
