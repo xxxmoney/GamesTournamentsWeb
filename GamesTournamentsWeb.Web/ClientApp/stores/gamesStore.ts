@@ -48,3 +48,7 @@ export const useGamesStore = defineStore({
     }
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useGamesStore, import.meta.hot))
+}

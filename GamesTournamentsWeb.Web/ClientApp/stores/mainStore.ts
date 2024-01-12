@@ -20,3 +20,7 @@ export const useMainStore = defineStore({
   },
   getters: {}
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useMainStore, import.meta.hot))
+}
