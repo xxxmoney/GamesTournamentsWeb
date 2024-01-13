@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import InputText from '~/components/common/InputText.vue'
+
 const { modelValue, label } = defineProps({
   modelValue: {
     type: String,
@@ -7,6 +9,10 @@ const { modelValue, label } = defineProps({
   label: {
     type: String,
     default: ''
+  },
+  showLabel: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -16,8 +22,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 </script>
 
 <template>
-  <div class="inline-flex flex-col">
-    <span>{{ label }}</span>
+  <CommonWithLabel :label="label" :showLabel="showLabel">
     <Password
       v-model="computedValue"
       :mediumLabel="$t('password.medium')"
@@ -27,5 +32,5 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
       :weakLabel="$t('password.weak')"
       inputClass="w-full"
     />
-  </div>
+  </CommonWithLabel>
 </template>

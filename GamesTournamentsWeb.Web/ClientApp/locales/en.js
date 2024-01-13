@@ -68,6 +68,9 @@ export default {
       subtitle: 'We\'d love to hear from you!',
       info: 'Fields with * are required.'
     }
+  },
+  games: {
+    my_tournaments: 'My tournaments'
   }
 
 }

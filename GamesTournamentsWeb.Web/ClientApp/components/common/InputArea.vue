@@ -20,8 +20,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 </script>
 
 <template>
-  <div class="inline-flex flex-col">
-    <span v-if="showLabel">{{ label }}</span>
+  <CommonWithLabel :label="label" :showLabel="showLabel">
     <Textarea
       v-model="computedValue"
       :placeholder="label as string"
@@ -29,5 +28,5 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
       cols="30"
       rows="4"
     />
-  </div>
+  </CommonWithLabel>
 </template>

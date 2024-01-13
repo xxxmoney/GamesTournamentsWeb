@@ -68,5 +68,8 @@ export default {
       subtitle: 'Rádi od vás uslyšíme!',
       info: 'Pole s * jsou povinná.'
     }
+  },
+  games: {
+    my_tournaments: 'Moje turnaje'
   }
 }

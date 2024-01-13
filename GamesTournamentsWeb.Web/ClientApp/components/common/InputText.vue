@@ -20,8 +20,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 </script>
 
 <template>
-  <div class="inline-flex flex-col">
-    <span v-if="showLabel">{{ label }}</span>
+  <CommonWithLabel :label="label" :showLabel="showLabel">
     <InputText v-model="computedValue" :placeholder="label as string" />
-  </div>
+  </CommonWithLabel>
 </template>

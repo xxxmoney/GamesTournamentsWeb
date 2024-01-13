@@ -3,37 +3,25 @@ const gamesStore = useGamesStore()
 
 const filter = computed(() => gamesStore.filter)
 const genres = computed(() => gamesStore.genres)
-
-const name = computed({
-  get: () => filter.value.name,
-  set: (value: string) => {
-    filter.value.name = value
-  }
-})
-const genreId = computed({
-  get: () => filter.value.genreId,
-  set: (value: string) => {
-    filter.value.genreId = tryParseInt(value)
-  }
-})
-
-const updateGenre = (genreIdString: string) => {
-  genreId.value = tryParseInt(genreIdString)
-}
 </script>
 
 <template>
   <div class="form-container">
-    <CommonInputText v-model="name" :label="$t('common.name')" />
-    <CommonDropdown
-      :label="$t('common.genre')"
-      :modelValue="genreId as string"
-      :options="genres"
-      @update:modelValue="updateGenre"
-    />
+    <CommonInputText v-model="filter.name" :label="$t('common.name')" />
+
+    <CommonWithLabel :label="$t('common.genre')">
+      <Dropdown
+        v-model="filter.genreId"
+        :options="genres"
+        :placeholder="$t('common.genre')"
+        optionLabel="name"
+        optionValue="id"
+        showClear
+      />
+    </CommonWithLabel>
+
+    <CommonWithLabel :label="$t('games.my_tournaments')">
+      <Checkbox v-model="filter.withMyTournaments" :binary="true" />
+    </CommonWithLabel>
   </div>
 </template>
-
-<style scoped>
-
-</style>
