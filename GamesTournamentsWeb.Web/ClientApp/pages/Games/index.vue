@@ -7,7 +7,7 @@ await gamesStore.initialize()
 </script>
 
 <template>
-  <div class="inline-flex flex-col items-center gap-xl m-auto">
+  <div class="page-container">
     <PageGamesFilter />
 
     <div class="grid gap-lg grid-cols-1 lg:grid-cols-3">

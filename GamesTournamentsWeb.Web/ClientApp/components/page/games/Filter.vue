@@ -14,6 +14,7 @@ const genres = computed(() => gamesStore.genres)
         v-model="filter.genreId"
         :options="genres"
         :placeholder="$t('common.genre')"
+        filter
         optionLabel="name"
         optionValue="id"
         showClear

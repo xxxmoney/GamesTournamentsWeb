@@ -222,12 +222,26 @@ html, body, #__nuxt {
     @apply hover:opacity-80 transition ease-in-out
 }
 
-.form-container {
-    @apply container-width inline-flex flex-col gap;
+.container {
+    @apply inline-flex flex-col;
 }
 
-.container {
-    @apply inline-flex flex-col gap;
+.page-container {
+    @apply container items-center gap-xl m-auto;
 }
+
+.form-container {
+    @apply container-width container gap;
+}
+
+.form-container-lg {
+    @apply container-width container gap-lg;
+}
+
+.form-container-xl {
+    @apply container-width container gap-xl;
+}
+
+
 
 

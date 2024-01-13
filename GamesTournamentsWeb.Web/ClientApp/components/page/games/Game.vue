@@ -17,12 +17,7 @@ const goToGameDetail = () => {
 </script>
 
 <template>
-  <div
-    class="form-container relative aspect-card overflow-hidden cursor-pointer hover"
-    @click="goToGameDetail"
-  >
-    <img :src="game.imageUrl" alt="Image" class="object-cover w-full h-full rounded-xl" />
-
-    <Button :label="$t('common.detail')" />
-  </div>
+  <CommonImageCard :imageUrl="game.imageUrl" @click="goToGameDetail">
+    <Button :label="$t('common.detail')" @click="goToGameDetail" />
+  </CommonImageCard>
 </template>
