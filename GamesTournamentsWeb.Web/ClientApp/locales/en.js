@@ -15,7 +15,8 @@ export default {
     message: 'Message',
     submit: 'Submit',
     genre: 'Genre',
-    detail: 'Detail'
+    detail: 'Detail',
+    my_tournaments: 'My tournaments'
   },
 
   pages: {
@@ -69,8 +70,6 @@ export default {
       info: 'Fields with * are required.'
     }
   },
-  games: {
-    my_tournaments: 'My tournaments'
-  }
+  games: {}
 
 }

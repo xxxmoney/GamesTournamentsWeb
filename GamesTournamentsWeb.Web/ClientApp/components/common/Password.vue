@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import InputText from '~/components/common/InputText.vue'
 
 const { modelValue, label } = defineProps({
   modelValue: {

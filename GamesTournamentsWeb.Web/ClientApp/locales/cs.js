@@ -15,7 +15,8 @@ export default {
     message: 'Zpráva',
     submit: 'Odeslat',
     genre: 'Žánr',
-    detail: 'Detail'
+    detail: 'Detail',
+    my_tournaments: 'Moje turnaje'
   },
 
   pages: {
@@ -69,7 +70,6 @@ export default {
       info: 'Pole s * jsou povinná.'
     }
   },
-  games: {
-    my_tournaments: 'Moje turnaje'
-  }
+  games: {},
+  tournaments: {}
 }

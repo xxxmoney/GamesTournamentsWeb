@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <div class="page-container"></div>
+  <div class="page-container">
+    <PageTournamentsFilter />
+  </div>
 </template>

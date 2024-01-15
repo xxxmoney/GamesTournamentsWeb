@@ -21,7 +21,7 @@ const genres = computed(() => gamesStore.genres)
       />
     </CommonWithLabel>
 
-    <CommonWithLabel :label="$t('games.my_tournaments')">
+    <CommonWithLabel :label="$t('common.my_tournaments')">
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
   </div>
