@@ -14,7 +14,7 @@ const getLocalData = <T>(key: string, defaultValue: T): T => {
 const setLocalData = <T>(key: string, value: T): T => {
   try {
     const stringValue = isObject(value) ? JSON.stringify(value) : value
-    localStorage.setItem(key, stringValue)
+    localStorage.setItem(key, stringValue as string)
   } catch (e) {
     console.error(e)
   }

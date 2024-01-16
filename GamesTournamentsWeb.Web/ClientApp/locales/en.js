@@ -16,7 +16,8 @@ export default {
     submit: 'Submit',
     genre: 'Genre',
     detail: 'Detail',
-    my_tournaments: 'My tournaments'
+    my_tournaments: 'My tournaments',
+    starts_in: 'Starts in'
   },
 
   pages: {

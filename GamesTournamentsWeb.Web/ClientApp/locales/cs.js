@@ -16,7 +16,8 @@ export default {
     submit: 'Odeslat',
     genre: 'Žánr',
     detail: 'Detail',
-    my_tournaments: 'Moje turnaje'
+    my_tournaments: 'Moje turnaje',
+    starts_in: 'Začíná za'
   },
 
   pages: {

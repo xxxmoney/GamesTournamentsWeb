@@ -23,10 +23,12 @@ export const useTournamentsStore = defineStore({
       const platform = new Platform(1, 'PC')
       const region = new Region(1, 'Europe')
 
+      const utcDate = new Date(Date.UTC(2024, 0, 20, 0, 0, 0))
+
       this.tournaments = [
-        new Tournament(1, 'Super Tournament', 2, game, platform, region),
-        new Tournament(2, 'Other Tournament', 4, game, platform, region),
-        new Tournament(3, 'Amazing Tournament?', 2, game, platform, region)
+        new Tournament(1, 'Super Tournament', 2, game, platform, region, utcDate),
+        new Tournament(2, 'Other Tournament', 4, game, platform, region, utcDate),
+        new Tournament(3, 'Amazing Tournament?', 2, game, platform, region, utcDate)
       ].map(tournament => tournament.toJson() as Tournament)
 
       return Promise.resolve(this.tournaments)

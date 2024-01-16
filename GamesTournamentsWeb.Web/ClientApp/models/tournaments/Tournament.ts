@@ -10,8 +10,9 @@ class Tournament extends ConvertableToJson {
   public game: Game
   public platform: Platform
   public region: Region
+  public startDate: Date
 
-  constructor (id: number, name: string, teamSize: number, game: Game, platform: Platform, region: Region) {
+  constructor (id: number, name: string, teamSize: number, game: Game, platform: Platform, region: Region, startDate: Date) {
     super()
 
     this.id = id
@@ -20,6 +21,7 @@ class Tournament extends ConvertableToJson {
     this.game = game
     this.platform = platform
     this.region = region
+    this.startDate = startDate
   }
 
   toJson (): Object {
