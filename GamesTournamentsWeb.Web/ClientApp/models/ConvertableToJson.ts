@@ -1,5 +1,5 @@
 class ConvertableToJson {
-  toJson () {
+  toJson (): Object {
     return { ...this }
   }
 }

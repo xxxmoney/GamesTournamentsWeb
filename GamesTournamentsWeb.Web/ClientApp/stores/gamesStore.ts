@@ -26,7 +26,7 @@ export const useGamesStore = defineStore({
         new Game(4, 'Dota 2', '', 1, 'https://business-portal-bucket.s3.amazonaws.com/media/images/41e172c318357d632f53b92d8cb38661_lar.original.format-png.png'),
         new Game(5, 'Fifa 21', '', 3, 'https://cdn.aktivcommunication.cz/images/products/screens/7434/2.jpg'),
         new Game(6, 'War Thunder', '', 4, 'https://warthunder.com/i/opengraph-wt.jpg')
-      ].map(game => game.toJson())
+      ].map(game => game.toJson() as Game)
 
       return Promise.resolve(this.games)
     },
@@ -37,7 +37,7 @@ export const useGamesStore = defineStore({
         new Genre(2, 'FPS'),
         new Genre(3, 'Sports'),
         new Genre(4, 'Simulation')
-      ].map(genre => genre.toJson())
+      ].map(genre => genre.toJson() as Genre)
 
       return Promise.resolve(this.genres)
     }
