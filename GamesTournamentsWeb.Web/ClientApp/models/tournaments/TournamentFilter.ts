@@ -6,6 +6,7 @@ class TournamentFilter extends ConvertableToJson {
   public teamSizes: number[]
   public regionIds: number[]
   public platformIds: number[]
+  public genreIds: number[]
   public withMyTournaments: boolean
 
   constructor () {
@@ -16,6 +17,7 @@ class TournamentFilter extends ConvertableToJson {
     this.teamSizes = []
     this.regionIds = []
     this.platformIds = []
+    this.genreIds = []
     this.withMyTournaments = false
   }
 }

@@ -17,7 +17,23 @@ export default {
     genre: 'Genre',
     detail: 'Detail',
     my_tournaments: 'My tournaments',
-    starts_in: 'Starts in'
+    starts_in: 'Starts in',
+    team_size: 'Team size',
+    region: 'Region',
+    platform: 'Platform'
+  },
+
+  enums: {
+    region: {
+      europe: 'Europe',
+      north_america: 'North America',
+      asia: 'Asia'
+    },
+    platform: {
+      pc: 'PC',
+      playstation: 'Playstation',
+      xbox: 'Xbox'
+    }
   },
 
   pages: {

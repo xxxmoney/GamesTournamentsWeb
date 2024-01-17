@@ -1,4 +1,4 @@
-import { ConvertableToJson } from '~/models/ConvertableToJson.ts'
+import { ConvertableToJson } from '~/models/ConvertableToJson'
 
 class Genre extends ConvertableToJson {
   public id: number

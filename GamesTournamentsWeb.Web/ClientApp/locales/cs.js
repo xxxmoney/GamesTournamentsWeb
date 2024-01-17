@@ -17,7 +17,23 @@ export default {
     genre: 'Žánr',
     detail: 'Detail',
     my_tournaments: 'Moje turnaje',
-    starts_in: 'Začíná za'
+    starts_in: 'Začíná za',
+    team_size: 'Velikost týmu',
+    region: 'Region',
+    platform: 'Platforma'
+  },
+
+  enums: {
+    region: {
+      europe: 'Evropa',
+      north_america: 'Severní Amerika',
+      asia: 'Asie'
+    },
+    platform: {
+      pc: 'PC',
+      playstation: 'Playstation',
+      xbox: 'Xbox'
+    }
   },
 
   pages: {

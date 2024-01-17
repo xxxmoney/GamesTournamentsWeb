@@ -10,7 +10,7 @@ await tournamentsStore.initialize()
   <div class="page-container">
     <PageTournamentsFilter />
 
-    <div class="grid gap-lg grid-cols-1 lg:grid-cols-3">
+    <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
       <PageTournamentsTournament
         v-for="tournament in tournaments"
         :id="tournament.id"

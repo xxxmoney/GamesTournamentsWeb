@@ -10,7 +10,7 @@ await gamesStore.initialize()
   <div class="page-container">
     <PageGamesFilter />
 
-    <div class="grid gap-lg grid-cols-1 lg:grid-cols-3">
+    <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
       <PageGamesGame
         v-for="game in games"
         :id="game.id"

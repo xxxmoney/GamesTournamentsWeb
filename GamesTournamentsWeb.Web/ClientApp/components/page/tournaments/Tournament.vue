@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 
-import { timeDifferenceJs } from '../../../utils/dateTimeFormat'
-
 const tournamentsStore = useTournamentsStore()
 const router = useRouter()
 
