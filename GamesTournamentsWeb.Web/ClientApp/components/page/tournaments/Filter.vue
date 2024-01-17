@@ -39,7 +39,6 @@ const platforms = computed(() => tournamentsStore.platforms)
         :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
         class="w-full"
         display="chip"
-        filter
         optionValue="id"
       />
     </CommonWithLabel>
@@ -53,7 +52,6 @@ const platforms = computed(() => tournamentsStore.platforms)
         :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
         class="w-full"
         display="chip"
-        filter
         optionValue="id"
       />
     </CommonWithLabel>

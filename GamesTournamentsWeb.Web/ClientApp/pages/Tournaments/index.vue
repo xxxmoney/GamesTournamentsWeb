@@ -17,5 +17,7 @@ await tournamentsStore.initialize()
         :key="`tournament-${tournament.id}`"
       />
     </div>
+
+    <Paginator :rows="10" :totalRecords="120"></Paginator>
   </div>
 </template>
