@@ -20,7 +20,8 @@ export default {
     starts_in: 'Začíná za',
     team_size: 'Velikost týmu',
     region: 'Region',
-    platform: 'Platforma'
+    platform: 'Platforma',
+    filter: 'Filtr'
   },
 
   enums: {

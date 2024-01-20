@@ -8,7 +8,9 @@ await gamesStore.initialize()
 
 <template>
   <div class="page-container">
-    <PageGamesFilter />
+    <CommonPanel :header="$t('common.filter')" class="container-width">
+      <PageGamesFilter />
+    </CommonPanel>
 
     <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
       <PageGamesGame

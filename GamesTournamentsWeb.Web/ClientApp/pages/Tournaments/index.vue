@@ -8,8 +8,10 @@ await tournamentsStore.initialize()
 
 <template>
   <div class="page-container">
-    <PageTournamentsFilter />
-
+    <CommonPanel :header="$t('common.filter')" class="container-width">
+      <PageTournamentsFilter />
+    </CommonPanel>
+    
     <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
       <PageTournamentsTournament
         v-for="tournament in tournaments"

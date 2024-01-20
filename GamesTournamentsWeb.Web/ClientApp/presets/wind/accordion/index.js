@@ -1,6 +1,6 @@
 export default {
     accordiontab: {
-        header: ({ props }) => ({
+        header: ({props}) => ({
             class: [
                 // Sizing
                 'pt-6 pb-0',
@@ -13,10 +13,10 @@ export default {
                 'border border-surface-200 dark:border-surface-700',
 
                 // State
-                { 'select-none pointer-events-none cursor-default opacity-60': props?.disabled }
+                {'select-none pointer-events-none cursor-default opacity-60': props?.disabled}
             ]
         }),
-        headerAction: ({ context }) => ({
+        headerAction: ({context}) => ({
             class: [
                 //Font
                 'font-semibold',
@@ -52,7 +52,7 @@ export default {
                 'leading-7',
 
                 // Spacing
-                'pr-12 pt-2',
+                'pt-2',
 
                 // Color
                 'text-surface-600 dark:text-surface-0/70'

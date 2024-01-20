@@ -20,7 +20,8 @@ export default {
     starts_in: 'Starts in',
     team_size: 'Team size',
     region: 'Region',
-    platform: 'Platform'
+    platform: 'Platform',
+    filter: 'Filter'
   },
 
   enums: {
