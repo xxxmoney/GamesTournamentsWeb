@@ -30,6 +30,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
       :strongLabel="$t('password.strong')"
       :weakLabel="$t('password.weak')"
       inputClass="w-full"
+      toggleMask
     />
   </CommonWithLabel>
 </template>

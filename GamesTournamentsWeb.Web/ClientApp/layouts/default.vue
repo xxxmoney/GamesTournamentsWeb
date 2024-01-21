@@ -18,6 +18,8 @@
   </div>
 
   <LayoutDefaultMobileMenu />
+
+  <Toast />
 </template>
 
 <style scoped>

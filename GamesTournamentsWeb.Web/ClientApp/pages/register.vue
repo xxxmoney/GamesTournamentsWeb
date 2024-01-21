@@ -1,19 +1,27 @@
 <script lang="ts" setup>
-const router = useRouter()
+import { Register } from '~/models/user/Register'
 
-const registerValue = ref({
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
-})
+const router = useRouter()
+const store = useMainStore()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
+
+const registerValue = ref(new Register())
 
 const goToLogin = () => {
-  router.push('/login')
+  return router.push('/login')
 }
 
-const register = () => {
-  router.push('/')
+const register = async () => {
+  try {
+    await store.register(registerValue.value)
+
+    successToast('register.success')
+
+    await goToLogin()
+  } catch (e) {
+    errorToast(e)
+  }
 }
 </script>
 
@@ -22,7 +30,7 @@ const register = () => {
     <CommonInputText v-model="registerValue.username" :label="$t('common.username')" />
     <CommonInputText v-model="registerValue.email" :label="$t('common.email')" />
     <CommonPassword v-model="registerValue.password" :label="$t('common.password')" />
-    <CommonPassword v-model="registerValue.confirmPassword" :label="$t('common.confirm_password')" />
+    <CommonPassword v-model="registerValue.passwordConfirm" :label="$t('common.confirm_password')" />
 
     <Button :label="$t('common.register')" @click="register" />
     <Button :label="$t('common.login')" severity="secondary" @click="goToLogin" />

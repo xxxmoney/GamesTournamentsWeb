@@ -21,7 +21,12 @@ export default {
     team_size: 'Velikost týmu',
     region: 'Region',
     platform: 'Platforma',
-    filter: 'Filtr'
+    filter: 'Filtr',
+    error: 'Chyba',
+    error_description: 'Něco se pokazilo. Zkuste to prosím znovu.',
+    success: 'Úspěch',
+    success_description: 'Akce byla úspěšně dokončena.',
+    info: 'Info'
   },
 
   enums: {
@@ -88,6 +93,11 @@ export default {
       info: 'Pole s * jsou povinná.'
     }
   },
-  games: {},
-  tournaments: {}
+  login: {
+    success: 'Byli jste úspěšně přihlášeni.'
+  },
+  register: {
+    success: 'Byli jste úspěšně zaregistrováni.'
+  }
+
 }

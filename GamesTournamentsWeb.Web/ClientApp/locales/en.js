@@ -21,7 +21,12 @@ export default {
     team_size: 'Team size',
     region: 'Region',
     platform: 'Platform',
-    filter: 'Filter'
+    filter: 'Filter',
+    error: 'Error',
+    error_description: 'Something went wrong. Please try again.',
+    success: 'Success',
+    success_description: 'Action was successfully completed.',
+    info: 'Info'
   },
 
   enums: {
@@ -88,6 +93,11 @@ export default {
       info: 'Fields with * are required.'
     }
   },
-  games: {}
+  login: {
+    success: 'You have been successfully logged in.'
+  },
+  register: {
+    success: 'You have been successfully registered.'
+  }
 
 }

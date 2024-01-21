@@ -1,17 +1,27 @@
 <script lang="ts" setup>
-const router = useRouter()
+import { Login } from '~/models/user/Login'
 
-const loginValue = ref({
-  email: '',
-  password: ''
-})
+const router = useRouter()
+const store = useMainStore()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
+
+const loginValue = ref(new Login())
 
 const goToRegister = () => {
-  router.push('/register')
+  return router.push('/register')
 }
 
-const login = () => {
-  router.push('/')
+const login = async () => {
+  try {
+    await store.login(loginValue.value)
+
+    successToast('login.success')
+
+    await router.push('/')
+  } catch (e) {
+    errorToast(e)
+  }
 }
 </script>
 

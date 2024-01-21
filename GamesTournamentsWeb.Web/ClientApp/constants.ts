@@ -14,5 +14,9 @@ export default {
     'war_thunder.jpg'
   ],
 
-  virtualScrollHeight: 26
+  virtualScrollHeight: 26,
+
+  toastErrorLifeTime: 3000,
+  toastSuccessLifeTime: 2000,
+  toastInfoLifeTime: 3000
 }
