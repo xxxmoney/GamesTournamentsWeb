@@ -18,5 +18,7 @@ export default {
 
   toastErrorLifeTime: 3000,
   toastSuccessLifeTime: 2000,
-  toastInfoLifeTime: 3000
+  toastInfoLifeTime: 3000,
+
+  loginKey: 'games-tournaments-web-login-result'
 }

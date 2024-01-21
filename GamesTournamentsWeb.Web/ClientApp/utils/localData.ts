@@ -1,8 +1,8 @@
 const getLocalData = <T>(key: string, defaultValue: T): T => {
   let finalValue = defaultValue
-
-  const stringValue = localStorage.getItem(key)
+  
   try {
+    const stringValue = localStorage.getItem(key)
     if (stringValue) {
       finalValue = JSON.parse(stringValue)
     }

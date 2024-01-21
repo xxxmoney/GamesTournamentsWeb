@@ -1,5 +1,13 @@
 <script lang="ts" setup>
+const mainStore = useMainStore()
+const gamesStore = useGamesStore()
+const tournamentsStore = useTournamentsStore()
 
+await Promise.all([
+  mainStore.initialize(),
+  gamesStore.initialize(),
+  tournamentsStore.initialize()
+])
 </script>
 
 <template>

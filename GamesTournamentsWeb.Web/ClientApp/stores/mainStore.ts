@@ -5,6 +5,7 @@ import { Role } from '~/models/user/Role'
 import type { LoginResult } from '~/models/user/LoginResult'
 import type { RegisterResult } from '~/models/user/RegisterResult'
 import { Register } from '~/models/user/Register'
+import constants from '~/constants'
 
 export const useMainStore = defineStore({
   id: 'main-store',
@@ -28,14 +29,16 @@ export const useMainStore = defineStore({
     },
 
     getLoginResult (): LoginResult | null {
-      // TODO: use to localStorage
+      const login = useCookie<LoginResult | null>(constants.loginKey)
 
-      return null
+      this.loginResult = login.value
+      return login.value
     },
-    setLoginResult (loginResult: LoginResult): void {
-      // TODO: use to localStorage
+    setLoginResult (loginResult: LoginResult | null): void {
+      const login = useCookie<LoginResult | null>(constants.loginKey)
 
       this.loginResult = loginResult
+      login.value = loginResult
     },
 
     login (login: Login): Promise<LoginResult> {
@@ -56,7 +59,7 @@ export const useMainStore = defineStore({
       return Promise.resolve({ account })
     },
     logout (): void {
-      this.loginResult = null
+      this.setLoginResult(null)
     }
   },
   getters: {
