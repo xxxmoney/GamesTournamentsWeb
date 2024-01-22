@@ -20,5 +20,7 @@ export default {
   toastSuccessLifeTime: 2000,
   toastInfoLifeTime: 3000,
 
-  loginKey: 'games-tournaments-web-login-result'
+  loginKey: 'games-tournaments-web-login-result',
+
+  defaultProfileImageUrl: '/img/profile.jpg'
 }

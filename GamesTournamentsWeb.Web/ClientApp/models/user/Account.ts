@@ -7,8 +7,9 @@ class Account extends ConvertableToJson {
   public email: string
   public role: Role
   public createdAt: Date
+  public imageUrl: string | null
 
-  constructor (id: number, name: string, email: string, Role: Role, createdAt: Date) {
+  constructor (id: number, name: string, email: string, Role: Role, createdAt: Date, imageUrl: string | null) {
     super()
 
     this.id = id
@@ -16,6 +17,7 @@ class Account extends ConvertableToJson {
     this.email = email
     this.role = Role
     this.createdAt = createdAt
+    this.imageUrl = imageUrl
   }
 }
 

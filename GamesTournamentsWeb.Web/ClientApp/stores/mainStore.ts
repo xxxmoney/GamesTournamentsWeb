@@ -10,7 +10,6 @@ import constants from '~/constants'
 export const useMainStore = defineStore({
   id: 'main-store',
   state: () => ({
-    isLoggedIn: false,
     loginResult: null as LoginResult | null,
     mobileMenuActive: false
   }),
@@ -43,7 +42,7 @@ export const useMainStore = defineStore({
 
     login (login: Login): Promise<LoginResult> {
       const role = new Role(1, 'user')
-      const account = new Account(1, 'John Doe', login.email, role, new Date())
+      const account = new Account(1, 'John Doe', login.email, role, new Date(), null)
       this.setLoginResult({ token: '69', account })
 
       return Promise.resolve(this.loginResult as LoginResult)
@@ -54,7 +53,7 @@ export const useMainStore = defineStore({
       }
 
       const role = new Role(1, 'user')
-      const account = new Account(1, 'John Doe', register.email, role, new Date())
+      const account = new Account(1, 'John Doe', register.email, role, new Date(), null)
 
       return Promise.resolve({ account })
     },
@@ -65,6 +64,9 @@ export const useMainStore = defineStore({
   getters: {
     isLoggedIn (): boolean {
       return !!this.loginResult
+    },
+    account (): Account | null {
+      return this.loginResult?.account ?? null
     }
   }
 })
