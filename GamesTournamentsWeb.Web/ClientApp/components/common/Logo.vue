@@ -9,7 +9,7 @@ const goToHome = () => {
 <template>
   <img
     alt="Logo"
-    class="w-16 h-16 transform -translate-x-1 cursor-pointer"
+    class="w-16 h-16 transform cursor-pointer"
     src="/img/logo.png"
     @click="goToHome"
   >

@@ -12,7 +12,7 @@ const { label, showLabel } = defineProps({
 </script>
 
 <template>
-  <div class="inline-flex flex-col">
+  <div class="container">
     <span v-if="showLabel">{{ label }}</span>
     <slot />
   </div>

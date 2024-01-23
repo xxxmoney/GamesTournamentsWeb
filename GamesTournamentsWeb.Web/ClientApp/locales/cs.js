@@ -17,6 +17,7 @@ export default {
     genre: 'Žánr',
     detail: 'Detail',
     my_tournaments: 'Moje turnaje',
+    my_dashboard: 'Můj dashboard',
     starts_in: 'Začíná za',
     team_size: 'Velikost týmu',
     region: 'Region',
@@ -26,7 +27,12 @@ export default {
     error_description: 'Něco se pokazilo. Zkuste to prosím znovu.',
     success: 'Úspěch',
     success_description: 'Akce byla úspěšně dokončena.',
-    info: 'Info'
+    info: 'Info',
+    matches_played: 'Hrané zápasy',
+    win_rate: 'Vyhrané zápasy',
+    history: 'Historie',
+    change_password: 'Změnit heslo',
+    delete_account: 'Smazat účet'
   },
 
   enums: {

@@ -226,8 +226,32 @@ html, body, #__nuxt {
     @apply inline-flex flex-col;
 }
 
-.page-container {
-    @apply container items-center gap-xl m-auto;
+.container-gap {
+    @apply inline-flex flex-col gap;
+}
+
+.container-gap-lg {
+    @apply inline-flex flex-col gap-lg;
+}
+
+.container-gap-xl {
+    @apply inline-flex flex-col gap-xl;
+}
+
+.container-row {
+    @apply inline-flex flex-row;
+}
+
+.container-row-gap {
+    @apply inline-flex flex-row gap;
+}
+
+.container-row-gap-lg {
+    @apply inline-flex flex-row gap-lg;
+}
+
+.container-row-gap-xl {
+    @apply inline-flex flex-row gap-xl;
 }
 
 .form-container {
@@ -240,6 +264,10 @@ html, body, #__nuxt {
 
 .form-container-xl {
     @apply container-width container gap-xl;
+}
+
+.page-container {
+    @apply container items-center gap-xl m-auto;
 }
 
 

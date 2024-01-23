@@ -17,6 +17,7 @@ export default {
     genre: 'Genre',
     detail: 'Detail',
     my_tournaments: 'My tournaments',
+    my_dashboard: 'My dashboard',
     starts_in: 'Starts in',
     team_size: 'Team size',
     region: 'Region',
@@ -26,7 +27,12 @@ export default {
     error_description: 'Something went wrong. Please try again.',
     success: 'Success',
     success_description: 'Action was successfully completed.',
-    info: 'Info'
+    info: 'Info',
+    matches_played: 'Matches played',
+    win_rate: 'Win rate',
+    history: 'History',
+    change_password: 'Change password',
+    delete_account: 'Delete account'
   },
 
   enums: {
