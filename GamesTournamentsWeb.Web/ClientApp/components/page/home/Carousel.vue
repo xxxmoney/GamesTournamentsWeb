@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import constants from '~/constants.ts'
+import constants from '~/constants'
 
 const path = '/img/game/'
 const images = constants.carouselImages.map(image => `${path}${image}`)
