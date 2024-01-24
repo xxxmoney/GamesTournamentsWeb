@@ -27,11 +27,16 @@ const onDeleteAccount = () => {
     <div class="container-gap">
       <CommonActionLink :label="$t('common.my_tournaments')" @click="goToTournaments" />
       <CommonActionLink :label="$t('common.my_dashboard')" @click="goToDashboard" />
-      <CommonActionLink :label="$t('common.history')" @click="showHistory" />
     </div>
 
     <div class="container-row-gap">
       <Button v-tooltip="$t('common.change_password')" icon="pi pi-wrench" @click="showChangePassword" />
+      <Button
+        v-tooltip="$t('common.history')"
+        icon="pi pi-history"
+        severity="secondary"
+        @click="showHistory"
+      />
       <Button
         v-tooltip="$t('common.delete_account')"
         icon="pi pi-trash"
