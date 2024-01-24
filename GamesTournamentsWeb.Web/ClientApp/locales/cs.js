@@ -17,6 +17,7 @@ export default {
     genre: 'Žánr',
     detail: 'Detail',
     my_tournaments: 'Moje turnaje',
+    tournaments: 'Turnaje',
     my_dashboard: 'Můj dashboard',
     starts_in: 'Začíná za',
     team_size: 'Velikost týmu',
@@ -32,10 +33,15 @@ export default {
     win_rate: 'Vyhrané zápasy',
     history: 'Historie',
     change_password: 'Změnit heslo',
+    password_change: 'Změna hesla',
     delete_account: 'Smazat účet',
     current_password: 'Současné heslo',
     new_password: 'Nové heslo',
-    confirm_new_password: 'Potvrzení nového hesla'
+    confirm_new_password: 'Potvrzení nového hesla',
+    nickname: 'Přezdívka',
+    game: 'Hra',
+    place: 'Místo',
+    link: 'Odkaz'
   },
 
   enums: {

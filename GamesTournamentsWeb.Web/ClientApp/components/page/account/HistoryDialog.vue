@@ -2,17 +2,14 @@
 const store = useAccountStore()
 
 const isActive = computed({
-  get: () => store.passwordChangeModalActive,
+  get: () => store.historyModalActive,
   set: (value) => {
     if (!value) {
-      store.closePasswordChangeModal()
+      store.closeHistoryModal()
     }
   }
 })
 
-const close = () => {
-  store.closePasswordChangeModal()
-}
 </script>
 
 <template>
@@ -20,12 +17,12 @@ const close = () => {
     v-model:visible="isActive"
     :baseZIndex="10000"
     :draggable="false"
-    :header="$t('common.password_change')"
+    :header="$t('common.tournaments')"
     :resizable="false"
     modal
   >
     <div class="flex">
-      <PageAccountPasswordChange class="m-auto" @passwordChanged="close" />
+      <PageAccountHistory class="m-auto" />
     </div>
   </Dialog>
 </template>

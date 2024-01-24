@@ -32,10 +32,12 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="form-container">
-    <CommonInputText v-model="changePassword.currentPassword" :label="$t('common.current_password')" />
-    <CommonInputText v-model="changePassword.newPassword" :label="$t('common.new_password')" />
-    <CommonInputText v-model="changePassword.confirmNewPassword" :label="$t('common.confirm_new_password')" />
+  <div class="form-container-lg">
+    <div class="container">
+      <CommonInputText v-model="changePassword.currentPassword" :label="$t('common.current_password')" />
+      <CommonInputText v-model="changePassword.newPassword" :label="$t('common.new_password')" />
+      <CommonInputText v-model="changePassword.confirmNewPassword" :label="$t('common.confirm_new_password')" />
+    </div>
 
     <Button :label="$t('common.change_password')" @click="login" />
   </div>

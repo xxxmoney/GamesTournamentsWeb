@@ -1,19 +1,29 @@
 import { defineStore } from 'pinia'
 import { AccountInfo } from '~/models/user/AccountInfo'
+import { HistoryItem } from '~/models/user/HistoryItem'
 
 export const useAccountStore = defineStore({
   id: 'account-store',
   state: () => ({
     info: null as AccountInfo | null,
+    history: [] as HistoryItem[],
     passwordChangeModalActive: false,
     historyModalActive: false
   }),
   actions: {
 
-    getAccountInfo (id: number): Promise<AccountInfo> {
-      const info = new AccountInfo(id, 10, 0.5)
+    getAccountInfo (accountId: number): Promise<AccountInfo> {
+      const info = new AccountInfo(accountId, 10, 0.5)
       this.info = info.toJson() as AccountInfo
       return Promise.resolve(info)
+    },
+
+    getHistory (accountId: number): Promise<HistoryItem[]> {
+      this.history = [
+        new HistoryItem(accountId, 1, 'War Thunder', 2, 69)
+      ].map(historyItem => historyItem.toJson() as HistoryItem)
+
+      return Promise.resolve(this.history)
     },
 
     openPasswordChangeModal (): void {

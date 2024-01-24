@@ -17,6 +17,7 @@ export default {
     genre: 'Genre',
     detail: 'Detail',
     my_tournaments: 'My tournaments',
+    tournaments: 'Tournaments',
     my_dashboard: 'My dashboard',
     starts_in: 'Starts in',
     team_size: 'Team size',
@@ -32,10 +33,15 @@ export default {
     win_rate: 'Win rate',
     history: 'History',
     change_password: 'Change password',
+    password_change: 'Password change',
     delete_account: 'Delete account',
     current_password: 'Current password',
     new_password: 'New password',
-    confirm_new_password: 'Confirm new password'
+    confirm_new_password: 'Confirm new password',
+    nickname: 'Nickname',
+    game: 'Game',
+    place: 'Place',
+    link: 'Link'
   },
 
   enums: {
