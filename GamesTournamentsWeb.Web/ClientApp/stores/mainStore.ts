@@ -6,6 +6,7 @@ import type { LoginResult } from '~/models/user/LoginResult'
 import type { RegisterResult } from '~/models/user/RegisterResult'
 import { Register } from '~/models/user/Register'
 import constants from '~/constants'
+import { ChangePassword } from '~/models/user/ChangePassword'
 
 export const useMainStore = defineStore({
   id: 'main-store',
@@ -59,6 +60,13 @@ export const useMainStore = defineStore({
     },
     logout (): void {
       this.setLoginResult(null)
+    },
+    changePassword (request: ChangePassword): Promise<void> {
+      if (request.newPassword !== request.confirmNewPassword) {
+        return Promise.reject()
+      }
+
+      return Promise.resolve()
     }
   },
   getters: {

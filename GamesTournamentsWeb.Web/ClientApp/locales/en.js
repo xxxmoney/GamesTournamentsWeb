@@ -32,7 +32,10 @@ export default {
     win_rate: 'Win rate',
     history: 'History',
     change_password: 'Change password',
-    delete_account: 'Delete account'
+    delete_account: 'Delete account',
+    current_password: 'Current password',
+    new_password: 'New password',
+    confirm_new_password: 'Confirm new password'
   },
 
   enums: {
@@ -104,6 +107,11 @@ export default {
   },
   register: {
     success: 'You have been successfully registered.'
+  },
+  change_password: {
+    password_not_matching: 'Passwords do not match.',
+    password_incorrect: 'Current password is incorrect.',
+    success: 'Password has been successfully changed.'
   }
 
 }

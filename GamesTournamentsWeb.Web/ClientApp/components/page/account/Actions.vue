@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-const mainStore = useMainStore()
+//const mainStore = useMainStore()
+const accountStore = useAccountStore()
 
-const accountId = computed(() => mainStore.account!.id)
+//const accountId = computed(() => mainStore.account!.id)
 
 const goToTournaments = () => {
   // TODO: filter to my tournaments and go to tournaments page
@@ -9,14 +10,12 @@ const goToTournaments = () => {
 const goToDashboard = () => {
   // TODO: go to dashboard page
 }
-const goToHistory = () => {
-  // TODO: go to history page
+const showHistory = () => {
+  accountStore.openHistoryModal()
 }
-
-const onChangePassword = () => {
-  // TODO: show change password dialog
+const showChangePassword = () => {
+  accountStore.openPasswordChangeModal()
 }
-
 const onDeleteAccount = () => {
   // TODO: show delete confirmation dialog
 }
@@ -28,11 +27,11 @@ const onDeleteAccount = () => {
     <div class="container-gap">
       <CommonActionLink :label="$t('common.my_tournaments')" @click="goToTournaments" />
       <CommonActionLink :label="$t('common.my_dashboard')" @click="goToDashboard" />
-      <CommonActionLink :label="$t('common.history')" @click="goToHistory" />
+      <CommonActionLink :label="$t('common.history')" @click="showHistory" />
     </div>
 
     <div class="container-row-gap">
-      <Button v-tooltip="$t('common.change_password')" icon="pi pi-wrench" @click="onChangePassword" />
+      <Button v-tooltip="$t('common.change_password')" icon="pi pi-wrench" @click="showChangePassword" />
       <Button
         v-tooltip="$t('common.delete_account')"
         icon="pi pi-trash"

@@ -16,5 +16,8 @@ if (!account) {
   <div class="form-container-lg m-auto">
     <PageAccountUserInfo />
     <PageAccountActions />
+
+    <PageAccountPasswordChangeDialog />
+    <PageAccountHistoryDialog />
   </div>
 </template>

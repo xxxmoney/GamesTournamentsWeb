@@ -32,7 +32,10 @@ export default {
     win_rate: 'Vyhrané zápasy',
     history: 'Historie',
     change_password: 'Změnit heslo',
-    delete_account: 'Smazat účet'
+    delete_account: 'Smazat účet',
+    current_password: 'Současné heslo',
+    new_password: 'Nové heslo',
+    confirm_new_password: 'Potvrzení nového hesla'
   },
 
   enums: {
@@ -104,6 +107,11 @@ export default {
   },
   register: {
     success: 'Byli jste úspěšně zaregistrováni.'
+  },
+  change_password: {
+    password_not_matching: 'Hesla se neshodují.',
+    password_incorrect: 'Současné heslo je nesprávné.',
+    success: 'Heslo bylo úspěšně změněno.'
   }
 
 }
