@@ -2,7 +2,14 @@
 //const mainStore = useMainStore()
 const accountStore = useAccountStore()
 
+const router = useRouter()
+const { t } = useI18n()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
+
 //const accountId = computed(() => mainStore.account!.id)
+
+const confirm = useConfirm()
 
 const goToTournaments = () => {
   // TODO: filter to my tournaments and go to tournaments page
@@ -17,7 +24,21 @@ const showChangePassword = () => {
   accountStore.openPasswordChangeModal()
 }
 const onDeleteAccount = () => {
-  // TODO: show delete confirmation dialog
+  confirm.require({
+    message: t('delete_account.prompt'),
+    header: 'Confirmation',
+    accept: () => {
+      try {
+        // TODO: add delete account method
+
+        successToast('delete_account.success')
+
+        router.push('/logout')
+      } catch (e) {
+        errorToast(e)
+      }
+    }
+  })
 }
 
 </script>

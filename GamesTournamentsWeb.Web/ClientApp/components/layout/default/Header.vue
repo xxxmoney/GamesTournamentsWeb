@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-between items-center">
+  <div class="flex flex-row justify-between items-center px">
     <div class="flex-1">
       <div class="lg:hidden">
         <LayoutDefaultMobileMenuButton />

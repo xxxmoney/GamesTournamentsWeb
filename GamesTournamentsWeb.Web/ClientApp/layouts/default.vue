@@ -11,8 +11,8 @@ await Promise.all([
 </script>
 
 <template>
-  <div class="flex flex-col h-full">
-    <header class="flex-grow-0 sticky top-0">
+  <div class="flex flex-col flex-1">
+    <header class="flex-grow-0 top-0 sticky z-big background">
       <LayoutDefaultHeader />
     </header>
 
@@ -28,6 +28,7 @@ await Promise.all([
   <LayoutDefaultMobileMenu />
 
   <Toast />
+  <ConfirmDialog />
 </template>
 
 <style scoped>

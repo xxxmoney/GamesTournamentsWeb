@@ -33,7 +33,7 @@ const login = async () => {
 
 <template>
   <div class="form-container-lg">
-    <div class="container">
+    <div class="container-gap">
       <CommonInputText v-model="changePassword.currentPassword" :label="$t('common.current_password')" />
       <CommonInputText v-model="changePassword.newPassword" :label="$t('common.new_password')" />
       <CommonInputText v-model="changePassword.confirmNewPassword" :label="$t('common.confirm_new_password')" />

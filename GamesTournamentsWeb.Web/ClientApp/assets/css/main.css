@@ -68,8 +68,16 @@ body {
 }
 
 html, body, #__nuxt {
-    width: 100%;
     min-height: 100vh;
+}
+
+#__nuxt {
+    @apply flex flex-col;
+}
+
+body {
+    width: 100%;
+    height: 100%;
 }
 
 #__nuxt {
@@ -88,6 +96,10 @@ html, body, #__nuxt {
 
 .color-primary {
     color: rgb(var(--primary-500));
+}
+
+.z-big {
+    z-index: 69;
 }
 
 .gap-x {
@@ -184,6 +196,14 @@ html, body, #__nuxt {
 
 .mb-xl {
     @apply mb-[var(--margin-y-xl)];
+}
+
+.px {
+    @apply px-[var(--margin-x)];
+}
+
+.py {
+    @apply py-[var(--margin-y)];
 }
 
 .gap {

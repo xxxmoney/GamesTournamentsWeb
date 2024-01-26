@@ -118,6 +118,10 @@ export default {
     password_not_matching: 'Passwords do not match.',
     password_incorrect: 'Current password is incorrect.',
     success: 'Password has been successfully changed.'
+  },
+  delete_account: {
+    success: 'Account has been successfully deleted.',
+    prompt: 'Are you sure you want to delete your account?'
   }
 
 }

@@ -118,6 +118,10 @@ export default {
     password_not_matching: 'Hesla se neshodují.',
     password_incorrect: 'Současné heslo je nesprávné.',
     success: 'Heslo bylo úspěšně změněno.'
+  },
+  delete_account: {
+    success: 'Účet byl úspěšně smazán.',
+    prompt: 'Opravdu chcete smazat svůj účet?'
   }
 
 }

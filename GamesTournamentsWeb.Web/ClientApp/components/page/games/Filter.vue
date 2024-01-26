@@ -8,7 +8,7 @@ const genres = computed(() => gamesStore.genres)
 </script>
 
 <template>
-  <div class="form-container">
+  <div class="inline-flex flex-col md:flex-row w-full gap">
     <CommonInputText v-model="filter.name" :label="$t('common.name')" />
 
     <CommonWithLabel :label="$t('common.genre')">
