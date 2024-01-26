@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div />
+  <div class="flex-1" />
 </template>
 
 <style scoped>
