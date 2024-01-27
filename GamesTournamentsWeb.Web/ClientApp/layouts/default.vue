@@ -12,7 +12,9 @@ await Promise.all([
 
 <template>
   <div class="flex flex-col flex-1">
-    <header class="flex-grow-0 top-0 sticky z-big background">
+    <header
+      class="flex-grow-0 top-0 sticky z-big background rounded-lg shadow-sm"
+    >
       <LayoutDefaultHeader />
     </header>
 
