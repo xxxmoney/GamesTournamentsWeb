@@ -223,7 +223,7 @@ body {
 }
 
 .ul-links {
-    @apply inline-flex gap;
+    @apply inline-flex md:items-center gap;
 }
 
 .max-w {

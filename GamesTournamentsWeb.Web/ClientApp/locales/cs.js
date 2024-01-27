@@ -44,6 +44,11 @@ export default {
     link: 'Odkaz'
   },
 
+  locales: {
+    en: 'Anglicky',
+    cs: 'Česky'
+  },
+
   enums: {
     region: {
       europe: 'Evropa',

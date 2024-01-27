@@ -44,6 +44,11 @@ export default {
     link: 'Link'
   },
 
+  locales: {
+    en: 'English',
+    cs: 'Czech'
+  },
+
   enums: {
     region: {
       europe: 'Europe',

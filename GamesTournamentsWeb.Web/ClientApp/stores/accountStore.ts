@@ -11,6 +11,9 @@ export const useAccountStore = defineStore({
     historyModalActive: false
   }),
   actions: {
+    initialize (): Promise<void> {
+      return Promise.resolve()
+    },
 
     getAccountInfo (accountId: number): Promise<AccountInfo> {
       const info = new AccountInfo(accountId, 10, 0.5)

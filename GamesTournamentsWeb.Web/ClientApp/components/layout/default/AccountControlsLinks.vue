@@ -37,5 +37,10 @@ const mobileClass = computed(() => bypassMobile ? '' : 'hidden lg:block')
         {{ $t('pages.logout') }}
       </NuxtLink>
     </li>
+    <li :class="mobileClass">
+      <Divider class="md:hidden" />
+      <CommonLanguageSelector />
+      <Divider class="md:hidden" />
+    </li>
   </ul>
 </template>

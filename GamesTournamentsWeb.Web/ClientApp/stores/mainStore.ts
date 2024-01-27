@@ -12,11 +12,13 @@ export const useMainStore = defineStore({
   id: 'main-store',
   state: () => ({
     loginResult: null as LoginResult | null,
-    mobileMenuActive: false
+    mobileMenuActive: false,
+    locale: constants.defaultLocale
   }),
   actions: {
     initialize (): Promise<void> {
       this.getLoginResult()
+      this.getLocale()
 
       return Promise.resolve()
     },
@@ -26,6 +28,19 @@ export const useMainStore = defineStore({
     },
     closeMobileMenu (): void {
       this.mobileMenuActive = false
+    },
+
+    getLocale (): string {
+      const locale = useCookie<string>(constants.localeKey)
+
+      this.locale = locale.value ?? constants.defaultLocale
+      return locale.value
+    },
+    setLocale (locale: string): void {
+      const localeCookie = useCookie<string>(constants.localeKey)
+
+      this.locale = locale
+      localeCookie.value = locale
     },
 
     getLoginResult (): LoginResult | null {

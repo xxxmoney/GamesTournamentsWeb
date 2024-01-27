@@ -22,5 +22,12 @@ export default {
 
   loginKey: 'games-tournaments-web-login-result',
 
-  defaultProfileImageUrl: '/img/profile.jpg'
+  defaultProfileImageUrl: '/img/profile.jpg',
+
+  localeKey: 'games-tournaments-web-locale',
+  locales: [
+    'en',
+    'cs'
+  ],
+  defaultLocale: 'en'
 }

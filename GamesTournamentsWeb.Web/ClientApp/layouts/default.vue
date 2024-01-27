@@ -1,15 +1,3 @@
-<script lang="ts" setup>
-const mainStore = useMainStore()
-const gamesStore = useGamesStore()
-const tournamentsStore = useTournamentsStore()
-
-await Promise.all([
-  mainStore.initialize(),
-  gamesStore.initialize(),
-  tournamentsStore.initialize()
-])
-</script>
-
 <template>
   <div class="flex flex-col flex-1">
     <header
