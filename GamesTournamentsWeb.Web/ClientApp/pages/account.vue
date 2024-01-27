@@ -13,7 +13,7 @@ if (!account) {
 </script>
 
 <template>
-  <div class="form-container-lg m-auto">
+  <div class="form-container-lg mx-auto">
     <PageAccountUserInfo />
     <PageAccountActions />
 

@@ -25,7 +25,7 @@ const close = () => {
     modal
   >
     <div class="flex">
-      <PageAccountPasswordChange class="m-auto" @passwordChanged="close" />
+      <PageAccountPasswordChange class="mx-auto" @passwordChanged="close" />
     </div>
   </Dialog>
 </template>

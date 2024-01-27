@@ -22,7 +22,7 @@ const isActive = computed({
     modal
   >
     <div class="flex">
-      <PageAccountHistory class="m-auto" />
+      <PageAccountHistory class="mx-auto" />
     </div>
   </Dialog>
 </template>

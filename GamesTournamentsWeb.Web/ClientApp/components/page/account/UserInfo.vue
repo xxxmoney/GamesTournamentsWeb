@@ -10,7 +10,7 @@ const account = computed(() => mainStore.account as Account)
 </script>
 
 <template>
-  <div class="form-container-lg m-auto">
+  <div class="form-container-lg mx-auto">
     <CommonImageProfile :imageUrl="account.imageUrl as string" :label="account.name" class="items-center" />
 
     <div class="container-gap">
