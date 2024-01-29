@@ -4,11 +4,13 @@ import { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import { Game } from '~/models/games/Game'
 import { Platform } from '~/models/tournaments/Platform'
 import { Region } from '~/models/tournaments/Region'
+import { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
     tournaments: [] as Tournament[],
+    tournamentDetail: null as TournamentDetail | null,
     teamSizes: [] as number[],
     regions: [] as Region[],
     platforms: [] as Platform[],
@@ -64,6 +66,10 @@ export const useTournamentsStore = defineStore({
 
       return Promise.resolve(this.platforms)
     }
+
+    // getTournamentDetail(tournamentId: number): Promise<TournamentDetail> {
+    //
+    // }
 
   },
   getters: {
