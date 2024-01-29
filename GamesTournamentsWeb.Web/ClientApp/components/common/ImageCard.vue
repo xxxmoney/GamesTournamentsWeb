@@ -18,7 +18,7 @@ const emitClick = () => {
     class="form-container relative aspect-card overflow-hidden"
   >
     <img
-      :src="imageUrl"
+      :src="imageUrl as string"
       alt="Image"
       class="object-cover w-full h-full rounded-xl hover cursor-pointer"
       @click="emitClick"

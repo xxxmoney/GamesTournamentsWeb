@@ -14,6 +14,6 @@ const detail = computed(() => tournamentsStore.tournamentDetail)
 </script>
 
 <template>
-  <div class="container-gap">
+  <div class="flex flex-row gap">
   </div>
 </template>

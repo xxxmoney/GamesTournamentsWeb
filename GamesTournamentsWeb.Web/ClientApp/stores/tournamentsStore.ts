@@ -101,7 +101,7 @@ export const useTournamentsStore = defineStore({
             createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
             imageUrl: null
           },
-          gameUsername: 'PlayerzoTwo',
+          gameUsername: 'PlayerZoTwo',
           statusId: 1
         }
       ]

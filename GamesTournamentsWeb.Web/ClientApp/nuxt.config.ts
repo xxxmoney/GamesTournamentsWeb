@@ -20,5 +20,8 @@ export default defineNuxtConfig({
   i18n: {},
   pinia: {
     storesDirs: ['./stores/**']
+  },
+  image: {
+    domains: ['your-domain.com']
   }
 })

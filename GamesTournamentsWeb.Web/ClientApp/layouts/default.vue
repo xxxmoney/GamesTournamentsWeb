@@ -1,4 +1,6 @@
 <template>
+  <NuxtLoadingIndicator />
+
   <div class="flex flex-col flex-1">
     <header
       class="flex-grow-0 top-0 sticky z-big background rounded-lg shadow-sm"

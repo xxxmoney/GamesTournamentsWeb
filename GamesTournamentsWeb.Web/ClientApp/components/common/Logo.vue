@@ -12,5 +12,5 @@ const goToHome = () => {
     class="w-16 h-16 transform cursor-pointer"
     src="/img/logo.png"
     @click="goToHome"
-  >
+  />
 </template>

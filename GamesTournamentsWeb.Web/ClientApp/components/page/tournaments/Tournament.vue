@@ -13,7 +13,7 @@ const { id } = defineProps({
 const tournament = computed(() => tournamentsStore.tournamentById(id))
 
 const goToTournamentDetail = () => {
-  router.push(`/tournament/${id}`)
+  router.push(`/tournaments/${id}`)
 }
 </script>
 
