@@ -22,7 +22,7 @@ export const useAccountStore = defineStore({
 
     getHistory (accountId: number): Promise<HistoryItem[]> {
       this.history = [
-        { accountId, gameId: 2, gameName: 'War Thunder' }
+        { accountId, gameId: 2, gameName: 'War Thunder', tournamentId: 1 }
       ]
 
       return Promise.resolve(this.history)

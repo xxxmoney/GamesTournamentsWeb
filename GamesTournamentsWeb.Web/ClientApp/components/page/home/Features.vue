@@ -4,7 +4,7 @@ import constants from '~/constants.ts'
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap md:flex-row">
     <div v-for="feature in constants.features" :key="`feature-${feature}`" class="form-container items-center mb">
       <div class="p-3 rounded-full bg-blue-100">
         <CommonIcon class="color-primary" icon="pi-star" size="2xl" />

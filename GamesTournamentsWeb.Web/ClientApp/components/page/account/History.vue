@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { HistoryItem } from '~/models/user/HistoryItem'
+import type { HistoryItem } from '~/models/user/HistoryItem'
 
 const accountStore = useAccountStore()
 const mainStore = useMainStore()

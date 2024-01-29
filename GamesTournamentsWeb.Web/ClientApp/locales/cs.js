@@ -109,7 +109,7 @@ export default {
     },
     contact_form: {
       title: 'Kontaktujte nás',
-      subtitle: 'Rádi od vás uslyšíme!',
+      subtitle: 'Rádi od Vás uslyšíme!',
       info: 'Pole s * jsou povinná.'
     }
   },

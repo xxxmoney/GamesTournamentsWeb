@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Account } from '~/models/user/Account'
-import { AccountInfo } from '~/models/user/AccountInfo'
+import type { Account } from '~/models/user/Account'
+import type { AccountInfo } from '~/models/user/AccountInfo'
 
 const accountStore = useAccountStore()
 const mainStore = useMainStore()
