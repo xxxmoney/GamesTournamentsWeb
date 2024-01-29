@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { label } = defineProps({
   label: {
-    label: String,
+    type: String,
     required: true
   }
 })

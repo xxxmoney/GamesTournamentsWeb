@@ -20,18 +20,13 @@ const goToTournamentDetail = () => {
 <template>
   <CommonImageCard :imageUrl="tournament.game.imageUrl" @click="goToTournamentDetail">
     <div class="container gap-lg">
-      <h2 class="subheading mt">{{ tournament.name }}</h2>
-
-      <div class="inline-flex flex-row gap">
-        <span class="italic">{{ tournament.game.name }}</span>
-        <span class="italic">{{ tournament.region.name }}</span>
-        <span class="italic">{{ tournament.platform.name }}</span>
-      </div>
-
-      <div class="container gap">
-        <span>{{ formatJsDate(tournament.startDate) }}</span>
-        <span>{{ $t('common.starts_in') }}: {{ timeDifferenceJs(tournament.startDate) }}</span>
-      </div>
+      <PageTournamentsTournamentInfo
+        :gameName="tournament.game.name"
+        :name="tournament.name"
+        :platformName="tournament.platform.name"
+        :regionName="tournament.region.name"
+        :startDate="tournament.startDate"
+      />
 
       <Button :label="$t('common.detail')" @click="goToTournamentDetail" />
     </div>

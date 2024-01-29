@@ -127,6 +127,16 @@ export default {
   delete_account: {
     success: 'Account has been successfully deleted.',
     prompt: 'Are you sure you want to delete your account?'
+  },
+
+  tournament_detail: {
+    overview: 'Overview',
+    rules: 'Rules',
+    prizes: 'Prizes',
+    players: 'Players',
+    matches: 'Matches',
+    streams: 'Streams',
+    admin: 'Admin'
   }
 
 }

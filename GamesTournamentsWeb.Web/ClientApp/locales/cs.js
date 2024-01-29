@@ -127,6 +127,16 @@ export default {
   delete_account: {
     success: 'Účet byl úspěšně smazán.',
     prompt: 'Opravdu chcete smazat svůj účet?'
+  },
+
+  tournament_detail: {
+    overview: 'Přehled',
+    rules: 'Pravidla',
+    prizes: 'Ceny',
+    players: 'Hráči',
+    matches: 'Zápasy',
+    streams: 'Streamy',
+    admin: 'Admin'
   }
 
 }
