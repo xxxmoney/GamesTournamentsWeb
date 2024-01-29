@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
-import { Tournament } from '~/models/tournaments/Tournament'
+import type { Tournament } from '~/models/tournaments/Tournament'
 import { TournamentFilter } from '~/models/tournaments/TournamentFilter'
-import { Game } from '~/models/games/Game'
-import { Platform } from '~/models/tournaments/Platform'
-import { Region } from '~/models/tournaments/Region'
-import { TournamentDetail } from '~/models/tournaments/TournamentDetail'
+import type { Platform } from '~/models/tournaments/Platform'
+import type { Region } from '~/models/tournaments/Region'
+import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -27,17 +26,23 @@ export const useTournamentsStore = defineStore({
     },
 
     getTournaments (): Promise<Tournament[]> {
-      const game = new Game(6, 'War Thunder', '', 4, 'https://warthunder.com/i/opengraph-wt.jpg')
-      const platform = new Platform(1, 'PC', 'pc')
-      const region = new Region(1, 'Europe', 'europe')
+      const game = {
+        id: 6,
+        name: 'War Thunder',
+        description: '',
+        genreId: 4,
+        imageUrl: 'https://warthunder.com/i/opengraph-wt.jpg'
+      }
+      const platform = { id: 1, name: 'PC', code: 'pc' }
+      const region = { id: 1, name: 'Europe', code: 'europe' }
 
       const utcDate = new Date(Date.UTC(2024, 0, 20, 0, 0, 0))
 
       this.tournaments = [
-        new Tournament(1, 'Super Tournament', 2, game, platform, region, utcDate),
-        new Tournament(2, 'Other Tournament', 4, game, platform, region, utcDate),
-        new Tournament(3, 'Amazing Tournament?', 2, game, platform, region, utcDate)
-      ].map(tournament => tournament.toJson() as Tournament)
+        { id: 1, name: 'Super Tournament', teamSize: 2, game, platform, region, startDate: utcDate },
+        { id: 2, name: 'Other Tournament', teamSize: 4, game, platform, region, startDate: utcDate },
+        { id: 3, name: 'Amazing Tournament?', teamSize: 2, game, platform, region, startDate: utcDate }
+      ]
 
       return Promise.resolve(this.tournaments)
     },
@@ -49,20 +54,20 @@ export const useTournamentsStore = defineStore({
 
     getRegions (): Promise<Region[]> {
       this.regions = [
-        new Region(1, 'Europe', 'europe'),
-        new Region(2, 'North America', 'north_america'),
-        new Region(3, 'Asia', 'asia')
-      ].map(region => region.toJson() as Region)
+        { id: 1, name: 'Europe', code: 'europe' },
+        { id: 2, name: 'North America', code: 'north_america' },
+        { id: 3, name: 'Asia', code: 'asia' }
+      ]
 
       return Promise.resolve(this.regions)
     },
 
     getPlatforms (): Promise<Platform[]> {
       this.platforms = [
-        new Platform(1, 'PC', 'pc'),
-        new Platform(2, 'Xbox', 'xbox'),
-        new Platform(3, 'Playstation', 'playstation')
-      ].map(platform => platform.toJson() as Platform)
+        { id: 1, name: 'PC', code: 'pc' },
+        { id: 2, name: 'Xbox', code: 'xbox' },
+        { id: 3, name: 'Playstation', code: 'playstation' }
+      ]
 
       return Promise.resolve(this.platforms)
     }

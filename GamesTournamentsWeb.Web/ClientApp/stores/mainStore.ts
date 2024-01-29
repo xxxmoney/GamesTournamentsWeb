@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
-import { Account } from '~/models/user/Account'
+import type { Account } from '~/models/user/Account'
 import { Login } from '~/models/user/Login'
-import { Role } from '~/models/user/Role'
 import type { LoginResult } from '~/models/user/LoginResult'
 import type { RegisterResult } from '~/models/user/RegisterResult'
 import { Register } from '~/models/user/Register'
@@ -57,8 +56,15 @@ export const useMainStore = defineStore({
     },
 
     login (login: Login): Promise<LoginResult> {
-      const role = new Role(1, 'user')
-      const account = new Account(1, 'John Doe', login.email, role, new Date(), null)
+      const role = { id: 1, name: 'user' }
+      const account = {
+        id: 1,
+        name: 'John Doe',
+        email: login.email,
+        role,
+        createdAt: new Date(),
+        imageUrl: null
+      }
       this.setLoginResult({ token: '69', account })
 
       return Promise.resolve(this.loginResult as LoginResult)
@@ -68,8 +74,15 @@ export const useMainStore = defineStore({
         return Promise.reject('Passwords do not match')
       }
 
-      const role = new Role(1, 'user')
-      const account = new Account(1, 'John Doe', register.email, role, new Date(), null)
+      const role = { id: 1, name: 'user' }
+      const account = {
+        id: 1,
+        name: 'John Doe',
+        email: register.email,
+        role,
+        createdAt: new Date(),
+        imageUrl: null
+      }
 
       return Promise.resolve({ account })
     },

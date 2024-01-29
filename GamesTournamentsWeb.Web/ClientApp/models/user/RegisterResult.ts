@@ -1,4 +1,4 @@
-import { Account } from '~/models/user/Account'
+import type { Account } from '~/models/user/Account'
 
 interface RegisterResult {
     account: Account;

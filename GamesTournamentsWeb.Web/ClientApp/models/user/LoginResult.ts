@@ -1,4 +1,4 @@
-import { Account } from '~/models/user/Account'
+import type { Account } from '~/models/user/Account'
 
 interface LoginResult {
     token: string;

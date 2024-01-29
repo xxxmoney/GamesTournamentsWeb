@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { AccountInfo } from '~/models/user/AccountInfo'
-import { HistoryItem } from '~/models/user/HistoryItem'
+import type { AccountInfo } from '~/models/user/AccountInfo'
+import type { HistoryItem } from '~/models/user/HistoryItem'
 
 export const useAccountStore = defineStore({
   id: 'account-store',
@@ -16,15 +16,14 @@ export const useAccountStore = defineStore({
     },
 
     getAccountInfo (accountId: number): Promise<AccountInfo> {
-      const info = new AccountInfo(accountId, 10, 0.5)
-      this.info = info.toJson() as AccountInfo
-      return Promise.resolve(info)
+      this.info = { id: accountId, matchesPlayed: 10, winRateRatio: 0.5 }
+      return Promise.resolve(this.info)
     },
 
     getHistory (accountId: number): Promise<HistoryItem[]> {
       this.history = [
-        new HistoryItem(accountId, 1, 'War Thunder', 2, 69)
-      ].map(historyItem => historyItem.toJson() as HistoryItem)
+        { accountId, gameId: 2, gameName: 'War Thunder' }
+      ]
 
       return Promise.resolve(this.history)
     },
