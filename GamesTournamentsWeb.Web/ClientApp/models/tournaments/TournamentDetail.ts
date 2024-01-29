@@ -13,8 +13,10 @@ interface TournamentDetail {
     platform: Platform
     region: Region
     startDate: Date
+    endDate: Date
     info: string
-    rules: string
+    rules: string,
+    settings: string
     prizes: Prize[]
     players: TournamentPlayer[]
     matches: Match[]
