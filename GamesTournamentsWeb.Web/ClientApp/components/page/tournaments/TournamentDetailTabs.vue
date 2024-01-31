@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
-
-const tournamentStore = useTournamentsStore()
-
-const detail = computed(() => tournamentStore.tournamentDetail as TournamentDetail)
 </script>
 
 <template>
@@ -32,7 +27,3 @@ const detail = computed(() => tournamentStore.tournamentDetail as TournamentDeta
     </TabPanel>
   </TabView>
 </template>
-
-<style scoped>
-
-</style>
