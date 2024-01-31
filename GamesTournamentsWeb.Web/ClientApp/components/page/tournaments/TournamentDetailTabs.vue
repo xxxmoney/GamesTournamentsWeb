@@ -9,26 +9,26 @@ const detail = computed(() => tournamentStore.tournamentDetail as TournamentDeta
 <template>
   <TabView class="max-w-xs md:max-w-full">
     <TabPanel :header="$t('tournament_detail.overview')">
-      <div></div>
+      <PageTournamentsTournamentDetailOverview />
     </TabPanel>
     <TabPanel :header="$t('tournament_detail.rules')">
-      <div></div>
+      <PageTournamentsTournamentDetailRules />
     </TabPanel>
     <TabPanel :header="$t('tournament_detail.prizes')">
-      <div></div>
+      <PageTournamentsTournamentDetailPrizes />
     </TabPanel>
     <TabPanel :header="$t('tournament_detail.players')">
-      <div></div>
+      <PageTournamentsTournamentDetailPlayers />
     </TabPanel>
     <TabPanel :header="$t('tournament_detail.matches')">
-      <div></div>
+      <PageTournamentsTournamentDetailMatches />
     </TabPanel>
     <TabPanel :header="$t('tournament_detail.streams')">
-      <div></div>
+      <PageTournamentsTournamentDetailStreams />
     </TabPanel>
     <!--    TODO: check for admin -->
     <TabPanel :header="$t('tournament_detail.admin')">
-      <div></div>
+      <PageTournamentsTournamentDetailAdmin />
     </TabPanel>
   </TabView>
 </template>
