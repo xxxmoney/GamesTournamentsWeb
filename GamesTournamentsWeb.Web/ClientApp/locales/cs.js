@@ -152,9 +152,13 @@ export default {
     game_username: 'Herní uživatelské jméno'
   },
   tournament_player_status: {
-    pending: 'Čeká na schválení',
+    pending: 'Čeká se na schválení',
     accepted: 'Přijato',
     rejected: 'Odmítnuto'
+  },
+  tournament_admin: {
+    edit: 'Upravit turnaj',
+    delete: 'Smazat turnaj'
   }
 
 }

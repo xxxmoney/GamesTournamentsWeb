@@ -50,7 +50,7 @@ const onDeleteAccount = () => {
       <CommonActionLink :label="$t('common.my_dashboard')" @click="goToDashboard" />
     </div>
 
-    <div class="container-row-gap">
+    <div class="container-row-gap-sm">
       <Button v-tooltip="$t('common.change_password')" icon="pi pi-wrench" @click="showChangePassword" />
       <Button
         v-tooltip="$t('common.history')"

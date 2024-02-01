@@ -152,9 +152,13 @@ export default {
     game_username: 'Game username'
   },
   tournament_player_status: {
-    pending: 'Čeká na schválení',
-    accepted: 'Přijato',
-    rejected: 'Odmítnuto'
+    pending: 'Pending',
+    accepted: 'Accepted',
+    rejected: 'Rejected'
+  },
+  tournament_admin: {
+    edit: 'Edit tournament',
+    delete: 'Delete tournament'
   }
 
 }

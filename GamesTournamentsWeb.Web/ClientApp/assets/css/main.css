@@ -27,9 +27,11 @@
 
     --background-color: var(--surface-0);
 
+    --margin-x-sm: calc(var(--margin-x) / 2);
     --margin-x: 25px;
     --margin-x-lg: calc(var(--margin-x) * 2);
     --margin-x-xl: calc(var(--margin-x-lg) * 2);
+    --margin-y-sm: calc(var(--margin-y) / 2);
     --margin-y: 8px;
     --margin-y-lg: calc(var(--margin-y) * 2);
     --margin-y-xl: calc(var(--margin-y-lg) * 2);
@@ -103,6 +105,10 @@ body {
     z-index: 69;
 }
 
+.gap-x-sm {
+    @apply gap-x-[var(--margin-x-sm)];
+}
+
 .gap-x {
     @apply gap-x-[var(--margin-x)];
 }
@@ -149,6 +155,10 @@ body {
 
 .mr-xl {
     @apply mr-[var(--margin-x-xl)];
+}
+
+.gap-y-sm {
+    @apply gap-y-[var(--margin-y-sm)];
 }
 
 .gap-y {
@@ -215,6 +225,10 @@ body {
     @apply py-[var(--margin-y-lg)];
 }
 
+.gap-sm {
+    @apply gap-x-sm gap-y-sm;
+}
+
 .gap {
     @apply gap-x gap-y;
 }
@@ -259,6 +273,10 @@ body {
     @apply inline-flex flex-col;
 }
 
+.container-gap-sm {
+    @apply inline-flex flex-col gap-sm;
+}
+
 .container-gap {
     @apply inline-flex flex-col gap;
 }
@@ -273,6 +291,10 @@ body {
 
 .container-row {
     @apply inline-flex flex-row;
+}
+
+.container-row-gap-sm {
+    @apply inline-flex flex-row gap-sm;
 }
 
 .container-row-gap {
