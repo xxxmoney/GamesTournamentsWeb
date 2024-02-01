@@ -35,6 +35,7 @@
     --margin-y-xl: calc(var(--margin-y-lg) * 2);
 
     --active-area: 1200px;
+    --text-area: 700px;
 }
 
 .heading {
@@ -202,8 +203,16 @@ body {
     @apply px-[var(--margin-x)];
 }
 
+.px-lg {
+    @apply px-[var(--margin-x-lg)];
+}
+
 .py {
     @apply py-[var(--margin-y)];
+}
+
+.py-lg {
+    @apply py-[var(--margin-y-lg)];
 }
 
 .gap {
@@ -220,6 +229,10 @@ body {
 
 .active-area {
     @apply lg:w-[var(--active-area)] lg:mx-auto;
+}
+
+.text-area {
+    @apply lg:w-[var(--text-area)];
 }
 
 .ul-links {

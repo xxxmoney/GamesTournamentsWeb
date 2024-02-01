@@ -137,6 +137,11 @@ export default {
     matches: 'Matches',
     streams: 'Streams',
     admin: 'Admin'
+  },
+  tournament_prizes: {
+    place: 'Place',
+    amount: 'Amount',
+    other_prizes: 'Other prizes'
   }
 
 }

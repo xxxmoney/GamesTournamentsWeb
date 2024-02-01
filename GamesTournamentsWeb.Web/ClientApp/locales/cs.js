@@ -137,6 +137,10 @@ export default {
     matches: 'Zápasy',
     streams: 'Streamy',
     admin: 'Admin'
+  },
+  tournament_prizes: {
+    place: 'Místo',
+    amount: 'Částka'
   }
 
 }

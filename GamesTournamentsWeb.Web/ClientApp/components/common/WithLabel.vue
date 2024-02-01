@@ -12,7 +12,8 @@ const { label, showLabel } = defineProps({
 </script>
 
 <template>
-  <div class="container">
+  <div class="container-gap items-center">
+    <slot name="aboveLabel" />
     <span v-if="showLabel">{{ label }}</span>
     <slot />
   </div>

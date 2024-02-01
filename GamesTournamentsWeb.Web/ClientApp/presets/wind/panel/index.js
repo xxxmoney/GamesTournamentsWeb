@@ -2,7 +2,7 @@ export default {
     root: {
         class: 'shadow-md rounded-lg'
     },
-    header: ({ props }) => ({
+    header: ({props}) => ({
         class: [
             // Alignments
             'flex items-center justify-between',
@@ -16,7 +16,7 @@ export default {
             'rounded-tl-lg rounded-tr-lg',
 
             // Conditional Spacing
-            { 'px-5 md:px-6 py-5': !props.toggleable, 'py-3 px-5 md:px-6': props.toggleable }
+            {'px-5 md:px-6 py-5': !props.toggleable, 'py-3 px-5 md:px-6': props.toggleable}
         ]
     }),
     title: {
@@ -55,7 +55,7 @@ export default {
     content: {
         class: [
             // Spacing
-            'py-6 px-5 md:px-6',
+            'px py',
 
             // Shape
             'last:rounded-br-lg last:rounded-bl-lg',
@@ -67,9 +67,6 @@ export default {
     },
     footer: {
         class: [
-            // Spacing
-            'py-6 px-5 md:px-6',
-
             //Shape
             'rounded-bl-lg rounded-br-lg',
 

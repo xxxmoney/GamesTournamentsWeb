@@ -149,9 +149,11 @@ export const useTournamentsStore = defineStore({
                     'Donec iaculis gravida nulla. \n' +
                     'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla quis diam. Pellentesque habitant morbi tristique senectus et.',
         prizes: [
-          { place: 1, amount: 1000, currency: 'USD' },
-          { place: 2, amount: 500, currency: 'USD' },
-          { place: 3, amount: 250, currency: 'USD' }
+          { place: 1, amount: 1000, currency: 'USD', currencySymbol: '$' },
+          { place: 2, amount: 500, currency: 'USD', currencySymbol: '$' },
+          { place: 3, amount: 250, currency: 'USD', currencySymbol: '$' },
+          { place: 4, amount: 100, currency: 'USD', currencySymbol: '$' },
+          { place: 5, amount: 50, currency: 'USD', currencySymbol: '$' }
         ],
         players,
         matches: [

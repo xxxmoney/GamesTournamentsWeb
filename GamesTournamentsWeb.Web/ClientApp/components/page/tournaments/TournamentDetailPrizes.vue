@@ -1,7 +1,49 @@
 <script lang="ts" setup>
+const detail = useTournamentDetail()
 
+const sortedPrizes = computed(() => {
+  return detail.value.prizes.sort((a, b) => {
+    return a.place - b.place
+  })
+})
+
+const topThreePrizesWithColors = computed(() => {
+  const prizes = sortedPrizes.value.slice(0, 3)
+
+  return prizes.map((prize, index) => {
+    return {
+      ...prize,
+      colorClass: index === 0 ? 'text-yellow-400' : index === 1 ? 'text-gray-400' : 'text-amber-700'
+    }
+  })
+})
+const otherPrizes = computed(() => {
+  return sortedPrizes.value.slice(3)
+})
 </script>
 
 <template>
-  <div></div>
+  <div class="container-gap">
+    <div class="container-row-gap">
+      <PageTournamentsTopPrize
+        v-for="(prize, index) in topThreePrizesWithColors"
+        :key="`top-prize-${index}`"
+        :amount="prize.amount"
+        :colorClass="prize.colorClass"
+        :currencySymbol="prize.currencySymbol"
+      />
+    </div>
+
+    <Panel
+      v-if="otherPrizes.length"
+      :header="$t('tournament_prizes.other_prizes')"
+      collapsed
+      toggleable
+    >
+      <DataTable :value="otherPrizes">
+        <Column :header="$t('tournament_prizes.place')" field="place"></Column>
+        <Column :header="$t('tournament_prizes.amount')" field="amount"></Column>
+      </DataTable>
+    </Panel>
+  </div>
 </template>

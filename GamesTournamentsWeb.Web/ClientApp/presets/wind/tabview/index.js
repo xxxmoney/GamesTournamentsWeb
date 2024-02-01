@@ -1,11 +1,11 @@
 export default {
-    navContainer: ({ props }) => ({
+    navContainer: ({props}) => ({
         class: [
             // Position
             'relative',
 
             // Misc
-            { 'overflow-hidden': props.scrollable }
+            {'overflow-hidden': props.scrollable}
         ]
     }),
     navContent: {
@@ -73,7 +73,7 @@ export default {
         ]
     },
     tabpanel: {
-        header: ({ props }) => ({
+        header: ({props}) => ({
             class: [
                 // Spacing
                 'mr-0',
@@ -84,7 +84,7 @@ export default {
                 }
             ]
         }),
-        headerAction: ({ parent, context }) => ({
+        headerAction: ({parent, context}) => ({
             class: [
                 'relative',
 
@@ -143,7 +143,7 @@ export default {
         content: {
             class: [
                 // Spacing
-                'p-6',
+                'px py-lg',
 
                 // Shape
                 'rounded-b-md',
