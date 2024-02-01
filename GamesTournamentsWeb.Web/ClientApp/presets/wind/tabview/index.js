@@ -143,7 +143,7 @@ export default {
         content: {
             class: [
                 // Spacing
-                'px py-lg',
+                'py-lg',
 
                 // Shape
                 'rounded-b-md',
