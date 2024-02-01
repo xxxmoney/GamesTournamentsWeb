@@ -4,6 +4,7 @@ import { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import type { Platform } from '~/models/tournaments/Platform'
 import type { Region } from '~/models/tournaments/Region'
 import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
+import { gamePlayerStatus } from '~/enums/tournaments/gamePlayerStatus'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -87,7 +88,7 @@ export const useTournamentsStore = defineStore({
             imageUrl: null
           },
           gameUsername: 'PlayerElOne',
-          statusId: 1
+          status: gamePlayerStatus.accepted
         },
         {
           account: {
@@ -102,7 +103,7 @@ export const useTournamentsStore = defineStore({
             imageUrl: null
           },
           gameUsername: 'PlayerZoTwo',
-          statusId: 1
+          status: gamePlayerStatus.pending
         }
       ]
 

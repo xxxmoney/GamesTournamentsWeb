@@ -7,13 +7,14 @@ const sortedPrizes = computed(() => {
   })
 })
 
-const topThreePrizesWithColors = computed(() => {
+const topThreePrizes = computed(() => {
   const prizes = sortedPrizes.value.slice(0, 3)
 
   return prizes.map((prize, index) => {
     return {
       ...prize,
-      colorClass: index === 0 ? 'text-yellow-400' : index === 1 ? 'text-gray-400' : 'text-amber-700'
+      colorClass: index === 0 ? 'text-yellow-400' : index === 1 ? 'text-gray-400' : 'text-amber-700',
+      tooltip: index === 0 ? 'tournament_prizes.first_place' : index === 1 ? 'tournament_prizes.second_place' : 'tournament_prizes.third_place'
     }
   })
 })
@@ -26,8 +27,9 @@ const otherPrizes = computed(() => {
   <div class="container-gap">
     <div class="container-row-gap">
       <PageTournamentsTopPrize
-        v-for="(prize, index) in topThreePrizesWithColors"
+        v-for="(prize, index) in topThreePrizes"
         :key="`top-prize-${index}`"
+        v-tooltip="$t(prize.tooltip)"
         :amount="prize.amount"
         :colorClass="prize.colorClass"
         :currencySymbol="prize.currencySymbol"

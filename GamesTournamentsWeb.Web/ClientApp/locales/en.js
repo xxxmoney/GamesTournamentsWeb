@@ -140,8 +140,21 @@ export default {
   },
   tournament_prizes: {
     place: 'Place',
+    first_place: 'First place',
+    second_place: 'Second place',
+    third_place: 'Third place',
     amount: 'Amount',
     other_prizes: 'Other prizes'
+  },
+  tournament_players: {
+    username: 'Username',
+    status: 'Status',
+    game_username: 'Game username'
+  },
+  tournament_player_status: {
+    pending: 'Čeká na schválení',
+    accepted: 'Přijato',
+    rejected: 'Odmítnuto'
   }
 
 }

@@ -1,5 +1,5 @@
 <script setup>
-const { size, icon, iconType } = defineProps({
+const { size, icon, iconType, cursor } = defineProps({
   size: {
     type: String,
     default: 'md'
@@ -11,15 +11,19 @@ const { size, icon, iconType } = defineProps({
   iconType: {
     type: String,
     default: 'pi'
+  },
+  cursor: {
+    type: Boolean,
+    default: false
   }
 })
 
 const iconClass = computed(() => {
-  return `text-${size} text-black ${iconType} ${icon}`
+  return `text-${size} text-black ${iconType} ${icon} ${cursor ? 'cursor-pointer' : ''}`
 })
 
 </script>
 
 <template>
-  <i :class="iconClass" class="cursor-pointer"></i>
+  <i :class="iconClass"></i>
 </template>
