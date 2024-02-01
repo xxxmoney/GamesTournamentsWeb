@@ -7,12 +7,16 @@ const { label, showLabel } = defineProps({
   showLabel: {
     type: Boolean,
     default: true
+  },
+  containerClass: {
+    type: String,
+    default: ''
   }
 })
 </script>
 
 <template>
-  <div class="container-gap items-center">
+  <div :class="containerClass" class="container-gap">
     <slot name="aboveLabel" />
     <span v-if="showLabel">{{ label }}</span>
     <slot />
