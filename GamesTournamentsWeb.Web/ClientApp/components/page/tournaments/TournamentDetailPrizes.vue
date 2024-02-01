@@ -42,7 +42,7 @@ const otherPrizes = computed(() => {
       collapsed
       toggleable
     >
-      <DataTable :value="otherPrizes">
+      <DataTable :value="otherPrizes" size="small">
         <Column :header="$t('tournament_prizes.place')" field="place"></Column>
         <Column :header="$t('tournament_prizes.amount')" field="amount"></Column>
       </DataTable>
