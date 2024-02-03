@@ -41,7 +41,9 @@ export default {
     nickname: 'Přezdívka',
     game: 'Hra',
     place: 'Místo',
-    link: 'Odkaz'
+    link: 'Odkaz',
+    video_not_supported: 'Váš prohlížeč nepodporuje toto video.',
+    stream: 'Stream'
   },
 
   locales: {

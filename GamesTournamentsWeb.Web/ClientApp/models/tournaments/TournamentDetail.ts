@@ -4,6 +4,7 @@ import type { Region } from '~/models/tournaments/Region'
 import type { Prize } from '~/models/tournaments/Prize'
 import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 import type { Match } from '~/models/tournaments/Match'
+import type { Stream } from '~/models/tournaments/Stream'
 
 interface TournamentDetail {
     id: number
@@ -20,7 +21,7 @@ interface TournamentDetail {
     prizes: Prize[]
     players: TournamentPlayer[]
     matches: Match[]
-    streams: string[]
+    streams: Stream[]
 }
 
 export type { TournamentDetail }

@@ -41,7 +41,9 @@ export default {
     nickname: 'Nickname',
     game: 'Game',
     place: 'Place',
-    link: 'Link'
+    link: 'Link',
+    video_not_supported: 'Your browser does not support the video tag.',
+    stream: 'Stream'
   },
 
   locales: {
