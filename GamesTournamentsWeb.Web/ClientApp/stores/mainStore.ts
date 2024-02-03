@@ -6,6 +6,7 @@ import type { RegisterResult } from '~/models/user/RegisterResult'
 import { Register } from '~/models/user/Register'
 import constants from '~/constants'
 import { ChangePassword } from '~/models/user/ChangePassword'
+import { AuthService } from '~/apiServices/AuthService'
 
 export const useMainStore = defineStore({
   id: 'main-store',
@@ -55,36 +56,18 @@ export const useMainStore = defineStore({
       login.value = loginResult
     },
 
-    login (login: Login): Promise<LoginResult> {
-      const role = { id: 1, name: 'user' }
-      const account = {
-        id: 1,
-        name: 'John Doe',
-        email: login.email,
-        role,
-        createdAt: new Date(),
-        imageUrl: null
-      }
-      this.setLoginResult({ token: '69', account })
+    async login (login: Login): Promise<LoginResult> {
+      const result = await AuthService.login(login)
+      this.setLoginResult(result)
 
-      return Promise.resolve(this.loginResult as LoginResult)
+      return result
     },
     register (register: Register): Promise<RegisterResult> {
       if (register.password !== register.passwordConfirm) {
         return Promise.reject('Passwords do not match')
       }
 
-      const role = { id: 1, name: 'user' }
-      const account = {
-        id: 1,
-        name: 'John Doe',
-        email: register.email,
-        role,
-        createdAt: new Date(),
-        imageUrl: null
-      }
-
-      return Promise.resolve({ account })
+      return AuthService.register(register)
     },
     logout (): void {
       this.setLoginResult(null)
@@ -94,7 +77,7 @@ export const useMainStore = defineStore({
         return Promise.reject()
       }
 
-      return Promise.resolve()
+      return AuthService.changePassword(request)
     }
   },
   getters: {

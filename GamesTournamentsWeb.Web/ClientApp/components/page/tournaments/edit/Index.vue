@@ -2,9 +2,11 @@
 const { id } = defineProps({
   id: {
     type: Number,
-    required: true
+    default: null
   }
 })
+
+// TODO: add to store tournament edit
 </script>
 
 <template>

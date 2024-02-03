@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { AccountInfo } from '~/models/user/AccountInfo'
 import type { HistoryItem } from '~/models/user/HistoryItem'
+import { AccountService } from '~/apiServices/AccountService'
 
 export const useAccountStore = defineStore({
   id: 'account-store',
@@ -15,17 +16,14 @@ export const useAccountStore = defineStore({
       return Promise.resolve()
     },
 
-    getAccountInfo (accountId: number): Promise<AccountInfo> {
-      this.info = { id: accountId, matchesPlayed: 10, winRateRatio: 0.5 }
-      return Promise.resolve(this.info)
+    async getAccountInfo (accountId: number): Promise<AccountInfo> {
+      this.info = await AccountService.getAccountInfo(accountId)
+      return this.info
     },
 
-    getHistory (accountId: number): Promise<HistoryItem[]> {
-      this.history = [
-        { accountId, gameId: 2, gameName: 'War Thunder', tournamentId: 1 }
-      ]
-
-      return Promise.resolve(this.history)
+    async getHistory (accountId: number): Promise<HistoryItem[]> {
+      this.history = await AccountService.getHistory(accountId)
+      return this.history
     },
 
     openPasswordChangeModal (): void {

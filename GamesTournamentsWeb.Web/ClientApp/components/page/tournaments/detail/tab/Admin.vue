@@ -20,7 +20,7 @@ const deleteTournament = () => {
 
         successToast('tournament_delete.success')
 
-        router.push('/tournaments')
+        await router.push('/tournaments')
       } catch (e) {
         errorToast(e)
       }
