@@ -12,7 +12,7 @@ const match = computed(() => detail.value.matches.find(m => m.id === matchId)!)
 </script>
 
 <template>
-  <div class="container-row-gap items-center justify-evenly max-w-32 md:max-w-52 lg:max-w-full min-h-8">
+  <div class="container-row-gap items-center max-w-32 md:max-w-52 lg:max-w-80 min-h-8">
     <span v-tooltip="match.firstTeam?.name" class="flex-1 truncate">
       {{ match.firstTeam?.name ?? '?' }}
     </span>
