@@ -103,18 +103,53 @@ export const useTournamentsStore = defineStore({
             imageUrl: null
           },
           gameUsername: 'PlayerZoTwo',
+          status: gamePlayerStatus.accepted
+        },
+        {
+          account: {
+            id: 3,
+            name: 'UwuZoPlayero',
+            email: '',
+            role: {
+              id: 1,
+              name: 'User'
+            },
+            createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
+            imageUrl: null
+          },
+          gameUsername: 'Uwuwu',
+          status: gamePlayerStatus.pending
+        },
+        {
+          account: {
+            id: 4,
+            name: 'AraAraPlayero',
+            email: '',
+            role: {
+              id: 1,
+              name: 'User'
+            },
+            createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
+            imageUrl: null
+          },
+          gameUsername: 'AtomicNek',
           status: gamePlayerStatus.pending
         }
       ]
 
-      const firstTeam = {
-        name: 'Team One',
-        players: [players[0]]
-      }
-      const secondTeam = {
-        name: 'Team Two',
-        players: [players[1]]
-      }
+      const teams = players.map((player, index) => {
+        return {
+          id: index + 1,
+          name: player.gameUsername,
+          players: [player]
+        }
+      })
+
+      const matches = [
+        { id: 1, nextMatchId: 3, tournamentId, firstTeam: teams[0], secondTeam: teams[1], winner: null },
+        { id: 2, nextMatchId: 3, tournamentId, firstTeam: teams[2], secondTeam: teams[3], winner: null },
+        { id: 3, nextMatchId: null, tournamentId, firstTeam: null, secondTeam: null, winner: null }
+      ]
 
       this.tournamentDetail = {
         id: tournamentId,
@@ -157,13 +192,7 @@ export const useTournamentsStore = defineStore({
           { place: 5, amount: 50, currency: 'USD', currencySymbol: '$' }
         ],
         players,
-        matches: [
-          {
-            firstTeam,
-            secondTeam,
-            winner: null
-          }
-        ],
+        matches,
         streams: [
           { name: 'Rick The First', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=tPb-oERlfwu0gk3Y' },
           { name: 'Rick The Second', url: 'https://www.youtube.com/embed/qWNQUvIk954?si=Nf03OVIlvbZAokk1' }

@@ -25,7 +25,7 @@ const otherPrizes = computed(() => {
 
 <template>
   <div class="container-gap">
-    <div class="container-row-gap">
+    <div class="container-row-gap mx-auto">
       <PageTournamentsTopPrize
         v-for="(prize, index) in topThreePrizes"
         :key="`top-prize-${index}`"
