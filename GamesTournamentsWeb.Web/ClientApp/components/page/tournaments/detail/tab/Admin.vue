@@ -7,14 +7,14 @@ const confirm = useConfirm()
 const successToast = useSuccessToast()
 const errorToast = useErrorToast()
 
-const editTournament = () => {
-  // TODO: redirect to edit
+const editTournament = async () => {
+  await router.push(`/tournaments/edit/${detail.value.id}`)
 }
 const deleteTournament = () => {
   confirm.require({
     message: t('tournament_delete.prompt'),
     header: 'Confirmation',
-    accept: () => {
+    accept: async () => {
       try {
         // TODO: add delete tournament method
 

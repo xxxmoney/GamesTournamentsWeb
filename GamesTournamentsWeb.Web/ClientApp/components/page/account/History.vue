@@ -12,7 +12,7 @@ const account = computed(() => mainStore.account)
 await accountStore.getHistory(account.value!.id)
 
 const goToTournament = (tournamentId: number) => {
-  router.push(`/tournaments/${tournamentId}`)
+  router.push(`/tournaments/detail/${tournamentId}`)
 }
 
 </script>

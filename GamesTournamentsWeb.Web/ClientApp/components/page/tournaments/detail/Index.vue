@@ -16,7 +16,7 @@ const detail = computed(() => tournamentsStore.tournamentDetail as TournamentDet
 </script>
 
 <template>
-  <div class="inline-flex flex-col gap">
+  <div class="container-gap">
     <div class="w-full max-h-80 rounded-lg shadow overflow-hidden">
       <img :src="detail.game.imageUrl" />
     </div>
