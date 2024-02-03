@@ -21,7 +21,7 @@ const detail = computed(() => tournamentsStore.tournamentDetail as TournamentDet
       <img :src="detail.game.imageUrl" />
     </div>
 
-    <PageTournamentsTournamentInfo
+    <PageTournamentsOverviewInfo
       :gameName="detail.game.name"
       :name="detail.name"
       :platformName="detail.platform.name"
@@ -29,6 +29,6 @@ const detail = computed(() => tournamentsStore.tournamentDetail as TournamentDet
       :startDate="detail.startDate"
     />
 
-    <PageTournamentsTournamentDetailTabs />
+    <PageTournamentsDetailTabs />
   </div>
 </template>

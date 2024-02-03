@@ -5,7 +5,5 @@ const id = computed(() => Number(route.params.id))
 </script>
 
 <template>
-  <div>
-    <PageTournamentsTournamentDetail :id="id" />
-  </div>
+  <PageTournamentsDetail :id="id" />
 </template>

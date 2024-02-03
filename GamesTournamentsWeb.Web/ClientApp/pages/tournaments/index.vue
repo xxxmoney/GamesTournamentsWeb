@@ -15,7 +15,7 @@ await tournamentsStore.initialize()
     </CommonPanel>
 
     <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
-      <PageTournamentsTournament
+      <PageTournamentsOverview
         v-for="tournament in tournaments"
         :id="tournament.id"
         :key="`tournament-${tournament.id}`"

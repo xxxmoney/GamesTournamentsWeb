@@ -10,7 +10,7 @@ const node = computed(() => toMatchTreeNode(detail.value.matches))
       <OrganizationChart :value="node" collapsible>
         <template #default="slotProps">
           <div class="px py border">
-            <PageTournamentsTournamentMatch :matchId="slotProps.node.key" />
+            <PageTournamentsDetailTabMatchesMatch :matchId="slotProps.node.key" />
           </div>
         </template>
       </OrganizationChart>
