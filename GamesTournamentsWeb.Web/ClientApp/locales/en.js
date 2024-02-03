@@ -165,6 +165,19 @@ export default {
   tournament_delete: {
     success: 'Tournament has been successfully deleted',
     prompt: 'Are you sure you want to delete this tournament?'
+  },
+  tournament_edit: {
+    steps: {
+      info: 'Info',
+      rules: 'Rules',
+      prizes: 'Prizes',
+      players: 'Players',
+      matches: 'Matches',
+      streams: 'Streams',
+      admins: 'Admins',
+      overview: 'Overview',
+      finish: 'Finish'
+    }
   }
 
 }

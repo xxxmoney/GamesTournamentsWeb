@@ -10,7 +10,7 @@ const { id } = defineProps({
 </script>
 
 <template>
-  <div class="container-gap">
+  <div class="container-gap w-full">
     <PageTournamentsEditSteps />
   </div>
 </template>

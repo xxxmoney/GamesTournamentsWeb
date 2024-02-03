@@ -5,12 +5,15 @@ import type { Platform } from '~/models/tournaments/Platform'
 import type { Region } from '~/models/tournaments/Region'
 import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 import { TournamentsService } from '~/apiServices/TournamentsService'
+import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
     tournaments: [] as Tournament[],
     tournamentDetail: null as TournamentDetail | null,
+    tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
+    tournamentEditStep: 0,
     teamSizes: [] as number[],
     regions: [] as Region[],
     platforms: [] as Platform[],
@@ -49,6 +52,11 @@ export const useTournamentsStore = defineStore({
     async getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
       this.tournamentDetail = await TournamentsService.getTournamentDetailById(tournamentId)
       return this.tournamentDetail
+    },
+
+    resetTournamentEdit (): void {
+      this.tournamentEditStep = 0
+      this.tournamentEdit = new TournamentEdit().toJson() as TournamentEdit
     }
 
   },

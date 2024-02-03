@@ -165,6 +165,19 @@ export default {
   tournament_delete: {
     success: 'Turnaj byl úspěšně smazán',
     prompt: 'Opravdu chcete smazat tento turnaj?'
+  },
+  tournament_edit: {
+    steps: {
+      info: 'Informace',
+      rules: 'Pravidla',
+      prizes: 'Ceny',
+      players: 'Hráči',
+      matches: 'Zápasy',
+      streams: 'Streamy',
+      admins: 'Admini',
+      overview: 'Přehled',
+      finish: 'Dokončit'
+    }
   }
 
 }
