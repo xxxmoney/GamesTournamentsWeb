@@ -1,11 +1,31 @@
 <script lang="ts" setup>
 const detail = useTournamentDetail()
 
+const { t } = useI18n()
+const router = useRouter()
+const confirm = useConfirm()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
+
 const editTournament = () => {
   // TODO: redirect to edit
 }
 const deleteTournament = () => {
-  // TODO: dialog for confirm delete
+  confirm.require({
+    message: t('tournament_delete.prompt'),
+    header: 'Confirmation',
+    accept: () => {
+      try {
+        // TODO: add delete tournament method
+
+        successToast('tournament_delete.success')
+
+        router.push('/tournaments')
+      } catch (e) {
+        errorToast(e)
+      }
+    }
+  })
 }
 </script>
 

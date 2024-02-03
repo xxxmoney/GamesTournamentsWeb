@@ -10,7 +10,7 @@ const { amount, currencySymbol } = defineProps({
   },
   colorClass: {
     type: String,
-    required: false
+    default: ''
   }
 })
 </script>

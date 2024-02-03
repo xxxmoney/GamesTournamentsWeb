@@ -25,7 +25,7 @@ export default {
     platform: 'Platforma',
     filter: 'Filtr',
     error: 'Chyba',
-    error_description: 'Něco se pokazilo. Zkuste to prosím znovu.',
+    error_description: 'Něco se pokazilo, zkuste to prosím znovu',
     success: 'Úspěch',
     success_description: 'Akce byla úspěšně dokončena.',
     info: 'Info',
@@ -99,33 +99,33 @@ export default {
       real_time_updates: {
         icon: 'pi-star',
         title: 'Aktualizace v reálném čase',
-        description: 'Sledujte aktuální stavy turnajů v reálném čase, abyste nikdy nepřišli pozdě do akce.'
+        description: 'Sledujte aktuální stavy turnajů v reálném čase, abyste nikdy nepřišli pozdě do akce'
       },
       stats_insights: {
         icon: 'pi-star',
         title: 'Statistiky a postřehy',
-        description: 'Ponořte se do minulých turnajů s komplexními statistikami a přehledy, které vám pomohou činit informovaná rozhodnutí.'
+        description: 'Ponořte se do minulých turnajů s komplexními statistikami a přehledy, které vám pomohou činit informovaná rozhodnutí'
       }
     },
     contact_form: {
       title: 'Kontaktujte nás',
       subtitle: 'Rádi od Vás uslyšíme!',
-      info: 'Pole s * jsou povinná.'
+      info: 'Pole s * jsou povinná'
     }
   },
   login: {
-    success: 'Byli jste úspěšně přihlášeni.'
+    success: 'Byli jste úspěšně přihlášeni'
   },
   register: {
-    success: 'Byli jste úspěšně zaregistrováni.'
+    success: 'Byli jste úspěšně zaregistrováni'
   },
   change_password: {
-    password_not_matching: 'Hesla se neshodují.',
-    password_incorrect: 'Současné heslo je nesprávné.',
-    success: 'Heslo bylo úspěšně změněno.'
+    password_not_matching: 'Hesla se neshodují',
+    password_incorrect: 'Současné heslo je nesprávné',
+    success: 'Heslo bylo úspěšně změněno'
   },
-  delete_account: {
-    success: 'Účet byl úspěšně smazán.',
+  account_delete: {
+    success: 'Účet byl úspěšně smazán',
     prompt: 'Opravdu chcete smazat svůj účet?'
   },
 
@@ -159,6 +159,10 @@ export default {
   tournament_admin: {
     edit: 'Upravit turnaj',
     delete: 'Smazat turnaj'
+  },
+  tournament_delete: {
+    success: 'Turnaj byl úspěšně smazán',
+    prompt: 'Opravdu chcete smazat tento turnaj?'
   }
 
 }

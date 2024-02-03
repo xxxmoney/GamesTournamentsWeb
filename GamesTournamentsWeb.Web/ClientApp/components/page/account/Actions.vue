@@ -25,13 +25,13 @@ const showChangePassword = () => {
 }
 const onDeleteAccount = () => {
   confirm.require({
-    message: t('delete_account.prompt'),
+    message: t('account_delete.prompt'),
     header: 'Confirmation',
     accept: () => {
       try {
         // TODO: add delete account method
 
-        successToast('delete_account.success')
+        successToast('account_delete.success')
 
         router.push('/logout')
       } catch (e) {

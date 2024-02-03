@@ -99,33 +99,33 @@ export default {
       real_time_updates: {
         icon: 'pi-star',
         title: 'Real Time Updates',
-        description: 'Stay updated with real-time tournament statuses, ensuring you\'re never late to the action.'
+        description: 'Stay updated with real-time tournament statuses, ensuring you\'re never late to the action'
       },
       stats_insights: {
         icon: 'pi-star',
         title: 'Stats & Insights',
-        description: 'Dive deep into past tournaments with comprehensive stats and insights, helping you make informed decisions.'
+        description: 'Dive deep into past tournaments with comprehensive stats and insights, helping you make informed decisions'
       }
     },
     contact_form: {
       title: 'Contact us',
       subtitle: 'We\'d love to hear from you!',
-      info: 'Fields with * are required.'
+      info: 'Fields with * are required'
     }
   },
   login: {
-    success: 'You have been successfully logged in.'
+    success: 'You have been successfully logged in'
   },
   register: {
-    success: 'You have been successfully registered.'
+    success: 'You have been successfully registered'
   },
   change_password: {
-    password_not_matching: 'Passwords do not match.',
-    password_incorrect: 'Current password is incorrect.',
-    success: 'Password has been successfully changed.'
+    password_not_matching: 'Passwords do not match',
+    password_incorrect: 'Current password is incorrect',
+    success: 'Password has been successfully changed'
   },
-  delete_account: {
-    success: 'Account has been successfully deleted.',
+  account_delete: {
+    success: 'Account has been successfully deleted',
     prompt: 'Are you sure you want to delete your account?'
   },
 
@@ -159,6 +159,10 @@ export default {
   tournament_admin: {
     edit: 'Edit tournament',
     delete: 'Delete tournament'
+  },
+  tournament_delete: {
+    success: 'Tournament has been successfully deleted',
+    prompt: 'Are you sure you want to delete this tournament?'
   }
 
 }
