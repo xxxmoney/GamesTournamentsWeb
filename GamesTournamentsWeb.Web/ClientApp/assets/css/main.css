@@ -246,7 +246,7 @@ body {
 }
 
 .text-area {
-    @apply lg:w-[var(--text-area)];
+    @apply max-w-md lg:max-w-[var(--text-area)];
 }
 
 .ul-links {

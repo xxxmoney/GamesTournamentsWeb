@@ -1,6 +1,7 @@
 import type { Game } from '~/models/games/Game'
 import type { Genre } from '~/models/games/Genre'
 import type { GameFilter } from '~/models/games/GameFilter'
+import type { GameOverview } from '~/models/games/GameOverview'
 
 export const GamesSerivce = {
   getGames (filter: GameFilter): Promise<Game[]> {
@@ -50,6 +51,19 @@ export const GamesSerivce = {
     ]
 
     return Promise.resolve(games)
+  },
+
+  getGameOverviews (): Promise<GameOverview[]> {
+    const result = [
+      { id: 1, name: 'League of Legends' },
+      { id: 2, name: 'Counter Strike' },
+      { id: 3, name: 'Valorant' },
+      { id: 4, name: 'Dota 2' },
+      { id: 5, name: 'Fifa 21' },
+      { id: 6, name: 'War Thunder' }
+    ]
+
+    return Promise.resolve(result)
   },
 
   getGenres (): Promise<Genre[]> {

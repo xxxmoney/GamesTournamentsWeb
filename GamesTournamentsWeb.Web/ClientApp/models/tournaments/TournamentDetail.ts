@@ -12,7 +12,7 @@ interface TournamentDetail {
     teamSize: number
     game: Game
     platform: Platform
-    region: Region
+    regions: Region[]
     startDate: Date
     endDate: Date
     info: string

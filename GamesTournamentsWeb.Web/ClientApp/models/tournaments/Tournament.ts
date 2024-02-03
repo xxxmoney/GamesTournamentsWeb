@@ -8,7 +8,7 @@ interface Tournament {
     teamSize: number
     game: Game
     platform: Platform
-    region: Region
+    regions: Region[]
     startDate: Date
 }
 

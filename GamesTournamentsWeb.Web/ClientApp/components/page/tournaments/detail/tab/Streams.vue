@@ -3,7 +3,7 @@ const detail = useTournamentDetail()
 </script>
 
 <template>
-  <div class="container-gap-lg">
+  <div class="container-gap-lg w-full">
     <Panel
       v-for="stream in detail.streams"
       :key="`stream-${stream.url}}`"

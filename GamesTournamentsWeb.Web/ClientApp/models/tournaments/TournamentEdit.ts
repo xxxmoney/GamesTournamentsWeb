@@ -10,7 +10,7 @@ class TournamentEdit extends ConvertableToJson {
   teamSize: number | null
   gameId: number | null
   platformId: number | null
-  regionId: number | null
+  regionIds: number[]
   startDate: Date | null
   endDate: Date | null
   info: string
@@ -29,7 +29,7 @@ class TournamentEdit extends ConvertableToJson {
     this.teamSize = null
     this.gameId = null
     this.platformId = null
-    this.regionId = null
+    this.regionIds = []
     this.startDate = null
     this.endDate = null
     this.info = ''

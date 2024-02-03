@@ -24,7 +24,7 @@ const goToTournamentDetail = () => {
         :gameName="tournament.game.name"
         :name="tournament.name"
         :platformName="tournament.platform.name"
-        :regionName="tournament.region.name"
+        :regionNames="tournament.regions.map(region => region.name)"
         :startDate="tournament.startDate"
       />
 

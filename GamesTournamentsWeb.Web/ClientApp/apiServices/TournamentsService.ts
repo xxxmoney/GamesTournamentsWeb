@@ -15,14 +15,14 @@ export const TournamentsService = {
       imageUrl: 'https://warthunder.com/i/opengraph-wt.jpg'
     }
     const platform = { id: 1, name: 'PC', code: 'pc' }
-    const region = { id: 1, name: 'Europe', code: 'europe' }
+    const regions = [{ id: 1, name: 'Europe', code: 'europe' }]
 
     const utcDate = new Date(Date.UTC(2024, 0, 20, 0, 0, 0))
 
     const tournaments = [
-      { id: 1, name: 'Super Tournament', teamSize: 2, game, platform, region, startDate: utcDate },
-      { id: 2, name: 'Other Tournament', teamSize: 4, game, platform, region, startDate: utcDate },
-      { id: 3, name: 'Amazing Tournament?', teamSize: 2, game, platform, region, startDate: utcDate }
+      { id: 1, name: 'Super Tournament', teamSize: 2, game, platform, regions, startDate: utcDate },
+      { id: 2, name: 'Other Tournament', teamSize: 4, game, platform, regions, startDate: utcDate },
+      { id: 3, name: 'Amazing Tournament?', teamSize: 2, game, platform, regions, startDate: utcDate }
     ]
 
     return Promise.resolve(tournaments)
@@ -147,11 +147,11 @@ export const TournamentsService = {
         name: 'PC',
         code: 'pc'
       },
-      region: {
+      regions: [{
         id: 1,
         name: 'Europe',
         code: 'europe'
-      },
+      }],
       startDate: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
       endDate: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
       info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Etiam quis quam. Sed vel lectus. ',

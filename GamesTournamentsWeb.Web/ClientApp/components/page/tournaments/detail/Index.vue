@@ -25,7 +25,7 @@ const detail = computed(() => tournamentsStore.tournamentDetail as TournamentDet
       :gameName="detail.game.name"
       :name="detail.name"
       :platformName="detail.platform.name"
-      :regionName="detail.region.name"
+      :regionNames="detail.regions.map(region => region.name)"
       :startDate="detail.startDate"
     />
 

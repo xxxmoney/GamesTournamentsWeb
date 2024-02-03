@@ -16,7 +16,7 @@ const { label, showLabel } = defineProps({
 </script>
 
 <template>
-  <div :class="containerClass" class="container-gap">
+  <div :class="containerClass" class="inline-flex flex-col">
     <slot name="aboveLabel" />
     <span v-if="showLabel">{{ label }}</span>
     <slot />

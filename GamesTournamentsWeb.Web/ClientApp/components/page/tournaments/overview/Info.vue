@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { name, gameName, regionName, platformName, startDate } = defineProps({
+const { name, gameName, regionNames, platformName, startDate } = defineProps({
   name: {
     type: String,
     required: true
@@ -8,8 +8,8 @@ const { name, gameName, regionName, platformName, startDate } = defineProps({
     type: String,
     required: true
   },
-  regionName: {
-    type: String,
+  regionNames: {
+    type: Array<String>,
     required: true
   },
   platformName: {
@@ -28,7 +28,7 @@ const { name, gameName, regionName, platformName, startDate } = defineProps({
 
   <div class="inline-flex flex-row gap">
     <span class="italic">{{ gameName }}</span>
-    <span class="italic">{{ regionName }}</span>
+    <span class="italic">{{ joinWithComma(regionNames) }}</span>
     <span class="italic">{{ platformName }}</span>
   </div>
 

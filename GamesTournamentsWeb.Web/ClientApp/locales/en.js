@@ -177,7 +177,11 @@ export default {
       admins: 'Admins',
       overview: 'Overview',
       finish: 'Finish'
-    }
+    },
+    choose_game: 'Choose game',
+    choose_platform: 'Choose platform',
+    choose_regions: 'Choose regions',
+    choose_team_size: 'Choose team size'
   }
 
 }
