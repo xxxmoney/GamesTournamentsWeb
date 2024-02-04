@@ -21,7 +21,7 @@ const { amount, currencySymbol } = defineProps({
     containerClass="items-center"
   >
     <template #aboveLabel>
-      <font-awesome-icon :class="colorClass" :icon="['fas', 'trophy']" class=" text-6xl" />
+      <FontAwesomeIcon :class="colorClass" :icon="['fas', 'trophy']" class=" text-6xl" />
     </template>
   </CommonWithLabel>
 </template>

@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     'nuxt-primevue',
     '@nuxtjs/eslint-module',
     '@nuxtjs/i18n',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-tiptap-editor'
   ],
   css: ['~/assets/css/main.css', 'primeicons/primeicons.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   primevue: {
@@ -23,5 +24,8 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ['your-domain.com']
+  },
+  tiptap: {
+    prefix: 'Tiptap'
   }
 })

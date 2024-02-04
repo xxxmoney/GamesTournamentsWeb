@@ -325,6 +325,8 @@ body {
     @apply container items-center gap-xl mx-auto;
 }
 
-
+.tiptap {
+    @apply border min-h-40
+}
 
 
