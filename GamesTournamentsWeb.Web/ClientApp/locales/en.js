@@ -48,7 +48,8 @@ export default {
     minimum_players: 'Minimum players',
     maximum_players: 'Maximum players',
     description: 'Description',
-    next: 'Next'
+    next: 'Next',
+    rules: 'Rules'
   },
 
   locales: {
@@ -187,7 +188,8 @@ export default {
     choose_platform: 'Choose platform',
     choose_regions: 'Choose regions',
     choose_team_size: 'Choose team size',
-    write_info_tooltip: 'Write a short description of the tournament'
+    write_info_tooltip: 'Write a short description of the tournament',
+    write_rules_tooltip: 'Write the rules of the tournament'
   }
 
 }

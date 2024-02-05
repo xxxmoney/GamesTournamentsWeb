@@ -48,7 +48,8 @@ export default {
     minimum_players: 'Nejméně hráčů',
     maximum_players: 'Nejvíce hráčů',
     description: 'Popis',
-    next: 'Další'
+    next: 'Další',
+    rules: 'Pravidla'
   },
 
   locales: {
@@ -182,7 +183,13 @@ export default {
       admins: 'Admini',
       overview: 'Přehled',
       finish: 'Dokončit'
-    }
+    },
+    choose_game: 'Vyberte hru',
+    choose_platform: 'Vyberte platformu',
+    choose_regions: 'Vyberte regiony',
+    choose_team_size: 'Vyberte velikost týmu',
+    write_info_tooltip: 'Napište stručný popis turnaje',
+    write_rules_tooltip: 'Napište pravidla'
   }
 
 }

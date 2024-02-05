@@ -3,5 +3,15 @@ const edit = useTournamentEdit()
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap"></div>
+  <div class="container-gap">
+    <CommonWithLabel
+      v-tooltip="$t('tournament_edit.write_rules_tooltip')"
+      :label="$t('common.rules')"
+      class="gap"
+    >
+      <CommonTextEditor v-model="edit.rules" />
+    </commonwithlabel>
+
+    <PageTournamentsEditNextStepButton />
+  </div>
 </template>
