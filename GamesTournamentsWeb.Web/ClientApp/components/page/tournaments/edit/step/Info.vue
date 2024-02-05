@@ -64,10 +64,48 @@ const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new 
           optionValue="key"
         />
       </CommonWithLabel>
+
+      <CommonWithLabel :label="$t('common.start_date')">
+        <Calendar
+          v-model="edit.startDate"
+          :minDate="new Date()"
+          hourFormat="24"
+          showIcon
+          showTime
+        />
+      </CommonWithLabel>
+
+      <CommonWithLabel :label="$t('common.minimum_players')">
+        <InputNumber
+          v-model="edit.minimumPlayers"
+          :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"
+          :min="1"
+          :placeholder="$t('common.minimum_players')"
+          showButtons
+        />
+      </commonwithlabel>
+
+      <CommonWithLabel :label="$t('common.maximum_players')">
+        <InputNumber
+          v-model="edit.maximumPlayers"
+          :max="constants.tournamentEditMaximumPlayers"
+          :min="edit.minimumPlayers ?? 1"
+          :placeholder="$t('common.maximum_players')"
+          showButtons
+        />
+      </commonwithlabel>
     </div>
 
     <div class="container-gap">
-      <CommonTextEditor v-model="edit.info" />
+      <CommonWithLabel
+        v-tooltip="$t('tournament_edit.write_info_tooltip')"
+        :label="$t('common.description')"
+        class="gap"
+      >
+        <CommonTextEditor v-model="edit.info" />
+      </commonwithlabel>
+
+      <PageTournamentsEditNextStepButton />
     </div>
   </div>
 </template>

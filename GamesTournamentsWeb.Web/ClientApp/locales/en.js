@@ -43,7 +43,12 @@ export default {
     place: 'Place',
     link: 'Link',
     video_not_supported: 'Your browser does not support the video tag.',
-    stream: 'Stream'
+    stream: 'Stream',
+    start_date: 'Start date',
+    minimum_players: 'Minimum players',
+    maximum_players: 'Maximum players',
+    description: 'Description',
+    next: 'Next'
   },
 
   locales: {
@@ -181,7 +186,8 @@ export default {
     choose_game: 'Choose game',
     choose_platform: 'Choose platform',
     choose_regions: 'Choose regions',
-    choose_team_size: 'Choose team size'
+    choose_team_size: 'Choose team size',
+    write_info_tooltip: 'Write a short description of the tournament'
   }
 
 }

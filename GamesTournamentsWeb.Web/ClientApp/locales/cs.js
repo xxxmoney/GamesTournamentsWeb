@@ -43,7 +43,12 @@ export default {
     place: 'Místo',
     link: 'Odkaz',
     video_not_supported: 'Váš prohlížeč nepodporuje toto video.',
-    stream: 'Stream'
+    stream: 'Stream',
+    start_date: 'Datum začátku',
+    minimum_players: 'Nejméně hráčů',
+    maximum_players: 'Nejvíce hráčů',
+    description: 'Popis',
+    next: 'Další'
   },
 
   locales: {

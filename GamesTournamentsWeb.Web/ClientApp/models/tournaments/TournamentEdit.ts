@@ -20,6 +20,8 @@ class TournamentEdit extends ConvertableToJson {
   players: TournamentPlayer[]
   matches: Match[]
   streams: Stream[]
+  minimumPlayers: number | null
+  maximumPlayers: number | null
 
   constructor () {
     super()
@@ -39,6 +41,8 @@ class TournamentEdit extends ConvertableToJson {
     this.players = []
     this.matches = []
     this.streams = []
+    this.minimumPlayers = null
+    this.maximumPlayers = null
   }
 }
 
