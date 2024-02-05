@@ -24,7 +24,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 </script>
 
 <template>
-  <CommonWithLabel :label="label" :showLabel="showLabel">
+  <CommonWithLabel :label="label" :showLabel="showLabel" class="gap">
     <InputText v-model="computedValue" :class="inputClass" :placeholder="label as string" />
   </CommonWithLabel>
 </template>

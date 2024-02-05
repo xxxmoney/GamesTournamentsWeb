@@ -11,12 +11,16 @@ const { label, showLabel } = defineProps({
   containerClass: {
     type: String,
     default: ''
+  },
+  flexOrientation: {
+    type: String,
+    default: 'col'
   }
 })
 </script>
 
 <template>
-  <div :class="containerClass" class="inline-flex flex-col">
+  <div :class="`flex-${flexOrientation}`" class="inline-flex">
     <slot name="aboveLabel" />
     <span v-if="showLabel">{{ label }}</span>
     <slot />

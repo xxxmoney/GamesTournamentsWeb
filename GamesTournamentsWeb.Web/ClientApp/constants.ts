@@ -14,7 +14,7 @@ export default {
     'war_thunder.jpg'
   ],
 
-  virtualScrollHeight: 26,
+  virtualScrollHeight: 34,
 
   toastErrorLifeTime: 3000,
   toastSuccessLifeTime: 2000,
@@ -30,6 +30,6 @@ export default {
     'cs'
   ],
   defaultLocale: 'en',
-  
+
   tournamentEditMaximumPlayers: 256
 }
