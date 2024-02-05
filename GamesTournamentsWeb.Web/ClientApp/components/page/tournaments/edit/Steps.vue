@@ -51,6 +51,30 @@ const steps = ref([
       <TabPanel>
         <PageTournamentsEditStepInfo class="text-area" />
       </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepRules class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepPrizes class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepPlayers class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepMatches class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepStreams class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepAdmins class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepOverview class="text-area" />
+      </TabPanel>
+      <TabPanel>
+        <PageTournamentsEditStepFinish class="text-area" />
+      </TabPanel>
     </TabView>
   </div>
 </template>
