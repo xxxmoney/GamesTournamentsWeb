@@ -32,6 +32,11 @@ const steps = ref([
     label: () => t('tournament_edit.steps.finish')
   }
 ])
+
+const onFinalize = () => {
+  // TODO: add finalize
+  console.log('finalize')
+}
 </script>
 
 <template>
@@ -76,6 +81,13 @@ const steps = ref([
         <PageTournamentsEditStepFinish class="text-area" />
       </TabPanel>
     </TabView>
+
+    <Divider />
+
+    <div class="flex flex-row justify-between">
+      <PageTournamentsEditPreviousStepButton />
+      <PageTournamentsEditNextStepButton @finalize="onFinalize" />
+    </div>
   </div>
 </template>
 

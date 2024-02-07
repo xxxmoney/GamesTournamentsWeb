@@ -48,8 +48,10 @@ export default {
     minimum_players: 'Nejméně hráčů',
     maximum_players: 'Nejvíce hráčů',
     description: 'Popis',
+    previous: 'Předchozí',
     next: 'Další',
-    rules: 'Pravidla'
+    rules: 'Pravidla',
+    prize: 'Cena'
   },
 
   locales: {

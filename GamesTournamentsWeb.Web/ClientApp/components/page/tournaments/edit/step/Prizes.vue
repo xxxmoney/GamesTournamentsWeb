@@ -2,31 +2,45 @@
 import type { Prize } from '~/models/tournaments/Prize'
 
 const edit = useTournamentEdit()
+const prizes = computed({
+  get: () => edit.value.prizes,
+  set: (value: Prize[]) => {
+    edit.value.prizes = value
+  }
+})
 
 const removePrize = (prize: Prize) => {
-  // TODO: remove prize
+  prizes.value = prizes.value.filter((p) => p !== prize)
 }
 
-const addPrize = (place: number) => {
-  // TODO: add prize
+const addPrize = () => {
+  prizes.value.push({
+    place: prizes.value.length + 1,
+    amount: 0
+  })
 }
 
 </script>
 
 <template>
   <div class="container-gap">
-    <!--    TODO: add button add-->
+    <!--    TODO: add currency selector-->
 
     <CommonWithButtonIcon
       v-for="prize in edit.prizes"
       :key="`prize-${prize.place}-${prize.amount}`"
-      :iconClick="() => removePrize(prize)"
       icon="pi pi-trash"
       severity="danger"
+      @iconClick="() => removePrize(prize)"
     >
-      <span>{{ prize.amount }}</span>
+      <InputNumber
+        v-model="prize.amount"
+        :min="0"
+        :placeholder="$t('common.maximum_players')"
+        showButtons
+      />
     </CommonWithButtonIcon>
 
-    <PageTournamentsEditNextStepButton />
+    <Button icon="pi pi-plus" @click="addPrize" />
   </div>
 </template>

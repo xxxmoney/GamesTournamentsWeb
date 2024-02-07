@@ -11,7 +11,5 @@ const edit = useTournamentEdit()
     >
       <CommonTextEditor v-model="edit.rules" />
     </commonwithlabel>
-
-    <PageTournamentsEditNextStepButton />
   </div>
 </template>

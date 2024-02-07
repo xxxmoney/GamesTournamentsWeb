@@ -104,8 +104,6 @@ const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new 
       >
         <CommonTextEditor v-model="edit.info" />
       </commonwithlabel>
-
-      <PageTournamentsEditNextStepButton />
     </div>
   </div>
 </template>

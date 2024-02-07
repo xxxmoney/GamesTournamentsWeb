@@ -48,8 +48,10 @@ export default {
     minimum_players: 'Minimum players',
     maximum_players: 'Maximum players',
     description: 'Description',
+    previous: 'Previous',
     next: 'Next',
-    rules: 'Rules'
+    rules: 'Rules',
+    prize: 'Prize'
   },
 
   locales: {

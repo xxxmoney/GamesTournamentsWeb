@@ -1,21 +1,40 @@
 <script lang="ts" setup>
-const { label } = defineProps({
+const { label, labelRight, iconClass, disabled } = defineProps({
   label: {
     type: String,
     required: true
+  },
+  labelRight: {
+    type: String,
+    default: ''
+  },
+  iconClass: {
+    type: String,
+    default: 'pi pi-arrow-right'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits(['click'])
 
 const onClick = () => {
-  emit('click')
+  if (!disabled) {
+    emit('click')
+  }
 }
 </script>
 
 <template>
-  <div class="container-row-gap items-center color-primary hover cursor-pointer" @click="onClick">
-    <span>{{ label }}</span>
-    <span class="pi pi-arrow-right"></span>
+  <div
+    :class="{'hover cursor-pointer': !disabled, 'opacity-50 cursor-not-allowed': disabled}"
+    class="container-row-gap items-center color-primary"
+    @click="onClick"
+  >
+    <span v-if="label">{{ label }}</span>
+    <span :class="iconClass"></span>
+    <span v-if="labelRight">{{ labelRight }}</span>
   </div>
 </template>

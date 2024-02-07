@@ -31,5 +31,7 @@ export default {
   ],
   defaultLocale: 'en',
 
-  tournamentEditMaximumPlayers: 256
+  tournamentEditMaximumPlayers: 256,
+
+  tournamentEditStepCount: 9
 }

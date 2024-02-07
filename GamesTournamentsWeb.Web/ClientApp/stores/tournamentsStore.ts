@@ -6,6 +6,7 @@ import type { Region } from '~/models/tournaments/Region'
 import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 import { TournamentsService } from '~/apiServices/TournamentsService'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
+import constants from '~/constants'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -59,14 +60,31 @@ export const useTournamentsStore = defineStore({
       this.tournamentEdit = new TournamentEdit().toJson() as TournamentEdit
     },
 
+    decreaseTournamentEditStep (): void {
+      if (this.canDecreaseTournamentEditStep) {
+        this.tournamentEditStep--
+      }
+    },
+
     increaseTournamentEditStep (): void {
-      this.tournamentEditStep++
+      if (this.canIncreaseTournamentEditStep) {
+        this.tournamentEditStep++
+      }
     }
 
   },
   getters: {
     tournamentById: (state) => (id: number): Tournament => {
       return state.tournaments.find(game => game.id === id) as Tournament
+    },
+    canDecreaseTournamentEditStep (state): boolean {
+      return state.tournamentEditStep > 0
+    },
+    canIncreaseTournamentEditStep (state): boolean {
+      return state.tournamentEditStep < constants.tournamentEditStepCount
+    },
+    isTournamentEditStepFinal (state): boolean {
+      return state.tournamentEditStep === constants.tournamentEditStepCount
     }
   }
 })
