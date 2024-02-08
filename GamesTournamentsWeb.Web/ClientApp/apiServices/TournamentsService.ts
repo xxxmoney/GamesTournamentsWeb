@@ -4,6 +4,7 @@ import type { Region } from '~/models/tournaments/Region'
 import type { Platform } from '~/models/tournaments/Platform'
 import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 import { gamePlayerStatus } from '~/enums/tournaments/gamePlayerStatus'
+import type { Currency } from '~/models/tournaments/Currency'
 
 export const TournamentsService = {
   getTournaments (filter: TournamentFilter): Promise<Tournament[]> {
@@ -48,6 +49,17 @@ export const TournamentsService = {
       { id: 1, name: 'PC', code: 'pc' },
       { id: 2, name: 'Xbox', code: 'xbox' },
       { id: 3, name: 'Playstation', code: 'playstation' }
+    ]
+
+    return Promise.resolve(result)
+  },
+
+  getCurrencies (): Promise<Currency[]> {
+    const result = [
+      { id: 1, name: 'Dollar', code: 'USD', symbol: '$', locale: 'en-US' },
+      { id: 2, name: 'Euro', code: 'EUR', symbol: '€', locale: 'en-EU' },
+      { id: 3, name: 'Pound', code: 'GBP', symbol: '£', locale: 'en-GB' },
+      { id: 4, name: 'Czech crown', code: 'CZK', symbol: 'Kč', locale: 'cs-CZ' }
     ]
 
     return Promise.resolve(result)
@@ -165,11 +177,11 @@ export const TournamentsService = {
                 'Donec iaculis gravida nulla. \n' +
                 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla quis diam. Pellentesque habitant morbi tristique senectus et.',
       prizes: [
-        { place: 1, amount: 1000, currency: 'USD', currencySymbol: '$' },
-        { place: 2, amount: 500, currency: 'USD', currencySymbol: '$' },
-        { place: 3, amount: 250, currency: 'USD', currencySymbol: '$' },
-        { place: 4, amount: 100, currency: 'USD', currencySymbol: '$' },
-        { place: 5, amount: 50, currency: 'USD', currencySymbol: '$' }
+        { place: 1, amount: 1000, currencyId: 1 },
+        { place: 2, amount: 500, currencyId: 1 },
+        { place: 3, amount: 250, currencyId: 1 },
+        { place: 4, amount: 100, currencyId: 1 },
+        { place: 5, amount: 50, currencyId: 1 }
       ],
       players,
       matches,

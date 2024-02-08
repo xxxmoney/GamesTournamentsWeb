@@ -51,12 +51,20 @@ export default {
     previous: 'Předchozí',
     next: 'Další',
     rules: 'Pravidla',
-    prize: 'Cena'
+    prize: 'Cena',
+    currency: 'Měna'
   },
 
   locales: {
     en: 'Anglicky',
     cs: 'Česky'
+  },
+
+  currencies: {
+    usd: 'Dolar',
+    eur: 'Euro',
+    gbp: 'Libra',
+    czk: 'Česká koruna'
   },
 
   enums: {

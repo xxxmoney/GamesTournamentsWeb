@@ -3,6 +3,7 @@ import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 import type { Match } from '~/models/tournaments/Match'
 import type { Stream } from '~/models/tournaments/Stream'
 import { ConvertableToJson } from '~/models/ConvertableToJson'
+import constants from '~/constants'
 
 class TournamentEdit extends ConvertableToJson {
   id: number | null
@@ -22,6 +23,7 @@ class TournamentEdit extends ConvertableToJson {
   streams: Stream[]
   minimumPlayers: number | null
   maximumPlayers: number | null
+  currencyId: number
 
   constructor () {
     super()
@@ -43,6 +45,7 @@ class TournamentEdit extends ConvertableToJson {
     this.streams = []
     this.minimumPlayers = null
     this.maximumPlayers = null
+    this.currencyId = constants.defaultCurrencyId
   }
 }
 

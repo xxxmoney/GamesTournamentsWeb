@@ -18,7 +18,7 @@ const onIconClick = () => {
 </script>
 
 <template>
-  <div class="container-row">
+  <div class="container-row gap-1">
     <slot />
     <Button :icon="icon" :severity="severity" @click="onIconClick" />
   </div>

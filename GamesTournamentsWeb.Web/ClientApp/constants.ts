@@ -33,5 +33,7 @@ export default {
 
   tournamentEditMaximumPlayers: 256,
 
-  tournamentEditStepCount: 9
+  tournamentEditStepCount: 9,
+
+  defaultCurrencyId: 1
 }

@@ -7,6 +7,7 @@ import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
 import { TournamentsService } from '~/apiServices/TournamentsService'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import constants from '~/constants'
+import type { Currency } from '~/models/tournaments/Currency'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -18,6 +19,7 @@ export const useTournamentsStore = defineStore({
     teamSizes: [] as number[],
     regions: [] as Region[],
     platforms: [] as Platform[],
+    currencies: [] as Currency[],
     filter: new TournamentFilter().toJson() as TournamentFilter
   }),
   actions: {
@@ -26,7 +28,8 @@ export const useTournamentsStore = defineStore({
         this.getTournaments(),
         this.getTeamSizes(),
         this.getRegions(),
-        this.getPlatforms()
+        this.getPlatforms(),
+        this.getCurrencies()
       ])
     },
 
@@ -48,6 +51,11 @@ export const useTournamentsStore = defineStore({
     async getPlatforms (): Promise<Platform[]> {
       this.platforms = await TournamentsService.getPlatforms()
       return this.platforms
+    },
+
+    async getCurrencies (): Currency[] {
+      this.currencies = await TournamentsService.getCurrencies()
+      return this.currencies
     },
 
     async getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
@@ -76,6 +84,9 @@ export const useTournamentsStore = defineStore({
   getters: {
     tournamentById: (state) => (id: number): Tournament => {
       return state.tournaments.find(game => game.id === id) as Tournament
+    },
+    currencyById: (state) => (id: number): Currency => {
+      return state.currencies.find(currency => currency.id === id) as Currency
     },
     canDecreaseTournamentEditStep (state): boolean {
       return state.tournamentEditStep > 0

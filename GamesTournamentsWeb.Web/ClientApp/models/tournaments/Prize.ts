@@ -1,8 +1,7 @@
 interface Prize {
     place: number
     amount: number
-    currency: string,
-    currencySymbol: string
+    currencyId: number
 }
 
 export type { Prize }

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Prize } from '~/models/tournaments/Prize'
 
+const tournamentsStore = useTournamentsStore()
 const edit = useTournamentEdit()
 const prizes = computed({
   get: () => edit.value.prizes,
@@ -8,6 +9,22 @@ const prizes = computed({
     edit.value.prizes = value
   }
 })
+const currencies = computed(() => tournamentsStore.currencies)
+
+const currentCurrencyId = computed({
+  get: () => edit.value.currencyId,
+  set: (value: number) => {
+    if (value === edit.value.currencyId) {
+      return
+    }
+
+    edit.value.currencyId = value
+    prizes.values?.forEach((prize) => {
+      prize.currencyId = value
+    })
+  }
+})
+const currentCurrency = computed(() => tournamentsStore.currencyById(currentCurrencyId.value))
 
 const removePrize = (prize: Prize) => {
   prizes.value = prizes.value.filter((p) => p !== prize)
@@ -16,7 +33,7 @@ const removePrize = (prize: Prize) => {
 const addPrize = () => {
   prizes.value.push({
     place: prizes.value.length + 1,
-    amount: 0
+    currencyId: currentCurrencyId.value
   })
 }
 
@@ -24,22 +41,33 @@ const addPrize = () => {
 
 <template>
   <div class="container-gap">
-    <!--    TODO: add currency selector-->
+    <CommonWithLabel :label="$t('common.currency')">
+      <Dropdown
+        v-model="currentCurrencyId"
+        :optionLabel="item => $t(`currencies.${item.code.toLowerCase()}`) + ' - ' + item.symbol"
+        :options="currencies"
+        class=""
+        optionValue="id"
+      />
+    </CommonWithLabel>
 
-    <CommonWithButtonIcon
+    <CommonWithLabel
       v-for="prize in edit.prizes"
       :key="`prize-${prize.place}-${prize.amount}`"
-      icon="pi pi-trash"
-      severity="danger"
-      @iconClick="() => removePrize(prize)"
+      :label="$t('common.place') + ': ' + prize.place.toString()"
     >
-      <InputNumber
-        v-model="prize.amount"
-        :min="0"
-        :placeholder="$t('common.maximum_players')"
-        showButtons
-      />
-    </CommonWithButtonIcon>
+      <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removePrize(prize)">
+        <InputNumber
+          v-model="prize.amount"
+          :currency="currentCurrency.code"
+          :locale="currentCurrency.locale"
+          :min="0"
+          :placeholder="$t('common.prize')"
+          mode="currency"
+          showButtons
+        />
+      </CommonWithButtonIcon>
+    </CommonWithLabel>
 
     <Button icon="pi pi-plus" @click="addPrize" />
   </div>
