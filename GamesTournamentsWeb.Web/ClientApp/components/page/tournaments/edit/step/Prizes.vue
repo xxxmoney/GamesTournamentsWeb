@@ -69,6 +69,6 @@ const addPrize = () => {
       </CommonWithButtonIcon>
     </CommonWithLabel>
 
-    <Button icon="pi pi-plus" @click="addPrize" />
+    <Button v-tooltip="$t('tournament_edit.add_prize_tooltip')" icon="pi pi-plus" @click="addPrize" />
   </div>
 </template>

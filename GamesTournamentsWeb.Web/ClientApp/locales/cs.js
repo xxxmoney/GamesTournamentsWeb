@@ -52,7 +52,8 @@ export default {
     next: 'Další',
     rules: 'Pravidla',
     prize: 'Cena',
-    currency: 'Měna'
+    currency: 'Měna',
+    stream_url: 'Odkaz na stream'
   },
 
   locales: {
@@ -199,7 +200,10 @@ export default {
     choose_regions: 'Vyberte regiony',
     choose_team_size: 'Vyberte velikost týmu',
     write_info_tooltip: 'Napište stručný popis turnaje',
-    write_rules_tooltip: 'Napište pravidla'
+    write_rules_tooltip: 'Napište pravidla',
+    add_prize_tooltip: 'Klikněte pro přidání ceny',
+    add_stream_tooltip: 'Klikněte pro přidání odkazu na stream',
+    can_anyone_join: 'Může se připojit kdokoliv?'
   }
 
 }

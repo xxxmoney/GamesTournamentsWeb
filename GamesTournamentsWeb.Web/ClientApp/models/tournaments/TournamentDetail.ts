@@ -21,7 +21,8 @@ interface TournamentDetail {
     prizes: Prize[]
     players: TournamentPlayer[]
     matches: Match[]
-    streams: Stream[]
+    streams: Stream[],
+    anyoneCanJoin: boolean
 }
 
 export type { TournamentDetail }

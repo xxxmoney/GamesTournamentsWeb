@@ -188,7 +188,8 @@ export const TournamentsService = {
       streams: [
         { name: 'Rick The First', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=tPb-oERlfwu0gk3Y' },
         { name: 'Rick The Second', url: 'https://www.youtube.com/embed/qWNQUvIk954?si=Nf03OVIlvbZAokk1' }
-      ]
+      ],
+      anyoneCanJoin: false
     }
 
     return Promise.resolve(tournamentDetail)
