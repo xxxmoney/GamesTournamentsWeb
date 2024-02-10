@@ -3,5 +3,5 @@ const edit = useTournamentEdit()
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap"></div>
+  <div class="container-gap-lg"></div>
 </template>

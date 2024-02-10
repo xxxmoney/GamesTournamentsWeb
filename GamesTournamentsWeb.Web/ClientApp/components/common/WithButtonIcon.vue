@@ -22,7 +22,7 @@ const onIconClick = () => {
 </script>
 
 <template>
-  <div class="container-row gap-1">
+  <div class="container-row items-center gap-1">
     <slot />
     <Button
       :disabled="iconDisabled"
