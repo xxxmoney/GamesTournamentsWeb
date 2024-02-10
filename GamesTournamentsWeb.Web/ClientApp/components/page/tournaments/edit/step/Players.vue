@@ -30,6 +30,10 @@ const removeAccount = (index: number) => {
 
 <template>
   <div class="container-gap">
+    <CommonWithLabel :label="$t('tournament_edit.can_anyone_join')">
+      <Checkbox v-model="edit.anyoneCanJoin" binary />
+    </CommonWithLabel>
+
     <CommonWithLabel :label="$t('tournament_edit.choose_account')">
       <CommonWithButtonIcon :iconDisabled="!selectedAccountId" icon="pi pi-plus" @iconClick="addAccount">
         <Dropdown

@@ -13,10 +13,6 @@ const removeStream = (index: number) => {
 
 <template>
   <div class="container-gap">
-    <CommonWithLabel :label="$t('tournament_edit.can_anyone_join')">
-      <Checkbox v-model="edit.anyoneCanJoin" binary />
-    </CommonWithLabel>
-
     <CommonWithLabel
       v-for="(_, index) in streams"
       :key="`stream-${index}`"
