@@ -1,7 +1,5 @@
-import type { Account } from '~/models/user/Account'
-
 interface TournamentPlayer {
-    account: Account
+    accountId: Number
     gameUsername: string
     status: string
 }

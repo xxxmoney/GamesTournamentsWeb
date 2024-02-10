@@ -53,7 +53,8 @@ export default {
     rules: 'Pravidla',
     prize: 'Cena',
     currency: 'Měna',
-    stream_url: 'Odkaz na stream'
+    stream_url: 'Odkaz na stream',
+    player: 'Hráč'
   },
 
   locales: {
@@ -203,7 +204,8 @@ export default {
     write_rules_tooltip: 'Napište pravidla',
     add_prize_tooltip: 'Klikněte pro přidání ceny',
     add_stream_tooltip: 'Klikněte pro přidání odkazu na stream',
-    can_anyone_join: 'Může se připojit kdokoliv?'
+    can_anyone_join: 'Může se připojit kdokoliv?',
+    choose_account: 'Vyberte účet'
   }
 
 }

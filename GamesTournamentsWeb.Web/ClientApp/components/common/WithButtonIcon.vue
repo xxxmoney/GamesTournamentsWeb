@@ -6,7 +6,11 @@ const { icon, severity } = defineProps({
   },
   severity: {
     type: String,
-    default: 'secondary'
+    default: null
+  },
+  iconDisabled: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -20,6 +24,11 @@ const onIconClick = () => {
 <template>
   <div class="container-row gap-1">
     <slot />
-    <Button :icon="icon" :severity="severity" @click="onIconClick" />
+    <Button
+      :disabled="iconDisabled"
+      :icon="icon"
+      :severity="severity"
+      @click="onIconClick"
+    />
   </div>
 </template>

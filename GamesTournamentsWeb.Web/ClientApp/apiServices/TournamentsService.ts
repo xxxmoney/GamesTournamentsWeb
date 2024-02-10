@@ -68,62 +68,22 @@ export const TournamentsService = {
   getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
     const players = [
       {
-        account: {
-          id: 1,
-          name: 'ElPlayero',
-          email: '',
-          role: {
-            id: 1,
-            name: 'User'
-          },
-          createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-          imageUrl: null
-        },
+        accountId: 1,
         gameUsername: 'PlayerElOne',
         status: gamePlayerStatus.accepted
       },
       {
-        account: {
-          id: 2,
-          name: 'ZoPlayero',
-          email: '',
-          role: {
-            id: 1,
-            name: 'User'
-          },
-          createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-          imageUrl: null
-        },
+        accountId: 2,
         gameUsername: 'PlayerZoTwo',
         status: gamePlayerStatus.accepted
       },
       {
-        account: {
-          id: 3,
-          name: 'UwuZoPlayero',
-          email: '',
-          role: {
-            id: 1,
-            name: 'User'
-          },
-          createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-          imageUrl: null
-        },
+        accountId: 3,
         gameUsername: 'Uwuwu',
         status: gamePlayerStatus.pending
       },
       {
-        account: {
-          id: 4,
-          name: 'AraAraPlayero',
-          email: '',
-          role: {
-            id: 1,
-            name: 'User'
-          },
-          createdAt: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-          imageUrl: null
-        },
+        accountId: 4,
         gameUsername: 'AtomicNek',
         status: gamePlayerStatus.pending
       }

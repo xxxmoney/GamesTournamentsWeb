@@ -26,8 +26,8 @@ const currentCurrencyId = computed({
 })
 const currentCurrency = computed(() => tournamentsStore.currencyById(currentCurrencyId.value))
 
-const removePrize = (prize: Prize) => {
-  prizes.value = prizes.value.filter((p) => p !== prize)
+const removePrize = (index: Number) => {
+  prizes.value.splice(index, 1)
 }
 
 const addPrize = () => {
@@ -52,11 +52,11 @@ const addPrize = () => {
     </CommonWithLabel>
 
     <CommonWithLabel
-      v-for="prize in edit.prizes"
+      v-for="(prize, index) in edit.prizes"
       :key="`prize-${prize.place}-${prize.amount}`"
       :label="$t('common.place') + ': ' + prize.place.toString()"
     >
-      <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removePrize(prize)">
+      <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removePrize(index)">
         <InputNumber
           v-model="prize.amount"
           :currency="currentCurrency.code"

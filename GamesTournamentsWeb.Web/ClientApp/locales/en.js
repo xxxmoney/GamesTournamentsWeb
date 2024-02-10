@@ -53,7 +53,8 @@ export default {
     rules: 'Rules',
     prize: 'Prize',
     currency: 'Currency',
-    stream_url: 'Stream link'
+    stream_url: 'Stream link',
+    player: 'Player'
   },
 
   locales: {
@@ -203,7 +204,8 @@ export default {
     write_rules_tooltip: 'Write the rules of the tournament',
     add_prize_tooltip: 'Click to add prize',
     add_stream_tooltip: 'Click to add stream link',
-    can_anyone_join: 'Should anyone be able to join?'
+    can_anyone_join: 'Should anyone be able to join?',
+    choose_account: 'Choose account'
   }
 
 }
