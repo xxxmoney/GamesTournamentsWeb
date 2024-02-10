@@ -54,7 +54,9 @@ export default {
     prize: 'Prize',
     currency: 'Currency',
     stream_url: 'Stream link',
-    player: 'Player'
+    player: 'Player',
+    account: 'Account',
+    admin: 'Administrator'
   },
 
   locales: {

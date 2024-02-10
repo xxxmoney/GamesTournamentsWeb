@@ -25,6 +25,7 @@ class TournamentEdit extends ConvertableToJson {
   maximumPlayers: number | null
   currencyId: number
   anyoneCanJoin: boolean
+  adminIds: number[]
 
   constructor () {
     super()
@@ -48,6 +49,7 @@ class TournamentEdit extends ConvertableToJson {
     this.maximumPlayers = null
     this.currencyId = constants.defaultCurrencyId,
     this.anyoneCanJoin = false
+    this.adminIds = []
   }
 }
 

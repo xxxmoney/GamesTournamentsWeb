@@ -23,6 +23,7 @@ interface TournamentDetail {
     matches: Match[]
     streams: Stream[],
     anyoneCanJoin: boolean
+    adminIds: number[]
 }
 
 export type { TournamentDetail }

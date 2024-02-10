@@ -54,7 +54,9 @@ export default {
     prize: 'Cena',
     currency: 'Měna',
     stream_url: 'Odkaz na stream',
-    player: 'Hráč'
+    player: 'Hráč',
+    account: 'Account',
+    admin: 'Administrátor'
   },
 
   locales: {

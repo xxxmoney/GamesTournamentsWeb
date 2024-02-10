@@ -149,7 +149,8 @@ export const TournamentsService = {
         { name: 'Rick The First', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=tPb-oERlfwu0gk3Y' },
         { name: 'Rick The Second', url: 'https://www.youtube.com/embed/qWNQUvIk954?si=Nf03OVIlvbZAokk1' }
       ],
-      anyoneCanJoin: false
+      anyoneCanJoin: false,
+      adminIds: [1]
     }
 
     return Promise.resolve(tournamentDetail)
