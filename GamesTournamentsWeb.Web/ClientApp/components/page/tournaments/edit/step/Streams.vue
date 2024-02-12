@@ -12,6 +12,8 @@ const removeStream = (index: number) => {
 </script>
 
 <template>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.streams') }}</h1>
+
   <div class="container-gap">
     <CommonWithLabel
       v-for="(_, index) in streams"

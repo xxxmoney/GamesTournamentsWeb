@@ -40,6 +40,8 @@ const addPrize = () => {
 </script>
 
 <template>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.prizes') }}</h1>
+
   <div class="container-gap">
     <CommonWithLabel :label="$t('common.currency')">
       <Dropdown

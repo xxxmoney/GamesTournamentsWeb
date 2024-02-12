@@ -3,5 +3,7 @@ const edit = useTournamentEdit()
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap"></div>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.matches') }}</h1>
+
+  <div class="container-gap"></div>
 </template>

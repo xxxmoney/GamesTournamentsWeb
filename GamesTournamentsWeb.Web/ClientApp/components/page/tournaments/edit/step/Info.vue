@@ -14,6 +14,8 @@ const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new 
 </script>
 
 <template>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.info') }}</h1>
+
   <div class="flex flex-col md:flex-row gap">
     <div class="container-gap">
       <CommonInputText v-model="edit.name" :label="$t('common.name')" />

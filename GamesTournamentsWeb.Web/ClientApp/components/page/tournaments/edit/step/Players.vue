@@ -29,6 +29,8 @@ const removeAccount = (index: number) => {
 </script>
 
 <template>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.players') }}</h1>
+
   <div class="container-gap">
     <CommonWithLabel :label="$t('tournament_edit.can_anyone_join')">
       <Checkbox v-model="edit.anyoneCanJoin" binary />

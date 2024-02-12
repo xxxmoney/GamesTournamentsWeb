@@ -26,6 +26,7 @@ const removeAdmin = (index: number) => {
 </script>
 
 <template>
+  <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.admins') }}</h1>
   <div class="container-gap">
     <CommonWithLabel :label="$t('tournament_edit.choose_account')">
       <CommonWithButtonIcon :iconDisabled="!selectedAccountId" icon="pi pi-plus" @iconClick="addAdmin">
