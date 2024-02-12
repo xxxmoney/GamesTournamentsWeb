@@ -78,6 +78,10 @@ export const useTournamentsStore = defineStore({
       if (this.canIncreaseTournamentEditStep) {
         this.tournamentEditStep++
       }
+    },
+
+    resetTournamentEditStep (): void {
+      this.tournamentEditStep = 0
     }
 
   },

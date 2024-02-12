@@ -3,9 +3,9 @@ const edit = useTournamentEdit()
 </script>
 
 <template>
-  <div class="container-gap-xl">
+  <div class="grid grid-cols-1 gap-x-lg gap-y-xl lg:grid-cols-2">
     <div>
-      <PageTournamentsEditStepInfo class="text-area" />
+      <PageTournamentsEditStepInfo class="text-area border border-black" />
     </div>
     <div>
       <PageTournamentsEditStepRules class="text-area" />

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const store = useTournamentsStore()
 const edit = useTournamentEdit()
 const step = useTournamentEditStep()
 const { t } = useI18n()
@@ -37,6 +38,10 @@ const onFinalize = () => {
   // TODO: add finalize
   console.log('finalize')
 }
+
+onMounted(() => {
+  store.resetTournamentEditStep()
+})
 </script>
 
 <template>
@@ -52,7 +57,7 @@ const onFinalize = () => {
 
     <Divider />
 
-    <TabView v-model:activeIndex="step">
+    <TabView v-model:activeIndex="step" class="flex-1">
       <TabPanel>
         <PageTournamentsEditStepInfo class="text-area" />
       </TabPanel>
@@ -75,7 +80,7 @@ const onFinalize = () => {
         <PageTournamentsEditStepAdmins class="text-area" />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepOverview class="text-area" />
+        <PageTournamentsEditStepOverview />
       </TabPanel>
       <TabPanel>
         <PageTournamentsEditStepFinish class="text-area" />

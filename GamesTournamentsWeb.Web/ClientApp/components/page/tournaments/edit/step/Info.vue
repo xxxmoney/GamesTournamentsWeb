@@ -27,6 +27,7 @@ const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new 
           :placeholder="$t('tournament_edit.choose_game')"
           :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
           class=""
+          filter
           optionLabel="name"
           optionValue="id"
         />
@@ -62,6 +63,7 @@ const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new 
           :options="teamSizes"
           :placeholder="$t('tournament_edit.choose_team_size')"
           class=""
+          filter
           optionLabel="value"
           optionValue="key"
         />
