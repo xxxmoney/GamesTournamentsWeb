@@ -18,7 +18,7 @@ const { amount, currencySymbol } = defineProps({
 <template>
   <CommonWithLabel
     :label="`${amount} ${currencySymbol}`"
-    containerClass="items-center"
+    class="items-center gap"
   >
     <template #aboveLabel>
       <FontAwesomeIcon :class="colorClass" :icon="['fas', 'trophy']" class=" text-6xl" />

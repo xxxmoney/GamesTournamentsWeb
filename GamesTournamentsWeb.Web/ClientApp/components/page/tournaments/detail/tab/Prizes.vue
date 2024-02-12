@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const store = useTournamentsStore()
 const detail = useTournamentDetail()
 
 const sortedPrizes = computed(() => {
@@ -21,6 +22,10 @@ const topThreePrizes = computed(() => {
 const otherPrizes = computed(() => {
   return sortedPrizes.value.slice(3)
 })
+
+const currencyById = (id: number) => {
+  return store.currencyById(id)
+}
 </script>
 
 <template>
@@ -32,7 +37,7 @@ const otherPrizes = computed(() => {
         v-tooltip="$t(prize.tooltip)"
         :amount="prize.amount"
         :colorClass="prize.colorClass"
-        :currencySymbol="prize.currencySymbol"
+        :currencySymbol="currencyById(prize.currencyId).symbol"
       />
     </div>
 
