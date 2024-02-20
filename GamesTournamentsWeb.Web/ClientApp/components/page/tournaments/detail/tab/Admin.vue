@@ -13,7 +13,7 @@ const editTournament = async () => {
 const deleteTournament = () => {
   confirm.require({
     message: t('tournament_delete.prompt'),
-    header: 'Confirmation',
+    header: t('common.confirmation'),
     accept: async () => {
       try {
         // TODO: add delete tournament method

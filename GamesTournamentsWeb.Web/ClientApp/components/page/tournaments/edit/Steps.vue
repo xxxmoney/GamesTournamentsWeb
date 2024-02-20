@@ -3,6 +3,10 @@ const store = useTournamentsStore()
 const edit = useTournamentEdit()
 const step = useTournamentEditStep()
 const { t } = useI18n()
+const router = useRouter()
+const confirm = useConfirm()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
 
 const steps = ref([
   {
@@ -28,15 +32,29 @@ const steps = ref([
   },
   {
     label: () => t('tournament_edit.steps.overview')
-  },
-  {
-    label: () => t('tournament_edit.steps.finish')
   }
 ])
 
 const onFinalize = () => {
-  // TODO: add finalize
-  console.log('finalize')
+  confirm.require({
+    message: t('tournament_edit.confirm'),
+    header: t('common.confirmation'),
+    accept: async () => {
+      try {
+        // TODO: add upsert call
+        const result = { id: 1 }
+
+        successToast('tournament_edit.success')
+
+        await router.push(`/tournaments/detail/${result.id}`)
+      } catch (e) {
+        errorToast(e)
+      }
+    },
+    reject: () => {
+      store.decreaseTournamentEditStep()
+    }
+  })
 }
 
 onMounted(() => {
@@ -81,9 +99,6 @@ onMounted(() => {
       </TabPanel>
       <TabPanel>
         <PageTournamentsEditStepOverview />
-      </TabPanel>
-      <TabPanel>
-        <PageTournamentsEditStepFinish class="text-area" />
       </TabPanel>
     </TabView>
 

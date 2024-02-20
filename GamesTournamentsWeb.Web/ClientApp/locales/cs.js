@@ -56,7 +56,8 @@ export default {
     stream_url: 'Odkaz na stream',
     player: 'Hráč',
     account: 'Account',
-    admin: 'Administrátor'
+    admin: 'Administrátor',
+    confirmation: 'Potvrzení'
   },
 
   locales: {
@@ -207,7 +208,9 @@ export default {
     add_prize_tooltip: 'Klikněte pro přidání ceny',
     add_stream_tooltip: 'Klikněte pro přidání odkazu na stream',
     can_anyone_join: 'Může se připojit kdokoliv?',
-    choose_account: 'Vyberte účet'
+    choose_account: 'Vyberte účet',
+    success: 'Turnaj byl úspěšně upraven',
+    confirm: 'Opravdu chcete dokončit úpravu turnaje?'
   }
 
 }

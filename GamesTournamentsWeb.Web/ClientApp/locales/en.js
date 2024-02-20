@@ -56,7 +56,8 @@ export default {
     stream_url: 'Stream link',
     player: 'Player',
     account: 'Account',
-    admin: 'Administrator'
+    admin: 'Administrator',
+    confirmation: 'Confirmation'
   },
 
   locales: {
@@ -207,7 +208,9 @@ export default {
     add_prize_tooltip: 'Click to add prize',
     add_stream_tooltip: 'Click to add stream link',
     can_anyone_join: 'Should anyone be able to join?',
-    choose_account: 'Choose account'
+    choose_account: 'Choose account',
+    success: 'Tournament has been successfully edited',
+    confirm: 'Are you sure you want to finish editing the tournament?'
   }
 
 }
