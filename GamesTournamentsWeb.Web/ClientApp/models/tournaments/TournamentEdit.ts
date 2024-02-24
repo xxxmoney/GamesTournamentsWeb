@@ -19,7 +19,7 @@ class TournamentEdit extends ConvertableToJson {
   settings: string
   prizes: Prize[]
   players: TournamentPlayer[]
-  matches: Match[]
+  match: Match | null
   streams: Stream[]
   minimumPlayers: number | null
   maximumPlayers: number | null
@@ -43,11 +43,11 @@ class TournamentEdit extends ConvertableToJson {
     this.settings = ''
     this.prizes = []
     this.players = []
-    this.matches = []
+    this.match = null
     this.streams = []
     this.minimumPlayers = null
     this.maximumPlayers = null
-    this.currencyId = constants.defaultCurrencyId,
+    this.currencyId = constants.defaultCurrencyId
     this.anyoneCanJoin = false
     this.adminIds = []
   }

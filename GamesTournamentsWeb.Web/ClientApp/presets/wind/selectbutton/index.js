@@ -1,8 +1,8 @@
 export default {
-    root: ({ props }) => ({
-        class: ['shadow-sm', { 'opacity-60 select-none pointer-events-none cursor-default': props.disabled }]
+    root: ({props}) => ({
+        class: ['shadow-sm', {'opacity-60 select-none pointer-events-none cursor-default': props.disabled}]
     }),
-    button: ({ context }) => ({
+    button: ({context}) => ({
         class: [
             'relative',
             // Font
@@ -24,13 +24,13 @@ export default {
             {
                 'bg-surface-0 dark:bg-surface-900': !context.active,
                 'text-surface-700 dark:text-white/80': !context.active,
-                'bg-surface-100 dark:bg-surface-700': context.active
+                'bg-surface-200 border-primary dark:bg-surface-700': context.active
             },
 
             // States
             'focus:outline-none focus:outline-offset-0 focus:ring-primary-500 dark:focus:ring-primary-400',
             'hover:bg-surface-200 dark:hover:bg-surface-600/80',
-            { 'opacity-60 select-none pointer-events-none cursor-default': context.disabled },
+            {'opacity-60 select-none pointer-events-none cursor-default': context.disabled},
 
             // Transition
             'transition duration-200',

@@ -8,6 +8,7 @@ import { TournamentsService } from '~/apiServices/TournamentsService'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import constants from '~/constants'
 import type { Currency } from '~/models/tournaments/Currency'
+import type { Match } from '~/models/tournaments/Match'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -63,6 +64,12 @@ export const useTournamentsStore = defineStore({
       return this.tournamentDetail
     },
 
+    mapTournamentDetailToEdit () {
+      // TODO: add whole mapping - check for detail being null - insert
+
+      this.tournamentEdit.match = this.tournamentDetailCurrentMatch
+    },
+
     resetTournamentEdit (): void {
       this.tournamentEditStep = 0
       this.tournamentEdit = new TournamentEdit().toJson() as TournamentEdit
@@ -88,6 +95,9 @@ export const useTournamentsStore = defineStore({
   getters: {
     tournamentById: (state) => (id: number): Tournament => {
       return state.tournaments.find(game => game.id === id) as Tournament
+    },
+    tournamentDetailCurrentMatch: (state): Match | null => {
+      return state.tournamentDetail?.matches?.find(match => match.isRunning)
     },
     currencyById: (state) => (id: number): Currency => {
       return state.currencies.find(currency => currency.id === id) as Currency

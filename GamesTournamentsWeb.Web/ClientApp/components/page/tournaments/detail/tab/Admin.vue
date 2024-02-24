@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const store = useTournamentsStore()
 const detail = useTournamentDetail()
 
 const { t } = useI18n()

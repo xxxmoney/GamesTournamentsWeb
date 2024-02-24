@@ -101,6 +101,14 @@ body {
     color: rgb(var(--primary-500));
 }
 
+.border-primary {
+    border: 1px solid rgb(var(--primary-500));
+}
+
+.outline-primary {
+    outline: 1px solid rgb(var(--primary-500));
+}
+
 .z-big {
     z-index: 69;
 }

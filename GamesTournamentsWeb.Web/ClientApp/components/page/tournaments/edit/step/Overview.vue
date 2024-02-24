@@ -17,7 +17,7 @@ const edit = useTournamentEdit()
       <PageTournamentsEditStepPlayers class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepMatches class="text-area" />
+      <PageTournamentsEditStepMatch class="text-area" />
     </div>
     <div>
       <PageTournamentsEditStepStreams class="text-area" />

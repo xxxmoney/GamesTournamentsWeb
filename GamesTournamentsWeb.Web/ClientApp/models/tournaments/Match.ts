@@ -6,7 +6,8 @@ interface Match {
     tournamentId: number
     firstTeam: Team | null
     secondTeam: Team | null
-    winner: Team | null
+    winner: Team | null,
+    isRunning: boolean
 }
 
 export type { Match }

@@ -98,9 +98,25 @@ export const TournamentsService = {
     })
 
     const matches = [
-      { id: 1, nextMatchId: 3, tournamentId, firstTeam: teams[0], secondTeam: teams[1], winner: null },
-      { id: 2, nextMatchId: 3, tournamentId, firstTeam: teams[2], secondTeam: teams[3], winner: null },
-      { id: 3, nextMatchId: null, tournamentId, firstTeam: null, secondTeam: null, winner: null }
+      {
+        id: 1,
+        nextMatchId: 3,
+        tournamentId,
+        firstTeam: teams[0],
+        secondTeam: teams[1],
+        winner: null,
+        isRunning: true
+      },
+      {
+        id: 2,
+        nextMatchId: 3,
+        tournamentId,
+        firstTeam: teams[2],
+        secondTeam: teams[3],
+        winner: null,
+        isRunning: false
+      },
+      { id: 3, nextMatchId: null, tournamentId, firstTeam: null, secondTeam: null, winner: null, isRunning: true }
     ]
 
     const tournamentDetail = {

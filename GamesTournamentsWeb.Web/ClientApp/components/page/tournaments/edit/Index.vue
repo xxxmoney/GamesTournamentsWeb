@@ -7,6 +7,14 @@ const { id } = defineProps({
 })
 
 // TODO: add to store tournament edit
+
+const store = useTournamentsStore()
+if (id) {
+  await store.getTournamentDetailById(id)
+}
+
+store.resetTournamentEdit()
+store.mapTournamentDetailToEdit()
 </script>
 
 <template>

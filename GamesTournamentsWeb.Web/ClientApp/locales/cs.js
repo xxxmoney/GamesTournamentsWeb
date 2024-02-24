@@ -57,7 +57,8 @@ export default {
     player: 'Hráč',
     account: 'Account',
     admin: 'Administrátor',
-    confirmation: 'Potvrzení'
+    confirmation: 'Potvrzení',
+    winner: 'Vítěz'
   },
 
   locales: {
@@ -193,7 +194,7 @@ export default {
       rules: 'Pravidla',
       prizes: 'Ceny',
       players: 'Hráči',
-      matches: 'Zápasy',
+      match: 'Zápas',
       streams: 'Streamy',
       admins: 'Admini',
       overview: 'Přehled',
@@ -209,6 +210,7 @@ export default {
     add_stream_tooltip: 'Klikněte pro přidání odkazu na stream',
     can_anyone_join: 'Může se připojit kdokoliv?',
     choose_account: 'Vyberte účet',
+    no_match: 'Teď neprobíhá žádný zápas',
     success: 'Turnaj byl úspěšně upraven',
     confirm: 'Opravdu chcete dokončit úpravu turnaje?'
   }

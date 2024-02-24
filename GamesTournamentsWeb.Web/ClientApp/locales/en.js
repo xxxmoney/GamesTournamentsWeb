@@ -57,7 +57,8 @@ export default {
     player: 'Player',
     account: 'Account',
     admin: 'Administrator',
-    confirmation: 'Confirmation'
+    confirmation: 'Confirmation',
+    winner: 'Winner'
   },
 
   locales: {
@@ -193,7 +194,7 @@ export default {
       rules: 'Rules',
       prizes: 'Prizes',
       players: 'Players',
-      matches: 'Matches',
+      match: 'Match',
       streams: 'Streams',
       admins: 'Admins',
       overview: 'Overview',
@@ -209,6 +210,7 @@ export default {
     add_stream_tooltip: 'Click to add stream link',
     can_anyone_join: 'Should anyone be able to join?',
     choose_account: 'Choose account',
+    no_match: 'There is no match right now',
     success: 'Tournament has been successfully edited',
     confirm: 'Are you sure you want to finish editing the tournament?'
   }

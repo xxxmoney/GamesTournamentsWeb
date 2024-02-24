@@ -22,7 +22,7 @@ const steps = ref([
     label: () => t('tournament_edit.steps.players')
   },
   {
-    label: () => t('tournament_edit.steps.matches')
+    label: () => t('tournament_edit.steps.match')
   },
   {
     label: () => t('tournament_edit.steps.streams')
@@ -89,7 +89,7 @@ onMounted(() => {
         <PageTournamentsEditStepPlayers class="text-area" />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepMatches class="text-area" />
+        <PageTournamentsEditStepMatch class="text-area" />
       </TabPanel>
       <TabPanel>
         <PageTournamentsEditStepStreams class="text-area" />
