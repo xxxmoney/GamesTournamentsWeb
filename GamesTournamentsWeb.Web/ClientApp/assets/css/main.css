@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 :root {
     --primary-50: 232 241 244;
     --primary-100: 217 236 232;
@@ -22,4 +24,317 @@
     --surface-800: 56 56 56;
     --surface-900: 38 38 38;
     --surface-950: 19 19 19;
+
+    --background-color: var(--surface-0);
+
+    --margin-x-sm: calc(var(--margin-x) / 2);
+    --margin-x: 25px;
+    --margin-x-lg: calc(var(--margin-x) * 2);
+    --margin-x-xl: calc(var(--margin-x-lg) * 2);
+    --margin-y-sm: calc(var(--margin-y) / 2);
+    --margin-y: 8px;
+    --margin-y-lg: calc(var(--margin-y) * 2);
+    --margin-y-xl: calc(var(--margin-y-lg) * 2);
+
+    --active-area: 1200px;
+    --text-area: 700px;
 }
+
+.heading {
+    font-size: 30px;
+    line-height: 120%;
+    letter-spacing: -0.1rem;
+}
+
+.subheading {
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: -0.1rem;
+}
+
+.background {
+    background-color: rgb(var(--background-color));
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /*min-height: 100vh;*/
+    /*min-width: 100vw;*/
+    background-color: rgb(var(--background-color));
+    color: black;
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0rem;
+    position: relative;
+}
+
+html, body, #__nuxt {
+    min-height: 100vh;
+}
+
+#__nuxt {
+    @apply flex flex-col;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+#__nuxt {
+    box-sizing: border-box;
+
+    position: relative;
+}
+
+#__nuxt {
+    @apply px-8 py-4 lg:px-20 lg:py-4;
+}
+
+.bg-primary {
+    background-color: rgb(var(--primary-500));
+}
+
+.color-primary {
+    color: rgb(var(--primary-500));
+}
+
+.border-primary {
+    border: 1px solid rgb(var(--primary-500));
+}
+
+.outline-primary {
+    outline: 1px solid rgb(var(--primary-500));
+}
+
+.z-big {
+    z-index: 69;
+}
+
+.gap-x-sm {
+    @apply gap-x-[var(--margin-x-sm)];
+}
+
+.gap-x {
+    @apply gap-x-[var(--margin-x)];
+}
+
+.gap-x-lg {
+    @apply gap-x-[var(--margin-x-lg)];
+}
+
+.gap-x-xl {
+    @apply gap-x-[var(--margin-x-xl)];
+}
+
+.mx {
+    @apply mx-[var(--margin-x)];
+}
+
+.mx-lg {
+    @apply mx-[var(--margin-x-lg)];
+}
+
+.mg-xl {
+    @apply mx-[var(--margin-x-xl)];
+}
+
+.ml {
+    @apply ml-[var(--margin-x)];
+}
+
+.ml-lg {
+    @apply ml-[var(--margin-x-lg)];
+}
+
+.mg-xl {
+    @apply ml-[var(--margin-x-xl)];
+}
+
+.mr {
+    @apply mr-[var(--margin-x)];
+}
+
+.mr-lg {
+    @apply mr-[var(--margin-x-lg)];
+}
+
+.mr-xl {
+    @apply mr-[var(--margin-x-xl)];
+}
+
+.gap-y-sm {
+    @apply gap-y-[var(--margin-y-sm)];
+}
+
+.gap-y {
+    @apply gap-y-[var(--margin-y)];
+}
+
+.gap-y-lg {
+    @apply gap-y-[var(--margin-y-lg)];
+}
+
+.gap-y-xl {
+    @apply gap-y-[var(--margin-y-xl)];
+}
+
+.my {
+    @apply my-[var(--margin-y)];
+}
+
+.my-lg {
+    @apply my-[var(--margin-y-lg)];
+}
+
+.my-xl {
+    @apply my-[var(--margin-y-xl)];
+}
+
+.mt {
+    @apply mt-[var(--margin-y)];
+}
+
+.mt-lg {
+    @apply mt-[var(--margin-y-lg)];
+}
+
+.mt-xl {
+    @apply mt-[var(--margin-y-xl)];
+}
+
+.mb {
+    @apply mb-[var(--margin-y)];
+}
+
+.mb-lg {
+    @apply mb-[var(--margin-y-lg)];
+}
+
+.mb-xl {
+    @apply mb-[var(--margin-y-xl)];
+}
+
+.px {
+    @apply px-[var(--margin-x)];
+}
+
+.px-lg {
+    @apply px-[var(--margin-x-lg)];
+}
+
+.py {
+    @apply py-[var(--margin-y)];
+}
+
+.py-lg {
+    @apply py-[var(--margin-y-lg)];
+}
+
+.gap-sm {
+    @apply gap-x-sm gap-y-sm;
+}
+
+.gap {
+    @apply gap-x gap-y;
+}
+
+.gap-lg {
+    @apply gap-x-lg gap-y-lg;
+}
+
+.gap-xl {
+    @apply gap-x-xl gap-y-xl;
+}
+
+.active-area {
+    @apply lg:w-[var(--active-area)] lg:mx-auto;
+}
+
+.text-area {
+    @apply max-w-md lg:max-w-[var(--text-area)];
+}
+
+.ul-links {
+    @apply inline-flex md:items-center gap;
+}
+
+.max-w {
+    @apply max-w-xs;
+}
+
+.container-width {
+    @apply w-full max-w
+}
+
+.aspect-card {
+    @apply aspect-[6/8]
+}
+
+.hover {
+    @apply hover:opacity-80 transition ease-in-out
+}
+
+.container {
+    @apply inline-flex flex-col;
+}
+
+.container-gap-sm {
+    @apply inline-flex flex-col gap-sm;
+}
+
+.container-gap {
+    @apply inline-flex flex-col gap;
+}
+
+.container-gap-lg {
+    @apply inline-flex flex-col gap-lg;
+}
+
+.container-gap-xl {
+    @apply inline-flex flex-col gap-xl;
+}
+
+.container-row {
+    @apply inline-flex flex-row;
+}
+
+.container-row-gap-sm {
+    @apply inline-flex flex-row gap-sm;
+}
+
+.container-row-gap {
+    @apply inline-flex flex-row gap;
+}
+
+.container-row-gap-lg {
+    @apply inline-flex flex-row gap-lg;
+}
+
+.container-row-gap-xl {
+    @apply inline-flex flex-row gap-xl;
+}
+
+.form-container {
+    @apply container-width container gap;
+}
+
+.form-container-lg {
+    @apply container-width container gap-lg;
+}
+
+.form-container-xl {
+    @apply container-width container gap-xl;
+}
+
+.page-container {
+    @apply container items-center gap-xl mx-auto;
+}
+
+.tiptap {
+    @apply border min-h-40
+}
+
+

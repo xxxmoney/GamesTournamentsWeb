@@ -2,7 +2,10 @@
 export default {
   darkMode: 'class',
   content: [
-    "presets/**/*.{js,vue,ts}"
+    'presets/**/*.{js,vue,ts}'
+  ],
+  plugins: [
+    require('daisyui')
   ],
   theme: {
     extend: {
@@ -34,4 +37,3 @@ export default {
     }
   }
 }
-

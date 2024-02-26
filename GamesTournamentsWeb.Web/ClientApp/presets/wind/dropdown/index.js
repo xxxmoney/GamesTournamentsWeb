@@ -1,12 +1,12 @@
 export default {
-    root: ({ props, state }) => ({
+    root: ({props, state}) => ({
         class: [
             // Display and Position
             'inline-flex',
             'relative',
 
             // Shape
-            'w-full md:w-56',
+            'w-full',
             'rounded-md',
             'shadow-sm',
 
@@ -14,15 +14,18 @@ export default {
             'bg-surface-0 dark:bg-surface-900',
 
             // States
-            { 'ring-1 ring-inset ring-surface-300 dark:ring-surface-700': !state.focused, 'ring-2 ring-inset ring-primary-500 dark:ring-primary-400': state.focused },
+            {
+                'ring-1 ring-inset ring-surface-300 dark:ring-surface-700': !state.focused,
+                'ring-2 ring-inset ring-primary-500 dark:ring-primary-400': state.focused
+            },
 
             // Misc
             'cursor-default',
             'select-none',
-            { 'opacity-60': props.disabled, 'pointer-events-none': props.disabled }
+            {'opacity-60': props.disabled, 'pointer-events-none': props.disabled}
         ]
     }),
-    input: ({ props }) => ({
+    input: ({props}) => ({
         class: [
             //Font
             'font-sans',
@@ -36,13 +39,16 @@ export default {
             // Color and Background
             'bg-transparent',
             'border-0',
-            { 'text-surface-800 dark:text-white/80': props.modelValue, 'text-surface-400 dark:text-surface-500': !props.modelValue },
+            {
+                'text-surface-800 dark:text-white/80': props.modelValue,
+                'text-surface-400 dark:text-surface-500': !props.modelValue
+            },
             'placeholder:text-surface-400 dark:placeholder:text-surface-500',
 
             // Sizing and Spacing
             'w-[1%]',
             'py-1.5 px-3',
-            { 'pr-7': props.showClear },
+            {'pr-7': props.showClear},
 
             //Shape
             'rounded-none',
@@ -112,12 +118,12 @@ export default {
     list: {
         class: 'py-1 list-none m-0'
     },
-    item: ({ context }) => ({
+    item: ({context}) => ({
         class: [
             // Font
             'sm:text-sm',
             'leading-none',
-            { 'font-normal': !context.selected, 'font-bold': context.selected },
+            {'font-normal': !context.selected, 'font-bold': context.selected},
 
             // Position
             'relative',
@@ -131,10 +137,10 @@ export default {
             'py-2 px-4',
 
             // Color
-            { 'text-surface-700 dark:text-white/80': !context.focused && !context.selected },
-            { 'bg-surface-200 dark:bg-surface-600/60 text-surface-700 dark:text-white/80': context.focused && !context.selected },
-            { 'bg-primary-500 dark:bg-primary-400 text-white dark:text-surface-700': context.focused && context.selected },
-            { 'bg-transparent text-surface-700 dark:text-white/80': !context.focused && context.selected },
+            {'text-surface-700 dark:text-white/80': !context.focused && !context.selected},
+            {'bg-surface-200 dark:bg-surface-600/60 text-surface-700 dark:text-white/80': context.focused && !context.selected},
+            {'bg-primary-500 dark:bg-primary-400 text-white dark:text-surface-700': context.focused && context.selected},
+            {'bg-transparent text-surface-700 dark:text-white/80': !context.focused && context.selected},
 
             //States
             'hover:bg-primary-500 dark:hover:bg-primary-400 hover:text-white dark:hover:text-surface-700',

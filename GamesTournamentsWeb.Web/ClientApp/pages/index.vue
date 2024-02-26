@@ -3,8 +3,10 @@
 </script>
 
 <template>
-  <div>
-    <InputText value="fffs" />
-    <h1>{{ $t('test') }}</h1>
+  <div class="inline-flex flex-col items-center mx-auto gap-y-xl">
+    <PageHomeHero />
+    <PageHomeFeatures />
+    <PageHomeCarousel />
+    <PageHomeContactForm />
   </div>
 </template>

@@ -68,5 +68,8 @@ module.exports = {
         'max-classes-per-file': 'off',
         'max-len': 'off',
         'vue/no-multiple-template-root': 'off',
+        'vue/html-self-closing': 'off',
+        'no-useless-constructor': 'off',
+        'vue/require-prop-type-constructor': 'off',
     }
 }
