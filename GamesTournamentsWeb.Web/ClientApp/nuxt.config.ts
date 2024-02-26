@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
-    'nuxt-tiptap-editor'
+    'nuxt-tiptap-editor',
+    '@vee-validate/nuxt'
   ],
   css: ['~/assets/css/main.css', 'primeicons/primeicons.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   primevue: {
@@ -27,5 +28,14 @@ export default defineNuxtConfig({
   },
   tiptap: {
     prefix: 'Tiptap'
+  },
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage'
+    }
   }
 })
