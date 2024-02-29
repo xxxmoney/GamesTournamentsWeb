@@ -61,6 +61,11 @@ export default {
     winner: 'Winner'
   },
 
+  validation: {
+    invalid: 'This is invalid',
+    required: 'This is required'
+  },
+
   locales: {
     en: 'English',
     cs: 'Czech'

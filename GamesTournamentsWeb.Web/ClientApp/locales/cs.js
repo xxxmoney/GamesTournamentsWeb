@@ -61,6 +61,11 @@ export default {
     winner: 'Vítěz'
   },
 
+  validation: {
+    invalid: 'Toto je neplatné',
+    required: 'Toto je povinné'
+  },
+
   locales: {
     en: 'Anglicky',
     cs: 'Česky'

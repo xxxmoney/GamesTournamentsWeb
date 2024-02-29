@@ -1,6 +1,8 @@
+import type { ValidationError } from '~/models/ValidationError'
+
 interface ValidationResult {
     isValid: boolean;
-    errors: string[];
+    errors: ValidationError[];
 }
 
 export type { ValidationResult }

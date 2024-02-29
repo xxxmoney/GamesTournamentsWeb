@@ -13,7 +13,6 @@ const validate = async () => {
   console.log(await schemaValidate(edit.value))
 }
 
-// TODO: add localization
 // TODO: add event bridge or smth to catch when next is step button is clicked
 
 </script>
