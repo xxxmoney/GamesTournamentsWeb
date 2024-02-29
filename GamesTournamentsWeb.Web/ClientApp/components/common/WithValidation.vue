@@ -1,9 +1,20 @@
 <script lang="ts" setup>
-const props = defineProps({
+import type { PropType } from 'vue'
+import type { ValidationError } from '~/models/ValidationError'
+
+const { t } = useI18n()
+
+const { errorMessage } = defineProps({
+  // errors: {
+  //   type: Object as PropType<Map<string, ValidationError>>,
+  //   required: true
+  // },
   errorMessage: {
+    type: String,
     required: true
   }
 })
+
 </script>
 
 <template>

@@ -2,7 +2,7 @@ import type { ValidationError } from '~/models/ValidationError'
 
 interface ValidationResult {
     isValid: boolean;
-    errors: ValidationError[];
+    errors: Map<string, ValidationError>;
 }
 
 export type { ValidationResult }

@@ -7,11 +7,13 @@ const schema = object({
   rules: string().required()
 })
 
-const schemaValidate = useYupValidate(schema)
+const { validateFor, getMessage } = useYupValidate(schema)
 
-const validate = async () => {
-  console.log(await schemaValidate(edit.value))
+const validate = () => {
+  validateFor(edit.value)
 }
+
+// IDEA: get keyes from schema and then watch those keys for changes and validate on change
 
 // TODO: add event bridge or smth to catch when next is step button is clicked
 
@@ -21,7 +23,7 @@ const validate = async () => {
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.rules') }}</h1>
 
   <div class="container-gap">
-    <CommonWithValidation errorMessage="empty">
+    <CommonWithValidation :errorMessage="$t(getMessage('rules'))">
       <CommonWithLabel
         v-tooltip="$t('tournament_edit.write_rules_tooltip')"
         :label="$t('common.rules')"

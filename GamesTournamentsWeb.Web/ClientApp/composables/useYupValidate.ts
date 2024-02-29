@@ -15,22 +15,33 @@ const getAllValidationErrors = (error: ValidationError): ValidationError[] => {
 
 const mapToValidationResult = (isValid: boolean, errors: ValidationError[]): ValidationResult => ({
   isValid,
-  errors: errors.map((error) => ({
+  errors: new Map(errors.map((error) => [error.path as string, {
     path: error.path as string,
     value: error.value,
     message: error.message
-  }))
+  }]))
 })
 
 export const useYupValidate = (schema: ObjectSchema<any>) => {
-  return async (value: any): Promise<ValidationResult> => {
+  const validation = ref<ValidationResult>(mapToValidationResult(true, []))
+
+  const validateFor = async (value: any): Promise<ValidationResult> => {
     try {
       await schema.validate(value, { abortEarly: false })
+      validation.value = mapToValidationResult(true, [])
     } catch (error) {
+      console.log(JSON.stringify(error, null, 2))
       const validationError = error as ValidationError
-      return mapToValidationResult(false, getAllValidationErrors(validationError))
+      validation.value = mapToValidationResult(false, getAllValidationErrors(validationError))
     }
 
-    return mapToValidationResult(true, [])
+    return validation.value
   }
+
+  const getMessage = (path: string): string => {
+    const error = validation.value.errors.get(path)
+    return error ? error.message : ''
+  }
+
+  return { validateFor, getMessage, validation }
 }
