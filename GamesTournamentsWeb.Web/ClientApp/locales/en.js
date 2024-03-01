@@ -61,9 +61,11 @@ export default {
     winner: 'Winner'
   },
 
-  validation: {
-    invalid: 'This is invalid',
-    required: 'This is required'
+  validations: {
+    error: 'Validation error',
+    required: 'The field is required.',
+    minLength: 'Min length is {min}.',
+    maxLength: 'Max length is {max}.'
   },
 
   locales: {

@@ -1,21 +1,25 @@
 <script lang="ts" setup>
-import { object, string } from 'yup'
+import useVuelidate from '@vuelidate/core'
+import constants from '~/constants'
 
 const edit = useTournamentEdit()
+const step = useTournamentEditStep()
 
-const schema = object({
-  rules: string().required()
-})
+const { event, listen } = useEventBus()
+const { required } = useValidators()
 
-const { validateFor, getMessage } = useYupValidate(schema)
-
-const validate = () => {
-  validateFor(edit.value)
+const rules = {
+  rules: { required }
 }
 
-// IDEA: get keyes from schema and then watch those keys for changes and validate on change
+const v$ = useVuelidate(rules, edit)
+const { validate } = useValidate(v$.value.$validate)
 
-// TODO: add event bridge or smth to catch when next is step button is clicked
+listen(constants.events.tournamentEditNextStepRequest, async () => {
+  if (step.value === constants.tournamentEditSteps.rules && await validate()) {
+    event(constants.events.tournamentEditNextStepConfirm)
+  }
+})
 
 </script>
 
@@ -23,7 +27,7 @@ const validate = () => {
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.rules') }}</h1>
 
   <div class="container-gap">
-    <CommonWithValidation :errorMessage="$t(getMessage('rules'))">
+    <CommonWithErrors :errors="v$.rules.$errors">
       <CommonWithLabel
         v-tooltip="$t('tournament_edit.write_rules_tooltip')"
         :label="$t('common.rules')"
@@ -31,8 +35,6 @@ const validate = () => {
       >
         <CommonTextEditor v-model="edit.rules" />
       </Commonwithlabel>
-    </CommonWithValidation>
-
-    <Button class="mt-lg" @click="validate">{{ $t('common.save') }}</Button>
+    </CommonWithErrors>
   </div>
 </template>

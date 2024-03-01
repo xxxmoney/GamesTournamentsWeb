@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+import constants from '~/constants'
+
 const tournamentsStore = useTournamentsStore()
 
+const { event, listen } = useEventBus()
 const emit = defineEmits(['finalize'])
 
 const increaseEditStep = () => {
@@ -11,6 +14,12 @@ const increaseEditStep = () => {
   }
 }
 
+const increaseEditStepRequest = () => {
+  event(constants.events.tournamentEditNextStepRequest)
+}
+
+listen(constants.events.tournamentEditNextStepConfirm, increaseEditStep)
+
 const canIncrease = computed(() => tournamentsStore.canIncreaseTournamentEditStep)
 </script>
 
@@ -18,6 +27,6 @@ const canIncrease = computed(() => tournamentsStore.canIncreaseTournamentEditSte
   <CommonActionLink
     :disabled="!canIncrease"
     :label="$t('common.next')"
-    @click="increaseEditStep"
+    @click="increaseEditStepRequest"
   />
 </template>

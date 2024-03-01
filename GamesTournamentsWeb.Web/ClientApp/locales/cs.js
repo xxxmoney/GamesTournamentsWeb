@@ -61,9 +61,11 @@ export default {
     winner: 'Vítěz'
   },
 
-  validation: {
-    invalid: 'Toto je neplatné',
-    required: 'Toto je povinné'
+  validations: {
+    error: 'Chyba při validaci',
+    required: 'Pole je povinné.',
+    minLength: 'Minimální délka je {min}.',
+    maxLength: 'Maximální délka je {max}.'
   },
 
   locales: {

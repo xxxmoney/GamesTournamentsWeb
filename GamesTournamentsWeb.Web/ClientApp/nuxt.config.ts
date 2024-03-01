@@ -11,8 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/eslint-module',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
-    'nuxt-tiptap-editor',
-    '@vee-validate/nuxt'
+    'nuxt-tiptap-editor'
   ],
   css: ['~/assets/css/main.css', 'primeicons/primeicons.css', '@fortawesome/fontawesome-svg-core/styles.css'],
   primevue: {
