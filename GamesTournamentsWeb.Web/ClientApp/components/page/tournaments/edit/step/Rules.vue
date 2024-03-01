@@ -21,6 +21,8 @@ listen(constants.events.tournamentEditNextStepRequest, async () => {
   }
 })
 
+// TODO: find out how to dirty state
+
 </script>
 
 <template>

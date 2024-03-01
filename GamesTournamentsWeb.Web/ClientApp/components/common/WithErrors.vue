@@ -18,8 +18,12 @@ const valid = computed(() => errors.length === 0)
 <template>
   <div class="container-gap">
     <div>
-      <slot :valid="valid" />
+      <slot />
     </div>
-    <small v-for="error in errors" class="text-red-300">{{ error.$message }}</small>
+    <span
+      v-for="(error, index) in errors"
+      :key="`error-${error.$property}-${index}`"
+      class="text-red-300"
+    >{{ error.$message }}</span>
   </div>
 </template>

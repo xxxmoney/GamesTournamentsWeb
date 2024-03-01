@@ -1,6 +1,6 @@
 import type { Emitter, Handler } from 'mitt'
 
-export const useEventBus = <T>() => {
+export const useEventBus = () => {
   const { $emitter } = useNuxtApp()
 
   const emitter = $emitter as Emitter<Record<string, unknown>>
