@@ -39,9 +39,7 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
   <div class="container-gap">
     <div class="container-gap">
       <CommonWithErrors :errors="v$.name.$errors">
-        <template #default="{ invalid }">
-          <CommonInputText v-model="edit.name" :invalid="invalid" :label="$t('common.name')" />
-        </template>
+        <CommonInputText v-model="edit.name" :label="$t('common.name')" />
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.gameId.$errors">
