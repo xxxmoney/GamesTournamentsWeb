@@ -15,6 +15,7 @@ const increaseEditStep = () => {
 }
 
 const increaseEditStepRequest = () => {
+  console.log('increase')
   event(constants.events.tournamentEditNextStepRequest)
 }
 

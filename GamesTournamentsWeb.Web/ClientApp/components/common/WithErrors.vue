@@ -17,13 +17,13 @@ const valid = computed(() => errors.length === 0)
 
 <template>
   <div class="container-gap">
-    <div>
+    <div :class="{'border-error': !valid}">
       <slot />
     </div>
     <span
       v-for="(error, index) in errors"
       :key="`error-${error.$property}-${index}`"
-      class="text-red-300"
+      class="text-error"
     >{{ error.$message }}</span>
   </div>
 </template>

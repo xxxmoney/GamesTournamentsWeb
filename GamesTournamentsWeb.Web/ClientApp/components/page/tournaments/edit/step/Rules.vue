@@ -2,26 +2,18 @@
 import useVuelidate from '@vuelidate/core'
 import constants from '~/constants'
 
-const edit = useTournamentEdit()
-const step = useTournamentEditStep()
-
-const { event, listen } = useEventBus()
 const { required } = useValidators()
 
+const edit = useTournamentEdit()
+
 const rules = {
-  rules: { required }
+  rules: { required, $autoDirty: true }
 }
 
 const v$ = useVuelidate(rules, edit)
 const { validate } = useValidate(v$.value.$validate)
 
-listen(constants.events.tournamentEditNextStepRequest, async () => {
-  if (step.value === constants.tournamentEditSteps.rules && await validate()) {
-    event(constants.events.tournamentEditNextStepConfirm)
-  }
-})
-
-// TODO: find out how to dirty state
+useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.rules, validate)
 
 </script>
 

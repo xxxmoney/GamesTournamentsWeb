@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+import useVuelidate from '@vuelidate/core'
 import { KeyValuePair } from '~/models/KeyValuePair'
 import constants from '~/constants'
+
+const { required } = useValidators()
 
 const gamesStore = useGamesStore()
 const tournamentsStore = useTournamentsStore()
@@ -11,6 +14,24 @@ const gameOverviews = computed(() => gamesStore.gameOverviews)
 const platforms = computed(() => tournamentsStore.platforms)
 const regions = computed(() => tournamentsStore.regions)
 const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new KeyValuePair(teamSize, teamSize)))
+
+const rules = {
+  name: { required, $autoDirty: true },
+  gameId: { required, $autoDirty: true },
+  platformId: { required, $autoDirty: true },
+  regionIds: { required, $autoDirty: true },
+  teamSize: { required, $autoDirty: true },
+  startDate: { required, $autoDirty: true },
+  minimumPlayers: { required, $autoDirty: true },
+  maximumPlayers: { required, $autoDirty: true },
+  info: { required, $autoDirty: true }
+}
+
+const v$ = useVuelidate(rules, edit)
+const { validate } = useValidate(v$.value.$validate)
+
+useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info, validate)
+
 </script>
 
 <template>
