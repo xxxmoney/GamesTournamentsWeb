@@ -14,7 +14,6 @@ const v$ = useVuelidate(rules, edit)
 const { validate } = useValidate(v$.value.$validate)
 
 useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.rules, validate)
-
 </script>
 
 <template>

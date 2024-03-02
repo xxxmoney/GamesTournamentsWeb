@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import constants from '~/constants'
+
 const store = useTournamentsStore()
 const edit = useTournamentEdit()
 const step = useTournamentEditStep()
@@ -77,28 +79,52 @@ onMounted(() => {
 
     <TabView v-model:activeIndex="step" class="flex-1">
       <TabPanel>
-        <PageTournamentsEditStepInfo class="text-area" />
+        <PageTournamentsEditStepInfo
+          v-if="constants.tournamentEditSteps.info === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepRules class="text-area" />
+        <PageTournamentsEditStepRules
+          v-if="constants.tournamentEditSteps.rules === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepPrizes class="text-area" />
+        <PageTournamentsEditStepPrizes
+          v-if="constants.tournamentEditSteps.prizes === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepPlayers class="text-area" />
+        <PageTournamentsEditStepPlayers
+          v-if="constants.tournamentEditSteps.players === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepMatch class="text-area" />
+        <PageTournamentsEditStepMatch
+          v-if="constants.tournamentEditSteps.match === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepStreams class="text-area" />
+        <PageTournamentsEditStepStreams
+          v-if="constants.tournamentEditSteps.streams === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepAdmins class="text-area" />
+        <PageTournamentsEditStepAdmins
+          v-if="constants.tournamentEditSteps.admins === step"
+          class="text-area"
+        />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepOverview />
+        <PageTournamentsEditStepOverview
+          v-if="constants.tournamentEditSteps.overview === step"
+          class="text-area"
+        />
       </TabPanel>
     </TabView>
 
