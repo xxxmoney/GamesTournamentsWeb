@@ -31,7 +31,6 @@ const v$ = useVuelidate(rules, edit)
 const { validate } = useValidate(v$.value.$validate)
 
 useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info, validate)
-
 </script>
 
 <template>
@@ -39,96 +38,116 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
 
   <div class="container-gap">
     <div class="container-gap">
-      <CommonInputText v-model="edit.name" :label="$t('common.name')" />
+      <CommonWithErrors :errors="v$.name.$errors">
+        <template #default="{ invalid }">
+          <CommonInputText v-model="edit.name" :invalid="invalid" :label="$t('common.name')" />
+        </template>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('tournament_edit.choose_game')">
-        <Dropdown
-          v-model:modelValue="edit.gameId"
-          :options="gameOverviews"
-          :placeholder="$t('tournament_edit.choose_game')"
-          :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
-          class=""
-          filter
-          optionLabel="name"
-          optionValue="id"
-        />
-      </CommonWithLabel>
+      <CommonWithErrors :errors="v$.gameId.$errors">
+        <CommonWithLabel :label="$t('tournament_edit.choose_game')">
+          <Dropdown
+            v-model:modelValue="edit.gameId"
+            :options="gameOverviews"
+            :placeholder="$t('tournament_edit.choose_game')"
+            :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
+            class=""
+            filter
+            optionLabel="name"
+            optionValue="id"
+          />
+        </CommonWithLabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('tournament_edit.choose_platform')">
-        <Dropdown
-          v-model:modelValue="edit.platformId"
-          :options="platforms"
-          :placeholder="$t('tournament_edit.choose_platform')"
-          class=""
-          optionLabel="name"
-          optionValue="id"
-        />
-      </CommonWithLabel>
+      <CommonWithErrors :errors="v$.platformId.$errors">
+        <CommonWithLabel :label="$t('tournament_edit.choose_platform')">
+          <Dropdown
+            v-model:modelValue="edit.platformId"
+            :options="platforms"
+            :placeholder="$t('tournament_edit.choose_platform')"
+            class=""
+            optionLabel="name"
+            optionValue="id"
+          />
+        </CommonWithLabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('tournament_edit.choose_regions')">
-        <MultiSelect
-          v-model="edit.regionIds"
-          :options="regions"
-          :placeholder="$t('tournament_edit.choose_regions')"
-          :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
-          class="w-full"
-          display="chip"
-          optionLabel="name"
-          optionValue="id"
-        />
-      </CommonWithLabel>
+      <CommonWithErrors :errors="v$.regionIds.$errors">
+        <CommonWithLabel :label="$t('tournament_edit.choose_regions')">
+          <MultiSelect
+            v-model="edit.regionIds"
+            :options="regions"
+            :placeholder="$t('tournament_edit.choose_regions')"
+            :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
+            class="w-full"
+            display="chip"
+            optionLabel="name"
+            optionValue="id"
+          />
+        </CommonWithLabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('tournament_edit.choose_team_size')">
-        <Dropdown
-          v-model:modelValue="edit.teamSize"
-          :options="teamSizes"
-          :placeholder="$t('tournament_edit.choose_team_size')"
-          class=""
-          filter
-          optionLabel="value"
-          optionValue="key"
-        />
-      </CommonWithLabel>
+      <CommonWithErrors :errors="v$.teamSize.$errors">
+        <CommonWithLabel :label="$t('tournament_edit.choose_team_size')">
+          <Dropdown
+            v-model:modelValue="edit.teamSize"
+            :options="teamSizes"
+            :placeholder="$t('tournament_edit.choose_team_size')"
+            class=""
+            filter
+            optionLabel="value"
+            optionValue="key"
+          />
+        </CommonWithLabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('common.start_date')">
-        <Calendar
-          v-model="edit.startDate"
-          :minDate="new Date()"
-          hourFormat="24"
-          showIcon
-          showTime
-        />
-      </CommonWithLabel>
+      <CommonWithErrors :errors="v$.startDate.$errors">
+        <CommonWithLabel :label="$t('common.start_date')">
+          <Calendar
+            v-model="edit.startDate"
+            :minDate="new Date()"
+            hourFormat="24"
+            showIcon
+            showTime
+          />
+        </CommonWithLabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('common.minimum_players')">
-        <InputNumber
-          v-model="edit.minimumPlayers"
-          :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"
-          :min="1"
-          :placeholder="$t('common.minimum_players')"
-          showButtons
-        />
-      </commonwithlabel>
+      <CommonWithErrors :errors="v$.minimumPlayers.$errors">
+        <CommonWithLabel :label="$t('common.minimum_players')">
+          <InputNumber
+            v-model="edit.minimumPlayers"
+            :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"
+            :min="1"
+            :placeholder="$t('common.minimum_players')"
+            showButtons
+          />
+        </Commonwithlabel>
+      </CommonWithErrors>
 
-      <CommonWithLabel :label="$t('common.maximum_players')">
-        <InputNumber
-          v-model="edit.maximumPlayers"
-          :max="constants.tournamentEditMaximumPlayers"
-          :min="edit.minimumPlayers ?? 1"
-          :placeholder="$t('common.maximum_players')"
-          showButtons
-        />
-      </commonwithlabel>
+      <CommonWithErrors :errors="v$.maximumPlayers.$errors">
+        <CommonWithLabel :label="$t('common.maximum_players')">
+          <InputNumber
+            v-model="edit.maximumPlayers"
+            :max="constants.tournamentEditMaximumPlayers"
+            :min="edit.minimumPlayers ?? 1"
+            :placeholder="$t('common.maximum_players')"
+            showButtons
+          />
+        </commonwithlabel>
+      </CommonWithErrors>
     </div>
 
     <div class="container-gap">
-      <CommonWithLabel
-        v-tooltip="$t('tournament_edit.write_info_tooltip')"
-        :label="$t('common.description')"
-        class="gap"
-      >
-        <CommonTextEditor v-model="edit.info" />
-      </commonwithlabel>
+      <CommonWithErrors :errors="v$.info.$errors">
+        <CommonWithLabel
+          v-tooltip="$t('tournament_edit.write_info_tooltip')"
+          :label="$t('common.description')"
+          class="gap"
+        >
+          <CommonTextEditor v-model="edit.info" />
+        </commonwithlabel>
+      </CommonWithErrors>
     </div>
   </div>
 </template>

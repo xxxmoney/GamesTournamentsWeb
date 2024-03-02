@@ -207,6 +207,10 @@ body {
     @apply mt-[var(--margin-y-xl)];
 }
 
+.mb-sm {
+    @apply mb-[var(--margin-y-sm)];
+}
+
 .mb {
     @apply mb-[var(--margin-y)];
 }

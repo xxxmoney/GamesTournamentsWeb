@@ -11,15 +11,13 @@ const { errors } = defineProps({
   }
 })
 
-const valid = computed(() => errors.length === 0)
+const invalid = computed(() => Boolean(errors))
 
 </script>
 
 <template>
-  <div class="container-gap">
-    <div :class="{'border-error': !valid}">
-      <slot />
-    </div>
+  <div class="container-gap-sm">
+    <slot :invalid="invalid" />
     <span
       v-for="(error, index) in errors"
       :key="`error-${error.$property}-${index}`"
