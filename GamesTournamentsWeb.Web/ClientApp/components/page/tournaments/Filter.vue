@@ -3,18 +3,33 @@ import { KeyValuePair } from '~/models/KeyValuePair'
 import constants from '~/constants'
 
 const tournamentsStore = useTournamentsStore()
+const gamesStore = useGamesStore()
 
 const filter = computed(() => tournamentsStore.filter)
 
 const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new KeyValuePair(teamSize, teamSize)))
 const regions = computed(() => tournamentsStore.regions)
 const platforms = computed(() => tournamentsStore.platforms)
+const gameOverviews = computed(() => gamesStore.gameOverviews)
 
 </script>
 
 <template>
   <div class="inline-flex flex-col md:flex-row w-full gap">
     <CommonInputText v-model="filter.name" :label="$t('common.name')" />
+
+    <CommonWithLabel :label="$t('common.choose_game')">
+      <Dropdown
+        v-model:modelValue="filter.gameId"
+        :options="gameOverviews"
+        :placeholder="$t('common.choose_game')"
+        :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
+        filter
+        optionLabel="name"
+        optionValue="id"
+        showClear
+      />
+    </CommonWithLabel>
 
     <CommonWithLabel :label="$t('common.team_size')">
       <MultiSelect

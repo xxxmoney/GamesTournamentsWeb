@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const gamesStore = useGamesStore()
+const tournamentsStore = useTournamentsStore()
 const router = useRouter()
 
 const { id } = defineProps({
@@ -11,13 +12,14 @@ const { id } = defineProps({
 
 const game = computed(() => gamesStore.gameById(id))
 
-const goToGameDetail = () => {
-  router.push(`/games/${id}`)
+const filterToGame = async () => {
+  tournamentsStore.filter.gameId = id
+  await router.push('/tournaments')
 }
 </script>
 
 <template>
-  <CommonImageCard :imageUrl="game.imageUrl" @click="goToGameDetail">
-    <Button :label="$t('common.detail')" @click="goToGameDetail" />
+  <CommonImageCard :imageUrl="game.imageUrl" @click="filterToGame">
+    <Button :label="$t('common.detail')" @click="filterToGame" />
   </CommonImageCard>
 </template>

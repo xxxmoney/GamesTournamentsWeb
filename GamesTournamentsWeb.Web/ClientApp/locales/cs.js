@@ -58,7 +58,12 @@ export default {
     account: 'Account',
     admin: 'Administrátor',
     confirmation: 'Potvrzení',
-    winner: 'Vítěz'
+    winner: 'Vítěz',
+    choose_game: 'Vyberte hru',
+    choose_platform: 'Vyberte platformu',
+    choose_regions: 'Vyberte regiony',
+    choose_team_size: 'Vyberte velikost týmu',
+    choose_account: 'Vyberte účet'
   },
 
   validations: {
@@ -207,16 +212,11 @@ export default {
       overview: 'Přehled',
       finish: 'Dokončit'
     },
-    choose_game: 'Vyberte hru',
-    choose_platform: 'Vyberte platformu',
-    choose_regions: 'Vyberte regiony',
-    choose_team_size: 'Vyberte velikost týmu',
     write_info_tooltip: 'Napište stručný popis turnaje',
     write_rules_tooltip: 'Napište pravidla',
     add_prize_tooltip: 'Klikněte pro přidání ceny',
     add_stream_tooltip: 'Klikněte pro přidání odkazu na stream',
     can_anyone_join: 'Může se připojit kdokoliv?',
-    choose_account: 'Vyberte účet',
     no_match: 'Teď neprobíhá žádný zápas',
     success: 'Turnaj byl úspěšně upraven',
     confirm: 'Opravdu chcete dokončit úpravu turnaje?'

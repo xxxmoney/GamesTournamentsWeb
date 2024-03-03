@@ -43,13 +43,12 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.gameId.$errors">
-        <CommonWithLabel :label="$t('tournament_edit.choose_game')">
+        <CommonWithLabel :label="$t('common.choose_game')">
           <Dropdown
             v-model:modelValue="edit.gameId"
             :options="gameOverviews"
-            :placeholder="$t('tournament_edit.choose_game')"
+            :placeholder="$t('common.choose_game')"
             :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
-            class=""
             filter
             optionLabel="name"
             optionValue="id"
@@ -58,11 +57,11 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.platformId.$errors">
-        <CommonWithLabel :label="$t('tournament_edit.choose_platform')">
+        <CommonWithLabel :label="$t('common.choose_platform')">
           <Dropdown
             v-model:modelValue="edit.platformId"
             :options="platforms"
-            :placeholder="$t('tournament_edit.choose_platform')"
+            :placeholder="$t('common.choose_platform')"
             class=""
             optionLabel="name"
             optionValue="id"
@@ -71,11 +70,11 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.regionIds.$errors">
-        <CommonWithLabel :label="$t('tournament_edit.choose_regions')">
+        <CommonWithLabel :label="$t('common.choose_regions')">
           <MultiSelect
             v-model="edit.regionIds"
             :options="regions"
-            :placeholder="$t('tournament_edit.choose_regions')"
+            :placeholder="$t('common.choose_regions')"
             :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
             class="w-full"
             display="chip"
@@ -86,11 +85,11 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.info,
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.teamSize.$errors">
-        <CommonWithLabel :label="$t('tournament_edit.choose_team_size')">
+        <CommonWithLabel :label="$t('common.choose_team_size')">
           <Dropdown
             v-model:modelValue="edit.teamSize"
             :options="teamSizes"
-            :placeholder="$t('tournament_edit.choose_team_size')"
+            :placeholder="$t('common.choose_team_size')"
             class=""
             filter
             optionLabel="value"
