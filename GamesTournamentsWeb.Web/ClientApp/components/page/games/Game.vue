@@ -13,6 +13,7 @@ const { id } = defineProps({
 const game = computed(() => gamesStore.gameById(id))
 
 const filterToGame = async () => {
+  tournamentsStore.resetFilter()
   tournamentsStore.filter.gameId = id
   await router.push('/tournaments')
 }

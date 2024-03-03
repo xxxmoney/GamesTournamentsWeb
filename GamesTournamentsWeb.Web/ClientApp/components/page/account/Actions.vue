@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 //const mainStore = useMainStore()
 const accountStore = useAccountStore()
+const tournamentsStore = useTournamentsStore()
 
 const router = useRouter()
 const { t } = useI18n()
@@ -11,8 +12,10 @@ const errorToast = useErrorToast()
 
 const confirm = useConfirm()
 
-const goToTournaments = () => {
-  // TODO: filter to my tournaments and go to tournaments page
+const goToTournaments = async () => {
+  tournamentsStore.resetFilter()
+  tournamentsStore.filter.withMyTournaments = true
+  await router.push('/tournaments')
 }
 const goToDashboard = () => {
   // TODO: go to dashboard page
