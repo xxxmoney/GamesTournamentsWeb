@@ -59,19 +59,21 @@ defineExpose({
       :label="$t('common.stream')"
     >
       <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removeStream(index)">
-        <CommonWithErrors :errors="v$.streams.$each.$response.$errors[index].name">
-          <InputText
-            v-model="streams[index].name"
-            :placeholder="$t('common.stream_name')"
-          />
-        </CommonWithErrors>
+        <div class="inline-flex flex-col md:flex-row">
+          <CommonWithErrors :errors="v$.streams.$each.$response.$errors[index].name">
+            <InputText
+              v-model="streams[index].name"
+              :placeholder="$t('common.stream_name')"
+            />
+          </CommonWithErrors>
 
-        <CommonWithErrors :errors="v$.streams.$each.$response.$errors[index].url">
-          <InputText
-            v-model="streams[index].url"
-            :placeholder="$t('common.stream_url')"
-          />
-        </CommonWithErrors>
+          <CommonWithErrors :errors="v$.streams.$each.$response.$errors[index].url">
+            <InputText
+              v-model="streams[index].url"
+              :placeholder="$t('common.stream_url')"
+            />
+          </CommonWithErrors>
+        </div>
       </CommonWithButtonIcon>
     </CommonWithLabel>
 
