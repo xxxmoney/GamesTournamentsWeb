@@ -5,6 +5,8 @@ import constants from '~/constants'
 const tournamentsStore = useTournamentsStore()
 const gamesStore = useGamesStore()
 
+const isLoggedIn = useIsLoggedIn()
+
 const filter = computed(() => tournamentsStore.filter)
 
 const teamSizes = computed(() => tournamentsStore.teamSizes.map(teamSize => new KeyValuePair(teamSize, teamSize)))
@@ -71,7 +73,7 @@ const gameOverviews = computed(() => gamesStore.gameOverviews)
       />
     </CommonWithLabel>
 
-    <CommonWithLabel :label="$t('common.my_tournaments')">
+    <CommonWithLabel v-if="isLoggedIn" :label="$t('common.my_tournaments')">
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
   </div>
