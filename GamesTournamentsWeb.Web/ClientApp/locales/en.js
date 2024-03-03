@@ -68,11 +68,12 @@ export default {
   },
 
   validations: {
-    undefined: 'The field is required',
+    undefined: 'The field is invalid',
     error: 'Validation error',
     required: 'The field is required',
     minLength: 'Min length is {min}',
-    maxLength: 'Max length is {max}'
+    maxLength: 'Max length is {max}',
+    url: 'Invalid URL'
   },
 
   locales: {

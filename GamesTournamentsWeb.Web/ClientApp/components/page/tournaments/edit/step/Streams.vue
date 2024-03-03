@@ -2,7 +2,7 @@
 import useVuelidate from '@vuelidate/core'
 import constants from '~/constants'
 
-const { helpers, required } = useValidators()
+const { helpers, required, url } = useValidators()
 
 const edit = useTournamentEdit()
 const streams = computed(() => edit.value.streams)
@@ -27,7 +27,8 @@ const rules = {
         required
       },
       url: {
-        required
+        required,
+        url
       }
     })
   }
