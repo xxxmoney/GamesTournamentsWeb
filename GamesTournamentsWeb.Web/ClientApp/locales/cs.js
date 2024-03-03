@@ -54,6 +54,7 @@ export default {
     prize: 'Cena',
     currency: 'Měna',
     stream_url: 'Odkaz na stream',
+    stream_name: 'Název streamu',
     player: 'Hráč',
     account: 'Account',
     admin: 'Administrátor',
@@ -67,10 +68,11 @@ export default {
   },
 
   validations: {
+    undefined: 'Pole je povinné',
     error: 'Chyba při validaci',
-    required: 'Pole je povinné.',
-    minLength: 'Minimální délka je {min}.',
-    maxLength: 'Maximální délka je {max}.'
+    required: 'Pole je povinné',
+    minLength: 'Minimální délka je {min}',
+    maxLength: 'Maximální délka je {max}'
   },
 
   locales: {

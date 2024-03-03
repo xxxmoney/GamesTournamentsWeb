@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { icon, severity } = defineProps({
+const { icon, severity, iconDisabled, iconClass } = defineProps({
   icon: {
     type: String,
     required: true
@@ -11,6 +11,10 @@ const { icon, severity } = defineProps({
   iconDisabled: {
     type: Boolean,
     default: false
+  },
+  iconClass: {
+    type: Object,
+    default: null
   }
 })
 
@@ -25,7 +29,8 @@ const onIconClick = () => {
   <div class="container-row items-center gap-1">
     <slot />
     <Button
-      :disabled="iconDisabled"
+      :class="iconClass"
+      :disabled="iconDisabled as Boolean"
       :icon="icon"
       :severity="severity"
       @click="onIconClick"

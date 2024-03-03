@@ -12,7 +12,9 @@ export const useValidators = () => {
 
   const maxLength = withI18nMessage(validators.maxLength(10))
 
+  const helpers = validators.helpers
+
   return {
-    required, minLength, maxLength
+    required, minLength, maxLength, helpers
   }
 }

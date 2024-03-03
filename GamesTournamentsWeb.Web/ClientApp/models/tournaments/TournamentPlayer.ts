@@ -1,6 +1,6 @@
 interface TournamentPlayer {
     accountId: Number
-    gameUsername: string
+    gameUsername: string | null
     status: string
 }
 

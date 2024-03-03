@@ -54,6 +54,7 @@ export default {
     prize: 'Prize',
     currency: 'Currency',
     stream_url: 'Stream link',
+    stream_name: 'Stream name',
     player: 'Player',
     account: 'Account',
     admin: 'Administrator',
@@ -67,10 +68,11 @@ export default {
   },
 
   validations: {
+    undefined: 'The field is required',
     error: 'Validation error',
-    required: 'The field is required.',
-    minLength: 'Min length is {min}.',
-    maxLength: 'Max length is {max}.'
+    required: 'The field is required',
+    minLength: 'Min length is {min}',
+    maxLength: 'Max length is {max}'
   },
 
   locales: {

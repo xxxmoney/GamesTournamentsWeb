@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import useVuelidate from '@vuelidate/core'
 import constants from '~/constants'
+
+const { required } = useValidators()
 
 const edit = useTournamentEdit()
 const adminIds = computed(() => new Set(edit.value.adminIds))
@@ -23,25 +26,46 @@ const addAdmin = () => {
 const removeAdmin = (index: number) => {
   edit.value.adminIds.splice(index, 1)
 }
+
+const rules = {
+  adminIds: { required, $autoDirty: true }
+}
+
+const v$ = useVuelidate(rules, edit)
+const { validate } = useValidate(v$.value.$validate)
+const invalid = computed(() => v$.value.$invalid)
+
+useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.admins, validate)
+
+defineExpose({
+  validate
+})
 </script>
 
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.admins') }}</h1>
   <div class="container-gap">
-    <CommonWithLabel :label="$t('tournament_edit.choose_account')">
-      <CommonWithButtonIcon :iconDisabled="!selectedAccountId" icon="pi pi-plus" @iconClick="addAdmin">
-        <Dropdown
-          v-model="selectedAccountId"
-          :options="accountsFiltered"
-          :placeholder="$t('tournament_edit.choose_account')"
-          :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
-          filter
-          optionLabel="username"
-          optionValue="id"
-          showClear
-        />
-      </CommonWithButtonIcon>
-    </CommonWithLabel>
+    <CommonWithErrors :errors="v$.adminIds.$errors">
+      <CommonWithLabel :label="$t('common.choose_account')">
+        <CommonWithButtonIcon
+          :iconClass="{'animate-pulse': invalid}"
+          :iconDisabled="!selectedAccountId"
+          icon="pi pi-plus"
+          @iconClick="addAdmin"
+        >
+          <Dropdown
+            v-model="selectedAccountId"
+            :options="accountsFiltered"
+            :placeholder="$t('common.choose_account')"
+            :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
+            filter
+            optionLabel="username"
+            optionValue="id"
+            showClear
+          />
+        </CommonWithButtonIcon>
+      </CommonWithLabel>
+    </CommonWithErrors>
 
     <CommonWithLabel
       v-for="(adminId, index) in edit.adminIds"

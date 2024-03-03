@@ -9,7 +9,7 @@ export const useTournamentEditNextStepRequestWithValidate = (stepOfTab: number, 
       event(constants.events.tournamentEditNextStepConfirm)
     }
   }
-
+  
   onMounted(() => {
     disconnect(constants.events.tournamentEditNextStepRequest)
     listen(constants.events.tournamentEditNextStepRequest, handler)
