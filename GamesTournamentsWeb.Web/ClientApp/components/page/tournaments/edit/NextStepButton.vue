@@ -28,6 +28,7 @@ const canIncrease = computed(() => tournamentsStore.canIncreaseTournamentEditSte
   <CommonActionLink
     :disabled="!canIncrease"
     :label="$t('common.next')"
+    class="animate-pulse"
     @click="increaseEditStepRequest"
   />
 </template>

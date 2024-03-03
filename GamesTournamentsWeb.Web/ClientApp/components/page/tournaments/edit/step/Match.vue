@@ -13,7 +13,7 @@ const noMatchRunning = computed(() => !match.value)
 const options = computed(() => {
   const options = [
     { label: match.value?.firstTeam?.name, value: match.value?.firstTeam },
-    { label: match.value?.firstTeam?.name, value: match.value?.secondTeam }
+    { label: match.value?.secondTeam?.name, value: match.value?.secondTeam }
   ]
 
   return options
