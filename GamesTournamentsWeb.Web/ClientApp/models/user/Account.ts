@@ -2,7 +2,7 @@ import type { Role } from '~/models/user/Role'
 
 interface Account {
     id: number
-    name: string
+    username: string
     email: string
     role: Role
     createdAt: Date

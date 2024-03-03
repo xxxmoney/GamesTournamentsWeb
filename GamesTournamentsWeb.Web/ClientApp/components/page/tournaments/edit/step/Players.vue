@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import useVuelidate from '@vuelidate/core'
 import constants from '~/constants'
+
+const { required } = useValidators()
 
 const edit = useTournamentEdit()
 const accountsIds = computed(() => new Set(edit.value.players.map((player) => player.accountId)))
@@ -9,15 +12,16 @@ const accounts = useAccounts()
 const accountsFiltered = computed(() => accounts.value.filter((account) => !accountsIds.value.has(account.id)))
 
 const getAccountName = (accountId: number) => {
-  const account = accounts.value.find((account) => account.id === accountId)
-  return account ? account.username : ''
+  const account = accounts.value.find(item => item.id === accountId)
+  return account?.username ?? ''
 }
 
 const addAccount = () => {
   if (selectedAccountId.value) {
     edit.value.players.push({
       accountId: selectedAccountId.value,
-      status: 'pending'
+      status: 'pending',
+      gameUsername: null
     })
     selectedAccountId.value = null
   }
@@ -26,6 +30,20 @@ const addAccount = () => {
 const removeAccount = (index: number) => {
   edit.value.players.splice(index, 1)
 }
+
+const rules = {
+  players: { required, $autoDirty: true }
+}
+
+const v$ = useVuelidate(rules, edit)
+const { validate } = useValidate(v$.value.$validate)
+const invalid = computed(() => v$.value.$invalid)
+
+useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.players, validate)
+
+defineExpose({
+  validate
+})
 </script>
 
 <template>
@@ -36,20 +54,27 @@ const removeAccount = (index: number) => {
       <Checkbox v-model="edit.anyoneCanJoin" binary />
     </CommonWithLabel>
 
-    <CommonWithLabel :label="$t('tournament_edit.choose_account')">
-      <CommonWithButtonIcon :iconDisabled="!selectedAccountId" icon="pi pi-plus" @iconClick="addAccount">
-        <Dropdown
-          v-model="selectedAccountId"
-          :options="accountsFiltered"
-          :placeholder="$t('tournament_edit.choose_account')"
-          :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
-          filter
-          optionLabel="username"
-          optionValue="id"
-          showClear
-        />
-      </CommonWithButtonIcon>
-    </CommonWithLabel>
+    <CommonWithErrors :errors="v$.players.$errors">
+      <CommonWithLabel :label="$t('common.choose_account')">
+        <CommonWithButtonIcon
+          :iconClass="{'animate-pulse': invalid}"
+          :iconDisabled="!selectedAccountId"
+          icon="pi pi-plus"
+          @iconClick="addAccount"
+        >
+          <Dropdown
+            v-model="selectedAccountId"
+            :options="accountsFiltered"
+            :placeholder="$t('common.choose_account')"
+            :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
+            filter
+            optionLabel="username"
+            optionValue="id"
+            showClear
+          />
+        </CommonWithButtonIcon>
+      </CommonWithLabel>
+    </CommonWithErrors>
 
     <CommonWithLabel
       v-for="(player, index) in edit.players"

@@ -25,6 +25,8 @@
     --surface-900: 38 38 38;
     --surface-950: 19 19 19;
 
+    --error-500: 252 165 165;
+
     --background-color: var(--surface-0);
 
     --margin-x-sm: calc(var(--margin-x) / 2);
@@ -205,6 +207,10 @@ body {
     @apply mt-[var(--margin-y-xl)];
 }
 
+.mb-sm {
+    @apply mb-[var(--margin-y-sm)];
+}
+
 .mb {
     @apply mb-[var(--margin-y)];
 }
@@ -337,4 +343,14 @@ body {
     @apply border min-h-40
 }
 
+.border-error {
+    border: 1px solid rgb(var(--error-500));
+}
 
+.border-bottom-error {
+    border-bottom: 2px solid rgb(var(--error-500));
+}
+
+.text-error {
+    color: rgb(var(--error-500));
+}

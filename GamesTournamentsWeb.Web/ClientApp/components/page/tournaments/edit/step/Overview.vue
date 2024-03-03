@@ -1,29 +1,76 @@
 <script lang="ts" setup>
+import constants from '~/constants'
+
 const edit = useTournamentEdit()
+
+const info = ref<HTMLElement | null>(null)
+const rules = ref<HTMLElement | null>(null)
+const prizes = ref<HTMLElement | null>(null)
+const players = ref<HTMLElement | null>(null)
+const match = ref<HTMLElement | null>(null)
+const streams = ref<HTMLElement | null>(null)
+const admins = ref<HTMLElement | null>(null)
+
+// Validte component - each should have exposed validate method
+const validateComponents = (component: { validate: (withToast: boolean) => Promise<boolean> }): Promise<boolean> => {
+  if (component) {
+    return component.validate(false)
+  }
+
+  return Promise.resolve(true)
+}
+
+const { validate } = useValidate(async () => {
+  // Call validate on each component
+
+  const validations = await Promise.all([
+    validateComponents(info.value as any),
+    validateComponents(rules.value as any),
+    validateComponents(prizes.value as any),
+    validateComponents(players.value as any),
+    validateComponents(match.value as any),
+    validateComponents(streams.value as any),
+    validateComponents(admins.value as any)
+  ])
+
+  return validations.every((validation) => validation)
+})
+
+defineExpose({
+  info,
+  rules,
+  prizes,
+  players,
+  match,
+  streams,
+  admins
+})
+
+useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.overview, validate)
 </script>
 
 <template>
   <div class="grid grid-cols-1 gap-x-lg gap-y-xl lg:grid-cols-2">
     <div>
-      <PageTournamentsEditStepInfo class="text-area border border-black" />
+      <PageTournamentsEditStepInfo ref="info" class="text-area border border-black" />
     </div>
     <div>
-      <PageTournamentsEditStepRules class="text-area" />
+      <PageTournamentsEditStepRules ref="rules" class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepPrizes class="text-area" />
+      <PageTournamentsEditStepPrizes ref="prizes" class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepPlayers class="text-area" />
+      <PageTournamentsEditStepPlayers ref="players" class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepMatch class="text-area" />
+      <PageTournamentsEditStepMatch ref="match" class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepStreams class="text-area" />
+      <PageTournamentsEditStepStreams ref="streams" class="text-area" />
     </div>
     <div>
-      <PageTournamentsEditStepAdmins class="text-area" />
+      <PageTournamentsEditStepAdmins ref="admins" class="text-area" />
     </div>
   </div>
 </template>

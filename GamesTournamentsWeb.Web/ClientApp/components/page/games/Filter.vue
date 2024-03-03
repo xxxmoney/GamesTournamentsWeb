@@ -3,6 +3,8 @@ import constants from '~/constants'
 
 const gamesStore = useGamesStore()
 
+const isLoggedIn = useIsLoggedIn()
+
 const filter = computed(() => gamesStore.filter)
 const genres = computed(() => gamesStore.genres)
 </script>
@@ -24,7 +26,7 @@ const genres = computed(() => gamesStore.genres)
       />
     </CommonWithLabel>
 
-    <CommonWithLabel :label="$t('common.my_tournaments')">
+    <CommonWithLabel v-if="isLoggedIn" :label="$t('common.my_tournaments')">
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
   </div>

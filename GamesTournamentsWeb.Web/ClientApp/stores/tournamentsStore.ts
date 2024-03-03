@@ -89,6 +89,10 @@ export const useTournamentsStore = defineStore({
 
     resetTournamentEditStep (): void {
       this.tournamentEditStep = 0
+    },
+    
+    resetFilter (): void {
+      this.filter = new TournamentFilter().toJson() as TournamentFilter
     }
 
   },

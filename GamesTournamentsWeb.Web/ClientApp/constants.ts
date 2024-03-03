@@ -33,7 +33,22 @@ export default {
 
   tournamentEditMaximumPlayers: 256,
 
+  tournamentEditSteps: {
+    info: 0,
+    rules: 1,
+    prizes: 2,
+    players: 3,
+    match: 4,
+    streams: 5,
+    admins: 6,
+    overview: 7
+  },
   tournamentEditStepCount: 8,
 
-  defaultCurrencyId: 1
+  defaultCurrencyId: 1,
+
+  events: {
+    tournamentEditNextStepRequest: 'tournament-edit-step-next-request',
+    tournamentEditNextStepConfirm: 'tournament-edit-step-next-confirm'
+  }
 }

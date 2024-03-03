@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { modelValue, label, showLabel, inputClass } = defineProps({
+const { modelValue, label, showLabel, inputClass, invalid } = defineProps({
   modelValue: {
     type: String,
     required: true
@@ -15,6 +15,10 @@ const { modelValue, label, showLabel, inputClass } = defineProps({
   inputClass: {
     type: String,
     default: ''
+  },
+  invalid: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -25,6 +29,11 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
 
 <template>
   <CommonWithLabel :label="label" :showLabel="showLabel">
-    <InputText v-model="computedValue" :class="inputClass" :placeholder="label as string" />
+    <InputText
+      v-model="computedValue"
+      :class="inputClass"
+      :invalid="invalid"
+      :placeholder="label as string"
+    />
   </CommonWithLabel>
 </template>

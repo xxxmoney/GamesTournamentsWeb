@@ -54,11 +54,26 @@ export default {
     prize: 'Prize',
     currency: 'Currency',
     stream_url: 'Stream link',
+    stream_name: 'Stream name',
     player: 'Player',
     account: 'Account',
     admin: 'Administrator',
     confirmation: 'Confirmation',
-    winner: 'Winner'
+    winner: 'Winner',
+    choose_game: 'Choose game',
+    choose_platform: 'Choose platform',
+    choose_regions: 'Choose regions',
+    choose_team_size: 'Choose team size',
+    choose_account: 'Choose account'
+  },
+
+  validations: {
+    undefined: 'The field is invalid',
+    error: 'Validation error',
+    required: 'The field is required',
+    minLength: 'Min length is {min}',
+    maxLength: 'Max length is {max}',
+    url: 'Invalid URL'
   },
 
   locales: {
@@ -200,16 +215,11 @@ export default {
       overview: 'Overview',
       finish: 'Finish'
     },
-    choose_game: 'Choose game',
-    choose_platform: 'Choose platform',
-    choose_regions: 'Choose regions',
-    choose_team_size: 'Choose team size',
     write_info_tooltip: 'Write a short description of the tournament',
     write_rules_tooltip: 'Write the rules of the tournament',
     add_prize_tooltip: 'Click to add prize',
     add_stream_tooltip: 'Click to add stream link',
     can_anyone_join: 'Should anyone be able to join?',
-    choose_account: 'Choose account',
     no_match: 'There is no match right now',
     success: 'Tournament has been successfully edited',
     confirm: 'Are you sure you want to finish editing the tournament?'
