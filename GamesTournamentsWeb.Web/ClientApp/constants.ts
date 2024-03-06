@@ -47,6 +47,9 @@ export default {
 
   defaultCurrencyId: 1,
 
+  defaultLayoutMaxRows: 3,
+  defaultLayoutMaxCols: 3,
+
   events: {
     tournamentEditNextStepRequest: 'tournament-edit-step-next-request',
     tournamentEditNextStepConfirm: 'tournament-edit-step-next-confirm'
