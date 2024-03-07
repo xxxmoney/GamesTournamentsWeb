@@ -47,8 +47,9 @@ export default {
 
   defaultCurrencyId: 1,
 
-  defaultLayoutMaxRows: 3,
-  defaultLayoutMaxCols: 3,
+  defaultLayoutMaxRows: Infinity,
+  defaultLayoutMaxCols: 6,
+  defaultLayoutRowHeight: 100,
 
   events: {
     tournamentEditNextStepRequest: 'tournament-edit-step-next-request',
