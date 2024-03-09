@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import constants from '~/constants'
 
-const { maxRows, maxCols, layout, layoutId } = defineProps({
+const { maxRows, maxCols, layoutItems, layoutId } = defineProps({
   maxRows: {
     type: Number,
     default: constants.defaultLayoutMaxRows
@@ -16,7 +16,7 @@ const { maxRows, maxCols, layout, layoutId } = defineProps({
     type: Number,
     default: constants.defaultLayoutRowHeight
   },
-  layout: {
+  layoutItems: {
     type: Array as PropType<LayoutItem[]>,
     default: () => []
   },
@@ -28,9 +28,8 @@ const { maxRows, maxCols, layout, layoutId } = defineProps({
 
 const emit = defineEmits(['update:layout', 'update'])
 
-const layoutComputed = useComputedWithEmit(layout, emit, 'layout')
+const layoutItemsComputed = useComputedWithEmit(layoutItems, emit, 'layoutItems')
 const onLayoutUpdated = (updatedLayout: Array<LayoutItem>) => {
-  console.log('onLayoutUpdated', updatedLayout)
   emit('update', updatedLayout)
 }
 </script>
@@ -38,8 +37,8 @@ const onLayoutUpdated = (updatedLayout: Array<LayoutItem>) => {
 <template>
   <ClientOnly>
     <GridLayout
-      :key="layoutId"
-      v-model:layout="layoutComputed"
+      :key="`layout-${layoutId}`"
+      v-model:layout="layoutItemsComputed"
       :colNum="maxCols as number"
       :isDraggable="true"
       :isMirrored="false"
@@ -53,7 +52,7 @@ const onLayoutUpdated = (updatedLayout: Array<LayoutItem>) => {
       @layoutUpdated="onLayoutUpdated as Function"
     >
       <GridItem
-        v-for="(module, index) in layoutComputed"
+        v-for="(module, index) in layoutItemsComputed"
         :key="`layout-item-${index}`"
         :h="module.h"
         :i="module.i"

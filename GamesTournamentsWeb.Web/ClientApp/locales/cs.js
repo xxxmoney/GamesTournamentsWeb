@@ -1,6 +1,10 @@
 export default {
   test: 'Test CS',
   common: {
+    create: 'Vytvořit',
+    do_create: 'Vytvořte',
+    update: 'Aktualizovat',
+    save: 'Uložit',
     pages: 'Stránky',
     email: 'E-mail',
     password: 'Heslo',
@@ -223,6 +227,14 @@ export default {
     no_match: 'Teď neprobíhá žádný zápas',
     success: 'Turnaj byl úspěšně upraven',
     confirm: 'Opravdu chcete dokončit úpravu turnaje?'
+  },
+  dashboard: {
+    title: 'Nástěnka',
+    new_view: 'Nový pohled',
+    no_view: {
+      title: 'Nebyl vybrán žádný pohled',
+      subtitle: 'Neváhejte vybrat nebo {create} pohled'
+    }
   }
 
 }

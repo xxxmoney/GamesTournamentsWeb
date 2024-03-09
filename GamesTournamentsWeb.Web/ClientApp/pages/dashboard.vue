@@ -1,21 +1,36 @@
 <script lang="ts" setup>
-const store = useDashboardStore()
+import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 
-const layout = computed({
-  get: () => store.layout,
-  set: (value) => {
-    store.layout = value
-  }
-})
+const dashboardStore = useDashboardStore()
+const mainStore = useMainStore()
 
-await store.getLayout()
+const layout = computed(() => dashboardStore.selectedLayout)
+
+const onItemsUpdate = async (items: LayoutItem[]) => {
+  await dashboardStore.updateLayoutItems(items)
+}
+
+const showCreateLayoutDialog = () => {
+  dashboardStore.openUpsertLayoutModal()
+}
+
+//await dashboardStore.getLayouts(mainStore.account!.id)
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="form-container-lg mx-auto">
+  <div class="inline-flex flex-col w-full">
+    <div class="form-container-lg mx-auto items-center">
+      <h1 class="heading">{{ $t('dashboard.title') }}</h1>
     </div>
 
-    <PageDashboardGridLayout v-model:layout="layout" />
+    <PageDashboardGridLayout
+      v-if="layout"
+      v-model:layoutItems="layout.items"
+      :layoutId="layout.id"
+      @update="onItemsUpdate"
+    />
+    <PageDashboardNoLayout v-else />
+
+    <PageDashboardUpsertLayoutDialog />
   </div>
 </template>
