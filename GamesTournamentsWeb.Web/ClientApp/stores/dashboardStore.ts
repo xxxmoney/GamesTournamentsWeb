@@ -4,6 +4,7 @@ import { DashboardService } from '~/apiServices/DashboardService'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { Layout } from '~/models/dashboard/Layout'
+import { DashboardMapper } from '~/mappers/dashboardMapper'
 
 export const useDashboardStore = defineStore({
   id: 'dashboard-store',
@@ -26,11 +27,8 @@ export const useDashboardStore = defineStore({
 
       const index = this.layouts.findIndex(layout => layout.id === upsertedLayout.id)
       if (index === -1) {
-        this.layouts.push({
-          id: upsertedLayout.id,
-          name: upsertedLayout.name,
-          items: []
-        })
+        this.layouts.push(DashboardMapper.mapLayoutToLayoutDetail(upsertedLayout))
+        this.selectedLayoutId = upsertedLayout.id
       } else {
         this.layouts[index].name = upsertedLayout.name
       }
@@ -49,6 +47,9 @@ export const useDashboardStore = defineStore({
     },
     clearLayoutUpsert (): void {
       this.layoutUpsert = null
+    },
+    setCurrentLayoutAsUpsert (): void {
+      this.layoutUpsert = DashboardMapper.mapLayoutDetailToLayoutUpsert(this.selectedLayout!)
     },
 
     openUpsertLayoutModal (): void {

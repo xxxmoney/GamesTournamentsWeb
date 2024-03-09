@@ -4,6 +4,7 @@ const successToast = useSuccessToast()
 const errorToast = useErrorToast()
 
 const layoutUpsert = computed(() => store.layoutUpsert)
+const isSelectedLayout = computed(() => !!store.selectedLayoutId)
 
 const emit = defineEmits(['upserted'])
 
@@ -31,6 +32,6 @@ onMounted(() => {
       <CommonInputText v-model="layoutUpsert.name" :label="$t('common.name')" />
     </div>
 
-    <Button :label="$t('common.save')" @click="upsert" />
+    <Button :label="isSelectedLayout ? $t('common.save') : $t('common.create')" @click="upsert" />
   </div>
 </template>

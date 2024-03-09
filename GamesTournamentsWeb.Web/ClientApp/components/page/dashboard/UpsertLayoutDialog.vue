@@ -20,7 +20,7 @@ const close = () => {
     v-model:visible="isActive"
     :baseZIndex="10000"
     :draggable="false"
-    :header="$t('dashboard.new_view')"
+    :header="$t('common.view')"
     :resizable="false"
     modal
   >
