@@ -1,34 +1,19 @@
 <script lang="ts" setup>
-import type { PropType } from 'vue'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import constants from '~/constants'
 
-const { maxRows, maxCols, layoutItems, layoutId } = defineProps({
-  maxRows: {
-    type: Number,
-    default: constants.defaultLayoutMaxRows
-  },
-  maxCols: {
-    type: Number,
-    default: constants.defaultLayoutMaxCols
-  },
-  rowHeight: {
-    type: Number,
-    default: constants.defaultLayoutRowHeight
-  },
-  layoutItems: {
-    type: Array as PropType<LayoutItem[]>,
-    default: () => []
-  },
-  layoutId: {
-    type: Number,
-    required: true
+const store = useDashboardStore()
+
+const layout = computed(() => store.selectedLayout)
+const layoutItems = computed({
+  get: () => layout.value?.items || [],
+  set: (items: LayoutItem[]) => {
+    layout.value!.items = items
   }
 })
 
-const emit = defineEmits(['update:layoutItems', 'update'])
+const emit = defineEmits(['update'])
 
-const layoutItemsComputed = useComputedWithEmit(layoutItems, emit, 'layoutItems')
 const onLayoutUpdated = (updatedLayout: LayoutItem[]) => {
   emit('update', updatedLayout)
 }
@@ -37,33 +22,33 @@ const onLayoutUpdated = (updatedLayout: LayoutItem[]) => {
 <template>
   <ClientOnly>
     <GridLayout
-      :key="`layout-${layoutId}`"
-      v-model:layout="layoutItemsComputed"
-      :colNum="maxCols as number"
+      :key="`layout-${layout!.id}`"
+      v-model:layout="layoutItems"
+      :colNum="constants.defaultLayoutMaxCols"
       :isDraggable="true"
       :isMirrored="false"
       :isResizable="true"
       :margin="[10, 10]"
-      :maxRows="maxRows as number"
+      :maxRows="constants.defaultLayoutMaxRows"
       :responsive="true"
-      :rowHeight="rowHeight"
+      :rowHeight="constants.defaultLayoutRowHeight"
       :useCssTransforms="true"
       :verticalCompact="true"
       @layoutUpdated="onLayoutUpdated as Function"
     >
       <GridItem
-        v-for="(module, index) in layoutItemsComputed"
+        v-for="(item, index) in layoutItems"
         :key="`layout-item-${index}`"
-        :h="module.h"
+        :h="item.h"
         :i="index"
         :minH="constants.defaultLayoutItemHeight"
         :minW="constants.defaultLayoutItemWidth"
         :preserveAspectRatio="true"
-        :w="module.w"
-        :x="module.x"
-        :y="module.y"
+        :w="item.w"
+        :x="item.x"
+        :y="item.y"
       >
-        <PageDashboardModuleBase :moduleId="module.id as number" />
+        <PageDashboardModuleBase :itemId="item.id as number" :moduleId="item.moduleId as number" />
       </GridItem>
     </GridLayout>
   </ClientOnly>

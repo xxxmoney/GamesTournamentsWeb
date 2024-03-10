@@ -4,6 +4,8 @@ export default {
     select: 'Select',
     choose_module: 'Choose module',
     add_module: 'Add module',
+    change_module: 'Change module',
+    delete_module: 'Delete module',
     module: 'Module',
     create: 'Create',
     do_create: 'Create',

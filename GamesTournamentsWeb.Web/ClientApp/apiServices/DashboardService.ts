@@ -6,12 +6,14 @@ import type { Module } from '~/models/dashboard/Module'
 
 export const DashboardService = {
   getModules (): Promise<Module[]> {
-    const module = {
-      id: 1,
-      name: 'Default'
-    }
+    const modules = [
+      {
+        id: 1,
+        name: 'Default'
+      }
+    ]
 
-    return Promise.resolve([module])
+    return Promise.resolve(modules)
   },
   getLayouts (userId: number): Promise<LayoutDetail[]> {
     const layout = {

@@ -4,6 +4,8 @@ export default {
     select: 'Vybrat',
     choose_module: 'Vyberte modul',
     add_module: 'Přidat modul',
+    change_module: 'Změnit modul',
+    delete_module: 'Odebrat modul',
     module: 'Modul',
     create: 'Vytvořit',
     do_create: 'Vytvořte',

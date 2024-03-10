@@ -223,12 +223,20 @@ body {
     @apply mb-[var(--margin-y-xl)];
 }
 
+.px-sm {
+    @apply px-[var(--margin-x-sm)];
+}
+
 .px {
     @apply px-[var(--margin-x)];
 }
 
 .px-lg {
     @apply px-[var(--margin-x-lg)];
+}
+
+.py-sm {
+    @apply py-[var(--margin-y-sm)];
 }
 
 .py {

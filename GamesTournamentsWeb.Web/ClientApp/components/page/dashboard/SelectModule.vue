@@ -21,7 +21,7 @@ const selectModule = () => {
     <CommonWithLabel :label="$t('common.choose_module')">
       <Dropdown
         v-model:modelValue="selectedModuleId"
-        :optionLabel="value => $t(`dashboard.modules.${toKebabCase(value.name)}`)"
+        :optionLabel="value => $t(`dashboard.modules.${toSnakeCase(value.name)}`)"
         :options="modules"
         :placeholder="$t('common.choose_module')"
         optionValue="id"

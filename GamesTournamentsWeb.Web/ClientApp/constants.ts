@@ -52,6 +52,8 @@ export default {
   defaultLayoutRowHeight: 100,
   defaultLayoutItemWidth: 2,
   defaultLayoutItemHeight: 2,
+  
+  moduleNamePrefix: 'PageDashboardModule',
 
   dialogBaseIndexZ: 10000,
 

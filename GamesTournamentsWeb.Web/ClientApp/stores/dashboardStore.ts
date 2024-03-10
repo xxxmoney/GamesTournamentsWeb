@@ -62,12 +62,12 @@ export const useDashboardStore = defineStore({
       if (!this.selectedLayout) {
         throw new Error('No layout selected')
       }
-      
+
       const lastIndex = this.selectedLayout.items.length
       const item = {
         layoutId: this.selectedLayout.id,
         moduleId,
-        id: null,
+        id: 1,
         i: lastIndex,
         x: 0,
         y: 0,
@@ -86,6 +86,16 @@ export const useDashboardStore = defineStore({
         item.moduleId = moduleId
       } else {
         this.addItemToLayout(moduleId)
+      }
+    },
+    removeItemFromLayout (itemId: number) {
+      if (!this.selectedLayout) {
+        throw new Error('No layout selected')
+      }
+
+      const index = this.selectedLayout.items.findIndex(item => item.id === itemId)
+      if (index !== -1) {
+        this.selectedLayout.items.splice(index, 1)
       }
     },
 
@@ -123,7 +133,7 @@ export const useDashboardStore = defineStore({
       return this.layouts.find(layout => layout.id === this.selectedLayoutId) ?? null
     },
     selectedLayoutItem (): LayoutItem | null {
-      return this.selectedLayoutItemId ? this.selectedLayout?.items.find(item => item.i === this.selectedLayoutItemId) ?? null : null
+      return this.selectedLayoutItemId ? this.selectedLayout?.items.find(item => item.id === this.selectedLayoutItemId) ?? null : null
     },
     moduleById: (state) => (id: number): Module | null => {
       return state.modules.find(module => module.id === id) ?? null

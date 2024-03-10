@@ -1,16 +1,14 @@
 <script lang="ts" setup>
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 
-const dashboardStore = useDashboardStore()
-
-const layout = computed(() => dashboardStore.selectedLayout)
+const store = useDashboardStore()
 
 const onItemsUpdate = async (items: LayoutItem[]) => {
-  await dashboardStore.upsertSelectedLayoutItems(items)
+  await store.upsertSelectedLayoutItems(items)
 }
 
 const showSelectModuleDialog = () => {
-  dashboardStore.openSelectModuleModal()
+  store.openSelectModuleModal()
 }
 
 </script>
@@ -25,8 +23,6 @@ const showSelectModuleDialog = () => {
       />
     </div>
     <PageDashboardGridLayout
-      v-model:layoutItems="layout!.items"
-      :layoutId="layout!.id"
       class="flex-1"
       @update="onItemsUpdate"
     />
