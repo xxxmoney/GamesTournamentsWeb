@@ -32,6 +32,10 @@ onMounted(() => {
       <CommonInputText v-model="layoutUpsert.name" :label="$t('common.name')" />
     </div>
 
-    <Button :label="isSelectedLayout ? $t('common.save') : $t('common.create')" @click="upsert" />
+    <Button
+      :disabled="!layoutUpsert.name"
+      :label="isSelectedLayout ? $t('common.save') : $t('common.create')"
+      @click="upsert"
+    />
   </div>
 </template>
