@@ -21,21 +21,24 @@ const { modelValue, label, showLabel, invalid } = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
-const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
+const emitValue = (value: string) => {
+  emit('update:modelValue', value)
+}
 </script>
 
 <template>
   <CommonWithLabel :label="label" :showLabel="showLabel">
     <Password
-      v-model="computedValue"
       :invalid="invalid"
       :mediumLabel="$t('password.medium')"
+      :modelValue="modelValue as string"
       :placeholder="label as string"
       :promptLabel="$t('password.prompt')"
       :strongLabel="$t('password.strong')"
       :weakLabel="$t('password.weak')"
       inputClass="w-full"
       toggleMask
+      @update:modelValue="emitValue"
     />
   </CommonWithLabel>
 </template>
