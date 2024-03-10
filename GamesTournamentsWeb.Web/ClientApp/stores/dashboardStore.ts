@@ -4,7 +4,7 @@ import { DashboardService } from '~/apiServices/DashboardService'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { Layout } from '~/models/dashboard/Layout'
-import { DashboardMapper } from '~/mappers/dashboardMapper'
+import { DashboardMapper } from '~/mappers/DashboardMapper'
 import type { Module } from '~/models/dashboard/Module'
 import constants from '~/constants'
 
