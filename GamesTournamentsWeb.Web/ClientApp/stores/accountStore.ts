@@ -14,8 +14,8 @@ export const useAccountStore = defineStore({
     historyModalActive: false
   }),
   actions: {
-    initialize (): Promise<void> {
-      return Promise.all([
+    async initialize (): Promise<void> {
+      await Promise.all([
         this.getAccounts()
       ])
     },
@@ -30,7 +30,7 @@ export const useAccountStore = defineStore({
       return this.history
     },
 
-    async getAccounts (): Account[] {
+    async getAccounts (): Promise<Account[]> {
       this.accounts = await AccountService.getAccounts()
       return this.accounts
     },

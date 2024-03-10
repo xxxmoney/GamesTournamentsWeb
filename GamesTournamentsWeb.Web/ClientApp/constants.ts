@@ -47,6 +47,16 @@ export default {
 
   defaultCurrencyId: 1,
 
+  defaultLayoutMaxRows: Infinity,
+  defaultLayoutMaxCols: 6,
+  defaultLayoutRowHeight: 100,
+  defaultLayoutItemWidth: 3,
+  defaultLayoutItemHeight: 3,
+
+  moduleNamePrefix: 'PageDashboardModule',
+
+  dialogBaseIndexZ: 10000,
+
   events: {
     tournamentEditNextStepRequest: 'tournament-edit-step-next-request',
     tournamentEditNextStepConfirm: 'tournament-edit-step-next-confirm'

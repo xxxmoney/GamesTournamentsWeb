@@ -1,6 +1,20 @@
 export default {
   test: 'Test CS',
   common: {
+    select: 'Vybrat',
+    choose_module: 'Vyberte modul',
+    add_module: 'Přidat modul',
+    change_module: 'Změnit modul',
+    delete_module: 'Odebrat modul',
+    module: 'Modul',
+    create: 'Vytvořit',
+    do_create: 'Vytvořte',
+    update: 'Aktualizovat',
+    view: 'Pohled',
+    choose_view: 'Vyberte pohled',
+    add_view: 'Přidat pohled',
+    update_view: 'Aktualizovat pohled',
+    save: 'Uložit',
     pages: 'Stránky',
     email: 'E-mail',
     password: 'Heslo',
@@ -223,6 +237,17 @@ export default {
     no_match: 'Teď neprobíhá žádný zápas',
     success: 'Turnaj byl úspěšně upraven',
     confirm: 'Opravdu chcete dokončit úpravu turnaje?'
+  },
+  dashboard: {
+    title: 'Nástěnka',
+    new_view: 'Nový pohled',
+    no_view: {
+      title: 'Nebyl vybrán žádný pohled',
+      subtitle: 'Neváhejte vybrat nebo {create} pohled'
+    },
+    modules: {
+      tournament_history: 'Historie turnajů'
+    }
   }
 
 }

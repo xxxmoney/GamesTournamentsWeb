@@ -1,6 +1,20 @@
 export default {
   test: 'Test EN',
   common: {
+    select: 'Select',
+    choose_module: 'Choose module',
+    add_module: 'Add module',
+    change_module: 'Change module',
+    delete_module: 'Delete module',
+    module: 'Module',
+    create: 'Create',
+    do_create: 'Create',
+    update: 'Update',
+    view: 'View',
+    choose_view: 'Choose view',
+    add_view: 'Add view',
+    update_view: 'Update view',
+    save: 'Save',
     pages: 'Pages',
     email: 'E-mail',
     password: 'Password',
@@ -223,6 +237,17 @@ export default {
     no_match: 'There is no match right now',
     success: 'Tournament has been successfully edited',
     confirm: 'Are you sure you want to finish editing the tournament?'
+  },
+  dashboard: {
+    title: 'Dashboard',
+    new_view: 'New view',
+    no_view: {
+      title: 'No view selected',
+      subtitle: 'Don\'t be afarid to select or {create} a view'
+    },
+    modules: {
+      tournament_history: 'Tournament history'
+    }
   }
 
 }

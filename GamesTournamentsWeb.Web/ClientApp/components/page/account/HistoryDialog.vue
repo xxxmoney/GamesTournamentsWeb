@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import constants from '~/constants'
+
 const store = useAccountStore()
 
 const isActive = computed({
@@ -15,7 +17,7 @@ const isActive = computed({
 <template>
   <Dialog
     v-model:visible="isActive"
-    :baseZIndex="10000"
+    :baseZIndex="constants.dialogBaseIndexZ"
     :draggable="false"
     :header="$t('common.tournaments')"
     :resizable="false"
