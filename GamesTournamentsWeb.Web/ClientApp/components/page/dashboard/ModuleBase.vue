@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-import type { PropType } from 'vue'
-import type { LayoutItem } from '~/models/dashboard/LayoutItem'
+const store = useDashboardStore()
 
-const { module } = defineProps({
-  module: {
-    type: Object as PropType<LayoutItem>,
+const { moduleId } = defineProps({
+  moduleId: {
+    type: Number,
     required: true
   }
 })
+
+const componentName = computed(() => store.moduleById(moduleId)!.name)
 </script>
 
 <template>
   <div class="inline-flex flex-col px py">
     <div class="flex-0"></div>
 
-    <component :is="module!.componentName" class="flex-1" />
+    <component :is="componentName" class="flex-1" />
   </div>
 </template>

@@ -55,13 +55,15 @@ const onLayoutUpdated = (updatedLayout: Array<LayoutItem>) => {
         v-for="(module, index) in layoutItemsComputed"
         :key="`layout-item-${index}`"
         :h="module.h"
-        :i="module.i"
+        :i="index"
+        :minH="constants.defaultLayoutItemHeight"
+        :minW="constants.defaultLayoutItemWidth"
         :preserveAspectRatio="true"
         :w="module.w"
         :x="module.x"
         :y="module.y"
       >
-        <PageDashboardModuleBase :module="module" />
+        <PageDashboardModuleBase :moduleId="module.id as number" />
       </GridItem>
     </GridLayout>
   </ClientOnly>

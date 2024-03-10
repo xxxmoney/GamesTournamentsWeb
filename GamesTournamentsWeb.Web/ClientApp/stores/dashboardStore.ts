@@ -62,11 +62,13 @@ export const useDashboardStore = defineStore({
       if (!this.selectedLayout) {
         throw new Error('No layout selected')
       }
-
+      
+      const lastIndex = this.selectedLayout.items.length
       const item = {
         layoutId: this.selectedLayout.id,
         moduleId,
-        i: null,
+        id: null,
+        i: lastIndex,
         x: 0,
         y: 0,
         w: constants.defaultLayoutItemWidth,

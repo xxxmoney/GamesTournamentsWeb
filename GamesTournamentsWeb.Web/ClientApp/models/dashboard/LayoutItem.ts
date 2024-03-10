@@ -1,5 +1,6 @@
 interface LayoutItem {
-    i: number | null;
+    id: number | null,
+    i: number;
     x: number;
     y: number;
     w: number;
