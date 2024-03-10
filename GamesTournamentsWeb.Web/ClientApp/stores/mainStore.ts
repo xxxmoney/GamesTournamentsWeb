@@ -11,6 +11,7 @@ import { AuthService } from '~/apiServices/AuthService'
 export const useMainStore = defineStore({
   id: 'main-store',
   state: () => ({
+    loading: false,
     loginResult: null as LoginResult | null,
     mobileMenuActive: false,
     locale: constants.defaultLocale
@@ -57,27 +58,46 @@ export const useMainStore = defineStore({
     },
 
     async login (login: Login): Promise<LoginResult> {
-      const result = await AuthService.login(login)
-      this.setLoginResult(result)
+      try {
+        this.loading = true
 
-      return result
+        const result = await AuthService.login(login)
+        this.setLoginResult(result)
+
+        return result
+      } finally {
+        this.loading = false
+      }
     },
     register (register: Register): Promise<RegisterResult> {
       if (register.password !== register.passwordConfirm) {
         return Promise.reject('Passwords do not match')
       }
 
-      return AuthService.register(register)
+      try {
+        this.loading = true
+
+        return AuthService.register(register)
+      } finally {
+        this.loading = false
+      }
     },
     logout (): void {
       this.setLoginResult(null)
     },
-    changePassword (request: ChangePassword): Promise<void> {
+    async changePassword (request: ChangePassword): Promise<void> {
       if (request.newPassword !== request.confirmNewPassword) {
         return Promise.reject()
       }
 
-      return AuthService.changePassword(request)
+      try {
+        this.loading = true
+
+        const result = await AuthService.changePassword(request)
+        return result
+      } finally {
+        this.loading = false
+      }
     }
   },
   getters: {

@@ -14,6 +14,8 @@ const regions = computed(() => tournamentsStore.regions)
 const platforms = computed(() => tournamentsStore.platforms)
 const gameOverviews = computed(() => gamesStore.gameOverviews)
 
+const getTournaments = () => tournamentsStore.getTournaments()
+
 </script>
 
 <template>
@@ -76,5 +78,7 @@ const gameOverviews = computed(() => gamesStore.gameOverviews)
     <CommonWithLabel v-if="isLoggedIn" :label="$t('common.my_tournaments')">
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
+
+    <Button :label="$t('common.search')" icon="pi pi-search" @click="getTournaments" />
   </div>
 </template>

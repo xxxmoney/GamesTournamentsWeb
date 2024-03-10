@@ -56,10 +56,10 @@ export const TournamentsService = {
 
   getCurrencies (): Promise<Currency[]> {
     const result = [
-      { id: 1, name: 'Dollar', code: 'USD', symbol: '$', locale: 'en-US', symbol: '$' },
-      { id: 2, name: 'Euro', code: 'EUR', symbol: '€', locale: 'en-EU', symbol: '€' },
-      { id: 3, name: 'Pound', code: 'GBP', symbol: '£', locale: 'en-GB', symbol: '£' },
-      { id: 4, name: 'Czech crown', code: 'CZK', symbol: 'Kč', locale: 'cs-CZ', symbol: 'Kč' }
+      { id: 1, name: 'Dollar', code: 'USD', symbol: '$', locale: 'en-US' },
+      { id: 2, name: 'Euro', code: 'EUR', symbol: '€', locale: 'en-EU' },
+      { id: 3, name: 'Pound', code: 'GBP', symbol: '£', locale: 'en-GB' },
+      { id: 4, name: 'Czech crown', code: 'CZK', symbol: 'Kč', locale: 'cs-CZ' }
     ]
 
     return Promise.resolve(result)

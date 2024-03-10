@@ -1,6 +1,7 @@
 export default {
   test: 'Test EN',
   common: {
+    search: 'Search',
     select: 'Select',
     choose_module: 'Choose module',
     add_module: 'Add module',
@@ -89,7 +90,8 @@ export default {
     maxLength: 'Max length is {max}',
     url: 'Invalid URL',
     email: 'Invalid e-mail',
-    sameAsPassword: 'Passwords do not match'
+    sameAsPassword: 'Passwords do not match',
+    sameAsNewPassword: 'New passwords do not match'
   },
 
   locales: {

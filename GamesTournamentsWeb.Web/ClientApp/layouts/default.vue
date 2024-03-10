@@ -21,8 +21,5 @@
 
   <Toast />
   <ConfirmDialog />
+  <LayoutDefaultLoading />
 </template>
-
-<style scoped>
-
-</style>

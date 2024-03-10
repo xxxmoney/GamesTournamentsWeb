@@ -11,6 +11,7 @@ import constants from '~/constants'
 export const useDashboardStore = defineStore({
   id: 'dashboard-store',
   state: () => ({
+    loading: false,
     modules: [] as Module[],
     layouts: [] as LayoutDetail[],
     selectedLayoutId: null as number | null,
@@ -27,35 +28,59 @@ export const useDashboardStore = defineStore({
     },
 
     async getModules (): Promise<Module[]> {
-      this.modules = await DashboardService.getModules()
-      return this.modules
+      try {
+        this.loading = true
+
+        this.modules = await DashboardService.getModules()
+        return this.modules
+      } finally {
+        this.loading = false
+      }
     },
 
     async getLayouts (userId: number): Promise<LayoutDetail[]> {
-      this.layouts = await DashboardService.getLayouts(userId)
-      return this.layouts
+      try {
+        this.loading = true
+
+        this.layouts = await DashboardService.getLayouts(userId)
+        return this.layouts
+      } finally {
+        this.loading = false
+      }
     },
     async upsertLayout (layoutUpsert: LayoutUpsert): Promise<Layout> {
-      const upsertedLayout = await DashboardService.upsertLayout(layoutUpsert)
+      try {
+        this.loading = true
 
-      const index = this.layouts.findIndex(layout => layout.id === upsertedLayout.id)
-      if (index === -1) {
-        this.layouts.push(DashboardMapper.mapLayoutToLayoutDetail(upsertedLayout))
-        this.selectedLayoutId = upsertedLayout.id
-      } else {
-        this.layouts[index].name = upsertedLayout.name
+        const upsertedLayout = await DashboardService.upsertLayout(layoutUpsert)
+
+        const index = this.layouts.findIndex(layout => layout.id === upsertedLayout.id)
+        if (index === -1) {
+          this.layouts.push(DashboardMapper.mapLayoutToLayoutDetail(upsertedLayout))
+          this.selectedLayoutId = upsertedLayout.id
+        } else {
+          this.layouts[index].name = upsertedLayout.name
+        }
+
+        return upsertedLayout
+      } finally {
+        this.loading = false
       }
-
-      return upsertedLayout
     },
     async upsertSelectedLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
       if (!this.selectedLayout) {
         throw new Error('No layout selected')
       }
 
-      const upsertedItems = await DashboardService.upsertLayoutItems(items)
-      this.selectedLayout.items = upsertedItems
-      return upsertedItems
+      try {
+        this.loading = true
+
+        const upsertedItems = await DashboardService.upsertLayoutItems(items)
+        this.selectedLayout.items = upsertedItems
+        return upsertedItems
+      } finally {
+        this.loading = false
+      }
     },
 
     addItemToLayout (moduleId: number) {
@@ -110,6 +135,10 @@ export const useDashboardStore = defineStore({
       this.layoutUpsert = null
     },
     setCurrentLayoutAsUpsert (): void {
+      if (!this.selectedLayout) {
+        throw new Error('No layout selected')
+      }
+
       this.layoutUpsert = DashboardMapper.mapLayoutDetailToLayoutUpsert(this.selectedLayout!)
     },
 

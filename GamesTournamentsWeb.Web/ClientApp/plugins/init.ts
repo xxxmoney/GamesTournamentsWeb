@@ -1,18 +1,7 @@
 export default defineNuxtPlugin({
   async setup (_) {
-    const mainStore = useMainStore()
-    const accountStore = useAccountStore()
-    const tournamentsStore = useTournamentsStore()
-    const gamesStore = useGamesStore()
-    const dashboardStore = useDashboardStore()
-
-    await Promise.all([
-      mainStore.initialize(),
-      accountStore.initialize(),
-      tournamentsStore.initialize(),
-      gamesStore.initialize(),
-      dashboardStore.initialize()
-    ])
+    const stores = useAllStores()
+    await Promise.all(Object.values(stores).map(s => s.initialize()))
   },
   hooks: {
     'vue:setup' () {
