@@ -50,9 +50,9 @@ export default {
   defaultLayoutMaxRows: Infinity,
   defaultLayoutMaxCols: 6,
   defaultLayoutRowHeight: 100,
-  defaultLayoutItemWidth: 2,
-  defaultLayoutItemHeight: 2,
-  
+  defaultLayoutItemWidth: 3,
+  defaultLayoutItemHeight: 3,
+
   moduleNamePrefix: 'PageDashboardModule',
 
   dialogBaseIndexZ: 10000,

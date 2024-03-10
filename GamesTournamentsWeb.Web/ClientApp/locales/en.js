@@ -246,7 +246,7 @@ export default {
       subtitle: 'Don\'t be afarid to select or {create} a view'
     },
     modules: {
-      default: 'Default'
+      tournament_history: 'Tournament history'
     }
   }
 

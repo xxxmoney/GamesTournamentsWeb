@@ -246,7 +246,7 @@ export default {
       subtitle: 'Neváhejte vybrat nebo {create} pohled'
     },
     modules: {
-      default: 'Výchozí'
+      tournament_history: 'Historie turnajů'
     }
   }
 

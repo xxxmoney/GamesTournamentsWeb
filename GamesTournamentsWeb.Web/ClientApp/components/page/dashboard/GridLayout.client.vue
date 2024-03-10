@@ -43,7 +43,7 @@ const onLayoutUpdated = (updatedLayout: LayoutItem[]) => {
         :i="index"
         :minH="constants.defaultLayoutItemHeight"
         :minW="constants.defaultLayoutItemWidth"
-        :preserveAspectRatio="true"
+        :preserveAspectRatio="false"
         :w="item.w"
         :x="item.x"
         :y="item.y"

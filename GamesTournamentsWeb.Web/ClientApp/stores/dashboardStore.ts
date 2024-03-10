@@ -63,11 +63,12 @@ export const useDashboardStore = defineStore({
         throw new Error('No layout selected')
       }
 
+      // TODO: check if this works properly, id null should be inserted
       const lastIndex = this.selectedLayout.items.length
       const item = {
         layoutId: this.selectedLayout.id,
         moduleId,
-        id: 1,
+        id: null,
         i: lastIndex,
         x: 0,
         y: 0,

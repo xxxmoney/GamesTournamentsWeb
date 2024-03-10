@@ -1,5 +1,5 @@
 const component = Object.freeze({
-  default: 1
+  tournamentHistory: 1
 })
 
 export { component }

@@ -14,8 +14,8 @@ const moduleId = computed(() => store.selectedLayout!.items.find(item => item.id
 
 const resolveModule = (moduleId: number) => {
   switch (moduleId) {
-    case component.default:
-      return resolveComponent('PageDashboardModuleDefault')
+    case component.tournamentHistory:
+      return resolveComponent('PageDashboardModuleTournamentHistory')
     default:
       throw new Error('Module not found')
   }

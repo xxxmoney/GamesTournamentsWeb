@@ -9,7 +9,7 @@ export const DashboardService = {
     const modules = [
       {
         id: 1,
-        name: 'Default'
+        name: 'TournamentHistory'
       }
     ]
 
@@ -18,7 +18,7 @@ export const DashboardService = {
   getLayouts (userId: number): Promise<LayoutDetail[]> {
     const layout = {
       id: 1,
-      name: 'Default',
+      name: 'View',
       items: [
         {
           i: 1,
@@ -37,7 +37,7 @@ export const DashboardService = {
   upsertLayout (layoutUpsert: LayoutUpsert): Promise<Layout> {
     const layout = {
       id: 1,
-      name: 'Default',
+      name: 'View',
       items: [
         {
           i: 1,
