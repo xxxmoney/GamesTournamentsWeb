@@ -1,4 +1,5 @@
 import * as validators from '@vuelidate/validators'
+import type { ComputedRef } from 'vue'
 
 export const useValidators = () => {
   const { t } = useI18n()
@@ -14,9 +15,13 @@ export const useValidators = () => {
 
   const url = withI18nMessage(validators.url)
 
+  const email = withI18nMessage(validators.email)
+
+  const useSameAs = (dependantValue: ComputedRef<any>) => withI18nMessage(validators.sameAs(dependantValue))
+
   const helpers = validators.helpers
 
   return {
-    required, minLength, maxLength, helpers, url
+    required, minLength, maxLength, helpers, url, email, useSameAs
   }
 }

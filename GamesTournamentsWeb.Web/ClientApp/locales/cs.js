@@ -87,7 +87,9 @@ export default {
     required: 'Pole je povinné',
     minLength: 'Minimální délka je {min}',
     maxLength: 'Maximální délka je {max}',
-    url: 'Neplatný odkaz'
+    url: 'Neplatný odkaz',
+    email: 'Neplatný e-mail',
+    sameAsPassword: 'Hesla se neshodují'
   },
 
   locales: {
