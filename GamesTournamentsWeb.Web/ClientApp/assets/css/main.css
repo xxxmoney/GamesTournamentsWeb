@@ -115,6 +115,14 @@ body {
     z-index: 69;
 }
 
+.z-high {
+    z-index: 9001;
+}
+
+.z-max {
+    z-index: 999999;
+}
+
 .gap-x-sm {
     @apply gap-x-[var(--margin-x-sm)];
 }

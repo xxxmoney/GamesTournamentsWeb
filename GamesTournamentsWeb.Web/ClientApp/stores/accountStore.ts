@@ -7,6 +7,7 @@ import type { Account } from '~/models/user/Account'
 export const useAccountStore = defineStore({
   id: 'account-store',
   state: () => ({
+    loading: false,
     accounts: [] as Account[],
     info: null as AccountInfo | null,
     history: [] as HistoryItem[],
@@ -21,18 +22,36 @@ export const useAccountStore = defineStore({
     },
 
     async getAccountInfo (accountId: number): Promise<AccountInfo> {
-      this.info = await AccountService.getAccountInfo(accountId)
-      return this.info
+      try {
+        this.loading = true
+
+        this.info = await AccountService.getAccountInfo(accountId)
+        return this.info
+      } finally {
+        this.loading = false
+      }
     },
 
     async getHistory (accountId: number): Promise<HistoryItem[]> {
-      this.history = await AccountService.getHistory(accountId)
-      return this.history
+      try {
+        this.loading = true
+
+        this.history = await AccountService.getHistory(accountId)
+        return this.history
+      } finally {
+        this.loading = false
+      }
     },
 
     async getAccounts (): Promise<Account[]> {
-      this.accounts = await AccountService.getAccounts()
-      return this.accounts
+      try {
+        this.loading = true
+
+        this.accounts = await AccountService.getAccounts()
+        return this.accounts
+      } finally {
+        this.loading = false
+      }
     },
 
     openPasswordChangeModal (): void {

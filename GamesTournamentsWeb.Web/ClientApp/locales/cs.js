@@ -1,6 +1,7 @@
 export default {
   test: 'Test CS',
   common: {
+    search: 'Vyhledat',
     select: 'Vybrat',
     choose_module: 'Vyberte modul',
     add_module: 'Přidat modul',
@@ -89,7 +90,8 @@ export default {
     maxLength: 'Maximální délka je {max}',
     url: 'Neplatný odkaz',
     email: 'Neplatný e-mail',
-    sameAsPassword: 'Hesla se neshodují'
+    sameAsPassword: 'Hesla se neshodují',
+    sameAsNewPassword: 'Nová hesla se neshodují'
   },
 
   locales: {

@@ -7,6 +7,8 @@ const isLoggedIn = useIsLoggedIn()
 
 const filter = computed(() => gamesStore.filter)
 const genres = computed(() => gamesStore.genres)
+
+const getGames = () => gamesStore.getGames()
 </script>
 
 <template>
@@ -29,5 +31,7 @@ const genres = computed(() => gamesStore.genres)
     <CommonWithLabel v-if="isLoggedIn" :label="$t('common.my_tournaments')">
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
+
+    <Button :label="$t('common.search')" icon="pi pi-search" @click="getGames" />
   </div>
 </template>

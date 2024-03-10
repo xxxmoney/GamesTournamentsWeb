@@ -1,8 +1,13 @@
 <script lang="ts" setup>
+import useVuelidate from '@vuelidate/core'
 import { ChangePassword } from '~/models/user/ChangePassword'
 
+const { required, useSameAs } = useValidators()
+
 const mainStore = useMainStore()
-const changePassword = ref(new ChangePassword())
+const changePasswordValue = ref(new ChangePassword())
+
+const newPassword = computed(() => changePasswordValue.value.newPassword)
 
 const router = useRouter()
 
@@ -11,14 +16,13 @@ const successToast = useSuccessToast()
 
 const emit = defineEmits(['passwordChanged'])
 
-const login = async () => {
+const changePassword = async () => {
   try {
-    if (changePassword.value.newPassword !== changePassword.value.confirmNewPassword) {
-      errorToast(null, 'change_password.password_not_matching')
+    if (!await validate()) {
       return
     }
 
-    await mainStore.changePassword(changePassword.value)
+    await mainStore.changePassword(changePasswordValue.value)
 
     successToast('change_password.success')
     emit('passwordChanged')
@@ -29,16 +33,35 @@ const login = async () => {
     errorToast(error, 'change_password.password_incorrect')
   }
 }
+
+const sameAsPassword = useSameAs(newPassword)
+
+const rules = {
+  currentPassword: { required, $autoDirty: true },
+  newPassword: { required, $autoDirty: true },
+  confirmNewPassword: { required, sameAsPassword, $autoDirty: true }
+}
+
+const v$ = useVuelidate(rules, changePasswordValue)
+const { validate } = useValidate(v$.value.$validate)
 </script>
 
 <template>
   <div class="form-container-lg">
     <div class="container-gap">
-      <CommonInputText v-model="changePassword.currentPassword" :label="$t('common.current_password')" />
-      <CommonInputText v-model="changePassword.newPassword" :label="$t('common.new_password')" />
-      <CommonInputText v-model="changePassword.confirmNewPassword" :label="$t('common.confirm_new_password')" />
+      <CommonWithErrors :errors="v$.currentPassword.$errors">
+        <CommonInputText v-model="changePasswordValue.currentPassword" :label="$t('common.current_password')" />
+      </CommonWithErrors>
+
+      <CommonWithErrors :errors="v$.newPassword.$errors">
+        <CommonPassword v-model="changePasswordValue.newPassword" :label="$t('common.new_password')" />
+      </CommonWithErrors>
+
+      <CommonWithErrors :errors="v$.confirmNewPassword.$errors">
+        <CommonPassword v-model="changePasswordValue.confirmNewPassword" :label="$t('common.confirm_new_password')" />
+      </CommonWithErrors>
     </div>
 
-    <Button :label="$t('common.change_password')" @click="login" />
+    <Button :label="$t('common.change_password')" @click="changePassword" />
   </div>
 </template>

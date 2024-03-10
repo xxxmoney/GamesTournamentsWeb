@@ -8,6 +8,7 @@ import type { GameOverview } from '~/models/games/GameOverview'
 export const useGamesStore = defineStore({
   id: 'games-store',
   state: () => ({
+    loading: false,
     games: [] as Game[],
     filter: new GameFilter().toJson() as GameFilter,
     genres: [] as Genre[],
@@ -23,18 +24,36 @@ export const useGamesStore = defineStore({
     },
 
     async getGames (): Promise<Game[]> {
-      this.games = await GamesSerivce.getGames(this.filter)
-      return this.games
+      try {
+        this.loading = true
+
+        this.games = await GamesSerivce.getGames(this.filter)
+        return this.games
+      } finally {
+        this.loading = false
+      }
     },
 
     async getGameOverviews (): Promise<GameOverview[]> {
-      this.gameOverviews = await GamesSerivce.getGameOverviews()
-      return this.gameOverviews
+      try {
+        this.loading = true
+
+        this.gameOverviews = await GamesSerivce.getGameOverviews()
+        return this.gameOverviews
+      } finally {
+        this.loading = false
+      }
     },
 
     async getGenres (): Promise<Genre[]> {
-      this.genres = await GamesSerivce.getGenres()
-      return this.genres
+      try {
+        this.loading = true
+
+        this.genres = await GamesSerivce.getGenres()
+        return this.genres
+      } finally {
+        this.loading = false
+      }
     }
   },
   getters: {

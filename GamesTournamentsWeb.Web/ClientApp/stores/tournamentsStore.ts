@@ -14,6 +14,7 @@ import { TournamentMapper } from '~/mappers/TournamentMapper'
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
+    loading: false,
     tournaments: [] as Tournament[],
     tournamentDetail: null as TournamentDetail | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
@@ -36,33 +37,69 @@ export const useTournamentsStore = defineStore({
     },
 
     async getTournaments (): Promise<Tournament[]> {
-      this.tournaments = await TournamentsService.getTournaments(this.filter)
-      return this.tournaments
+      try {
+        this.loading = true
+
+        this.tournaments = await TournamentsService.getTournaments(this.filter)
+        return this.tournaments
+      } finally {
+        this.loading = false
+      }
     },
 
     async getTeamSizes (): Promise<number[]> {
-      this.teamSizes = await TournamentsService.getTeamSizes()
-      return this.teamSizes
+      try {
+        this.loading = true
+
+        this.teamSizes = await TournamentsService.getTeamSizes()
+        return this.teamSizes
+      } finally {
+        this.loading = false
+      }
     },
 
     async getRegions (): Promise<Region[]> {
-      this.regions = await TournamentsService.getRegions()
-      return this.regions
+      try {
+        this.loading = true
+
+        this.regions = await TournamentsService.getRegions()
+        return this.regions
+      } finally {
+        this.loading = false
+      }
     },
 
     async getPlatforms (): Promise<Platform[]> {
-      this.platforms = await TournamentsService.getPlatforms()
-      return this.platforms
+      try {
+        this.loading = true
+
+        this.platforms = await TournamentsService.getPlatforms()
+        return this.platforms
+      } finally {
+        this.loading = false
+      }
     },
 
-    async getCurrencies (): Currency[] {
-      this.currencies = await TournamentsService.getCurrencies()
-      return this.currencies
+    async getCurrencies (): Promise<Currency[]> {
+      try {
+        this.loading = true
+
+        this.currencies = await TournamentsService.getCurrencies()
+        return this.currencies
+      } finally {
+        this.loading = false
+      }
     },
 
     async getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
-      this.tournamentDetail = await TournamentsService.getTournamentDetailById(tournamentId)
-      return this.tournamentDetail
+      try {
+        this.loading = true
+
+        this.tournamentDetail = await TournamentsService.getTournamentDetailById(tournamentId)
+        return this.tournamentDetail
+      } finally {
+        this.loading = false
+      }
     },
 
     mapTournamentDetailToEdit () {
