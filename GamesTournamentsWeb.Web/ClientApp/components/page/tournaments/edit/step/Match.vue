@@ -40,7 +40,7 @@ defineExpose({
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.match') }}</h1>
 
-  <div class="container-gap">
+  <div class="form-container">
     <template v-if="noMatchRunning">
       <span>{{ $t('tournament_edit.no_match') }}</span>
     </template>

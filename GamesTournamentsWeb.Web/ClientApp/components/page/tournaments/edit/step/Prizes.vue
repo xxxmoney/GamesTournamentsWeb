@@ -60,7 +60,7 @@ defineExpose({
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.prizes') }}</h1>
 
-  <div class="container-gap">
+  <div class="form-container">
     <CommonWithErrors :errors="v$.prizes.$errors">
       <CommonWithLabel :label="$t('common.currency')">
         <Dropdown

@@ -37,6 +37,8 @@ const steps = ref([
   }
 ])
 
+const isInsert = computed(() => !edit.value.id)
+
 const onFinalize = () => {
   confirm.require({
     message: t('tournament_edit.confirm'),
@@ -70,7 +72,7 @@ onMounted(() => {
       <Steps
         v-model:activeStep="step"
         :model="steps"
-        :readonly="false"
+        :readonly="isInsert"
         class="mx-auto"
       />
     </div>

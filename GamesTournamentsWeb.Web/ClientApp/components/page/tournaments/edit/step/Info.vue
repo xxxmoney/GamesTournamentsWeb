@@ -40,7 +40,7 @@ defineExpose({
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.info') }}</h1>
 
-  <div class="container-gap">
+  <div class="form-container">
     <div class="container-gap">
       <CommonWithErrors :errors="v$.name.$errors">
         <CommonInputText v-model="edit.name" :label="$t('common.name')" />
