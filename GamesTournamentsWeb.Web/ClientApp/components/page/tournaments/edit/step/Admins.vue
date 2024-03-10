@@ -44,7 +44,7 @@ defineExpose({
 
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.admins') }}</h1>
-  <div class="container-gap">
+  <div class="form-container">
     <CommonWithErrors :errors="v$.adminIds.$errors">
       <CommonWithLabel :label="$t('common.choose_account')">
         <CommonWithButtonIcon

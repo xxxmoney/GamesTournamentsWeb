@@ -22,6 +22,8 @@ interface TournamentDetail {
     players: TournamentPlayer[]
     matches: Match[]
     streams: Stream[],
+    minimumPlayers: number
+    maximumPlayers: number
     anyoneCanJoin: boolean
     adminIds: number[]
 }

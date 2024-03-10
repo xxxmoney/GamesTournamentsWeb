@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
-
 const { id } = defineProps({
   id: {
     type: Number,
@@ -12,11 +10,11 @@ const tournamentsStore = useTournamentsStore()
 
 await tournamentsStore.getTournamentDetailById(id)
 
-const detail = computed(() => tournamentsStore.tournamentDetail as TournamentDetail)
+const detail = computed(() => tournamentsStore.tournamentDetail)
 </script>
 
 <template>
-  <div class="container-gap">
+  <div v-if="detail" class="container-gap">
     <div class="w-full max-h-80 rounded-lg shadow overflow-hidden">
       <img :src="detail.game.imageUrl" />
     </div>

@@ -9,6 +9,7 @@ import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import constants from '~/constants'
 import type { Currency } from '~/models/tournaments/Currency'
 import type { Match } from '~/models/tournaments/Match'
+import { TournamentMapper } from '~/mappers/TournamentMapper'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -65,9 +66,8 @@ export const useTournamentsStore = defineStore({
     },
 
     mapTournamentDetailToEdit () {
-      // TODO: add whole mapping - check for detail being null - insert
-
-      this.tournamentEdit.match = this.tournamentDetailCurrentMatch
+      const match = this.tournamentDetailCurrentMatch
+      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail!, match)
     },
 
     resetTournamentEdit (): void {
@@ -90,7 +90,7 @@ export const useTournamentsStore = defineStore({
     resetTournamentEditStep (): void {
       this.tournamentEditStep = 0
     },
-    
+
     resetFilter (): void {
       this.filter = new TournamentFilter().toJson() as TournamentFilter
     }

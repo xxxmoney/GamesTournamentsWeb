@@ -23,7 +23,7 @@ defineExpose({
 <template>
   <h1 class="heading mb-lg">{{ $t('tournament_edit.steps.rules') }}</h1>
 
-  <div class="container-gap">
+  <div class="form-container">
     <CommonWithErrors :errors="v$.rules.$errors">
       <CommonWithLabel
         v-tooltip="$t('tournament_edit.write_rules_tooltip')"

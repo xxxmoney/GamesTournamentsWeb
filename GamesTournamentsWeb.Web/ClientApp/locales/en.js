@@ -87,7 +87,9 @@ export default {
     required: 'The field is required',
     minLength: 'Min length is {min}',
     maxLength: 'Max length is {max}',
-    url: 'Invalid URL'
+    url: 'Invalid URL',
+    email: 'Invalid e-mail',
+    sameAsPassword: 'Passwords do not match'
   },
 
   locales: {
