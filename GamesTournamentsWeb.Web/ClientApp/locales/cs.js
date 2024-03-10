@@ -1,6 +1,10 @@
 export default {
   test: 'Test CS',
   common: {
+    select: 'Vybrat',
+    choose_module: 'Vyberte modul',
+    add_module: 'Přidat modul',
+    module: 'Modul',
     create: 'Vytvořit',
     do_create: 'Vytvořte',
     update: 'Aktualizovat',
@@ -238,6 +242,9 @@ export default {
     no_view: {
       title: 'Nebyl vybrán žádný pohled',
       subtitle: 'Neváhejte vybrat nebo {create} pohled'
+    },
+    modules: {
+      default: 'Výchozí'
     }
   }
 

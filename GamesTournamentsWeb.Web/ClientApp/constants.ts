@@ -50,6 +50,10 @@ export default {
   defaultLayoutMaxRows: Infinity,
   defaultLayoutMaxCols: 6,
   defaultLayoutRowHeight: 100,
+  defaultLayoutItemWidth: 2,
+  defaultLayoutItemHeight: 2,
+
+  dialogBaseIndexZ: 10000,
 
   events: {
     tournamentEditNextStepRequest: 'tournament-edit-step-next-request',

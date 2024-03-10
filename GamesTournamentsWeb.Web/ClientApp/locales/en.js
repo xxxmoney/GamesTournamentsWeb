@@ -1,6 +1,10 @@
 export default {
   test: 'Test EN',
   common: {
+    select: 'Select',
+    choose_module: 'Choose module',
+    add_module: 'Add module',
+    module: 'Module',
     create: 'Create',
     do_create: 'Create',
     update: 'Update',
@@ -238,6 +242,9 @@ export default {
     no_view: {
       title: 'No view selected',
       subtitle: 'Don\'t be afarid to select or {create} a view'
+    },
+    modules: {
+      default: 'Default'
     }
   }
 

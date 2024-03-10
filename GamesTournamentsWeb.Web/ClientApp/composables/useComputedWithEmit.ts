@@ -1,4 +1,4 @@
-export const useComputedWithEmit = <T>(value: T, emit, key, prefix = 'update') => computed<T>({
+export const useComputedWithEmit = <T>(value: T, emit: any, key: string, prefix = 'update') => computed<T>({
   get: () => {
     return value
   },

@@ -14,8 +14,8 @@ export const useAccountStore = defineStore({
     historyModalActive: false
   }),
   actions: {
-    initialize (): Promise<any> {
-      return Promise.all([
+    async initialize (): Promise<void> {
+      await Promise.all([
         this.getAccounts()
       ])
     },

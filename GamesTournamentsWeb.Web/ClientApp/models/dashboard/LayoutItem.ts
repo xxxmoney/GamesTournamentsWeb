@@ -1,10 +1,10 @@
 interface LayoutItem {
-    i: number;
+    i: number | null;
     x: number;
     y: number;
     w: number;
     h: number;
-    componentName: string;
+    moduleId: number;
     layoutId: number;
 }
 

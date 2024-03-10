@@ -7,7 +7,7 @@ const layout = computed(() => dashboardStore.selectedLayout)
 </script>
 
 <template>
-  <div class="inline-flex flex-col w-full">
+  <div class="container-gap-lg w-full">
     <div class="form-container-lg mx-auto items-center">
       <h1 class="heading">{{ $t('dashboard.title') }}</h1>
 
@@ -18,5 +18,6 @@ const layout = computed(() => dashboardStore.selectedLayout)
     <PageDashboardNoLayout v-else />
 
     <PageDashboardUpsertLayoutDialog />
+    <PageDashboardSelectModuleDialog />
   </div>
 </template>

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import constants from '~/constants'
+ 
 const store = useDashboardStore()
 
 const isActive = computed({
@@ -18,7 +20,7 @@ const close = () => {
 <template>
   <Dialog
     v-model:visible="isActive"
-    :baseZIndex="10000"
+    :baseZIndex="constants.dialogBaseIndexZ"
     :draggable="false"
     :header="$t('common.view')"
     :resizable="false"

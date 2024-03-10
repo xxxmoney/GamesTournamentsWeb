@@ -6,16 +6,29 @@ const dashboardStore = useDashboardStore()
 const layout = computed(() => dashboardStore.selectedLayout)
 
 const onItemsUpdate = async (items: LayoutItem[]) => {
-  await dashboardStore.updateLayoutItems(items)
+  await dashboardStore.upsertSelectedLayoutItems(items)
+}
+
+const showSelectModuleDialog = () => {
+  dashboardStore.openSelectModuleModal()
 }
 
 </script>
 
 <template>
-  <PageDashboardGridLayout
-    v-if="layout"
-    v-model:layoutItems="layout.items"
-    :layoutId="layout.id"
-    @update="onItemsUpdate"
-  />
+  <div class="container-gap-lg">
+    <div class="flex-0 mx-auto">
+      <Button
+        :label="$t('common.add_module')"
+        icon="pi pi-plus"
+        @click="showSelectModuleDialog"
+      />
+    </div>
+    <PageDashboardGridLayout
+      v-model:layoutItems="layout!.items"
+      :layoutId="layout!.id"
+      class="flex-1"
+      @update="onItemsUpdate"
+    />
+  </div>
 </template>

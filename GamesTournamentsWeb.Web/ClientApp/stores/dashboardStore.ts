@@ -5,19 +5,32 @@ import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { Layout } from '~/models/dashboard/Layout'
 import { DashboardMapper } from '~/mappers/dashboardMapper'
+import type { Module } from '~/models/dashboard/Module'
+import constants from '~/constants'
 
 export const useDashboardStore = defineStore({
   id: 'dashboard-store',
   state: () => ({
+    modules: [] as Module[],
     layouts: [] as LayoutDetail[],
-    selectedLayoutId: null as Number | null,
+    selectedLayoutId: null as number | null,
     layoutUpsert: null as LayoutUpsert | null,
-    upsertLayoutModalActive: false
+    selectedLayoutItemId: null as number | null,
+    upsertLayoutModalActive: false,
+    selectModuleModalActive: false
   }),
   actions: {
-    initialize (): Promise<void> {
-      return Promise.resolve()
+    async initialize (): Promise<void> {
+      await Promise.all([
+        this.getModules()
+      ])
     },
+
+    async getModules (): Promise<Module[]> {
+      this.modules = await DashboardService.getModules()
+      return this.modules
+    },
+
     async getLayouts (userId: number): Promise<LayoutDetail[]> {
       this.layouts = await DashboardService.getLayouts(userId)
       return this.layouts
@@ -35,8 +48,43 @@ export const useDashboardStore = defineStore({
 
       return upsertedLayout
     },
-    updateLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
-      return DashboardService.updateLayoutItems(items)
+    async upsertSelectedLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
+      if (!this.selectedLayout) {
+        throw new Error('No layout selected')
+      }
+
+      const upsertedItems = await DashboardService.upsertLayoutItems(items)
+      this.selectedLayout.items = upsertedItems
+      return upsertedItems
+    },
+
+    addItemToLayout (moduleId: number) {
+      if (!this.selectedLayout) {
+        throw new Error('No layout selected')
+      }
+
+      const item = {
+        layoutId: this.selectedLayout.id,
+        moduleId,
+        i: null,
+        x: 0,
+        y: 0,
+        w: constants.defaultLayoutItemWidth,
+        h: constants.defaultLayoutItemHeight
+      }
+      this.selectedLayout.items.push(item)
+    },
+    updateOrAddSelectedLayoutItem (moduleId: number) {
+      if (!this.selectedLayout) {
+        throw new Error('No layout selected')
+      }
+
+      const item = this.selectedLayoutItem
+      if (item) {
+        item.moduleId = moduleId
+      } else {
+        this.addItemToLayout(moduleId)
+      }
     },
 
     setDefaultLayoutUpsert (): void {
@@ -58,11 +106,25 @@ export const useDashboardStore = defineStore({
     closeUpsertLayoutModal (): void {
       this.clearLayoutUpsert()
       this.upsertLayoutModalActive = false
+    },
+
+    openSelectModuleModal (): void {
+      this.selectModuleModalActive = true
+    },
+    closeSelectModuleModal (): void {
+      this.selectedLayoutItemId = null
+      this.selectModuleModalActive = false
     }
   },
   getters: {
     selectedLayout (): LayoutDetail | null {
       return this.layouts.find(layout => layout.id === this.selectedLayoutId) ?? null
+    },
+    selectedLayoutItem (): LayoutItem | null {
+      return this.selectedLayoutItemId ? this.selectedLayout?.items.find(item => item.i === this.selectedLayoutItemId) ?? null : null
+    },
+    moduleById: (state) => (id: number): Module | null => {
+      return state.modules.find(module => module.id === id) ?? null
     }
   }
 })

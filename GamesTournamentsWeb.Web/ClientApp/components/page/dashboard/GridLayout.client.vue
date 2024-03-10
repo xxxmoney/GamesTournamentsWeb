@@ -26,7 +26,7 @@ const { maxRows, maxCols, layoutItems, layoutId } = defineProps({
   }
 })
 
-const emit = defineEmits(['update:layout', 'update'])
+const emit = defineEmits(['update:layoutItems', 'update'])
 
 const layoutItemsComputed = useComputedWithEmit(layoutItems, emit, 'layoutItems')
 const onLayoutUpdated = (updatedLayout: Array<LayoutItem>) => {

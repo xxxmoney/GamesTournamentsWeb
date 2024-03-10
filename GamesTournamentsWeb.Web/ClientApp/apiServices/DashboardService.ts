@@ -2,8 +2,17 @@ import type { LayoutDetail } from '~/models/dashboard/LayoutDetail'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { Layout } from '~/models/dashboard/Layout'
+import type { Module } from '~/models/dashboard/Module'
 
 export const DashboardService = {
+  getModules (): Promise<Module[]> {
+    const module = {
+      id: 1,
+      name: 'Default'
+    }
+
+    return Promise.resolve([module])
+  },
   getLayouts (userId: number): Promise<LayoutDetail[]> {
     const layout = {
       id: 1,
@@ -15,7 +24,7 @@ export const DashboardService = {
           y: 0,
           w: 2,
           h: 2,
-          componentName: 'Default',
+          moduleId: 1,
           layoutId: 1
         }
       ]
@@ -34,7 +43,7 @@ export const DashboardService = {
           y: 0,
           w: 2,
           h: 2,
-          componentName: 'Default',
+          moduleId: 1,
           layoutId: 1
         }
       ]
@@ -42,7 +51,7 @@ export const DashboardService = {
 
     return Promise.resolve(layout)
   },
-  updateLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
+  upsertLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
     return Promise.resolve(items)
   }
 }
