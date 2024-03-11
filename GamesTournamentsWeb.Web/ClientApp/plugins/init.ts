@@ -7,8 +7,8 @@ export default defineNuxtPlugin({
     'vue:setup' () {
       const mainStore = useMainStore()
 
-      const { setLocale } = useI18n()
-      setLocale(mainStore.locale)
+      const applyLocale = useApplyLocale()
+      applyLocale(mainStore.locale)
     }
   }
 })

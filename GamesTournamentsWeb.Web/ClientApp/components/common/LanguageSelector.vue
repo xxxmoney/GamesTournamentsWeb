@@ -3,16 +3,19 @@ import constants from '~/constants'
 import { KeyValuePair } from '~/models/KeyValuePair'
 
 const mainStore = useMainStore()
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
+const applyLocale = useApplyLocale()
+
 const locales = constants.locales.map(locale => new KeyValuePair(locale, locale))
 
 const setPersistedLocale = (locale: string) => {
-  setLocale(locale)
   mainStore.setLocale(locale)
+
+  applyLocale(locale)
 }
 
-// Set locale to i18n from persisted
-setLocale(mainStore.locale)
+// Set locale from persisted
+applyLocale(mainStore.locale)
 </script>
 
 <template>
