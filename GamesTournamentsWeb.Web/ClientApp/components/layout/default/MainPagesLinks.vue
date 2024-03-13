@@ -3,6 +3,11 @@ const { orientation } = defineProps({
   orientation: useFlexByOrientationPropsParam()
 })
 
+const emit = defineEmits(['linkClick'])
+const onLinkClick = () => {
+  emit('linkClick')
+}
+
 const containerClass = useFlexByOrientationClass(orientation)
 
 const isLoggedIn = useIsLoggedIn()
@@ -11,22 +16,22 @@ const isLoggedIn = useIsLoggedIn()
 <template>
   <ul :class="containerClass" class="ul-links">
     <li>
-      <NuxtLink to="/">
+      <NuxtLink to="/" @click="onLinkClick">
         {{ $t('pages.home') }}
       </NuxtLink>
     </li>
     <li>
-      <NuxtLink to="/tournaments">
+      <NuxtLink to="/tournaments" @click="onLinkClick">
         {{ $t('pages.tournaments') }}
       </NuxtLink>
     </li>
     <li>
-      <NuxtLink to="/games">
+      <NuxtLink to="/games" @click="onLinkClick">
         {{ $t('pages.games') }}
       </NuxtLink>
     </li>
     <li v-if="isLoggedIn">
-      <NuxtLink to="/dashboard">
+      <NuxtLink to="/dashboard" @click="onLinkClick">
         {{ $t('pages.dashboard') }}
       </NuxtLink>
     </li>
