@@ -49,15 +49,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseSpaStaticFiles();
-app.UseSpa(spa =>
-{
-    spa.Options.SourcePath = Constants.ClientAppFolder;
-    if (app.Environment.IsDevelopment())
-    {
-        // Launch development server for Nuxt
-        //spa.UseNuxtDevelopmentServer();
-    }
-});
+//app.UseSpaStaticFiles();
+// app.UseSpa(spa =>
+// {
+//     spa.Options.SourcePath = Constants.ClientAppFolder;
+//     if (app.Environment.IsDevelopment())
+//     {
+//         // Launch development server for Nuxt
+//         spa.UseNuxtDevelopmentServer();
+//     }
+// });
 
 app.Run();
