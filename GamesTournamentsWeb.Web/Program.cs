@@ -56,7 +56,7 @@ app.UseSpa(spa =>
     if (app.Environment.IsDevelopment())
     {
         // Launch development server for Nuxt
-        spa.UseNuxtDevelopmentServer();
+        //spa.UseNuxtDevelopmentServer();
     }
 });
 
