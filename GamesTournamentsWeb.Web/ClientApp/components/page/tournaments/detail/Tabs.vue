@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+const mainStore = useMainStore()
+// TODO: check if the user is admin of current tournament
+const isAdmin = computed(() => mainStore.isLoggedIn)
+
 </script>
 
 <template>
@@ -21,8 +25,7 @@
     <TabPanel :header="$t('tournament_detail.streams')">
       <PageTournamentsDetailTabStreams class="text-area" />
     </TabPanel>
-    <!--    TODO: check for admin -->
-    <TabPanel :header="$t('tournament_detail.admin')">
+    <TabPanel v-if="isAdmin" :header="$t('tournament_detail.admin')">
       <PageTournamentsDetailTabAdmin class="text-area" />
     </TabPanel>
   </TabView>
