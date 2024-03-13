@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import type { Tournament } from '~/models/tournaments/Tournament'
+import type { TournamentOverview } from '~/models/tournaments/TournamentOverview'
 import { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import type { Platform } from '~/models/tournaments/Platform'
 import type { Region } from '~/models/tournaments/Region'
-import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
+import type { Tournament } from '~/models/tournaments/Tournament'
 import { TournamentsService } from '~/apiServices/TournamentsService'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import constants from '~/constants'
@@ -15,8 +15,8 @@ export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
     loading: false,
-    tournaments: [] as Tournament[],
-    tournamentDetail: null as TournamentDetail | null,
+    tournaments: [] as TournamentOverview[],
+    tournamentDetail: null as Tournament | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
     tournamentEditStep: 0,
     teamSizes: [] as number[],
@@ -28,7 +28,7 @@ export const useTournamentsStore = defineStore({
   actions: {
     async initialize (): Promise<void> {
       await Promise.all([
-        this.getTournaments(),
+        this.getTournamentOverviews(),
         this.getTeamSizes(),
         this.getRegions(),
         this.getPlatforms(),
@@ -36,11 +36,11 @@ export const useTournamentsStore = defineStore({
       ])
     },
 
-    async getTournaments (): Promise<Tournament[]> {
+    async getTournamentOverviews (): Promise<TournamentOverview[]> {
       try {
         this.loading = true
 
-        this.tournaments = await TournamentsService.getTournaments(this.filter)
+        this.tournaments = await TournamentsService.getTournamentOverviews(this.filter)
         return this.tournaments
       } finally {
         this.loading = false
@@ -91,11 +91,11 @@ export const useTournamentsStore = defineStore({
       }
     },
 
-    async getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
+    async getTournamentById (tournamentId: number): Promise<Tournament> {
       try {
         this.loading = true
 
-        this.tournamentDetail = await TournamentsService.getTournamentDetailById(tournamentId)
+        this.tournamentDetail = await TournamentsService.getTournamentById(tournamentId)
         return this.tournamentDetail
       } finally {
         this.loading = false
@@ -134,8 +134,8 @@ export const useTournamentsStore = defineStore({
 
   },
   getters: {
-    tournamentById: (state) => (id: number): Tournament => {
-      return state.tournaments.find(game => game.id === id) as Tournament
+    tournamentById: (state) => (id: number): TournamentOverview => {
+      return state.tournaments.find(game => game.id === id) as TournamentOverview
     },
     tournamentDetailCurrentMatch: (state): Match | null => {
       return state.tournamentDetail?.matches?.find(match => match.isRunning)
