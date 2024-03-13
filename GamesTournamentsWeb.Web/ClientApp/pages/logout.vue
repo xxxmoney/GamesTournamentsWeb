@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: 'auth'
+})
+
 const store = useMainStore()
 const router = useRouter()
 

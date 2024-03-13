@@ -1,9 +1,14 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: 'auth'
+})
+
+const mainStore = useMainStore()
 const dashboardStore = useDashboardStore()
 
 const layout = computed(() => dashboardStore.selectedLayout)
 
-//await dashboardStore.getLayouts(mainStore.account!.id)
+await dashboardStore.getLayouts(mainStore.account!.id)
 </script>
 
 <template>
