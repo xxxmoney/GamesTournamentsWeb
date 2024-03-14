@@ -11,7 +11,7 @@ public class Account
     public string Password { get; set; }
     public int RoleId { get; set; }
     public Role Role { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
     public string ImageUrl { get; set; }
     public ICollection<Tournament> AdminTournaments { get; set; }
     public ICollection<TournamentPlayer> TournamentPlayers { get; set; }

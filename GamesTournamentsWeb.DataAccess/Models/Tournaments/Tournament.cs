@@ -13,8 +13,8 @@ public class Tournament
     public int PlatformId { get; set; }
     public Platform Platform { get; set; }
     public ICollection<Region> Regions { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
+    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset? EndDate { get; set; }
     public string Infos { get; set; }
     public string Rules { get; set; }
     public string Settings { get; set; }
