@@ -14,4 +14,5 @@ public class Account
     public DateTime CreatedAt { get; set; }
     public string ImageUrl { get; set; }
     public ICollection<Tournament> AdminTournaments { get; set; }
+    public ICollection<TournamentPlayer> TournamentPlayers { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.DataAccess.Models.Users;
+﻿using GamesTournamentsWeb.DataAccess.Models.Games;
+using GamesTournamentsWeb.DataAccess.Models.Users;
 
 namespace GamesTournamentsWeb.DataAccess.Models.Tournaments;
 
@@ -13,7 +14,7 @@ public class Tournament
     public Platform Platform { get; set; }
     public ICollection<Region> Regions { get; set; }
     public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
     public string Infos { get; set; }
     public string Rules { get; set; }
     public string Settings { get; set; }
