@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesTournamentsWeb.DataAccess.Migrations
 {
     [DbContext(typeof(WebContext))]
-    [Migration("20240316153422_InitialCreate")]
+    [Migration("20240316161043_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
