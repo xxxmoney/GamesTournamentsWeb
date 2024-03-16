@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GamesTournamentsWeb.DataAccess.Repositories;
 
-public interface IGameRepository
+public interface IGameRepository : IRepository
 {
     Task<PagedResult<GameOverview>> GetGameOverviewsAsync(int page, int count);
     
-    Task<Game> GetGameByIdAsync(int id);
+    ValueTask<Game> GetGameByIdAsync(int id);
 }
 
 public class GameRepository(DbSet<Game> games) : IGameRepository
@@ -23,8 +23,8 @@ public class GameRepository(DbSet<Game> games) : IGameRepository
         }).ToPagedAsync(page, count);
     }
 
-    public async Task<Game> GetGameByIdAsync(int id)
+    public ValueTask<Game> GetGameByIdAsync(int id)
     {
-        return await games.FindAsync(id);
+        return games.FindAsync(id);
     }
 }

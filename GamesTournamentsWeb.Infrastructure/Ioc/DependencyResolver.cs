@@ -1,4 +1,6 @@
 ﻿using GamesTournamentsWeb.DataAccess.Contexts;
+using GamesTournamentsWeb.DataAccess.Repositories;
+using GamesTournamentsWeb.Infrastructure.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +13,21 @@ public static class DependencyResolver
         // TODO: Add services here
         
         // Context
-        services.AddDbContext<WebContext>();
+        services.AddDbContext<WebContext>(ServiceLifetime.Transient);
+        
+        // Repositories
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+        services.AddScoped<IGameRepository, GameRepository>();
+        services.AddScoped<IGenreRepository, GenreRepository>();
+        services.AddScoped<IMatchRepository, MatchRepository>();
+        services.AddScoped<IPrizeRepository, PrizeRepository>();
+        services.AddScoped<IStreamRepository, StreamRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITournamentPlayerRepository, TournamentPlayerRepository>();
+        services.AddScoped<ITournamentRepository, TournamentRepository>();
+        
+        // Operations
+        services.AddSingleton<IRepositoryProvider, RepositoryProvider>();
         
         // services.AddAutoMapper(cfg =>
         //     {
