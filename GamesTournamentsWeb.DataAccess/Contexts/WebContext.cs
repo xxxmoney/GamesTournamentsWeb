@@ -1,4 +1,7 @@
-﻿using GamesTournamentsWeb.DataAccess.Models.Games;
+﻿using GamesTournamentsWeb.Common.Enums.Account;
+using GamesTournamentsWeb.Common.Enums.Tournament;
+using GamesTournamentsWeb.Common.Helpers;
+using GamesTournamentsWeb.DataAccess.Models.Games;
 using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using GamesTournamentsWeb.DataAccess.Models.Users;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +46,8 @@ public class WebContext : DbContext
     {
         modelBuilder.Entity<Game>(game =>
         {
+            game.ToTable(nameof(Game), Constants.DboSchema);
+            
             game.HasOne(e => e.Genre)
                 .WithMany(e => e.Games)
                 .HasForeignKey(e => e.GenreId)
@@ -61,6 +66,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Genre>(genre =>
         {
+            genre.ToTable(nameof(Genre), Constants.DboSchema);
+            
             genre.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -68,6 +75,8 @@ public class WebContext : DbContext
 
         modelBuilder.Entity<Tournament>(tournament =>
         {
+            tournament.ToTable(nameof(Tournament), Constants.DboSchema);
+            
             tournament.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -131,6 +140,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<TournamentPlayer>(tournamentPlayer =>
         {
+            tournamentPlayer.ToTable(nameof(TournamentPlayer), Constants.DboSchema);
+            
             tournamentPlayer.HasOne(e => e.Tournament)
                 .WithMany(e => e.Players)
                 .HasForeignKey(e => e.TournamentId)
@@ -156,6 +167,16 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<TournamentPlayerStatus>(tournamentPlayerStatus =>
         {
+            tournamentPlayerStatus.ToTable(nameof(TournamentPlayerStatus), Constants.EnumSchema);
+            
+            tournamentPlayerStatus.HasData(EnumHelper.SelectTo<TournamentPlayerStatusEnum, TournamentPlayerStatus>(info => new TournamentPlayerStatus
+            {
+                Id = info.Value,
+                Name = info.Name
+            }));
+            
+            tournamentPlayerStatus.Property(e => e.Id).ValueGeneratedNever();
+            
             tournamentPlayerStatus.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -163,6 +184,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Prize>(prize =>
         {
+            prize.ToTable(nameof(Prize), Constants.DboSchema);
+            
             prize.Property(e => e.Place)
                 .IsRequired();
 
@@ -184,6 +207,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Stream>(stream =>
         {
+            stream.ToTable(nameof(Stream), Constants.DboSchema);
+            
             stream.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -201,6 +226,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Team>(team =>
         {
+            team.ToTable(nameof(Team), Constants.DboSchema);
+            
             team.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -208,6 +235,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Match>(match =>
         {
+            match.ToTable(nameof(Match), Constants.DboSchema);
+            
             match.Property(e => e.StartDate)
                 .IsRequired();
 
@@ -226,13 +255,6 @@ public class WebContext : DbContext
                 .HasForeignKey<Match>(m => m.NextMatchId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Match>()
-                .HasOne(m => m.PreviousMatch)
-                .WithOne()
-                .HasForeignKey<Match>(m => m.PreviousMatchId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Cascade);
             
             match.HasOne(e => e.FirstTeam)
                 .WithMany(e => e.FirstTeamMatches)
@@ -249,6 +271,16 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Platform>(platform =>
         {
+            platform.ToTable(nameof(Platform), Constants.EnumSchema);
+
+            platform.HasData(EnumHelper.SelectTo<PlatformEnum, Platform>(info => new Platform
+            {
+                Id = info.Value,
+                Name = info.Name
+            }));
+            
+            platform.Property(e => e.Id).ValueGeneratedNever();
+            
             platform.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -256,6 +288,16 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Region>(region =>
         {
+            region.ToTable(nameof(Region), Constants.EnumSchema);
+            
+            region.HasData(EnumHelper.SelectTo<RegionEnum, Region>(info => new Region
+            {
+                Id = info.Value,
+                Name = info.Name
+            }));
+            
+            region.Property(e => e.Id).ValueGeneratedNever();
+            
             region.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -263,17 +305,25 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Account>(account =>
         {
+            account.ToTable(nameof(Account), Constants.DboSchema);
+            
             account.Property(e => e.Username)
                 .IsRequired()
                 .HasMaxLength(100);
 
             account.Property(e => e.Email)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(254);
 
-            account.Property(e => e.Password)
+            account.Property(e => e.PasswordHash)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(64)
+                .IsFixedLength();
+
+            account.Property(e => e.PasswordSalt)
+                .IsRequired()
+                .HasMaxLength(128)
+                .IsFixedLength();
 
             account.HasOne(e => e.Role)
                 .WithMany(e => e.Accounts)
@@ -291,6 +341,16 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Role>(role =>
         {
+            role.ToTable(nameof(Role), Constants.EnumSchema);
+
+            role.HasData(EnumHelper.SelectTo<RoleEnum, Role>(info => new Role
+            {
+                Id = info.Value,
+                Name = info.Name
+            }));
+            
+            role.Property(e => e.Id).ValueGeneratedNever();
+            
             role.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
@@ -298,6 +358,8 @@ public class WebContext : DbContext
         
         modelBuilder.Entity<Currency>(currency =>
         {
+            currency.ToTable(nameof(Currency), Constants.DboSchema);
+            
             currency.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);

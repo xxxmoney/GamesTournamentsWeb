@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { gamePlayerStatus } from '~/enums/tournaments/gamePlayerStatus'
+import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 
 const { status } = defineProps({
   status: {
@@ -10,11 +10,11 @@ const { status } = defineProps({
 
 const icon = computed(() => {
   switch (status) {
-    case gamePlayerStatus.accepted:
+    case tournamentPlayerStatus.accepted:
       return 'pi-check'
-    case gamePlayerStatus.rejected:
+    case tournamentPlayerStatus.rejected:
       return 'pi-times'
-    case gamePlayerStatus.pending:
+    case tournamentPlayerStatus.pending:
       return 'pi-question'
     default:
       return ''

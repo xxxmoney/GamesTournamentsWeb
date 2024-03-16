@@ -3,7 +3,7 @@ import type { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import type { Region } from '~/models/tournaments/Region'
 import type { Platform } from '~/models/tournaments/Platform'
 import type { Tournament } from '~/models/tournaments/Tournament'
-import { gamePlayerStatus } from '~/enums/tournaments/gamePlayerStatus'
+import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 import type { Currency } from '~/models/tournaments/Currency'
 
 export const TournamentsService = {
@@ -70,22 +70,22 @@ export const TournamentsService = {
       {
         accountId: 1,
         gameUsername: 'PlayerElOne',
-        status: gamePlayerStatus.accepted
+        status: tournamentPlayerStatus.accepted
       },
       {
         accountId: 2,
         gameUsername: 'PlayerZoTwo',
-        status: gamePlayerStatus.accepted
+        status: tournamentPlayerStatus.accepted
       },
       {
         accountId: 3,
         gameUsername: 'Uwuwu',
-        status: gamePlayerStatus.pending
+        status: tournamentPlayerStatus.pending
       },
       {
         accountId: 4,
         gameUsername: 'AtomicNek',
-        status: gamePlayerStatus.pending
+        status: tournamentPlayerStatus.pending
       }
     ]
 

@@ -10,6 +10,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <ProjectReference Include="..\GamesTournamentsWeb.Infrastructure\GamesTournamentsWeb.Infrastructure.csproj" />
     </ItemGroup>
 
 

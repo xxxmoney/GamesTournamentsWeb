@@ -110,6 +110,7 @@ export default {
     region: {
       europe: 'Evropa',
       north_america: 'Severní Amerika',
+      south_america: 'Jižní Amerika',
       asia: 'Asie'
     },
     platform: {
