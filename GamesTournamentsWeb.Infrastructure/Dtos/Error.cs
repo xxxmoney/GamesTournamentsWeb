@@ -1,4 +1,4 @@
-﻿namespace GamesTournamentsWeb.Infrastructure.Dto;
+﻿namespace GamesTournamentsWeb.Infrastructure.Dtos;
 
 public class Error(Exception ex)
 {

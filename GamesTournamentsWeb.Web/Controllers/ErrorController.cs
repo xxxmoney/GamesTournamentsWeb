@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Runtime.InteropServices.JavaScript;
-using GamesTournamentsWeb.Infrastructure.Dto;
+using GamesTournamentsWeb.Infrastructure.Dtos;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
