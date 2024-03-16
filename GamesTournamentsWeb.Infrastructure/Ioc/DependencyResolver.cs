@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GamesTournamentsWeb.DataAccess.Contexts;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GamesTournamentsWeb.Infrastructure.Ioc;
@@ -8,6 +9,9 @@ public static class DependencyResolver
     public static IServiceCollection ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
         // TODO: Add services here
+        
+        // Context
+        services.AddDbContext<WebContext>();
         
         // services.AddAutoMapper(cfg =>
         //     {

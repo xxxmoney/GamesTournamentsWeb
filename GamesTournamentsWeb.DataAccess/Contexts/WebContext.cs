@@ -1,22 +1,19 @@
-﻿using GamesTournamentsWeb.Common.Enums.Account;
+﻿using System.ComponentModel;
+using GamesTournamentsWeb.Common.Enums.Account;
 using GamesTournamentsWeb.Common.Enums.Tournament;
 using GamesTournamentsWeb.Common.Helpers;
 using GamesTournamentsWeb.DataAccess.Models.Games;
 using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using GamesTournamentsWeb.DataAccess.Models.Users;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Stream = GamesTournamentsWeb.DataAccess.Models.Tournaments.Stream;
 
 namespace GamesTournamentsWeb.DataAccess.Contexts;
 
-public class WebContext : DbContext
+public class WebContext(IConfiguration configuration) : DbContext
 {
-    private readonly string connectionString;
-
-    public WebContext(string connectionString)
-    {
-        this.connectionString = connectionString;
-    }
+    private readonly string connectionString = configuration.GetConnectionString(Constants.WebConnectionKey);
 
     public DbSet<Game> Games { get; set; }
     public DbSet<Genre> Genres { get; set; }
@@ -247,26 +244,27 @@ public class WebContext : DbContext
                 .WithMany(e => e.Matches)
                 .HasForeignKey(e => e.TournamentId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Match>()
-                .HasOne(m => m.NextMatch)
-                .WithOne()
-                .HasForeignKey<Match>(m => m.NextMatchId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Cascade);
+            match.HasIndex(e => e.NextMatchId)
+                .IsUnique(false)
+                .IsClustered(false)
+                .HasFilter($"([{nameof(Match.NextMatchId)}] IS NOT NULL)");
             
-            match.HasOne(e => e.FirstTeam)
-                .WithMany(e => e.FirstTeamMatches)
-                .HasForeignKey(e => e.FirstTeamId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Cascade);
+            match.HasIndex(e => e.FirstTeamId)
+                .IsUnique(false)
+                .IsClustered(false)
+                .HasFilter($"([{nameof(Match.FirstTeamId)}] IS NOT NULL)");
             
-            match.HasOne(e => e.SecondTeam)
-                .WithMany(e => e.SecondTeamMatches)
-                .HasForeignKey(e => e.SecondTeamId)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Cascade);
+            match.HasIndex(e => e.SecondTeamId)
+                .IsUnique(false)
+                .IsClustered(false)
+                .HasFilter($"([{nameof(Match.SecondTeamId)}] IS NOT NULL)");
+            
+            match.HasIndex(e => e.WinnerId)
+                .IsUnique(false)
+                .IsClustered(false)
+                .HasFilter($"([{nameof(Match.WinnerId)}] IS NOT NULL)");
         });
         
         modelBuilder.Entity<Platform>(platform =>
@@ -276,12 +274,17 @@ public class WebContext : DbContext
             platform.HasData(EnumHelper.SelectTo<PlatformEnum, Platform>(info => new Platform
             {
                 Id = info.Value,
-                Name = info.Name
-            }));
+                Name = info.Name,
+                Code = ((DescriptionAttribute)info.Attribute).Description
+            }, typeof(DescriptionAttribute)));
             
             platform.Property(e => e.Id).ValueGeneratedNever();
             
             platform.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            platform.Property(e => e.Code)
                 .IsRequired()
                 .HasMaxLength(100);
         });
@@ -293,12 +296,17 @@ public class WebContext : DbContext
             region.HasData(EnumHelper.SelectTo<RegionEnum, Region>(info => new Region
             {
                 Id = info.Value,
-                Name = info.Name
-            }));
+                Name = info.Name,
+                Code = ((DescriptionAttribute)info.Attribute).Description
+            }, typeof(DescriptionAttribute)));
             
             region.Property(e => e.Id).ValueGeneratedNever();
             
             region.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            region.Property(e => e.Code)
                 .IsRequired()
                 .HasMaxLength(100);
         });
@@ -363,6 +371,18 @@ public class WebContext : DbContext
             currency.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+            
+            currency.Property(e => e.Code)  
+                .IsRequired()
+                .HasMaxLength(10);
+            
+            currency.Property(e => e.Locale)
+                .IsRequired()
+                .HasMaxLength(10);
+            
+            currency.Property(e => e.Symbol)
+                .IsRequired()
+                .HasMaxLength(10);
         });
         
         base.OnModelCreating(modelBuilder);
