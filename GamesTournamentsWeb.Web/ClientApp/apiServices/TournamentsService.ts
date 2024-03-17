@@ -1,13 +1,13 @@
-import type { Tournament } from '~/models/tournaments/Tournament'
+import type { TournamentOverview } from '~/models/tournaments/TournamentOverview'
 import type { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import type { Region } from '~/models/tournaments/Region'
 import type { Platform } from '~/models/tournaments/Platform'
-import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
-import { gamePlayerStatus } from '~/enums/tournaments/gamePlayerStatus'
+import type { Tournament } from '~/models/tournaments/Tournament'
+import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 import type { Currency } from '~/models/tournaments/Currency'
 
 export const TournamentsService = {
-  getTournaments (filter: TournamentFilter): Promise<Tournament[]> {
+  getTournamentOverviews (filter: TournamentFilter): Promise<TournamentOverview[]> {
     const game = {
       id: 6,
       name: 'War Thunder',
@@ -65,27 +65,27 @@ export const TournamentsService = {
     return Promise.resolve(result)
   },
 
-  getTournamentDetailById (tournamentId: number): Promise<TournamentDetail> {
+  getTournamentById (tournamentId: number): Promise<Tournament> {
     const players = [
       {
         accountId: 1,
         gameUsername: 'PlayerElOne',
-        status: gamePlayerStatus.accepted
+        status: tournamentPlayerStatus.accepted
       },
       {
         accountId: 2,
         gameUsername: 'PlayerZoTwo',
-        status: gamePlayerStatus.accepted
+        status: tournamentPlayerStatus.accepted
       },
       {
         accountId: 3,
         gameUsername: 'Uwuwu',
-        status: gamePlayerStatus.pending
+        status: tournamentPlayerStatus.pending
       },
       {
         accountId: 4,
         gameUsername: 'AtomicNek',
-        status: gamePlayerStatus.pending
+        status: tournamentPlayerStatus.pending
       }
     ]
 

@@ -1,10 +1,10 @@
-import type { TournamentDetail } from '~/models/tournaments/TournamentDetail'
+import type { Tournament } from '~/models/tournaments/Tournament'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import type { Match } from '~/models/tournaments/Match'
 import { copyObject } from '~/utils/objectUtils'
 
 export const TournamentMapper = {
-  mapTournamenDetailToEdit (tournamentDetail: TournamentDetail, match: Match | null): TournamentEdit {
+  mapTournamenDetailToEdit (tournamentDetail: Tournament, match: Match | null): TournamentEdit {
     const edit = new TournamentEdit()
     edit.id = tournamentDetail.id
     edit.name = tournamentDetail.name

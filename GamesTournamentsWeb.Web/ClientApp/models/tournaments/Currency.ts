@@ -6,4 +6,4 @@ interface Currency {
     symbol: string;
 }
 
-export { Currency }
+export type { Currency }
