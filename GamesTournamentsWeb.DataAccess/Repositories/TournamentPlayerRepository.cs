@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.DataAccess.Models.Tournaments;
+﻿using GamesTournamentsWeb.DataAccess.Contexts;
+using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using Microsoft.EntityFrameworkCore;
 
 namespace GamesTournamentsWeb.DataAccess.Repositories;
@@ -8,10 +9,10 @@ public interface ITournamentPlayerRepository : IRepository
     Task<List<TournamentPlayer>> GetCurrenciesAsync();
 }
 
-public class TournamentPlayerRepository(DbSet<TournamentPlayer> teamPlayers) : ITournamentPlayerRepository
+public class TournamentPlayerRepository(WebContext context) : ITournamentPlayerRepository
 {
     public Task<List<TournamentPlayer>> GetCurrenciesAsync()
     {
-        return teamPlayers.ToListAsync();
+        return context.TournamentPlayers.ToListAsync();
     }
 }

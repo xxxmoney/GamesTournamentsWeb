@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.DataAccess.Contexts;
+﻿using AutoMapper.EquivalencyExpression;
+using GamesTournamentsWeb.DataAccess.Contexts;
 using GamesTournamentsWeb.DataAccess.Repositories;
 using GamesTournamentsWeb.Infrastructure.Operations;
 using Microsoft.Extensions.Configuration;
@@ -28,13 +29,14 @@ public static class DependencyResolver
         
         // Operations
         services.AddSingleton<IRepositoryProvider, RepositoryProvider>();
+        services.AddSingleton<IGenreOperation, GenreOperation>();
         
-        // services.AddAutoMapper(cfg =>
-        //     {
-        //         cfg.AddCollectionMappers();
-        //     },
-        //     AppDomain.CurrentDomain.GetAssemblies()
-        // );
+        services.AddAutoMapper(cfg =>
+            {
+                cfg.AddCollectionMappers();
+            },
+            AppDomain.CurrentDomain.GetAssemblies()
+        );
         
         // Serilog.Log.Logger = new LoggerConfiguration()
         //     .Enrich.FromLogContext()

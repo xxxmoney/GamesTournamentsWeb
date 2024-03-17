@@ -1,4 +1,5 @@
 ﻿using GamesTournamentsWeb.Common.Models;
+using GamesTournamentsWeb.DataAccess.Contexts;
 using GamesTournamentsWeb.DataAccess.Extensions;
 using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,11 @@ public interface ITournamentRepository : IRepository
     ValueTask<Tournament> GetTournamentByIdAsync(int id);
 }
 
-public class TournamentRepository(DbSet<Tournament> tournaments) : ITournamentRepository
+public class TournamentRepository(WebContext context) : ITournamentRepository
 {
     public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsAsync(int page, int count)
     {
-        return tournaments.Select(t => new TournamentOverview
+        return context.Tournaments.Select(t => new TournamentOverview
         {
             Id = t.Id,
             Name = t.Name
@@ -25,6 +26,6 @@ public class TournamentRepository(DbSet<Tournament> tournaments) : ITournamentRe
 
     public ValueTask<Tournament> GetTournamentByIdAsync(int id)
     {
-        return tournaments.FindAsync(id);
+        return context.Tournaments.FindAsync(id);
     }
 }

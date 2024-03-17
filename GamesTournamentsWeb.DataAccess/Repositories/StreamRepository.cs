@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GamesTournamentsWeb.DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
 using Stream = GamesTournamentsWeb.DataAccess.Models.Tournaments.Stream;
 
 namespace GamesTournamentsWeb.DataAccess.Repositories;
@@ -8,10 +9,10 @@ public interface IStreamRepository : IRepository
     Task<List<Stream>> GetCurrenciesAsync();
 }
 
-public class StreamRepository(DbSet<Stream> streams) : IStreamRepository
+public class StreamRepository(WebContext context) : IStreamRepository
 {
     public Task<List<Stream>> GetCurrenciesAsync()
     {
-        return streams.ToListAsync();
+        return context.Streams.ToListAsync();
     }
 }

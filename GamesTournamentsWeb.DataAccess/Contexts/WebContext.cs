@@ -22,6 +22,7 @@ public class WebContext(IConfiguration configuration) : DbContext
     public DbSet<Match> Matches { get; set; }
     public DbSet<Platform> Platforms { get; set; }
     public DbSet<Prize> Prizes { get; set; }
+    public DbSet<Currency> Currencies { get; set; }
     public DbSet<Region> Regions { get; set; }
     public DbSet<Stream> Streams { get; set; }
     public DbSet<Team> Teams { get; set; }
@@ -64,6 +65,29 @@ public class WebContext(IConfiguration configuration) : DbContext
         modelBuilder.Entity<Genre>(genre =>
         {
             genre.ToTable(nameof(Genre), Constants.DboSchema);
+            
+            genre.HasData(
+                new Genre
+                {
+                    Id = 1,
+                    Name = "MOBA"
+                },
+                new Genre
+                {
+                    Id = 2,
+                    Name = "FPS"
+                },
+                new Genre
+                {
+                    Id = 3,
+                    Name = "Sport"
+                },
+                new Genre
+                {
+                    Id = 4,
+                    Name = "Simulator"
+                }
+            );
             
             genre.Property(e => e.Name)
                 .IsRequired()
@@ -367,6 +391,37 @@ public class WebContext(IConfiguration configuration) : DbContext
         modelBuilder.Entity<Currency>(currency =>
         {
             currency.ToTable(nameof(Currency), Constants.DboSchema);
+            
+            currency.HasData(
+                new Currency
+            {
+                Id = 1,
+                Name = "Dollar",
+                Code = "USD",
+                Symbol = "$",
+                Locale = "en-US"
+            }, new Currency
+            {
+                Id = 2,
+                Name = "Euro",
+                Code = "EUR",
+                Symbol = "€",
+                Locale = "en-EU"
+            }, new Currency
+            {
+                Id = 3,
+                Name = "Pound",
+                Code = "GBP",
+                Symbol = "£",
+                Locale = "en-GB"
+            }, new Currency
+            {
+                Id = 4,
+                Name = "Czech crown",
+                Code = "CZK",
+                Symbol = "Kč",
+                Locale = "cs-CZ"
+            });
             
             currency.Property(e => e.Name)
                 .IsRequired()

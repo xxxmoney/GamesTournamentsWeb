@@ -1,5 +1,5 @@
 ﻿using GamesTournamentsWeb.DataAccess.Repositories;
-using GamesTournamentsWeb.Infrastructure.Dtos;
+using GamesTournamentsWeb.Infrastructure.Dto;
 
 namespace GamesTournamentsWeb.Infrastructure.Operations;
 

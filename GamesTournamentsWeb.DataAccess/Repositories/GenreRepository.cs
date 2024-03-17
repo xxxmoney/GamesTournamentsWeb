@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using GamesTournamentsWeb.DataAccess.Contexts;
 using GamesTournamentsWeb.DataAccess.Models.Games;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,10 @@ public interface IGenreRepository : IRepository
     Task<List<Genre>> GetGenresAsync();
 }
 
-public class GenreRepository(DbSet<Genre> genres) : IGenreRepository
+public class GenreRepository(WebContext context) : IGenreRepository
 {
     public Task<List<Genre>> GetGenresAsync()
     {
-        return genres.ToListAsync();
+        return context.Genres.ToListAsync();
     }
 }
