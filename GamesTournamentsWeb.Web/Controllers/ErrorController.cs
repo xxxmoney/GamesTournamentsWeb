@@ -16,11 +16,16 @@ public class ErrorController : ControllerBase
         var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
         var exception = context.Error;
         var code = HttpStatusCode.InternalServerError;
-            
+
         if (exception is ValidationException)
-            code = HttpStatusCode.BadRequest;
+        {
+            
+        }
         else
+        {
             // Internal server error log.
+            
+        }
             
         Response.StatusCode = (int)code;
         return new Error(exception);
