@@ -11,7 +11,7 @@ import constants from '~/constants'
 export const useDashboardStore = defineStore({
   id: 'dashboard-store',
   state: () => ({
-    loading: false,
+    loading: true,
     modules: [] as Module[],
     layouts: [] as LayoutDetail[],
     selectedLayoutId: null as number | null,
@@ -25,6 +25,8 @@ export const useDashboardStore = defineStore({
       await Promise.all([
         this.getModules()
       ])
+
+      this.loading = false
     },
 
     async getModules (): Promise<Module[]> {

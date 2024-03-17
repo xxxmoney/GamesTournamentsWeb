@@ -8,7 +8,7 @@ import type { GameOverview } from '~/models/games/GameOverview'
 export const useGamesStore = defineStore({
   id: 'games-store',
   state: () => ({
-    loading: false,
+    loading: true,
     games: [] as Game[],
     filter: new GameFilter().toJson() as GameFilter,
     genres: [] as Genre[],
@@ -21,6 +21,8 @@ export const useGamesStore = defineStore({
         this.getGameOverviews(),
         this.getGenres()
       ])
+
+      this.loading = false
     },
 
     async getGames (): Promise<Game[]> {

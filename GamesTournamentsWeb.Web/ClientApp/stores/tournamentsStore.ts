@@ -14,7 +14,7 @@ import { TournamentMapper } from '~/mappers/TournamentMapper'
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
-    loading: false,
+    loading: true,
     tournaments: [] as TournamentOverview[],
     tournamentDetail: null as Tournament | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
