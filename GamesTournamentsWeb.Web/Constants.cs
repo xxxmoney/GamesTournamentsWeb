@@ -1,6 +1,6 @@
 ﻿namespace GamesTournamentsWeb.Web;
 
-public class Constants
+public static class Constants
 {
     public const int ClientAppPort = 3000;
     public const string ClientAppFolder = "ClientApp";
