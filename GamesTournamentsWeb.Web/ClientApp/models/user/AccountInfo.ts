@@ -1,5 +1,4 @@
 interface AccountInfo {
-    id: number
     matchesPlayed: number
     winRateRatio: number
 }

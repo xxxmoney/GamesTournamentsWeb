@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GamesTournamentsWeb.Infrastructure.Operations;
 
-public interface IRepositoryProvider
+public interface IRepositoryProvider : ISingletonOperation
 {
     IRepositoryProviderScope CreateScope();
 }

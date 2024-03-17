@@ -8,7 +8,7 @@ const { id } = defineProps({
 
 const tournamentsStore = useTournamentsStore()
 
-await tournamentsStore.getTournamentDetailById(id)
+await tournamentsStore.getTournamentById(id)
 
 const detail = computed(() => tournamentsStore.tournamentDetail)
 </script>

@@ -8,14 +8,14 @@ namespace GamesTournamentsWeb.DataAccess.Repositories;
 
 public interface IGameRepository : IRepository
 {
-    Task<PagedResult<GameOverview>> GetGameOverviewsAsync(int page, int count);
+    Task<PagedResult<GameOverview>> GetGameOverviewsPagedAsync(int page, int count);
     
     ValueTask<Game> GetGameByIdAsync(int id);
 }
 
 public class GameRepository(WebContext context) : IGameRepository
 {
-    public async Task<PagedResult<GameOverview>> GetGameOverviewsAsync(int page, int count)
+    public async Task<PagedResult<GameOverview>> GetGameOverviewsPagedAsync(int page, int count)
     {
         return await context.Games.Select(g => new GameOverview
         {
