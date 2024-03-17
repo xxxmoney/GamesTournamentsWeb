@@ -1,3 +1,5 @@
+using GamesTournamentsWeb.Common.Enums.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
@@ -10,6 +12,7 @@ public class WeatherForecastController : BaseController
     };
 
     [HttpGet(Name = "GetWeatherForecast")]
+    [Authorize(Roles = nameof(RoleEnum.User))]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast

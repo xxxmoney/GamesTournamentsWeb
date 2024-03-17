@@ -2,11 +2,12 @@
 using GamesTournamentsWeb.DataAccess.Repositories;
 using GamesTournamentsWeb.Infrastructure.Dto.Users;
 
-namespace GamesTournamentsWeb.Infrastructure.Operations.Accounts;
+namespace GamesTournamentsWeb.Infrastructure.Operations.Users;
 
 public interface IAccountOperation : IOperation
 {
-    Task<ICollection<Account>> GetAccounts();
+    Task<ICollection<Account>> GetAccountsAsync();
+    Task<Account> GetAccountByIdAsync(int accountId);
     
     Task<AccountInfo> GetAccountInfoByIdAsync(int accountId);
     
@@ -15,13 +16,22 @@ public interface IAccountOperation : IOperation
 
 public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : IAccountOperation
 {
-    public async Task<ICollection<Account>> GetAccounts()
+    public async Task<ICollection<Account>> GetAccountsAsync()
     {
         using var scope = repositoryProvider.CreateScope();
         var accountRepository = scope.Provide<IAccountRepository>();
         
         var models = await accountRepository.GetAccountsAsync();
         return mapper.Map<List<Account>>(models);
+    }
+
+    public async Task<Account> GetAccountByIdAsync(int accountId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var accountRepository = scope.Provide<IAccountRepository>();
+        
+        var model = await accountRepository.GetAccountByIdAsync(accountId);
+        return mapper.Map<Account>(model);
     }
 
     public async Task<AccountInfo> GetAccountInfoByIdAsync(int accountId)
