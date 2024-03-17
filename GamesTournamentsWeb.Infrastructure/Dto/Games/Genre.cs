@@ -1,4 +1,4 @@
-﻿namespace GamesTournamentsWeb.Infrastructure.Dto;
+﻿namespace GamesTournamentsWeb.Infrastructure.Dto.Games;
 
 public class Genre
 {

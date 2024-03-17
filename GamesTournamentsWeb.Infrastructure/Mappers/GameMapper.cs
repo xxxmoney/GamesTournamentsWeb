@@ -6,8 +6,8 @@ public class GameMapper : Profile
 {
     public GameMapper()
     {
-        CreateMap<DataAccess.Models.Games.Genre, Dto.Genre>();
-        
-        // TODO: add other mappings
+        CreateMap<DataAccess.Models.Games.Game, Dto.Games.Game>();
+        CreateMap<DataAccess.Models.Games.GameOverview, Dto.Games.GameOverview>();
+        CreateMap<DataAccess.Models.Games.Genre, Dto.Games.Genre>();
     }
 }
