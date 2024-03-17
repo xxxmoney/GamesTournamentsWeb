@@ -15,18 +15,7 @@ public class ErrorController : ControllerBase
     {
         var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
         var exception = context.Error;
-        var code = HttpStatusCode.InternalServerError;
-
-        if (exception is ValidationException)
-        {
-            
-        }
-        else
-        {
-            // Internal server error log.
-            
-        }
-            
+        var code = exception is ValidationException ? HttpStatusCode.BadRequest : HttpStatusCode.InternalServerError;         
         Response.StatusCode = (int)code;
         return new Error(exception);
     }
