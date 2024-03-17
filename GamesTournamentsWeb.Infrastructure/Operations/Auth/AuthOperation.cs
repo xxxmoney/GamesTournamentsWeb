@@ -22,6 +22,10 @@ public class AuthOperation(IRepositoryProvider repositoryProvider, TimeProvider 
         var accountRepository = scope.Provide<IAccountRepository>();
 
         var account = await accountRepository.GetAccountByEmailAsync(login.Email);
+        if (account == null)
+        {
+            throw new AccountNotFoundException();
+        }
 
         if (!PasswordHashHelper.VerifyPasswordHash(login.Password, account.PasswordHash, account.PasswordSalt))
         {

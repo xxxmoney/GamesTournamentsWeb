@@ -33,12 +33,12 @@ public class AccountRepository(WebContext context) : IAccountRepository
 
     public Task<Account> GetAccountByEmailAsync(string email)
     {
-        return context.Accounts.SingleAsync(account => account.Email == email);
+        return context.Accounts.SingleOrDefaultAsync(account => account.Email == email);
     }
 
     public async Task<bool> ExistsAccountWithEmailAsync(string email)
     {
-        return await context.Accounts.SingleOrDefaultAsync(account => account.Email == email) != null;
+        return await this.GetAccountByEmailAsync(email) != null;
     }
 
     public async Task AddAsync(Account account)

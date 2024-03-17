@@ -31,7 +31,7 @@ public static class DependencyResolver
         services.AddSingleton(TimeProvider.System);
         
         // Context
-        services.AddDbContext<WebContext>(ServiceLifetime.Transient);
+        services.AddDbContext<WebContext>(ServiceLifetime.Scoped);
 
         // Register repositories
         services.RegisterInheritedFromType(typeof(IRepository));

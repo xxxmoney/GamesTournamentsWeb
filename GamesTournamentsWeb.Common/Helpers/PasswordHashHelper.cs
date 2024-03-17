@@ -8,7 +8,7 @@ public static class PasswordHashHelper
         if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
 
         using var hmac = new System.Security.Cryptography.HMACSHA512();
-        return (hmac.Key, hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)));
+        return (hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)), hmac.Key);
     }
 
     public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)

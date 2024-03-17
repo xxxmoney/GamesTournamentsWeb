@@ -349,12 +349,12 @@ public class WebContext(IConfiguration configuration) : DbContext
 
             account.Property(e => e.PasswordHash)
                 .IsRequired()
-                .HasMaxLength(64)
+                .HasMaxLength(128)
                 .IsFixedLength();
 
             account.Property(e => e.PasswordSalt)
                 .IsRequired()
-                .HasMaxLength(128)
+                .HasMaxLength(64)
                 .IsFixedLength();
 
             account.HasOne(e => e.Role)
