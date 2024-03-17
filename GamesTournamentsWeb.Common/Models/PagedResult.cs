@@ -7,5 +7,17 @@ public class PagedResult<T>
     public int PageSize { get; set; }
     public int RowCount { get; set; }
     public int PageCount { get; set; }
-    public List<T> Results { get; set; }
+    public ICollection<T> Results { get; set; }
+    
+    public PagedResult<R> WithData<R>(ICollection<R> data) where R : class, new()
+    {
+        return new PagedResult<R>
+        {
+            CurrentPage = this.CurrentPage,
+            PageSize = this.PageSize,
+            RowCount = this.RowCount,
+            PageCount = this.PageCount,
+            Results = data
+        };
+    }
 }

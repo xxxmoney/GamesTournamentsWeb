@@ -14,7 +14,7 @@ const regions = computed(() => tournamentsStore.regions)
 const platforms = computed(() => tournamentsStore.platforms)
 const gameOverviews = computed(() => gamesStore.gameOverviews)
 
-const getTournaments = () => tournamentsStore.getTournaments()
+const getTournamentOverviews = () => tournamentsStore.getTournamentOverviews()
 
 </script>
 
@@ -79,6 +79,6 @@ const getTournaments = () => tournamentsStore.getTournaments()
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
 
-    <Button :label="$t('common.search')" icon="pi pi-search" @click="getTournaments" />
+    <Button :label="$t('common.search')" icon="pi pi-search" @click="getTournamentOverviews" />
   </div>
 </template>

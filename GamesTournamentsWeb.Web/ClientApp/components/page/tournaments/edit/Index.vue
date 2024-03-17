@@ -10,7 +10,7 @@ const { id } = defineProps({
 
 const store = useTournamentsStore()
 if (id) {
-  await store.getTournamentDetailById(id)
+  await store.getTournamentById(id)
 }
 
 store.resetTournamentEdit()

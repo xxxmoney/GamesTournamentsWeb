@@ -605,7 +605,7 @@ namespace GamesTournamentsWeb.DataAccess.Migrations
 
                     b.HasIndex("TournamentsId");
 
-                    b.ToTable("RegionTournament");
+                    b.ToTable("RegionTournament", (string)null);
                 });
 
             modelBuilder.Entity("AccountTournament", b =>

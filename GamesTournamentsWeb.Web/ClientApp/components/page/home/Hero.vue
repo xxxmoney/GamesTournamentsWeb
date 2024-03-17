@@ -5,6 +5,13 @@ const { required, email } = useValidators()
 const successToast = useSuccessToast()
 const errorToast = useErrorToast()
 
+const { showTryNow } = defineProps({
+  showTryNow: {
+    type: Boolean,
+    required: true
+  }
+})
+
 const tryModel = ref({
   email: ''
 })
@@ -37,7 +44,7 @@ const { validate } = useValidate(v$.value.$validate)
     <h1 class="heading">{{ $t('home.hero.title') }}</h1>
     <p>{{ $t('home.hero.description') }}</p>
 
-    <CommonWithErrors :errors="v$.email.$errors">
+    <CommonWithErrors v-if="showTryNow" :errors="v$.email.$errors">
       <CommonInputText
         v-model="tryModel.email"
         :label="$t('common.email')"
@@ -46,6 +53,6 @@ const { validate } = useValidate(v$.value.$validate)
       />
     </CommonWithErrors>
 
-    <Button :label="$t('common.try_now')" @click="trySubmit" />
+    <Button v-if="showTryNow" :label="$t('common.try_now')" @click="trySubmit" />
   </div>
 </template>

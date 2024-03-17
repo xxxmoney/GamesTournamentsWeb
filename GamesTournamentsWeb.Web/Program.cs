@@ -1,6 +1,7 @@
 using GamesTournamentsWeb.Infrastructure.Ioc;
 using GamesTournamentsWeb.Web;
 using GamesTournamentsWeb.Web.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,16 +11,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddSwaggerGen(setup =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
+    var jwtSecurityScheme = new OpenApiSecurityScheme
     {
-        Version = "v1",
-        Title = "API",
-        Description = ""
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "JWT Authentication",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+    setup.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+    setup.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
     });
-
-    options.CustomSchemaIds(type => type.ToString());
 });
 
 //builder.Services.AddSpaStaticFiles(options => options.RootPath = $"{Constants.ClientAppFolder}/dist");

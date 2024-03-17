@@ -6,13 +6,26 @@ namespace GamesTournamentsWeb.DataAccess.Repositories;
 
 public interface IMatchRepository : IRepository
 {
-    Task<List<Match>> GetCurrenciesAsync();
+    Task<List<Match>> GetMatchesAsync();
+    
+    Task<List<Match>> GetMatchesByAccountIdAsync(int accountId);
 }
 
 public class MatchRepository(WebContext context) : IMatchRepository
 {
-    public Task<List<Match>> GetCurrenciesAsync()
+    public Task<List<Match>> GetMatchesAsync()
     {
         return context.Matches.ToListAsync();
+    }
+
+    public Task<List<Match>> GetMatchesByAccountIdAsync(int accountId)
+    {
+        var teamIds = context.Teams.Include(team => team.Players)
+            .Where(team => team.Players.Any(player => player.AccountId == accountId))
+            .Select(team => team.Id)
+            .ToArray();
+
+        return context.Matches.Include(match => match.Tournament).Include(match => match.Tournament.Game).Where(match =>
+            teamIds.Contains(match.FirstTeamId ?? -1) || teamIds.Contains(match.SecondTeamId ?? -1)).ToListAsync();
     }
 }
