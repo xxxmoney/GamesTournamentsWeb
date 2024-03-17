@@ -19,7 +19,7 @@ public class AccountsController(IAccountOperation accountOperation) : BaseContro
     }
     
     [AllowAnonymous]
-    [HttpGet("all")]
+    [HttpGet("")]
     public async Task<IActionResult> GetAccounts()
     {
         return Ok(await accountOperation.GetAccountsAsync());

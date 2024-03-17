@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.Common.Models;
+﻿using System.Linq.Expressions;
+using GamesTournamentsWeb.Common.Models;
 using GamesTournamentsWeb.DataAccess.Contexts;
 using GamesTournamentsWeb.DataAccess.Extensions;
 using GamesTournamentsWeb.DataAccess.Models.Tournaments;
@@ -8,16 +9,16 @@ namespace GamesTournamentsWeb.DataAccess.Repositories;
 
 public interface ITournamentRepository : IRepository
 {
-    Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(int page, int count);
+    Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count);
     
     ValueTask<Tournament> GetTournamentByIdAsync(int id);
 }
 
 public class TournamentRepository(WebContext context) : ITournamentRepository
 {
-    public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(int page, int count)
+    public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count)
     {
-        return context.Tournaments.Select(t => new TournamentOverview
+        return context.Tournaments.Where(filter).Select(t => new TournamentOverview
         {
             Id = t.Id,
             Name = t.Name

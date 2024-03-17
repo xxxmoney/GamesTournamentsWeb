@@ -10,12 +10,13 @@ import constants from '~/constants'
 import type { Currency } from '~/models/tournaments/Currency'
 import type { Match } from '~/models/tournaments/Match'
 import { TournamentMapper } from '~/mappers/TournamentMapper'
+import type { PagedResult } from '~/models/PagedResult'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
     loading: true,
-    tournaments: [] as TournamentOverview[],
+    pagedTournaments: null as PagedResult<TournamentOverview> | null,
     tournamentDetail: null as Tournament | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
     tournamentEditStep: 0,
@@ -134,11 +135,14 @@ export const useTournamentsStore = defineStore({
 
   },
   getters: {
+    tournaments: (state) => {
+      return state.pagedTournaments?.results ?? []
+    },
     tournamentById: (state) => (id: number): TournamentOverview => {
-      return state.tournaments.find(game => game.id === id) as TournamentOverview
+      return (state.pagedTournaments?.results ?? []).find(game => game.id === id) as TournamentOverview
     },
     tournamentDetailCurrentMatch: (state): Match | null => {
-      return state.tournamentDetail?.matches?.find(match => match.isRunning)
+      return state.tournamentDetail?.matches?.find(match => match.isRunning) ?? null
     },
     currencyById: (state) => (id: number): Currency => {
       return state.currencies.find(currency => currency.id === id) as Currency

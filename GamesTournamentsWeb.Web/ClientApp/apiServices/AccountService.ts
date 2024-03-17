@@ -1,7 +1,6 @@
 import type { AccountInfo } from '~/models/user/AccountInfo'
 import type { HistoryItem } from '~/models/user/HistoryItem'
 import type { Account } from '~/models/user/Account'
-import { useApi } from '~/composables/useApi'
 
 export const AccountService = {
   async getAccountInfo (accountId: number): Promise<AccountInfo> {
@@ -18,7 +17,7 @@ export const AccountService = {
 
   async getAccounts (): Promise<Account[]> {
     const api = useApi()
-    const result = await api.get<Account[]>('accounts/all')
+    const result = await api.get<Account[]>('accounts/')
     return result.data
   }
 }
