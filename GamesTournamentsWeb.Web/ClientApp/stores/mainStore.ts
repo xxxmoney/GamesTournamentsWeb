@@ -83,6 +83,14 @@ export const useMainStore = defineStore({
         this.loading = false
       }
     },
+    async testAuthentication (): Promise<boolean> {
+      const result = await AuthService.testAuthentication()
+      if (!result) {
+        this.logout()
+      }
+
+      return result
+    },
     logout (): void {
       this.setLoginResult(null)
     },

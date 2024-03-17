@@ -25,14 +25,20 @@ public class AuthController(IAuthOperation authOperation) : BaseController
             var result = await authOperation.LoginAsync(login);
             return Ok(result);
         }
-        catch (AccountNotFoundException e)
+        catch (AccountNotFoundException)
         {
             return Unauthorized();
         }
-        catch (AccountAuthenticationInvalid e)
+        catch (AccountAuthenticationInvalid)
         {
             return Unauthorized(); 
         }
+    }
+    
+    [HttpGet("test")]
+    public IActionResult Test()
+    {
+        return Ok("Nice");
     }
     
 }

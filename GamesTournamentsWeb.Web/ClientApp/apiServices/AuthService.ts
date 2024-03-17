@@ -18,6 +18,16 @@ export const AuthService = {
     return result.data
   },
 
+  async testAuthentication (): Promise<boolean> {
+    const api = useApi()
+    try {
+      await api.get('auth/test')
+    } catch {
+      return false
+    }
+    return true
+  },
+
   changePassword (request: ChangePassword): Promise<void> {
     return Promise.resolve()
   }

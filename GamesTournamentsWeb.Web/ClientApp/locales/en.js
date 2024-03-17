@@ -1,5 +1,5 @@
 export default {
-  test: 'Test EN',
+  testAuthentication: 'Test EN',
   common: {
     search: 'Search',
     select: 'Select',
