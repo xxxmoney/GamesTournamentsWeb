@@ -27,7 +27,7 @@ public class AuthController(IAuthOperation authOperation) : BaseController
         }
         catch (AccountNotFoundException e)
         {
-            return NotFound();
+            return Unauthorized();
         }
         catch (AccountAuthenticationInvalid e)
         {
