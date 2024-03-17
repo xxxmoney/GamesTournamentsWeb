@@ -6,14 +6,16 @@ import type { ChangePassword } from '~/models/user/ChangePassword'
 import { useApi } from '~/composables/useApi'
 
 export const AuthService = {
-  login (login: Login): Promise<LoginResult> {
+  async login (login: Login): Promise<LoginResult> {
     const api = useApi()
-    return api.post('auth/login', login)
+    const result = await api.post('auth/login', login)
+    return result.data
   },
 
-  register (register: Register): Promise<RegisterResult> {
+  async register (register: Register): Promise<RegisterResult> {
     const api = useApi()
-    return api.post('auth/register', register)
+    const result = await api.post('auth/register', register)
+    return result.data
   },
 
   changePassword (request: ChangePassword): Promise<void> {
