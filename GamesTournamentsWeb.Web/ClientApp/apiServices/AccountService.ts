@@ -17,7 +17,7 @@ export const AccountService = {
 
   async getAccounts (): Promise<Account[]> {
     const api = useApi()
-    const result = await api.get<Account[]>('accounts/')
+    const result = await api.get<Account[]>('accounts')
     return result.data
   }
 }

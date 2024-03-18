@@ -8,7 +8,7 @@ namespace GamesTournamentsWeb.Web.Controllers;
 public class TournamentsController(ITournamentOperation tournamentOperation) : BaseController
 {
     [AllowAnonymous]
-    [HttpGet("overviews")]
+    [HttpPost("overviews")]
     public async Task<IActionResult> GetTournamentOverviews(TournamentFilter filter)
     {
         return Ok(await tournamentOperation.GetTournamentOverviewsPagedAsync(filter));

@@ -7,8 +7,8 @@ import type { PagedResult } from '~/models/PagedResult'
 export const GamesSerivce = {
   async getGames (filter: GameFilter): Promise<PagedResult<Game>> {
     const api = useApi()
-    const result = await api.post<PagedResult<Game>>('games/', filter)
-    return result.data.results
+    const result = await api.post<PagedResult<Game>>('games', filter)
+    return result.data
   },
 
   async getGameOverviews (): Promise<GameOverview[]> {
@@ -19,7 +19,7 @@ export const GamesSerivce = {
 
   async getGenres (): Promise<Genre[]> {
     const api = useApi()
-    const result = await api.get<Genre[]>('games/genres')
+    const result = await api.get<Genre[]>('genres')
     return result.data
   }
 

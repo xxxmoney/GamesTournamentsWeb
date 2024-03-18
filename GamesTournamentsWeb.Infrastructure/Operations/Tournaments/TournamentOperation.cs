@@ -19,7 +19,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
     {
         using var scope = repositoryProvider.CreateScope();
         var tournamentRepository = scope.Provide<ITournamentRepository>();
-        var pagedModels = await tournamentRepository.GetTournamentOverviewsFilteredPagedAsync(FilterTournaments(filter), filter.Page, Constants.PageCount);
+        var pagedModels = await tournamentRepository.GetTournamentOverviewsFilteredPagedAsync(FilterTournaments(filter), filter.Page, Constants.PerPageCount);
         
         return pagedModels.WithData(mapper.Map<List<TournamentOverview>>(pagedModels.Results));
     }

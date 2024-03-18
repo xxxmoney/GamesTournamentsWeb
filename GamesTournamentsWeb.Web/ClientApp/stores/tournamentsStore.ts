@@ -41,7 +41,7 @@ export const useTournamentsStore = defineStore({
       try {
         this.loading = true
 
-        this.tournaments = await TournamentsService.getTournamentOverviews(this.filter)
+        this.pagedTournaments = await TournamentsService.getTournamentOverviews(this.filter)
         return this.tournaments
       } finally {
         this.loading = false

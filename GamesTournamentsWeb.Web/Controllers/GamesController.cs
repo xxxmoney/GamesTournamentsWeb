@@ -15,7 +15,7 @@ public class GamesController(IGameOperation gameOperation) : BaseController
     }
     
     [AllowAnonymous]
-    [HttpPost("overviews")]
+    [HttpGet("overviews")]
     public async Task<IActionResult> GetGameOverviews()
     {
         return Ok(await gameOperation.GetGameOverviewsAsync());

@@ -22,7 +22,7 @@ public class GameOperation(IRepositoryProvider repositoryProvider, IMapper mappe
         var gameRepository = scope.Provide<IGameRepository>();
 
         var pagedModels = await gameRepository.GetGamesFilteredPagedAsync(FilterGames(filter), 
-            filter.Page, Constants.PageCount);
+            filter.Page, Constants.PerPageCount);
 
         return pagedModels.WithData(mapper.Map<List<Game>>(pagedModels.Results));
     }
