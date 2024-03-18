@@ -8,12 +8,11 @@ const isLoggedIn = useIsLoggedIn()
 const filter = computed(() => gamesStore.filter)
 const genres = computed(() => gamesStore.genres)
 
-watch(filter, () => {
+const getGames = async () => {
   filter.value.page = 1
   gamesStore.paginatorFirst = 0
-}, { deep: true })
-
-const getGames = () => gamesStore.getGames()
+  await gamesStore.getGames()
+}
 </script>
 
 <template>
