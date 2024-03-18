@@ -8,8 +8,12 @@ const tournamentOverviews = computed(() => tournamentsStore.tournaments)
 
 await tournamentsStore.initialize()
 
-// const first = computed(() => (tournamentsStore.filter.page - 1) * (pagedTournamentOverviews.value?.pageSize ?? 0))
-const first = ref(0)
+const first = computed({
+  get: () => tournamentsStore.paginatorFirst,
+  set: (value) => {
+    tournamentsStore.paginatorFirst = value
+  }
+})
 
 const onPage = async (value: PageState) => {
   tournamentsStore.filter.page = value.page

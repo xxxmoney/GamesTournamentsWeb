@@ -11,6 +11,7 @@ export const useGamesStore = defineStore({
   state: () => ({
     loading: true,
     pagedGames: null as PagedResult<Game> | null,
+    paginatorFirst: 0 as number,
     filter: new GameFilter().toJson() as GameFilter,
     genres: [] as Genre[],
     gameOverviews: [] as GameOverview[]

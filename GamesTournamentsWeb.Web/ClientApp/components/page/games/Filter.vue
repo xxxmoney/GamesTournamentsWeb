@@ -10,6 +10,7 @@ const genres = computed(() => gamesStore.genres)
 
 watch(filter, () => {
   filter.value.page = 1
+  gamesStore.paginatorFirst = 0
 }, { deep: true })
 
 const getGames = () => gamesStore.getGames()

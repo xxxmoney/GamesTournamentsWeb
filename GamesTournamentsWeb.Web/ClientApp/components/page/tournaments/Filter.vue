@@ -16,6 +16,7 @@ const gameOverviews = computed(() => gamesStore.gameOverviews)
 
 watch(filter, () => {
   filter.value.page = 1
+  tournamentsStore.paginatorFirst = 0
 }, { deep: true })
 
 const getTournamentOverviews = () => tournamentsStore.getTournamentOverviews()

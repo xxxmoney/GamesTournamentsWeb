@@ -17,6 +17,7 @@ export const useTournamentsStore = defineStore({
   state: () => ({
     loading: true,
     pagedTournaments: null as PagedResult<TournamentOverview> | null,
+    paginatorFirst: 0 as Number,
     tournamentDetail: null as Tournament | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
     tournamentEditStep: 0,

@@ -8,8 +8,12 @@ const games = computed(() => gamesStore.games)
 
 await gamesStore.initialize()
 
-//const first = computed(() => (gamesStore.filter.page - 1) * (pagedGames.value?.pageSize ?? 0))
-const first = ref(0)
+const first = computed({
+  get: () => gamesStore.paginatorFirst,
+  set: (value) => {
+    gamesStore.paginatorFirst = value
+  }
+})
 
 const onPage = async (value: PageState) => {
   gamesStore.filter.page = value.page + 1
