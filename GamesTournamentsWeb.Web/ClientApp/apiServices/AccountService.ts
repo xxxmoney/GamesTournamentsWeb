@@ -3,28 +3,21 @@ import type { HistoryItem } from '~/models/user/HistoryItem'
 import type { Account } from '~/models/user/Account'
 
 export const AccountService = {
-  getAccountInfo (accountId: number): Promise<AccountInfo> {
-    const result = { id: accountId, matchesPlayed: 10, winRateRatio: 0.5 }
-
-    return Promise.resolve(result)
+  async getAccountInfo (accountId: number): Promise<AccountInfo> {
+    const api = useApi()
+    const result = await api.get<AccountInfo>(`accounts/${accountId}/info`)
+    return result.data
   },
 
-  getHistory (accountId: number): Promise<HistoryItem[]> {
-    const result = [
-      { accountId, gameId: 2, gameName: 'War Thunder', tournamentId: 1 }
-    ]
-
-    return Promise.resolve(result)
+  async getHistory (accountId: number): Promise<HistoryItem[]> {
+    const api = useApi()
+    const result = await api.get<HistoryItem[]>(`accounts/${accountId}/history`)
+    return result.data
   },
 
-  getAccounts (): Promise<Account[]> {
-    const result = [
-      { id: 1, username: 'PlayerElOne', email: 'email', password: 'password', role: 'user' },
-      { id: 2, username: 'PlayerZoTwo', email: 'email', password: 'password', role: 'user' },
-      { id: 3, username: 'Uwuwu', email: 'email', password: 'password', role: 'user' },
-      { id: 4, username: 'AtomicNek', email: 'email', password: 'password', role: 'user' }
-    ]
-
-    return Promise.resolve(result)
+  async getAccounts (): Promise<Account[]> {
+    const api = useApi()
+    const result = await api.get<Account[]>('accounts')
+    return result.data
   }
 }

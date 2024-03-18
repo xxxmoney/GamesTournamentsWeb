@@ -9,7 +9,7 @@ namespace GamesTournamentsWeb.Web.Controllers;
 public class AuthController(IAuthOperation authOperation) : BaseController
 {
     [AllowAnonymous]
-    [HttpPost(nameof(Register))]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(Register register)
     {
         var result = await authOperation.RegisterAsync(register);
@@ -17,7 +17,7 @@ public class AuthController(IAuthOperation authOperation) : BaseController
     }
     
     [AllowAnonymous]
-    [HttpPost(nameof(Login))]
+    [HttpPost("login")]
     public async Task<IActionResult> Login(Login login)
     {
         try
@@ -25,14 +25,20 @@ public class AuthController(IAuthOperation authOperation) : BaseController
             var result = await authOperation.LoginAsync(login);
             return Ok(result);
         }
-        catch (AccountNotFoundException e)
+        catch (AccountNotFoundException)
         {
-            return NotFound();
+            return Unauthorized();
         }
-        catch (AccountAuthenticationInvalid e)
+        catch (AccountAuthenticationInvalid)
         {
             return Unauthorized(); 
         }
+    }
+    
+    [HttpGet("test")]
+    public IActionResult Test()
+    {
+        return Ok("Nice");
     }
     
 }

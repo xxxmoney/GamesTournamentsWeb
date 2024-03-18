@@ -11,7 +11,7 @@ import { AuthService } from '~/apiServices/AuthService'
 export const useMainStore = defineStore({
   id: 'main-store',
   state: () => ({
-    loading: false,
+    loading: true,
     loginResult: null as LoginResult | null,
     mobileMenuActive: false,
     locale: constants.defaultLocale
@@ -20,6 +20,8 @@ export const useMainStore = defineStore({
     initialize (): Promise<void> {
       this.getLoginResult()
       this.getLocale()
+
+      this.loading = false
 
       return Promise.resolve()
     },
@@ -38,23 +40,22 @@ export const useMainStore = defineStore({
       return locale.value
     },
     setLocale (locale: string): void {
-      const localeCookie = useCookie<string>(constants.localeKey)
-
-      this.locale = locale
-      localeCookie.value = locale
+      //const localeCookie = useCookie<string>(constants.localeKey)
+      this.locale = getLocalData(constants.localeKey, constants.defaultLocale)
     },
 
     getLoginResult (): LoginResult | null {
-      const login = useCookie<LoginResult | null>(constants.loginKey)
+      //const login = useCookie<LoginResult | null>(constants.loginKey)
+      const result = getLocalData(constants.loginKey, null)
 
-      this.loginResult = login.value
-      return login.value
+      this.loginResult = result
+      return result
     },
     setLoginResult (loginResult: LoginResult | null): void {
-      const login = useCookie<LoginResult | null>(constants.loginKey)
+      //const login = useCookie<LoginResult | null>(constants.loginKey)
+      const result = setLocalData(constants.loginKey, loginResult)
 
-      this.loginResult = loginResult
-      login.value = loginResult
+      this.loginResult = result
     },
 
     async login (login: Login): Promise<LoginResult> {
@@ -81,6 +82,14 @@ export const useMainStore = defineStore({
       } finally {
         this.loading = false
       }
+    },
+    async testAuthentication (): Promise<boolean> {
+      const result = await AuthService.testAuthentication()
+      if (!result) {
+        this.logout()
+      }
+
+      return result
     },
     logout (): void {
       this.setLoginResult(null)

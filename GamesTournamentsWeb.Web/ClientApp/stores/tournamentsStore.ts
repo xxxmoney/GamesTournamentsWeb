@@ -10,12 +10,14 @@ import constants from '~/constants'
 import type { Currency } from '~/models/tournaments/Currency'
 import type { Match } from '~/models/tournaments/Match'
 import { TournamentMapper } from '~/mappers/TournamentMapper'
+import type { PagedResult } from '~/models/PagedResult'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
   state: () => ({
-    loading: false,
-    tournaments: [] as TournamentOverview[],
+    loading: true,
+    pagedTournaments: null as PagedResult<TournamentOverview> | null,
+    paginatorFirst: 0 as Number,
     tournamentDetail: null as Tournament | null,
     tournamentEdit: new TournamentEdit().toJson() as TournamentEdit,
     tournamentEditStep: 0,
@@ -40,7 +42,7 @@ export const useTournamentsStore = defineStore({
       try {
         this.loading = true
 
-        this.tournaments = await TournamentsService.getTournamentOverviews(this.filter)
+        this.pagedTournaments = await TournamentsService.getTournamentOverviews(this.filter)
         return this.tournaments
       } finally {
         this.loading = false
@@ -134,11 +136,14 @@ export const useTournamentsStore = defineStore({
 
   },
   getters: {
+    tournaments: (state) => {
+      return state.pagedTournaments?.results ?? []
+    },
     tournamentById: (state) => (id: number): TournamentOverview => {
-      return state.tournaments.find(game => game.id === id) as TournamentOverview
+      return (state.pagedTournaments?.results ?? []).find(game => game.id === id) as TournamentOverview
     },
     tournamentDetailCurrentMatch: (state): Match | null => {
-      return state.tournamentDetail?.matches?.find(match => match.isRunning)
+      return state.tournamentDetail?.matches?.find(match => match.isRunning) ?? null
     },
     currencyById: (state) => (id: number): Currency => {
       return state.currencies.find(currency => currency.id === id) as Currency

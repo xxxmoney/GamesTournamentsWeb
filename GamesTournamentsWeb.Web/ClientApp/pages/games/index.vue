@@ -1,9 +1,24 @@
 <script lang="ts" setup>
+import type { PageState } from 'primevue/paginator'
+
 const gamesStore = useGamesStore()
 
+const pagedGames = computed(() => gamesStore.pagedGames)
 const games = computed(() => gamesStore.games)
 
 await gamesStore.initialize()
+
+const first = computed({
+  get: () => gamesStore.paginatorFirst,
+  set: (value) => {
+    gamesStore.paginatorFirst = value
+  }
+})
+
+const onPage = async (value: PageState) => {
+  gamesStore.filter.page = value.page + 1
+  await gamesStore.getGames()
+}
 </script>
 
 <template>
@@ -22,6 +37,11 @@ await gamesStore.initialize()
       />
     </div>
 
-    <Paginator :rows="10" :totalRecords="120"></Paginator>
+    <Paginator
+      v-model:first="first"
+      :rows="pagedGames?.pageSize ?? 0"
+      :totalRecords="pagedGames?.rowCount ?? 0"
+      @page="onPage"
+    ></Paginator>
   </div>
 </template>

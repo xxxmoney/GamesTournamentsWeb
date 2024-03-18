@@ -8,6 +8,7 @@ class TournamentFilter extends ConvertableToJson {
   public platformIds: number[]
   public genreIds: number[]
   public withMyTournaments: boolean
+  public page: number
 
   constructor () {
     super()
@@ -19,6 +20,7 @@ class TournamentFilter extends ConvertableToJson {
     this.platformIds = []
     this.genreIds = []
     this.withMyTournaments = false
+    this.page = 1
   }
 }
 

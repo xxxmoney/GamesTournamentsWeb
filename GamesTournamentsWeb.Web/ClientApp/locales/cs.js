@@ -1,5 +1,5 @@
 export default {
-  test: 'Test CS',
+  testAuthentication: 'Test CS',
   common: {
     search: 'Vyhledat',
     select: 'Vybrat',

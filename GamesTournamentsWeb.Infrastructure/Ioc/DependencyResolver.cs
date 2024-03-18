@@ -92,6 +92,8 @@ public static class DependencyResolver
                             context.Fail("Unauthorized");
                         }
                     }
+                    
+                    context.Success();
                 }
             };
             x.RequireHttpsMetadata = false;

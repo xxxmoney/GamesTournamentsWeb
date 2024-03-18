@@ -7,7 +7,7 @@ import type { Account } from '~/models/user/Account'
 export const useAccountStore = defineStore({
   id: 'account-store',
   state: () => ({
-    loading: false,
+    loading: true,
     accounts: [] as Account[],
     info: null as AccountInfo | null,
     history: [] as HistoryItem[],
@@ -19,6 +19,8 @@ export const useAccountStore = defineStore({
       await Promise.all([
         this.getAccounts()
       ])
+
+      this.loading = false
     },
 
     async getAccountInfo (accountId: number): Promise<AccountInfo> {

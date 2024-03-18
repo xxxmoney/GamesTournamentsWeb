@@ -1,9 +1,24 @@
 <script lang="ts" setup>
+import type { PageState } from 'primevue/paginator'
+
 const tournamentsStore = useTournamentsStore()
 
-const tournaments = computed(() => tournamentsStore.tournaments)
+const pagedTournamentOverviews = computed(() => tournamentsStore.pagedTournaments)
+const tournamentOverviews = computed(() => tournamentsStore.tournaments)
 
 await tournamentsStore.initialize()
+
+const first = computed({
+  get: () => tournamentsStore.paginatorFirst,
+  set: (value) => {
+    tournamentsStore.paginatorFirst = value
+  }
+})
+
+const onPage = async (value: PageState) => {
+  tournamentsStore.filter.page = value.page
+  await tournamentsStore.getTournamentOverviews()
+}
 </script>
 
 <template>
@@ -16,12 +31,17 @@ await tournamentsStore.initialize()
 
     <div class="grid gap-xl grid-cols-1 lg:grid-cols-3">
       <PageTournamentsOverview
-        v-for="tournament in tournaments"
-        :id="tournament.id"
-        :key="`tournament-${tournament.id}`"
+        v-for="tournamentOverview in tournamentOverviews"
+        :id="tournamentOverview.id"
+        :key="`tournament-${tournamentOverview.id}`"
       />
     </div>
 
-    <Paginator :rows="10" :totalRecords="120"></Paginator>
+    <Paginator
+      v-model:first="first"
+      :rows="pagedTournamentOverviews?.pageSize ?? 0"
+      :totalRecords="pagedTournamentOverviews?.rowCount ?? 0"
+      @page="onPage"
+    ></Paginator>
   </div>
 </template>

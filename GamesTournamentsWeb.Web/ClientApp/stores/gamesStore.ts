@@ -4,12 +4,14 @@ import type { Game } from '~/models/games/Game'
 import type { Genre } from '~/models/games/Genre'
 import { GamesSerivce } from '~/apiServices/GamesService'
 import type { GameOverview } from '~/models/games/GameOverview'
+import type { PagedResult } from '~/models/PagedResult'
 
 export const useGamesStore = defineStore({
   id: 'games-store',
   state: () => ({
-    loading: false,
-    games: [] as Game[],
+    loading: true,
+    pagedGames: null as PagedResult<Game> | null,
+    paginatorFirst: 0 as number,
     filter: new GameFilter().toJson() as GameFilter,
     genres: [] as Genre[],
     gameOverviews: [] as GameOverview[]
@@ -21,13 +23,15 @@ export const useGamesStore = defineStore({
         this.getGameOverviews(),
         this.getGenres()
       ])
+
+      this.loading = false
     },
 
     async getGames (): Promise<Game[]> {
       try {
         this.loading = true
 
-        this.games = await GamesSerivce.getGames(this.filter)
+        this.pagedGames = await GamesSerivce.getGames(this.filter)
         return this.games
       } finally {
         this.loading = false
@@ -57,8 +61,11 @@ export const useGamesStore = defineStore({
     }
   },
   getters: {
+    games: (state) => {
+      return state.pagedGames?.results ?? []
+    },
     gameById: (state) => (id: number): Game => {
-      return state.games.find(game => game.id === id) as Game
+      return (state.pagedGames?.results ?? []).find(game => game.id === id) as Game
     }
   }
 })

@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public const int PageCount = 9;
+    public const int PerPageCount = 3;
     
     public const string AppSettings = "AppSettings";
 

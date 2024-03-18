@@ -5,34 +5,26 @@ import type { RegisterResult } from '~/models/user/RegisterResult'
 import type { ChangePassword } from '~/models/user/ChangePassword'
 
 export const AuthService = {
-  login (login: Login): Promise<LoginResult> {
-    const role = { id: 1, name: 'user' }
-    const account = {
-      id: 1,
-      name: 'John Doe',
-      email: login.email,
-      role,
-      createdAt: new Date(),
-      imageUrl: null
-    }
-    const result = { token: '69', account }
-
-    return Promise.resolve(result)
+  async login (login: Login): Promise<LoginResult> {
+    const api = useApi()
+    const result = await api.post('auth/login', login)
+    return result.data
   },
 
-  register (register: Register): Promise<RegisterResult> {
-    const role = { id: 1, name: 'user' }
-    const account = {
-      id: 1,
-      name: 'John Doe',
-      email: register.email,
-      role,
-      createdAt: new Date(),
-      imageUrl: null
-    }
-    const result = { account }
+  async register (register: Register): Promise<RegisterResult> {
+    const api = useApi()
+    const result = await api.post('auth/register', register)
+    return result.data
+  },
 
-    return Promise.resolve(result)
+  async testAuthentication (): Promise<boolean> {
+    const api = useApi()
+    try {
+      await api.get('auth/test')
+    } catch {
+      return false
+    }
+    return true
   },
 
   changePassword (request: ChangePassword): Promise<void> {

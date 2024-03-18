@@ -3,30 +3,14 @@ import type { TournamentFilter } from '~/models/tournaments/TournamentFilter'
 import type { Region } from '~/models/tournaments/Region'
 import type { Platform } from '~/models/tournaments/Platform'
 import type { Tournament } from '~/models/tournaments/Tournament'
-import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 import type { Currency } from '~/models/tournaments/Currency'
+import type { PagedResult } from '~/models/PagedResult'
 
 export const TournamentsService = {
-  getTournamentOverviews (filter: TournamentFilter): Promise<TournamentOverview[]> {
-    const game = {
-      id: 6,
-      name: 'War Thunder',
-      description: '',
-      genreId: 4,
-      imageUrl: 'https://warthunder.com/i/opengraph-wt.jpg'
-    }
-    const platform = { id: 1, name: 'PC', code: 'pc' }
-    const regions = [{ id: 1, name: 'Europe', code: 'europe' }]
-
-    const utcDate = new Date(Date.UTC(2024, 0, 20, 0, 0, 0))
-
-    const tournaments = [
-      { id: 1, name: 'Super Tournament', teamSize: 2, game, platform, regions, startDate: utcDate },
-      { id: 2, name: 'Other Tournament', teamSize: 4, game, platform, regions, startDate: utcDate },
-      { id: 3, name: 'Amazing Tournament?', teamSize: 2, game, platform, regions, startDate: utcDate }
-    ]
-
-    return Promise.resolve(tournaments)
+  async getTournamentOverviews (filter: TournamentFilter): Promise<PagedResult<TournamentOverview>> {
+    const api = useApi()
+    const result = await api.post<PagedResult<TournamentOverview>>('tournaments/overviews', filter)
+    return result.data
   },
 
   getTeamSizes (): Promise<number[]> {
@@ -34,141 +18,27 @@ export const TournamentsService = {
     return Promise.resolve(result)
   },
 
-  getRegions (): Promise<Region[]> {
-    const result = [
-      { id: 1, name: 'Europe', code: 'europe' },
-      { id: 2, name: 'North America', code: 'north_america' },
-      { id: 3, name: 'Asia', code: 'asia' }
-    ]
-
-    return Promise.resolve(result)
+  async getRegions (): Promise<Region[]> {
+    const api = useApi()
+    const result = await api.get<Region[]>('regions')
+    return result.data
   },
 
-  getPlatforms (): Promise<Platform[]> {
-    const result = [
-      { id: 1, name: 'PC', code: 'pc' },
-      { id: 2, name: 'Xbox', code: 'xbox' },
-      { id: 3, name: 'Playstation', code: 'playstation' }
-    ]
-
-    return Promise.resolve(result)
+  async getPlatforms (): Promise<Platform[]> {
+    const api = useApi()
+    const result = await api.get<Platform[]>('platforms')
+    return result.data
   },
 
-  getCurrencies (): Promise<Currency[]> {
-    const result = [
-      { id: 1, name: 'Dollar', code: 'USD', symbol: '$', locale: 'en-US' },
-      { id: 2, name: 'Euro', code: 'EUR', symbol: '€', locale: 'en-EU' },
-      { id: 3, name: 'Pound', code: 'GBP', symbol: '£', locale: 'en-GB' },
-      { id: 4, name: 'Czech crown', code: 'CZK', symbol: 'Kč', locale: 'cs-CZ' }
-    ]
-
-    return Promise.resolve(result)
+  async getCurrencies (): Promise<Currency[]> {
+    const api = useApi()
+    const result = await api.get<Currency[]>('currencies')
+    return result.data
   },
 
-  getTournamentById (tournamentId: number): Promise<Tournament> {
-    const players = [
-      {
-        accountId: 1,
-        gameUsername: 'PlayerElOne',
-        status: tournamentPlayerStatus.accepted
-      },
-      {
-        accountId: 2,
-        gameUsername: 'PlayerZoTwo',
-        status: tournamentPlayerStatus.accepted
-      },
-      {
-        accountId: 3,
-        gameUsername: 'Uwuwu',
-        status: tournamentPlayerStatus.pending
-      },
-      {
-        accountId: 4,
-        gameUsername: 'AtomicNek',
-        status: tournamentPlayerStatus.pending
-      }
-    ]
-
-    const teams = players.map((player, index) => {
-      return {
-        id: index + 1,
-        name: player.gameUsername,
-        players: [player]
-      }
-    })
-
-    const matches = [
-      {
-        id: 1,
-        nextMatchId: 3,
-        tournamentId,
-        firstTeam: teams[0],
-        secondTeam: teams[1],
-        winner: null,
-        isRunning: true
-      },
-      {
-        id: 2,
-        nextMatchId: 3,
-        tournamentId,
-        firstTeam: teams[2],
-        secondTeam: teams[3],
-        winner: null,
-        isRunning: false
-      },
-      { id: 3, nextMatchId: null, tournamentId, firstTeam: null, secondTeam: null, winner: null, isRunning: true }
-    ]
-
-    const tournamentDetail = {
-      id: tournamentId,
-      name: 'Super Tournament',
-      teamSize: 2,
-      game: {
-        id: 6,
-        name: 'War Thunder',
-        description: '',
-        genreId: 4,
-        imageUrl: 'https://warthunder.com/i/opengraph-wt.jpg'
-      },
-      platform: {
-        id: 1,
-        name: 'PC',
-        code: 'pc'
-      },
-      regions: [{
-        id: 1,
-        name: 'Europe',
-        code: 'europe'
-      }],
-      startDate: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-      endDate: new Date(Date.UTC(2024, 0, 20, 0, 0, 0)),
-      info: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Etiam quis quam. Sed vel lectus. ',
-      rules: 'Fusce consectetuer risus a nunc. Suspendisse nisl. Nulla turpis magna, cursus sit amet, suscipit a, interdum id, felis. Aliquam erat volutpat. \n' +
-                'Nulla pulvinar eleifend sem. In rutrum. Aliquam erat volutpat. \n' +
-                'Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. \n' +
-                'Mauris metus. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. \n' +
-                'Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam.',
-      settings: 'Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Integer lacinia. Fusce suscipit libero eget elit. \n' +
-                'Aenean id metus id velit ullamcorper pulvinar. \n' +
-                'Donec iaculis gravida nulla. \n' +
-                'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla quis diam. Pellentesque habitant morbi tristique senectus et.',
-      prizes: [
-        { place: 1, amount: 1000, currencyId: 1 },
-        { place: 2, amount: 500, currencyId: 1 },
-        { place: 3, amount: 250, currencyId: 1 },
-        { place: 4, amount: 100, currencyId: 1 },
-        { place: 5, amount: 50, currencyId: 1 }
-      ],
-      players,
-      matches,
-      streams: [
-        { name: 'Rick The First', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=tPb-oERlfwu0gk3Y' },
-        { name: 'Rick The Second', url: 'https://www.youtube.com/embed/qWNQUvIk954?si=Nf03OVIlvbZAokk1' }
-      ],
-      anyoneCanJoin: false,
-      adminIds: [1]
-    }
-
-    return Promise.resolve(tournamentDetail)
+  async getTournamentById (tournamentId: number): Promise<Tournament> {
+    const api = useApi()
+    const result = await api.get<Tournament>(`tournaments/${tournamentId}`)
+    return result.data
   }
 }
