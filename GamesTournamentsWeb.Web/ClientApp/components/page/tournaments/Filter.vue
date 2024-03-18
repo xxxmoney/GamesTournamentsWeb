@@ -14,12 +14,11 @@ const regions = computed(() => tournamentsStore.regions)
 const platforms = computed(() => tournamentsStore.platforms)
 const gameOverviews = computed(() => gamesStore.gameOverviews)
 
-watch(filter, () => {
+const getTournamentOverviews = async () => {
   filter.value.page = 1
   tournamentsStore.paginatorFirst = 0
-}, { deep: true })
-
-const getTournamentOverviews = () => tournamentsStore.getTournamentOverviews()
+  await tournamentsStore.getTournamentOverviews()
+}
 
 </script>
 
