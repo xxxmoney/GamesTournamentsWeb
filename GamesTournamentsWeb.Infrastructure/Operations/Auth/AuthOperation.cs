@@ -60,7 +60,7 @@ public class AuthOperation(IRepositoryProvider repositoryProvider, TimeProvider 
             PasswordSalt = hashResult.PasswordSalt
         };
 
-        await accountRepository.AddAsync(account);
+        await accountRepository.AddAccountAsync(account);
 
         await scope.SaveChangesAsync();
 
