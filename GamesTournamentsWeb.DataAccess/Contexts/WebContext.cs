@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
 using GamesTournamentsWeb.Common.Enums.Account;
+using GamesTournamentsWeb.Common.Enums.Dashboard;
 using GamesTournamentsWeb.Common.Enums.Tournament;
 using GamesTournamentsWeb.Common.Helpers;
+using GamesTournamentsWeb.DataAccess.Models.Dashboard;
 using GamesTournamentsWeb.DataAccess.Models.Games;
 using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using GamesTournamentsWeb.DataAccess.Models.Users;
@@ -31,6 +33,10 @@ public class WebContext(IConfiguration configuration) : DbContext
     
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Role> Roles { get; set; }
+    
+    public DbSet<Module> Modules { get; set; }
+    public DbSet<Layout> Layouts { get; set; }
+    public DbSet<LayoutItem> LayoutItems { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -349,12 +355,12 @@ public class WebContext(IConfiguration configuration) : DbContext
 
             account.Property(e => e.PasswordHash)
                 .IsRequired()
-                .HasMaxLength(128)
+                .HasMaxLength(64)
                 .IsFixedLength();
 
             account.Property(e => e.PasswordSalt)
                 .IsRequired()
-                .HasMaxLength(64)
+                .HasMaxLength(128)
                 .IsFixedLength();
 
             account.HasOne(e => e.Role)
@@ -438,6 +444,49 @@ public class WebContext(IConfiguration configuration) : DbContext
             currency.Property(e => e.Symbol)
                 .IsRequired()
                 .HasMaxLength(10);
+        });
+        
+        modelBuilder.Entity<Module>(module =>
+        {
+            module.ToTable(nameof(Module), Constants.EnumSchema);
+
+            module.HasData(EnumHelper.SelectTo<ModuleEnum, Module>(info => new Module
+            {
+                Id = info.Value,
+                Name = info.Name
+            }));
+            
+            module.Property(e => e.Id).ValueGeneratedNever();
+            
+            module.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+        });
+        
+        modelBuilder.Entity<Layout>(layout =>
+        {
+            layout.ToTable(nameof(Layout), Constants.DboSchema);
+            
+            layout.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+        });
+        
+        modelBuilder.Entity<LayoutItem>(layoutItem =>
+        {
+            layoutItem.ToTable(nameof(LayoutItem), Constants.DboSchema);
+            
+            layoutItem.HasOne(e => e.Module)
+                .WithMany(e => e.LayoutItems)
+                .HasForeignKey(e => e.ModuleId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            layoutItem.HasOne(e => e.Layout)
+                .WithMany(e => e.Items)
+                .HasForeignKey(e => e.LayoutId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         });
         
         base.OnModelCreating(modelBuilder);
