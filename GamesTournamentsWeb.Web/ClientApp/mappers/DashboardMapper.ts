@@ -1,22 +1,22 @@
-import type { LayoutDetail } from '~/models/dashboard/LayoutDetail'
-import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { Layout } from '~/models/dashboard/Layout'
+import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
+import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 
 export const DashboardMapper = {
-  mapLayoutDetailToLayoutUpsert (layoutDetail: LayoutDetail): LayoutUpsert {
+  mapLayoutDetailToLayoutUpsert (layoutDetail: Layout): LayoutUpsert {
     return {
       id: layoutDetail.id,
       name: layoutDetail.name
     }
   },
-  mapLayoutUpsertToLayoutDetail (layoutUpsert: LayoutUpsert): LayoutDetail {
+  mapLayoutUpsertToLayoutDetail (layoutUpsert: LayoutUpsert): Layout {
     return {
       id: layoutUpsert.id!,
       name: layoutUpsert.name,
       items: []
     }
   },
-  mapLayoutToLayoutDetail (layout: Layout): LayoutDetail {
+  mapLayoutToLayoutDetail (layout: LayoutOverview): Layout {
     return {
       id: layout.id,
       name: layout.name,

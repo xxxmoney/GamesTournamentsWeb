@@ -1,21 +1,10 @@
-import type { LayoutDetail } from '~/models/dashboard/LayoutDetail'
+import type { Layout } from '~/models/dashboard/Layout'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
-import type { Layout } from '~/models/dashboard/Layout'
-import type { Module } from '~/models/dashboard/Module'
+import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 
 export const DashboardService = {
-  getModules (): Promise<Module[]> {
-    const modules = [
-      {
-        id: 1,
-        name: 'TournamentHistory'
-      }
-    ]
-
-    return Promise.resolve(modules)
-  },
-  getLayouts (userId: number): Promise<LayoutDetail[]> {
+  getLayouts (userId: number): Promise<Layout[]> {
     const layout = {
       id: 1,
       name: 'View',
@@ -34,21 +23,10 @@ export const DashboardService = {
 
     return Promise.resolve([layout])
   },
-  upsertLayout (layoutUpsert: LayoutUpsert): Promise<Layout> {
+  upsertLayout (layoutUpsert: LayoutUpsert): Promise<LayoutOverview> {
     const layout = {
       id: 1,
-      name: 'View',
-      items: [
-        {
-          i: 1,
-          x: 0,
-          y: 0,
-          w: 2,
-          h: 2,
-          moduleId: 1,
-          layoutId: 1
-        }
-      ]
+      name: 'View'
     }
 
     return Promise.resolve(layout)

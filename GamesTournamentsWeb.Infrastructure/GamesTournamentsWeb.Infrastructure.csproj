@@ -21,6 +21,7 @@
 
 
     <ItemGroup>
+      <Folder Include="Dto\Dashboard\" />
       <Folder Include="ViewModels\" />
     </ItemGroup>
 
