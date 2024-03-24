@@ -31,7 +31,7 @@ export const DashboardService = {
 
     return Promise.resolve(layout)
   },
-  upsertLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
+  upsertLayoutItems (layoutId: number, items: LayoutItem[]): Promise<LayoutItem[]> {
     return Promise.resolve(items)
   }
 }

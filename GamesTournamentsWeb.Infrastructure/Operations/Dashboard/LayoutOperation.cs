@@ -11,8 +11,8 @@ public interface ILayoutOperation : IOperation
     Task<ICollection<Layout>> GetLayoutsForAccountAsync(int accountId);
     
     Task<LayoutOverview> UpsertLayoutAsync(LayoutEdit layoutEdit);
-    
-    Task<LayoutItem> UpsertLayoutItemsAsync(int layoutId, ICollection<LayoutItemEdit> layoutItemEdits);
+
+    Task<ICollection<LayoutItem>> UpsertLayoutItemsAsync(LayoutItemsEdit layoutItemEdits);
 }
 
 public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ILayoutOperation
@@ -50,19 +50,19 @@ public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper map
         return mapper.Map<LayoutOverview>(layout);
     }
 
-    public async Task<LayoutItem> UpsertLayoutItemsAsync(int layoutId, ICollection<LayoutItemEdit> layoutItemEdits)
+    public async Task<ICollection<LayoutItem>> UpsertLayoutItemsAsync(LayoutItemsEdit layoutItemEdits)
     {
         using var scope = repositoryProvider.CreateScope();
         var layoutRepository = scope.Provide<ILayoutRepository>();
         
-        var models = await layoutRepository.GetLayoutItemsByLayoutIdAsync(layoutId);
+        var models = await layoutRepository.GetLayoutItemsByLayoutIdAsync(layoutItemEdits.LayoutId);
         layoutRepository.DeleteLayoutItems(models);
         
-        var newModels = mapper.Map<List<DataAccess.Models.Dashboard.LayoutItem>>(layoutItemEdits);
+        var newModels = mapper.Map<List<DataAccess.Models.Dashboard.LayoutItem>>(layoutItemEdits.Items);
         await layoutRepository.AddLayoutItemsAsync(newModels);
         
         await scope.SaveChangesAsync();
         
-        return mapper.Map<LayoutItem>(newModels);
+        return mapper.Map<List<LayoutItem>>(newModels);
     }
 }
