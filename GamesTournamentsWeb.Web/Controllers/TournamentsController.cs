@@ -28,6 +28,13 @@ public class TournamentsController(ITournamentOperation tournamentOperation) : B
         return Ok(await tournamentOperation.UpsertTournamentAsync(tournamentEdit));
     }
     
+    [HttpDelete("{tournamentId}/delete")]
+    public async Task<IActionResult> DeleteTournament(int tournamentId)
+    {
+        await tournamentOperation.DeleteTournamentByIdAsync(tournamentId);
+        return Ok();
+    }
+    
     
     
 }

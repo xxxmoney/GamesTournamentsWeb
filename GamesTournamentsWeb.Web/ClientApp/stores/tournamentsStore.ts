@@ -104,9 +104,29 @@ export const useTournamentsStore = defineStore({
       }
     },
 
+    async upsertTournament (): Promise<Tournament> {
+      try {
+        this.loading = true
+
+        return await TournamentsService.upsertTournament(this.tournamentEdit)
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async deleteTournamenById (tournamentId: number): Promise<void> {
+      try {
+        this.loading = true
+
+        await TournamentsService.deleteTournamentById(tournamentId)
+      } finally {
+        this.loading = false
+      }
+    },
+
     mapTournamentDetailToEdit () {
       const match = this.tournamentDetailCurrentMatch
-      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail!, match)
+      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, match)
     },
 
     resetTournamentEdit (): void {

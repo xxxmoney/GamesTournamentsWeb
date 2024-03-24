@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 const mainStore = useMainStore()
-// TODO: check if the user is admin of current tournament
-const isAdmin = computed(() => mainStore.isLoggedIn)
+const tournamentsStore = useTournamentsStore()
+
+const tournamentDetail = computed(() => tournamentsStore.tournamentDetail)
+const isAdmin = computed(() => tournamentDetail.value?.admins?.some(admin => admin.id === mainStore.account?.id) ?? false)
 
 </script>
 

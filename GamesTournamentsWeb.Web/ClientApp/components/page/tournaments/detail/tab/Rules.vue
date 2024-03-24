@@ -5,6 +5,6 @@ const detail = useTournamentDetail()
 <template>
   <div class="container-gap">
     <h2 class="subheading">{{ $t('tournament_detail.rules') }}</h2>
-    <p>{{ detail.rules }}</p>
+    <div v-html="detail.rules"></div>
   </div>
 </template>

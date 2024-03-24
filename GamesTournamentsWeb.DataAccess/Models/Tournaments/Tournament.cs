@@ -15,9 +15,8 @@ public class Tournament
     public ICollection<Region> Regions { get; set; }
     public DateTimeOffset StartDate { get; set; }
     public DateTimeOffset? EndDate { get; set; }
-    public string Infos { get; set; }
+    public string Info { get; set; }
     public string Rules { get; set; }
-    public string Settings { get; set; }
     public ICollection<Prize> Prizes { get; set; }
     public ICollection<Match> Matches { get; set; }
     public ICollection<Stream> Streams { get; set; }

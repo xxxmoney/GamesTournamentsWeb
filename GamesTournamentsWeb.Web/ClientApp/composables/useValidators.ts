@@ -9,6 +9,10 @@ export const useValidators = () => {
 
   const required = withI18nMessage(validators.required)
 
+  const useRequiredIf = (dependantValue: ComputedRef<any>) => withI18nMessage(validators.requiredIf(dependantValue))
+
+  const useRequiredUnless = (dependantValue: ComputedRef<any>) => withI18nMessage(validators.requiredUnless(dependantValue))
+
   const minLength = withI18nMessage(validators.minLength, { withArguments: true })
 
   const maxLength = withI18nMessage(validators.maxLength(10))
@@ -22,6 +26,6 @@ export const useValidators = () => {
   const helpers = validators.helpers
 
   return {
-    required, minLength, maxLength, helpers, url, email, useSameAs
+    required, useRequiredIf, useRequiredUnless, minLength, maxLength, helpers, url, email, useSameAs
   }
 }

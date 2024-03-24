@@ -15,7 +15,7 @@ const emitClick = () => {
 
 <template>
   <div
-    class="form-container relative aspect-card overflow-hidden"
+    class="form-container relative overflow-hidden"
   >
     <img
       :src="imageUrl as string"

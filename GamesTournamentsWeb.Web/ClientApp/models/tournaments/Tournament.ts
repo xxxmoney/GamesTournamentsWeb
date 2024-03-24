@@ -5,6 +5,7 @@ import type { Prize } from '~/models/tournaments/Prize'
 import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 import type { Match } from '~/models/tournaments/Match'
 import type { Stream } from '~/models/tournaments/Stream'
+import type { Account } from '~/models/user/Account'
 
 interface Tournament {
     id: number
@@ -17,7 +18,6 @@ interface Tournament {
     endDate: Date
     info: string
     rules: string,
-    settings: string
     prizes: Prize[]
     players: TournamentPlayer[]
     matches: Match[]
@@ -25,7 +25,7 @@ interface Tournament {
     minimumPlayers: number
     maximumPlayers: number
     anyoneCanJoin: boolean
-    adminIds: number[]
+    admins: Account[]
 }
 
 export type { Tournament }

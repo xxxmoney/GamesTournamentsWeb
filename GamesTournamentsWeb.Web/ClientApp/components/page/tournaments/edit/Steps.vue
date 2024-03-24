@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import constants from '~/constants'
+import { TournamentsService } from '~/apiServices/TournamentsService'
 
 const store = useTournamentsStore()
 const edit = useTournamentEdit()
@@ -45,8 +46,7 @@ const onFinalize = () => {
     header: t('common.confirmation'),
     accept: async () => {
       try {
-        // TODO: add upsert call
-        const result = { id: 1 }
+        const result = await TournamentsService.upsertTournament(edit.value)
 
         successToast('tournament_edit.success')
 

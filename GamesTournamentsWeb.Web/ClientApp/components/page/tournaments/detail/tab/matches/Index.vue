@@ -16,4 +16,7 @@ const node = computed(() => toMatchTreeNode(detail.value.matches))
       </OrganizationChart>
     </ScrollPanel>
   </div>
+  <div v-else>
+    <span class="font-bold">{{ $t('tournament_matches.no_matches') }}</span>
+  </div>
 </template>

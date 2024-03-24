@@ -5,6 +5,7 @@ import type { Platform } from '~/models/tournaments/Platform'
 import type { Tournament } from '~/models/tournaments/Tournament'
 import type { Currency } from '~/models/tournaments/Currency'
 import type { PagedResult } from '~/models/PagedResult'
+import type { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 
 export const TournamentsService = {
   async getTournamentOverviews (filter: TournamentFilter): Promise<PagedResult<TournamentOverview>> {
@@ -40,5 +41,16 @@ export const TournamentsService = {
     const api = useApi()
     const result = await api.get<Tournament>(`tournaments/${tournamentId}`)
     return result.data
+  },
+
+  async upsertTournament (tournament: TournamentEdit): Promise<Tournament> {
+    const api = useApi()
+    const result = await api.post('tournaments/upsert', tournament)
+    return result.data
+  },
+
+  async deleteTournamentById (tournamentId: number): Promise<void> {
+    const api = useApi()
+    await api.delete(`tournaments/${tournamentId}/delete`)
   }
 }

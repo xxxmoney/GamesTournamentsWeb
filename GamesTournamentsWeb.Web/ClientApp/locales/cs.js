@@ -87,6 +87,8 @@ export default {
     undefined: 'Pole je nevalidn9',
     error: 'Chyba při validaci',
     required: 'Pole je povinné',
+    requiredIf: 'Pole je povinné',
+    requiredUnless: 'Pole je povinné',
     minLength: 'Minimální délka je {min}',
     maxLength: 'Maximální délka je {max}',
     url: 'Neplatný odkaz',
@@ -196,6 +198,9 @@ export default {
     matches: 'Zápasy',
     streams: 'Streamy',
     admin: 'Admin'
+  },
+  tournament_matches: {
+    no_matches: 'There are no matches right now'
   },
   tournament_prizes: {
     place: 'Místo',

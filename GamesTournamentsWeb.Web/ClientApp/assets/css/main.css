@@ -272,7 +272,7 @@ body {
 }
 
 .active-area {
-    @apply lg:w-[var(--active-area)] lg:mx-auto;
+    @apply xl:w-[var(--active-area)] xl:mx-auto;
 }
 
 .text-area {

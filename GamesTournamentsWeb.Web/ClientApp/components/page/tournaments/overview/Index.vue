@@ -18,7 +18,7 @@ const goToTournamentDetail = () => {
 </script>
 
 <template>
-  <CommonImageCard :imageUrl="tournament.game.imageUrl" @click="goToTournamentDetail">
+  <CommonImageCard v-if="tournament" :imageUrl="tournament.game.imageUrl" @click="goToTournamentDetail">
     <div class="container-gap-lg">
       <PageTournamentsOverviewInfo
         :gameName="tournament.game.name"

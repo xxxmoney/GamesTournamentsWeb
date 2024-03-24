@@ -87,6 +87,8 @@ export default {
     undefined: 'The field is invalid',
     error: 'Validation error',
     required: 'The field is required',
+    requiredIf: 'The field is required',
+    requiredUnless: 'The field is required',
     minLength: 'Min length is {min}',
     maxLength: 'Max length is {max}',
     url: 'Invalid URL',
@@ -196,6 +198,9 @@ export default {
     matches: 'Matches',
     streams: 'Streams',
     admin: 'Admin'
+  },
+  tournament_matches: {
+    no_matches: 'There are no matches right now'
   },
   tournament_prizes: {
     place: 'Place',

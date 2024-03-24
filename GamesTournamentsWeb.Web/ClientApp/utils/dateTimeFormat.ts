@@ -4,7 +4,7 @@ const formatDate = (date: DateTime): string => {
   return date.toLocaleString(DateTime.DATETIME_MED)
 }
 const formatJsDate = (date: Date): string => {
-  return DateTime.fromJSDate(date).toLocaleString(DateTime.DATETIME_MED)
+  return DateTime.fromJSDate(new Date(date)).toLocaleString(DateTime.DATETIME_MED)
 }
 
 const timeDifferenceJs = (date: Date, otherDate: Date | null = null): string => {
@@ -13,7 +13,7 @@ const timeDifferenceJs = (date: Date, otherDate: Date | null = null): string => 
   }
 
   const difference = DateTime
-    .fromJSDate(date)
+    .fromJSDate(new Date(date))
     .diff(DateTime.fromJSDate(otherDate))
 
   return difference.toFormat("h'h' m'm'")

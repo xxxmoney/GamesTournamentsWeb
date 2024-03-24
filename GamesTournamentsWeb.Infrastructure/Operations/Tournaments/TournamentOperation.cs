@@ -16,6 +16,9 @@ public interface ITournamentOperation : IOperation
     
     Task<Tournament> UpsertTournamentAsync(TournamentEdit tournamentEdit);
     
+    Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId);
+    
+    Task DeleteTournamentByIdAsync(int tournamentId);
 }
 
 public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentOperation
@@ -54,6 +57,8 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         
         using var scope = repositoryProvider.CreateScope();
         var tournamentRepository = scope.Provide<ITournamentRepository>();
+        var accountRepository = scope.Provide<IAccountRepository>();
+        var regionRepository = scope.Provide<IRegionRepository>();
         
         if (UpsertHelper.EntityExists(tournamentEdit.Id))
         {
@@ -66,10 +71,46 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             await tournamentRepository.AddTournamentAsync(tournament);
         }
         
+        // Set admins
+        tournament.Admins ??= new List<DataAccess.Models.Users.Account>();
+        tournament.Admins.Clear();
+        foreach (var adminId in tournamentEdit.AdminIds)
+        {
+            var admin = await accountRepository.GetAccountByIdAsync(adminId);
+            tournament.Admins.Add(admin);
+        }
+        
+        // Set regions
+        tournament.Regions ??= new List<DataAccess.Models.Tournaments.Region>();
+        tournament.Regions.Clear();
+        foreach (var regionId in tournamentEdit.RegionIds)
+        {
+            var region = await regionRepository.GetRegionByIdAsync(regionId);
+            tournament.Regions.Add(region);
+        }
+        
         mapper.Map(tournamentEdit, tournament);
         
         await scope.SaveChangesAsync();
         
         return mapper.Map<Tournament>(tournament);
+    }
+
+    public Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId)
+    {
+        // TODO: update tournament matches (brackets) based on current accepted tournament players
+        
+        throw new NotImplementedException();
+    }
+
+    public async Task DeleteTournamentByIdAsync(int tournamentId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var tournamentRepository = scope.Provide<ITournamentRepository>();
+        
+        var model = await tournamentRepository.GetTournamentByIdAsync(tournamentId);
+        tournamentRepository.DeleteTournament(model);
+        
+        await scope.SaveChangesAsync();
     }
 }

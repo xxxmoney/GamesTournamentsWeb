@@ -7,16 +7,15 @@ import constants from '~/constants'
 
 class TournamentEdit extends ConvertableToJson {
   id: number | null
-  name: string
+  name: string | null
   teamSize: number | null
   gameId: number | null
   platformId: number | null
   regionIds: number[]
   startDate: Date | null
   endDate: Date | null
-  info: string
-  rules: string
-  settings: string
+  info: string | null
+  rules: string | null
   prizes: Prize[]
   players: TournamentPlayer[]
   match: Match | null
@@ -31,16 +30,15 @@ class TournamentEdit extends ConvertableToJson {
     super()
 
     this.id = null
-    this.name = ''
+    this.name = null
     this.teamSize = null
     this.gameId = null
     this.platformId = null
     this.regionIds = []
     this.startDate = null
     this.endDate = null
-    this.info = ''
-    this.rules = ''
-    this.settings = ''
+    this.info = null
+    this.rules = null
     this.prizes = []
     this.players = []
     this.match = null

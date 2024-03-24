@@ -17,6 +17,7 @@ public interface ITournamentRepository : IRepository
     
     Task AddTournamentAsync(Tournament tournament);
     
+    void DeleteTournament(Tournament tournament);
 }
 
 public class TournamentRepository(WebContext context) : ITournamentRepository
@@ -25,18 +26,26 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
         .Include(t => t.Game)
         .Include(t => t.Platform)
         .Include(t => t.Regions)
-        .Include(t => t.Prizes)
         .Include(t => t.Players)
         .Include(t => t.Matches)
         .Include(t => t.Streams)
-        .Include(t => t.Admins);
+        .Include(t => t.Admins)
+        .Include(t => t.Prizes).ThenInclude(p => p.Currency);
     
     public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count)
     {
-        return context.Tournaments.Where(filter).Select(t => new TournamentOverview
+        return this.GetTournamentsWithIncludes().Where(filter).Select(t => new TournamentOverview
         {
             Id = t.Id,
-            Name = t.Name
+            Name = t.Name,
+            TeamSize = t.TeamSize,
+            GameId = t.GameId,
+            Game = t.Game,
+            Platform = t.Platform,
+            PlatformId = t.PlatformId,
+            Regions = t.Regions,
+            StartDate = t.StartDate,
+            EndDate = t.EndDate
         }).ToPagedAsync(page, count);
     }
 
@@ -53,5 +62,10 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
     public async Task AddTournamentAsync(Tournament tournament)
     {
         await context.Tournaments.AddAsync(tournament);
+    }
+
+    public void DeleteTournament(Tournament tournament)
+    {
+        context.Tournaments.Remove(tournament);
     }
 }

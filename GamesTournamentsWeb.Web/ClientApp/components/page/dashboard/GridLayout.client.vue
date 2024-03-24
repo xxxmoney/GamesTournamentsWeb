@@ -22,6 +22,7 @@ const onLayoutUpdated = (updatedLayout: LayoutItem[]) => {
 <template>
   <ClientOnly>
     <GridLayout
+      v-if="layout"
       :key="`layout-${layout!.id}`"
       v-model:layout="layoutItems"
       :colNum="constants.defaultLayoutMaxCols"

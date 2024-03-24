@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.EquivalencyExpression;
 
 namespace GamesTournamentsWeb.Infrastructure.Mappers;
 
@@ -18,10 +19,16 @@ public class TournamentMapper : Profile
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayer, Dto.Tournaments.TournamentPlayer>();
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayerStatus, Dto.Tournaments.TournamentPlayerStatus>();
         
-        CreateMap<ViewModels.Tournaments.TournamentEdit, DataAccess.Models.Tournaments.Tournament>();
-        CreateMap<ViewModels.Tournaments.TournamentPlayerEdit, DataAccess.Models.Tournaments.TournamentPlayer>();
-        CreateMap<ViewModels.Tournaments.PrizeEdit, DataAccess.Models.Tournaments.Prize>();
-        CreateMap<ViewModels.Tournaments.StreamEdit, DataAccess.Models.Tournaments.Stream>();
+        CreateMap<ViewModels.Tournaments.TournamentEdit, DataAccess.Models.Tournaments.Tournament>()
+            .ForMember(dest => dest.Regions, opt => opt.Ignore())
+            .ForMember(dest => dest.Admins, opt => opt.Ignore())
+            .EqualityComparison((model, dto) => model.Id == dto.Id);
+        CreateMap<ViewModels.Tournaments.TournamentPlayerEdit, DataAccess.Models.Tournaments.TournamentPlayer>()
+            .EqualityComparison((model, dto) => model.Id == dto.Id);
+        CreateMap<ViewModels.Tournaments.PrizeEdit, DataAccess.Models.Tournaments.Prize>()
+            .EqualityComparison((model, dto) => model.Id == dto.Id);
+        CreateMap<ViewModels.Tournaments.StreamEdit, DataAccess.Models.Tournaments.Stream>()
+            .EqualityComparison((model, dto) => model.Id == dto.Id);
     }
     
 }
