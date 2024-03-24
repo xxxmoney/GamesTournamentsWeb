@@ -1,6 +1,7 @@
 export default {
   testAuthentication: 'Test EN',
   common: {
+    delete: 'Delete',
     search: 'Search',
     select: 'Select',
     choose_module: 'Choose module',
