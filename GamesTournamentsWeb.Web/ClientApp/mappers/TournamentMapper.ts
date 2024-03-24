@@ -16,7 +16,6 @@ export const TournamentMapper = {
     edit.endDate = tournamentDetail?.endDate ?? null
     edit.info = tournamentDetail?.info ?? null
     edit.rules = tournamentDetail?.rules ?? null
-    edit.settings = tournamentDetail?.settings ?? null
     edit.prizes = tournamentDetail?.prizes.map(prize => copyObject(prize)) ?? []
     edit.players = tournamentDetail?.players.map(player => copyObject(player)) ?? []
     edit.match = copyObject(match)

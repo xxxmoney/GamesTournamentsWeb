@@ -17,7 +17,6 @@ interface Tournament {
     endDate: Date
     info: string
     rules: string,
-    settings: string
     prizes: Prize[]
     players: TournamentPlayer[]
     matches: Match[]

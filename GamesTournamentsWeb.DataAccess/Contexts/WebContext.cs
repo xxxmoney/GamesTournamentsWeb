@@ -130,15 +130,11 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .IsRequired(false);
             
             tournament.Property(e => e.Info)
-                .IsRequired(true)
+                .IsRequired()
                 .HasMaxLength(-1);
             
             tournament.Property(e => e.Rules)
-                .IsRequired(true)
-                .HasMaxLength(-1);
-            
-            tournament.Property(e => e.Settings)
-                .IsRequired(true)
+                .IsRequired()
                 .HasMaxLength(-1);
 
             tournament.HasMany(e => e.Prizes)
@@ -182,7 +178,7 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             tournamentPlayer.Property(e => e.GameUsername)
-                .IsRequired()
+                .IsRequired(false)
                 .HasMaxLength(100);
 
             tournamentPlayer.HasOne(e => e.Status)

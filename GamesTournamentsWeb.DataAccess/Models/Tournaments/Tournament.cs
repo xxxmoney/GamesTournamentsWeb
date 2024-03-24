@@ -17,7 +17,6 @@ public class Tournament
     public DateTimeOffset? EndDate { get; set; }
     public string Info { get; set; }
     public string Rules { get; set; }
-    public string Settings { get; set; }
     public ICollection<Prize> Prizes { get; set; }
     public ICollection<Match> Matches { get; set; }
     public ICollection<Stream> Streams { get; set; }

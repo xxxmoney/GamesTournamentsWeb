@@ -16,6 +16,7 @@ public interface ITournamentOperation : IOperation
     
     Task<Tournament> UpsertTournamentAsync(TournamentEdit tournamentEdit);
     
+    Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId);
 }
 
 public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentOperation
@@ -71,5 +72,12 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         await scope.SaveChangesAsync();
         
         return mapper.Map<Tournament>(tournament);
+    }
+
+    public Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId)
+    {
+        // TODO: update tournament matches (brackets) based on current accepted tournament players
+        
+        throw new NotImplementedException();
     }
 }

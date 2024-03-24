@@ -15,7 +15,6 @@ public class TournamentEdit
     public DateTime? EndDate { get; set; }
     public string Info { get; set; }
     public string Rules { get; set; }
-    public string Settings { get; set; }
     public List<PrizeEdit> Prizes { get; set; }
     public List<TournamentPlayerEdit> Players { get; set; }
     public Match Match { get; set; }

@@ -88,6 +88,7 @@ export default {
     error: 'Validation error',
     required: 'The field is required',
     requiredIf: 'The field is required',
+    requiredUnless: 'The field is required',
     minLength: 'Min length is {min}',
     maxLength: 'Max length is {max}',
     url: 'Invalid URL',
