@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { LayoutItem } from '~/models/dashboard/LayoutItem'
+
 const dashboardStore = useDashboardStore()
 
 const selectedLayoutId = computed({
@@ -7,8 +9,17 @@ const selectedLayoutId = computed({
     dashboardStore.selectedLayoutId = value
   }
 })
+const selectedLayout = computed(() => dashboardStore.selectedLayout)
 const isSelectedLayout = computed(() => !!dashboardStore.selectedLayoutId)
 const layouts = computed(() => dashboardStore.layouts)
+
+const saveItems = async () => {
+  await dashboardStore.upsertSelectedLayoutItems(selectedLayout.value!.items)
+}
+
+const removeSelectedLayout = async () => {
+  await dashboardStore.removeLayout(selectedLayout.value!.id)
+}
 
 const showCreateLayoutDialog = () => {
   dashboardStore.openUpsertLayoutModal()
@@ -24,25 +35,40 @@ const showUpdateLayoutDialog = () => {
   <div class="container-gap">
     <CommonWithLabel :label="$t('common.choose_view')">
       <CommonWithButtonIcon
-        v-tooltip="$t('common.update_view')"
+        v-tooltip="$t('common.delete')"
         :iconDisabled="!isSelectedLayout"
-        icon="pi pi-file-edit"
-        @iconClick="showUpdateLayoutDialog"
+        icon="pi pi-trash"
+        severity="danger"
+        @iconClick="removeSelectedLayout"
       >
         <CommonWithButtonIcon
-          v-tooltip="$t('common.add_view')"
-          icon="pi pi-plus"
-          @iconClick="showCreateLayoutDialog"
+          v-tooltip="$t('common.save')"
+          :iconDisabled="!isSelectedLayout"
+          icon="pi pi-save"
+          @iconClick="saveItems"
         >
-          <Dropdown
-            v-model:modelValue="selectedLayoutId"
-            :options="layouts"
-            :placeholder="$t('common.choose_view')"
-            filter
-            optionLabel="name"
-            optionValue="id"
-            showClear
-          />
+          <CommonWithButtonIcon
+            v-tooltip="$t('common.update_view')"
+            :iconDisabled="!isSelectedLayout"
+            icon="pi pi-file-edit"
+            @iconClick="showUpdateLayoutDialog"
+          >
+            <CommonWithButtonIcon
+              v-tooltip="$t('common.add_view')"
+              icon="pi pi-plus"
+              @iconClick="showCreateLayoutDialog"
+            >
+              <Dropdown
+                v-model:modelValue="selectedLayoutId"
+                :options="layouts"
+                :placeholder="$t('common.choose_view')"
+                filter
+                optionLabel="name"
+                optionValue="id"
+                showClear
+              />
+            </CommonWithButtonIcon>
+          </CommonWithButtonIcon>
         </CommonWithButtonIcon>
       </CommonWithButtonIcon>
     </CommonWithLabel>

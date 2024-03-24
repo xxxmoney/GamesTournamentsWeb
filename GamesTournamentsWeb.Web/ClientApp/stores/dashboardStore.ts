@@ -56,6 +56,22 @@ export const useDashboardStore = defineStore({
         this.loading = false
       }
     },
+    async removeLayout (layoutId: number): Promise<void> {
+      try {
+        this.loading = true
+
+        await DashboardService.removeLayout(layoutId)
+
+        const index = this.layouts.findIndex(layout => layout.id === layoutId)
+        if (index !== -1) {
+          this.layouts.splice(index, 1)
+        }
+
+        this.selectedLayoutId = null
+      } finally {
+        this.loading = false
+      }
+    },
     async upsertSelectedLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
       if (!this.selectedLayout) {
         throw new Error('No layout selected')
@@ -64,7 +80,7 @@ export const useDashboardStore = defineStore({
       try {
         this.loading = true
 
-        const upsertedItems = await DashboardService.upsertLayoutItems(items)
+        const upsertedItems = await DashboardService.upsertLayoutItems(this.selectedLayoutId!, items)
         this.selectedLayout.items = upsertedItems
         return upsertedItems
       } finally {

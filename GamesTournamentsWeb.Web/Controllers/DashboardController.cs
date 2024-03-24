@@ -20,7 +20,19 @@ public class DashboardController(ILayoutOperation layoutOperation) : BaseControl
     [HttpPost("layouts/upsert")]
     public async Task<IActionResult> UpsertLayout(LayoutEdit layoutEdit)
     {
-        return Ok(await layoutOperation.UpsertLayoutAsync(layoutEdit));
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await layoutOperation.UpsertLayoutAsync(this.AccountId.Value, layoutEdit));
+    }
+    
+    [HttpDelete("layouts/{layoutId}/remove")]
+    public async Task<IActionResult> RemoveLayout(int layoutId)
+    {
+        await layoutOperation.RemoveLayoutAsync(layoutId);
+        return Ok();
     }
     
     [HttpPost("layouts/items/upsert")]

@@ -7,6 +7,7 @@ public class DashboardMapper : Profile
     public DashboardMapper()
     {
         CreateMap<DataAccess.Models.Dashboard.Layout, Dto.Dashboard.Layout>();
+        CreateMap<DataAccess.Models.Dashboard.Layout, Dto.Dashboard.LayoutOverview>();
         CreateMap<DataAccess.Models.Dashboard.LayoutItem, Dto.Dashboard.LayoutItem>()
             .ForMember(dest => dest.Index, opt => opt.Ignore())
             .ReverseMap();

@@ -16,6 +16,8 @@ public interface ILayoutRepository : IRepository
    
     
     Task AddLayoutAsync(Layout layout);
+    
+    void RemoveLayout(Layout layout);
   
     void UpdateLayoutItems(ICollection<LayoutItem> layoutItems);
     
@@ -53,6 +55,11 @@ public class LayoutRepository(WebContext context) : ILayoutRepository
     public async Task AddLayoutAsync(Layout layout)
     {
         await context.Layouts.AddAsync(layout);
+    }
+
+    public void RemoveLayout(Layout layout)
+    {
+        context.Layouts.Remove(layout);
     }
 
     public void UpdateLayoutItems(ICollection<LayoutItem> layoutItems)

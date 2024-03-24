@@ -14,9 +14,14 @@ export const DashboardService = {
     const result = await api.post<LayoutOverview>('dashboard/layouts/upsert', layoutUpsert)
     return result.data
   },
+  async removeLayout (layoutId: number): Promise<void> {
+    const api = useApi()
+    await api.delete(`dashboard/layouts/${layoutId}/remove`)
+  },
   async upsertLayoutItems (layoutId: number, items: LayoutItem[]): Promise<LayoutItem[]> {
     const api = useApi()
     const result = await api.post<LayoutItem[]>('dashboard/layouts/items/upsert', { layoutId, items })
     return result.data
   }
+
 }

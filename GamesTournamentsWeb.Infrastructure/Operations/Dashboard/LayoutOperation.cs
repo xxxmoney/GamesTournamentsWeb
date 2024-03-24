@@ -10,7 +10,9 @@ public interface ILayoutOperation : IOperation
 {
     Task<ICollection<Layout>> GetLayoutsForAccountAsync(int accountId);
     
-    Task<LayoutOverview> UpsertLayoutAsync(LayoutEdit layoutEdit);
+    Task<LayoutOverview> UpsertLayoutAsync(int accountId, LayoutEdit layoutEdit);
+    
+    Task RemoveLayoutAsync(int layoutId);
 
     Task<ICollection<LayoutItem>> UpsertLayoutItemsAsync(LayoutItemsEdit layoutItemEdits);
 }
@@ -27,7 +29,7 @@ public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper map
         return mapper.Map<List<Layout>>(models);
     }
 
-    public async Task<LayoutOverview> UpsertLayoutAsync(LayoutEdit layoutEdit)
+    public async Task<LayoutOverview> UpsertLayoutAsync(int accountId, LayoutEdit layoutEdit)
     {
         DataAccess.Models.Dashboard.Layout layout;
         using var scope = repositoryProvider.CreateScope();
@@ -44,10 +46,22 @@ public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper map
             await layoutRepository.AddLayoutAsync(layout);
         }
         
+        layout.AccountId = accountId;
         mapper.Map(layoutEdit, layout);
         await scope.SaveChangesAsync();
         
         return mapper.Map<LayoutOverview>(layout);
+    }
+
+    public async Task RemoveLayoutAsync(int layoutId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var layoutRepository = scope.Provide<ILayoutRepository>();
+        
+        var model = await layoutRepository.GetLayoutByIdAsync(layoutId);
+        layoutRepository.RemoveLayout(model);
+        
+        await scope.SaveChangesAsync();
     }
 
     public async Task<ICollection<LayoutItem>> UpsertLayoutItemsAsync(LayoutItemsEdit layoutItemEdits)
