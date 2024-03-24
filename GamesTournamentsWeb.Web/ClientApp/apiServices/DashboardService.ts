@@ -4,34 +4,19 @@ import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 
 export const DashboardService = {
-  getLayouts (): Promise<Layout[]> {
-    const layout = {
-      id: 1,
-      name: 'View',
-      items: [
-        {
-          i: 1,
-          x: 0,
-          y: 0,
-          w: 2,
-          h: 2,
-          moduleId: 1,
-          layoutId: 1
-        }
-      ]
-    }
-
-    return Promise.resolve([layout])
+  async getLayouts (): Promise<Layout[]> {
+    const api = useApi()
+    const result = await api.get<Layout[]>('dashboard/layouts')
+    return result.data
   },
-  upsertLayout (layoutUpsert: LayoutUpsert): Promise<LayoutOverview> {
-    const layout = {
-      id: 1,
-      name: 'View'
-    }
-
-    return Promise.resolve(layout)
+  async upsertLayout (layoutUpsert: LayoutUpsert): Promise<LayoutOverview> {
+    const api = useApi()
+    const result = await api.post<LayoutOverview>('dashboard/layouts/upsert', layoutUpsert)
+    return result.data
   },
-  upsertLayoutItems (layoutId: number, items: LayoutItem[]): Promise<LayoutItem[]> {
-    return Promise.resolve(items)
+  async upsertLayoutItems (layoutId: number, items: LayoutItem[]): Promise<LayoutItem[]> {
+    const api = useApi()
+    const result = await api.post<LayoutItem[]>('dashboard/layouts/items/upsert', { layoutId, items })
+    return result.data
   }
 }
