@@ -129,7 +129,7 @@ public class WebContext(IConfiguration configuration) : DbContext
             tournament.Property(e => e.EndDate)
                 .IsRequired(false);
             
-            tournament.Property(e => e.Infos)
+            tournament.Property(e => e.Info)
                 .IsRequired(true)
                 .HasMaxLength(-1);
             

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { PageState } from 'primevue/paginator'
 
+const router = useRouter()
 const tournamentsStore = useTournamentsStore()
 
 const pagedTournamentOverviews = computed(() => tournamentsStore.pagedTournaments)
@@ -19,11 +20,17 @@ const onPage = async (value: PageState) => {
   tournamentsStore.filter.page = value.page
   await tournamentsStore.getTournamentOverviews()
 }
+
+const goToCreateTournament = async () => {
+  await router.push('/tournaments/create')
+}
 </script>
 
 <template>
   <div class="page-container">
-    <CommonPanel :header="$t('common.filter')" class="w-full">
+    <Button :label="$t('common.create')" @click="goToCreateTournament" />
+
+    <CommonPanel :header="$t('common.filter')" class="w-full overflow-auto">
       <div class="flex md:inline-flex">
         <PageTournamentsFilter />
       </div>

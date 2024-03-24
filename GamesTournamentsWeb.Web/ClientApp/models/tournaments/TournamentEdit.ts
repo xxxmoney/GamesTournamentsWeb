@@ -7,16 +7,16 @@ import constants from '~/constants'
 
 class TournamentEdit extends ConvertableToJson {
   id: number | null
-  name: string
+  name: string | null
   teamSize: number | null
   gameId: number | null
   platformId: number | null
   regionIds: number[]
   startDate: Date | null
   endDate: Date | null
-  info: string
-  rules: string
-  settings: string
+  info: string | null
+  rules: string | null
+  settings: string | null
   prizes: Prize[]
   players: TournamentPlayer[]
   match: Match | null

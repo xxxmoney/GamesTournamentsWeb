@@ -23,7 +23,7 @@ const onPage = async (value: PageState) => {
 
 <template>
   <div class="page-container">
-    <CommonPanel :header="$t('common.filter')" class="w-full">
+    <CommonPanel :header="$t('common.filter')" class="w-full overflow-auto">
       <div class="flex md:inline-flex">
         <PageGamesFilter />
       </div>

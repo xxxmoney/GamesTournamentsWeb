@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import useVuelidate from '@vuelidate/core'
 import constants from '~/constants'
+import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 
-const { required } = useValidators()
+const { useRequiredUnless } = useValidators()
 
 const edit = useTournamentEdit()
 const accountsIds = computed(() => new Set(edit.value.players.map((player) => player.accountId)))
 const selectedAccountId = ref(null)
+const anyoneCanJoin = computed(() => edit.value.anyoneCanJoin)
 
 const accounts = useAccounts()
 const accountsFiltered = computed(() => accounts.value.filter((account) => !accountsIds.value.has(account.id)))
@@ -19,8 +21,9 @@ const getAccountName = (accountId: number) => {
 const addAccount = () => {
   if (selectedAccountId.value) {
     edit.value.players.push({
+      id: 0,
       accountId: selectedAccountId.value,
-      status: 'pending',
+      statusId: tournamentPlayerStatus.pending,
       gameUsername: null
     })
     selectedAccountId.value = null
@@ -31,8 +34,9 @@ const removeAccount = (index: number) => {
   edit.value.players.splice(index, 1)
 }
 
+const requiredUnless = useRequiredUnless(anyoneCanJoin)
 const rules = {
-  players: { required, $autoDirty: true }
+  players: { requiredUnless, $autoDirty: true }
 }
 
 const v$ = useVuelidate(rules, edit)
