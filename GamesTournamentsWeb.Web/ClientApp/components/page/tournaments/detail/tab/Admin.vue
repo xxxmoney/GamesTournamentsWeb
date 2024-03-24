@@ -17,11 +17,13 @@ const deleteTournament = () => {
     header: t('common.confirmation'),
     accept: async () => {
       try {
-        // TODO: add delete tournament method
-
-        successToast('tournament_delete.success')
+        await store.deleteTournamenById(detail.value.id)
 
         await router.push('/tournaments')
+
+        store.tournamentDetail = null
+
+        successToast('tournament_delete.success')
       } catch (e) {
         errorToast(e)
       }

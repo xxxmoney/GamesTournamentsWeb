@@ -199,6 +199,9 @@ export default {
     streams: 'Streamy',
     admin: 'Admin'
   },
+  tournament_matches: {
+    no_matches: 'There are no matches right now'
+  },
   tournament_prizes: {
     place: 'Místo',
     first_place: 'První místo',

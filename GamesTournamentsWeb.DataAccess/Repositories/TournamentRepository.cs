@@ -17,6 +17,7 @@ public interface ITournamentRepository : IRepository
     
     Task AddTournamentAsync(Tournament tournament);
     
+    void DeleteTournament(Tournament tournament);
 }
 
 public class TournamentRepository(WebContext context) : ITournamentRepository
@@ -61,5 +62,10 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
     public async Task AddTournamentAsync(Tournament tournament)
     {
         await context.Tournaments.AddAsync(tournament);
+    }
+
+    public void DeleteTournament(Tournament tournament)
+    {
+        context.Tournaments.Remove(tournament);
     }
 }

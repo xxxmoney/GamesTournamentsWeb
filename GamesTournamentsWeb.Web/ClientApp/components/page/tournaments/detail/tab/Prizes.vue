@@ -30,14 +30,14 @@ const currencyById = (id: number) => {
 
 <template>
   <div class="container-gap">
-    <div class="container-row-gap mx-auto">
+    <div v-if="topThreePrizes.length" class="container-row-gap mx-auto">
       <PageTournamentsTopPrize
         v-for="(prize, index) in topThreePrizes"
         :key="`top-prize-${index}`"
         v-tooltip="$t(prize.tooltip)"
         :amount="prize.amount"
         :colorClass="prize.colorClass"
-        :currencySymbol="currencyById(prize.currencyId).symbol"
+        :currencySymbol="currencyById(prize.currencyId)?.symbol"
       />
     </div>
 

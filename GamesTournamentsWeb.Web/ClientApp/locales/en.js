@@ -199,6 +199,9 @@ export default {
     streams: 'Streams',
     admin: 'Admin'
   },
+  tournament_matches: {
+    no_matches: 'There are no matches right now'
+  },
   tournament_prizes: {
     place: 'Place',
     first_place: 'First place',

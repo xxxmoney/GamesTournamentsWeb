@@ -6,10 +6,10 @@ const players = computed(() => detail.value.players)
 
 <template>
   <DataTable :value="players" size="small">
-    <Column :header="$t('tournament_players.username')" field="account.name"></Column>
+    <Column :header="$t('tournament_players.username')" field="account.username"></Column>
     <Column :header="$t('tournament_players.status')">
       <template #body="slotProps">
-        <PageTournamentsGameUserStatus :status="slotProps.data.statusId" />
+        <PageTournamentsGameUserStatus :statusId="slotProps.data.statusId" />
       </template>
     </Column>
     <Column :header="$t('tournament_players.game_username')" field="gameUsername"></Column>
