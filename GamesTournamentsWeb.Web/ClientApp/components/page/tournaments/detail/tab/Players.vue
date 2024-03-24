@@ -9,7 +9,7 @@ const players = computed(() => detail.value.players)
     <Column :header="$t('tournament_players.username')" field="account.name"></Column>
     <Column :header="$t('tournament_players.status')">
       <template #body="slotProps">
-        <PageTournamentsGameUserStatus :status="slotProps.data.status" />
+        <PageTournamentsGameUserStatus :status="slotProps.data.statusId" />
       </template>
     </Column>
     <Column :header="$t('tournament_players.game_username')" field="gameUsername"></Column>

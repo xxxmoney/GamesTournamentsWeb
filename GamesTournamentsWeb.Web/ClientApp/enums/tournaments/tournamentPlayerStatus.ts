@@ -1,7 +1,7 @@
 const tournamentPlayerStatus = Object.freeze({
-  pending: 'pending',
-  accepted: 'accepted',
-  rejected: 'rejected'
+  pending: 1,
+  accepted: 2,
+  rejected: 3
 })
 
 export { tournamentPlayerStatus }

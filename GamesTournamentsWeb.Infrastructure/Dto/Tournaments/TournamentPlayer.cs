@@ -8,5 +8,5 @@ public class TournamentPlayer
     public int TournamentId { get; set; }
     public Account Account { get; set; }
     public string GameUsername { get; set; }
-    public string Status { get; set; }
+    public int StatusId { get; set; }
 }

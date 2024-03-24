@@ -27,11 +27,11 @@ export const useDashboardStore = defineStore({
       return Promise.resolve()
     },
 
-    async getLayouts (userId: number): Promise<Layout[]> {
+    async getLayouts (): Promise<Layout[]> {
       try {
         this.loading = true
 
-        this.layouts = await DashboardService.getLayouts(userId)
+        this.layouts = await DashboardService.getLayouts()
         return this.layouts
       } finally {
         this.loading = false

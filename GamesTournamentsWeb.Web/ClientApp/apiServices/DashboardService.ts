@@ -4,7 +4,7 @@ import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
 import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 
 export const DashboardService = {
-  getLayouts (userId: number): Promise<Layout[]> {
+  getLayouts (): Promise<Layout[]> {
     const layout = {
       id: 1,
       name: 'View',
