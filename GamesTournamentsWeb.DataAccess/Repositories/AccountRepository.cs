@@ -14,9 +14,9 @@ public interface IAccountRepository : IRepository
 
     Task<bool> ExistsAccountWithEmailAsync(string email);
 
-    Task AddAsync(Account account);
+    Task AddAccountAsync(Account account);
     
-    void Update(Account account);
+    void UpdateAccount(Account account);
 }
 
 public class AccountRepository(WebContext context) : IAccountRepository
@@ -41,12 +41,12 @@ public class AccountRepository(WebContext context) : IAccountRepository
         return await this.GetAccountByEmailAsync(email) != null;
     }
 
-    public async Task AddAsync(Account account)
+    public async Task AddAccountAsync(Account account)
     {
         await context.Accounts.AddAsync(account);
     }
 
-    public void Update(Account account)
+    public void UpdateAccount(Account account)
     {
         context.Accounts.Update(account);
     }

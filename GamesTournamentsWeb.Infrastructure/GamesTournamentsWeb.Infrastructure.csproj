@@ -19,9 +19,4 @@
       <ProjectReference Include="..\GamesTournamentsWeb.DataAccess\GamesTournamentsWeb.DataAccess.csproj" />
     </ItemGroup>
 
-
-    <ItemGroup>
-      <Folder Include="ViewModels\" />
-    </ItemGroup>
-
 </Project>

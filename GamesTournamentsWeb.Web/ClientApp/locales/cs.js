@@ -1,6 +1,7 @@
 export default {
   testAuthentication: 'Test CS',
   common: {
+    delete: 'Smazat',
     search: 'Vyhledat',
     select: 'Vybrat',
     choose_module: 'Vyberte modul',

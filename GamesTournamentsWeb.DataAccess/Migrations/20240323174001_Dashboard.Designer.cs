@@ -4,6 +4,7 @@ using GamesTournamentsWeb.DataAccess.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesTournamentsWeb.DataAccess.Migrations
 {
     [DbContext(typeof(WebContext))]
-    partial class WebContextModelSnapshot : ModelSnapshot
+    [Migration("20240323174001_Dashboard")]
+    partial class Dashboard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,17 +48,12 @@ namespace GamesTournamentsWeb.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.ToTable("Layout", "dbo");
                 });
@@ -703,17 +701,6 @@ namespace GamesTournamentsWeb.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamesTournamentsWeb.DataAccess.Models.Dashboard.Layout", b =>
-                {
-                    b.HasOne("GamesTournamentsWeb.DataAccess.Models.Users.Account", "Account")
-                        .WithMany("Layouts")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("GamesTournamentsWeb.DataAccess.Models.Dashboard.LayoutItem", b =>
                 {
                     b.HasOne("GamesTournamentsWeb.DataAccess.Models.Dashboard.Layout", "Layout")
@@ -914,8 +901,6 @@ namespace GamesTournamentsWeb.DataAccess.Migrations
 
             modelBuilder.Entity("GamesTournamentsWeb.DataAccess.Models.Users.Account", b =>
                 {
-                    b.Navigation("Layouts");
-
                     b.Navigation("TournamentPlayers");
                 });
 

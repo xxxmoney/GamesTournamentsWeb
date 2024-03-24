@@ -2,7 +2,7 @@ interface TournamentPlayer {
     id: number
     accountId: Number
     gameUsername: string | null
-    status: string
+    statusId: number
 }
 
 export type { TournamentPlayer }

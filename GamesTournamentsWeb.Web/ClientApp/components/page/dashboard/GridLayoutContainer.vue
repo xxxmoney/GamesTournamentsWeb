@@ -1,11 +1,5 @@
 <script lang="ts" setup>
-import type { LayoutItem } from '~/models/dashboard/LayoutItem'
-
 const store = useDashboardStore()
-
-const onItemsUpdate = async (items: LayoutItem[]) => {
-  await store.upsertSelectedLayoutItems(items)
-}
 
 const showSelectModuleDialog = () => {
   store.openSelectModuleModal()
@@ -15,7 +9,7 @@ const showSelectModuleDialog = () => {
 
 <template>
   <div class="container-gap-lg">
-    <div class="flex-0 mx-auto">
+    <div class="flex-0 mx-auto inline-flex gap">
       <Button
         :label="$t('common.add_module')"
         icon="pi pi-plus"
@@ -24,7 +18,6 @@ const showSelectModuleDialog = () => {
     </div>
     <PageDashboardGridLayout
       class="flex-1"
-      @update="onItemsUpdate"
     />
   </div>
 </template>

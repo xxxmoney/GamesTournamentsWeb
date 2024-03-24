@@ -1,59 +1,27 @@
-import type { LayoutDetail } from '~/models/dashboard/LayoutDetail'
+import type { Layout } from '~/models/dashboard/Layout'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
-import type { Layout } from '~/models/dashboard/Layout'
-import type { Module } from '~/models/dashboard/Module'
+import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 
 export const DashboardService = {
-  getModules (): Promise<Module[]> {
-    const modules = [
-      {
-        id: 1,
-        name: 'TournamentHistory'
-      }
-    ]
-
-    return Promise.resolve(modules)
+  async getLayouts (): Promise<Layout[]> {
+    const api = useApi()
+    const result = await api.get<Layout[]>('dashboard/layouts')
+    return result.data
   },
-  getLayouts (userId: number): Promise<LayoutDetail[]> {
-    const layout = {
-      id: 1,
-      name: 'View',
-      items: [
-        {
-          i: 1,
-          x: 0,
-          y: 0,
-          w: 2,
-          h: 2,
-          moduleId: 1,
-          layoutId: 1
-        }
-      ]
-    }
-
-    return Promise.resolve([layout])
+  async upsertLayout (layoutUpsert: LayoutUpsert): Promise<LayoutOverview> {
+    const api = useApi()
+    const result = await api.post<LayoutOverview>('dashboard/layouts/upsert', layoutUpsert)
+    return result.data
   },
-  upsertLayout (layoutUpsert: LayoutUpsert): Promise<Layout> {
-    const layout = {
-      id: 1,
-      name: 'View',
-      items: [
-        {
-          i: 1,
-          x: 0,
-          y: 0,
-          w: 2,
-          h: 2,
-          moduleId: 1,
-          layoutId: 1
-        }
-      ]
-    }
-
-    return Promise.resolve(layout)
+  async removeLayout (layoutId: number): Promise<void> {
+    const api = useApi()
+    await api.delete(`dashboard/layouts/${layoutId}/remove`)
   },
-  upsertLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
-    return Promise.resolve(items)
+  async upsertLayoutItems (layoutId: number, items: LayoutItem[]): Promise<LayoutItem[]> {
+    const api = useApi()
+    const result = await api.post<LayoutItem[]>('dashboard/layouts/items/upsert', { layoutId, items })
+    return result.data
   }
+
 }

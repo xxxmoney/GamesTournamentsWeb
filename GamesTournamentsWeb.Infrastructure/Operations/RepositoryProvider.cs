@@ -23,6 +23,8 @@ public interface IRepositoryProviderScope : IDisposable
         where T : IRepository;
     
     Task SaveChangesAsync();
+    
+    void RevertChanges();
 }
 
 public class RepositoryProviderScope(IServiceScope scope) : IRepositoryProviderScope
@@ -37,6 +39,11 @@ public class RepositoryProviderScope(IServiceScope scope) : IRepositoryProviderS
     public Task SaveChangesAsync()
     {
         return this.context.SaveChangesAsync();
+    }
+
+    public void RevertChanges()
+    {
+        this.context.ChangeTracker.Clear();
     }
 
     public void Dispose()

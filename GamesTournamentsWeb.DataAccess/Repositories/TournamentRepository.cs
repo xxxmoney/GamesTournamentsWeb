@@ -11,11 +11,26 @@ public interface ITournamentRepository : IRepository
 {
     Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count);
     
-    ValueTask<Tournament> GetTournamentByIdAsync(int id);
+    Task<Tournament> GetTournamentByIdAsync(int id);
+    
+    void UpdateTournament(Tournament tournament);
+    
+    Task AddTournamentAsync(Tournament tournament);
+    
 }
 
 public class TournamentRepository(WebContext context) : ITournamentRepository
 {
+    private IQueryable<Tournament> GetTournamentsWithIncludes() => context.Tournaments
+        .Include(t => t.Game)
+        .Include(t => t.Platform)
+        .Include(t => t.Regions)
+        .Include(t => t.Prizes)
+        .Include(t => t.Players)
+        .Include(t => t.Matches)
+        .Include(t => t.Streams)
+        .Include(t => t.Admins);
+    
     public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count)
     {
         return context.Tournaments.Where(filter).Select(t => new TournamentOverview
@@ -25,8 +40,18 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
         }).ToPagedAsync(page, count);
     }
 
-    public ValueTask<Tournament> GetTournamentByIdAsync(int id)
+    public Task<Tournament> GetTournamentByIdAsync(int id)
     {
-        return context.Tournaments.FindAsync(id);
+        return this.GetTournamentsWithIncludes().SingleOrDefaultAsync(tournament => tournament.Id == id);
+    }
+
+    public void UpdateTournament(Tournament tournament)
+    {
+        context.Tournaments.Update(tournament);
+    }
+
+    public async Task AddTournamentAsync(Tournament tournament)
+    {
+        await context.Tournaments.AddAsync(tournament);
     }
 }

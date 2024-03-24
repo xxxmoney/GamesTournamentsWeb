@@ -1,5 +1,6 @@
 ﻿using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
 using GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
+using GamesTournamentsWeb.Infrastructure.ViewModels.Tournaments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +21,13 @@ public class TournamentsController(ITournamentOperation tournamentOperation) : B
     {
         return Ok(await tournamentOperation.GetTournamentByIdAsync(tournamentId));
     }
+    
+    [HttpPost("upsert")]
+    public async Task<IActionResult> UpsertTournament(TournamentEdit tournamentEdit)
+    {
+        return Ok(await tournamentOperation.UpsertTournamentAsync(tournamentEdit));
+    }
+    
+    
     
 }

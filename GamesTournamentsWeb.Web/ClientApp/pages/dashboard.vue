@@ -3,12 +3,11 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const mainStore = useMainStore()
 const dashboardStore = useDashboardStore()
 
 const layout = computed(() => dashboardStore.selectedLayout)
 
-await dashboardStore.getLayouts(mainStore.account!.id)
+await dashboardStore.getLayouts()
 </script>
 
 <template>

@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia'
-import type { LayoutDetail } from '~/models/dashboard/LayoutDetail'
+import type { Layout } from '~/models/dashboard/Layout'
 import { DashboardService } from '~/apiServices/DashboardService'
 import type { LayoutItem } from '~/models/dashboard/LayoutItem'
 import type { LayoutUpsert } from '~/models/dashboard/LayoutUpsert'
-import type { Layout } from '~/models/dashboard/Layout'
+import type { LayoutOverview } from '~/models/dashboard/LayoutOverview'
 import { DashboardMapper } from '~/mappers/DashboardMapper'
 import type { Module } from '~/models/dashboard/Module'
 import constants from '~/constants'
+import { component } from '~/enums/dashboard/component'
 
 export const useDashboardStore = defineStore({
   id: 'dashboard-store',
   state: () => ({
     loading: true,
-    modules: [] as Module[],
-    layouts: [] as LayoutDetail[],
+    layouts: [] as Layout[],
     selectedLayoutId: null as number | null,
     layoutUpsert: null as LayoutUpsert | null,
     selectedLayoutItemId: null as number | null,
@@ -21,36 +21,23 @@ export const useDashboardStore = defineStore({
     selectModuleModalActive: false
   }),
   actions: {
-    async initialize (): Promise<void> {
-      await Promise.all([
-        this.getModules()
-      ])
-
+    initialize (): Promise<void> {
       this.loading = false
+
+      return Promise.resolve()
     },
 
-    async getModules (): Promise<Module[]> {
+    async getLayouts (): Promise<Layout[]> {
       try {
         this.loading = true
 
-        this.modules = await DashboardService.getModules()
-        return this.modules
-      } finally {
-        this.loading = false
-      }
-    },
-
-    async getLayouts (userId: number): Promise<LayoutDetail[]> {
-      try {
-        this.loading = true
-
-        this.layouts = await DashboardService.getLayouts(userId)
+        this.layouts = await DashboardService.getLayouts()
         return this.layouts
       } finally {
         this.loading = false
       }
     },
-    async upsertLayout (layoutUpsert: LayoutUpsert): Promise<Layout> {
+    async upsertLayout (layoutUpsert: LayoutUpsert): Promise<LayoutOverview> {
       try {
         this.loading = true
 
@@ -69,6 +56,22 @@ export const useDashboardStore = defineStore({
         this.loading = false
       }
     },
+    async removeLayout (layoutId: number): Promise<void> {
+      try {
+        this.loading = true
+
+        await DashboardService.removeLayout(layoutId)
+
+        const index = this.layouts.findIndex(layout => layout.id === layoutId)
+        if (index !== -1) {
+          this.layouts.splice(index, 1)
+        }
+
+        this.selectedLayoutId = null
+      } finally {
+        this.loading = false
+      }
+    },
     async upsertSelectedLayoutItems (items: LayoutItem[]): Promise<LayoutItem[]> {
       if (!this.selectedLayout) {
         throw new Error('No layout selected')
@@ -77,7 +80,7 @@ export const useDashboardStore = defineStore({
       try {
         this.loading = true
 
-        const upsertedItems = await DashboardService.upsertLayoutItems(items)
+        const upsertedItems = await DashboardService.upsertLayoutItems(this.selectedLayoutId!, items)
         this.selectedLayout.items = upsertedItems
         return upsertedItems
       } finally {
@@ -161,14 +164,14 @@ export const useDashboardStore = defineStore({
     }
   },
   getters: {
-    selectedLayout (): LayoutDetail | null {
+    selectedLayout (): Layout | null {
       return this.layouts.find(layout => layout.id === this.selectedLayoutId) ?? null
     },
     selectedLayoutItem (): LayoutItem | null {
       return this.selectedLayoutItemId ? this.selectedLayout?.items.find(item => item.id === this.selectedLayoutItemId) ?? null : null
     },
-    moduleById: (state) => (id: number): Module | null => {
-      return state.modules.find(module => module.id === id) ?? null
+    modules (): Module[] {
+      return Object.entries(component).map(([key, value]) => ({ id: value, name: key }))
     }
   }
 })

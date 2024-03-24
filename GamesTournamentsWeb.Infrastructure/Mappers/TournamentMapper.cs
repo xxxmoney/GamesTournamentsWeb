@@ -17,5 +17,11 @@ public class TournamentMapper : Profile
         CreateMap<DataAccess.Models.Tournaments.TournamentOverview, Dto.Tournaments.TournamentOverview>();
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayer, Dto.Tournaments.TournamentPlayer>();
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayerStatus, Dto.Tournaments.TournamentPlayerStatus>();
+        
+        CreateMap<ViewModels.Tournaments.TournamentEdit, DataAccess.Models.Tournaments.Tournament>();
+        CreateMap<ViewModels.Tournaments.TournamentPlayerEdit, DataAccess.Models.Tournaments.TournamentPlayer>();
+        CreateMap<ViewModels.Tournaments.PrizeEdit, DataAccess.Models.Tournaments.Prize>();
+        CreateMap<ViewModels.Tournaments.StreamEdit, DataAccess.Models.Tournaments.Stream>();
     }
+    
 }

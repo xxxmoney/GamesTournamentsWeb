@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.DataAccess.Models.Tournaments;
+﻿using GamesTournamentsWeb.DataAccess.Models.Dashboard;
+using GamesTournamentsWeb.DataAccess.Models.Tournaments;
 using GamesTournamentsWeb.DataAccess.Models.Users;
 
 namespace GamesTournamentsWeb.DataAccess.Models.Users;
@@ -16,4 +17,5 @@ public class Account
     public string ImageUrl { get; set; }
     public ICollection<Tournament> AdminTournaments { get; set; }
     public ICollection<TournamentPlayer> TournamentPlayers { get; set; }
+    public ICollection<Layout> Layouts { get; set; }
 }
