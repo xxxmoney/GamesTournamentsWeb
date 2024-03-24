@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { ConcreteComponent } from 'vue'
 import { component } from '~/enums/dashboard/component'
 
 const store = useDashboardStore()
