@@ -6,12 +6,12 @@ import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStat
 const { useRequiredUnless } = useValidators()
 
 const edit = useTournamentEdit()
-const accountsIds = computed(() => new Set(edit.value.players.map((player) => player.accountId)))
+const accountsIds = computed(() => edit.value?.players.map((player) => player.accountId) ?? [])
 const selectedAccountId = ref(null)
 const anyoneCanJoin = computed(() => edit.value.anyoneCanJoin)
 
 const accounts = useAccounts()
-const accountsFiltered = computed(() => accounts.value.filter((account) => !accountsIds.value.has(account.id)))
+const accountsFiltered = computed(() => accounts.value.filter((account) => !accountsIds.value.includes(account.id)))
 
 const getAccountName = (accountId: number) => {
   const account = accounts.value.find(item => item.id === accountId)

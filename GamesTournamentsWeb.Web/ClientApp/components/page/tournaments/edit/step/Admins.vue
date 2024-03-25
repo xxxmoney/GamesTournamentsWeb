@@ -5,11 +5,11 @@ import constants from '~/constants'
 const { required } = useValidators()
 
 const edit = useTournamentEdit()
-const adminIds = computed(() => new Set(edit.value.adminIds))
+const adminIds = computed(() => edit.value.adminIds)
 const selectedAccountId = ref(null)
 
 const accounts = useAccounts()
-const accountsFiltered = computed(() => accounts.value.filter((account) => !adminIds.value.has(account.id)))
+const accountsFiltered = computed(() => accounts.value.filter((account) => !adminIds.value.includes(account.id)))
 
 const getAccountName = (accountId: number) => {
   const account = accounts.value.find((account) => account.id === accountId)
