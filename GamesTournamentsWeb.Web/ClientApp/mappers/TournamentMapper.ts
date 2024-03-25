@@ -26,7 +26,7 @@ export const TournamentMapper = {
       edit.currencyId = tournamentDetail.prizes[0].currencyId
     }
     edit.anyoneCanJoin = tournamentDetail?.anyoneCanJoin ?? false
-    edit.adminIds = [...tournamentDetail?.adminIds ?? []]
+    edit.adminIds = [...tournamentDetail?.admins.map(admin => admin.id) ?? []]
 
     return edit.toJson() as TournamentEdit
   }
