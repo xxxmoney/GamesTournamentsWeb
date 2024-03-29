@@ -41,4 +41,23 @@ public class AuthController(IAuthOperation authOperation) : BaseController
         return Ok("Nice");
     }
     
+    [HttpPut("changePassword")]
+    public async Task<IActionResult> ChangePassword(ChangePassword changePassword)
+    {
+        try
+        {
+            if (!this.AccountId.HasValue)
+            {
+                return Unauthorized();
+            }
+            
+            await authOperation.ChangePasswordAsync(this.AccountId.Value, changePassword);
+            return Ok();
+        }
+        catch (AccountNotFoundException)
+        {
+            return NotFound();
+        }
+    }
+    
 }
