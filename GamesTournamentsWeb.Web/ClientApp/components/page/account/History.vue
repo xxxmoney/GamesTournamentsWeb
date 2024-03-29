@@ -9,7 +9,9 @@ const router = useRouter()
 const history = computed(() => accountStore.history)
 const account = computed(() => mainStore.account)
 
-await accountStore.getHistory(account.value!.id)
+if (account.value) {
+  await accountStore.getHistory()
+}
 
 const goToTournament = (tournamentId: number) => {
   router.push(`/tournaments/detail/${tournamentId}`)
@@ -18,11 +20,11 @@ const goToTournament = (tournamentId: number) => {
 </script>
 
 <template>
-  <div class="form-container-lg">
+  <div v-if="account" class="form-container-lg">
     <div class="container">
       <DataTable :value="history" size="small">
-        <Column :header="$t('common.nickname')" field="nickname"></Column>
-        <Column :header="$t('common.game')" field="gameName"></Column>
+        <Column :header="$t('common.tournament_name')" field="tournamentName"></Column>
+        <Column :header="$t('common.game_username')" field="gameUsername"></Column>
         <Column :header="$t('common.place')" field="place"></Column>
         <Column :header="$t('common.link')">
           <template #body="{ data }">
@@ -31,7 +33,5 @@ const goToTournament = (tournamentId: number) => {
         </Column>
       </DataTable>
     </div>
-
-    <Paginator :rows="10" :totalRecords="120"></Paginator>
   </div>
 </template>

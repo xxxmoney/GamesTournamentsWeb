@@ -80,7 +80,15 @@ export default {
     choose_platform: 'Vyberte platformu',
     choose_regions: 'Vyberte regiony',
     choose_team_size: 'Vyberte velikost týmu',
-    choose_account: 'Vyberte účet'
+    choose_account: 'Vyberte účet',
+    status: 'Stav',
+    game_username: 'Herní jméno',
+    tournament_name: 'Název turnaje',
+    invitations: 'Pozvánky',
+    accept: 'Přijmout',
+    reject: 'Odmítnout',
+    actions: 'Akce',
+    set_nickname: 'Nastavit přezdívku'
   },
 
   validations: {
@@ -148,7 +156,7 @@ export default {
   home: {
     hero: {
       small_title: 'Web pro herní turnaje',
-      title: 'Stránka nové generace pro multiplayerové turnaje',
+      title: 'Stránka Nové Generace Pro Multiplayerové Turnaje',
       description: 'Uvolněte své hráčské srdce v našich herních turnajích pro více hráčů, které jsou globální platformou pro strategii, soutěž a kamarádství. Zapojte se do bitvy ještě dnes!'
     },
     features: {
@@ -165,7 +173,7 @@ export default {
       stats_insights: {
         icon: 'pi-star',
         title: 'Statistiky a postřehy',
-        description: 'Ponořte se do minulých turnajů s komplexními statistikami a přehledy, které vám pomohou činit informovaná rozhodnutí'
+        description: 'Ponořte se do minulých turnajů se statistikami a přehledy, které vám pomohou činit informovaná rozhodnutí'
       }
     },
     contact_form: {
@@ -188,6 +196,11 @@ export default {
   account_delete: {
     success: 'Účet byl úspěšně smazán',
     prompt: 'Opravdu chcete smazat svůj účet?'
+  },
+
+  account_detail: {
+    invitation_accept_confirm: 'Opravdu chcete přijmout pozvánku?',
+    invitation_reject_confirm: 'Opravdu chcete odmítnout pozvánku?'
   },
 
   tournament_detail: {
@@ -215,8 +228,7 @@ export default {
   },
   tournament_players: {
     username: 'Uživatelské jméno',
-    status: 'Stav',
-    game_username: 'Herní uživatelské jméno'
+    status: 'Stav'
   },
   tournament_player_status: {
     pending: 'Čeká se na schválení',

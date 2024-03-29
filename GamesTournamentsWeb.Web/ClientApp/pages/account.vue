@@ -10,7 +10,7 @@ const accountStore = useAccountStore()
 
 const account = computed(() => mainStore.account)
 if (account.value) {
-  await accountStore.getAccountInfo(account.value.id)
+  await accountStore.getAccountInfo()
 }
 </script>
 
@@ -21,5 +21,6 @@ if (account.value) {
 
     <PageAccountPasswordChangeDialog />
     <PageAccountHistoryDialog />
+    <PageAccountInvitationsDialog />
   </div>
 </template>
