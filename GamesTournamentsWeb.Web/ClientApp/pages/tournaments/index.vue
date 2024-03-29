@@ -4,6 +4,7 @@ import type { PageState } from 'primevue/paginator'
 const router = useRouter()
 const tournamentsStore = useTournamentsStore()
 
+const isLoggedIn = useIsLoggedIn()
 const pagedTournamentOverviews = computed(() => tournamentsStore.pagedTournaments)
 const tournamentOverviews = computed(() => tournamentsStore.tournaments)
 
@@ -28,7 +29,7 @@ const goToCreateTournament = async () => {
 
 <template>
   <div class="page-container">
-    <Button :label="$t('common.create')" @click="goToCreateTournament" />
+    <Button v-if="isLoggedIn" :label="$t('common.create')" @click="goToCreateTournament" />
 
     <CommonPanel :header="$t('common.filter')" class="w-full overflow-auto">
       <div class="flex md:inline-flex">

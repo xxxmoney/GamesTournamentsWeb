@@ -14,7 +14,8 @@ export const useMainStore = defineStore({
     loading: true,
     loginResult: null as LoginResult | null,
     mobileMenuActive: false,
-    locale: constants.defaultLocale
+    locale: constants.defaultLocale,
+    registerValue: new Register().toJson() as Register
   }),
   actions: {
     initialize (): Promise<void> {
@@ -82,6 +83,9 @@ export const useMainStore = defineStore({
       } finally {
         this.loading = false
       }
+    },
+    resetRegisterValue (): void {
+      this.registerValue = new Register().toJson() as Register
     },
     async testAuthentication (): Promise<boolean> {
       const result = await AuthService.testAuthentication()
