@@ -14,7 +14,7 @@ export default {
   custom: 'Vlastní',
   dateAfter: 'Datum je po',
   dateBefore: 'Datum je před',
-  dateFormat: 'dd.mm.rrrr',
+  dateFormat: 'dd.mm.yy',
   dateIs: 'Datum je',
   dateIsNot: 'Datum není',
   dayNames: [

@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: 'auth'
+})
+
 const { id } = defineProps({
   id: {
     type: Number,
@@ -6,15 +10,20 @@ const { id } = defineProps({
   }
 })
 
-const store = useTournamentsStore()
-if (id) {
-  await store.getTournamentById(id)
-}
+const mainStore = useMainStore()
+const tournamentsStore = useTournamentsStore()
+const account = computed(() => mainStore.account)
 
-store.resetTournamentEdit()
-store.mapTournamentDetailToEdit()
+if (account.value) {
+  if (id) {
+    await tournamentsStore.getTournamentById(id)
+  }
+
+  tournamentsStore.resetTournamentEdit()
+  tournamentsStore.mapTournamentDetailToEdit(account.value!.id)
+}
 </script>
 
 <template>
-  <PageTournamentsEditSteps class="w-full" />
+  <PageTournamentsEditSteps v-if="account" class="w-full" />
 </template>

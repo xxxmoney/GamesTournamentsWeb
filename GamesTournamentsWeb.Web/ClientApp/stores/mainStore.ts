@@ -20,7 +20,7 @@ export const useMainStore = defineStore({
   actions: {
     initialize (): Promise<void> {
       this.getLoginResult()
-      this.getLocale()
+      //this.getLocale()
 
       this.loading = false
 
@@ -35,25 +35,22 @@ export const useMainStore = defineStore({
     },
 
     getLocale (): string {
-      const locale = useCookie<string>(constants.localeKey)
+      const locale = getLocalData<string>(constants.localeKey, constants.defaultLocale)
 
-      this.locale = locale.value ?? constants.defaultLocale
-      return locale.value
+      this.locale = locale
+      return locale
     },
     setLocale (locale: string): void {
-      //const localeCookie = useCookie<string>(constants.localeKey)
-      this.locale = getLocalData(constants.localeKey, constants.defaultLocale)
+      this.locale = setLocalData<string>(constants.localeKey, locale)
     },
 
     getLoginResult (): LoginResult | null {
-      //const login = useCookie<LoginResult | null>(constants.loginKey)
       const result = getLocalData(constants.loginKey, null)
 
       this.loginResult = result
       return result
     },
     setLoginResult (loginResult: LoginResult | null): void {
-      //const login = useCookie<LoginResult | null>(constants.loginKey)
       const result = setLocalData(constants.loginKey, loginResult)
 
       this.loginResult = result

@@ -9,6 +9,7 @@ const streams = computed(() => edit.value.streams)
 
 const addStream = () => {
   streams.value.push({
+    id: 0,
     name: '',
     url: ''
   })
@@ -20,7 +21,6 @@ const removeStream = (index: number) => {
 
 const rules = {
   streams: {
-    required,
     $autoDirty: true,
     $each: helpers.forEach({
       name: {
@@ -40,6 +40,11 @@ const invalid = computed(() => v$.value.$invalid)
 
 useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.streams, validate)
 
+const canShowStream = (streamIndex: number) => {
+  const stream = streams.value[streamIndex]
+  return stream && stream.url && v$.value.streams.$each.$response.$errors[streamIndex].url.length === 0
+}
+
 defineExpose({
   validate
 })
@@ -54,7 +59,7 @@ defineExpose({
     </CommonWithErrors>
 
     <CommonWithLabel
-      v-for="(_, index) in streams"
+      v-for="(stream, index) in streams"
       :key="`stream-${index}`"
       :label="$t('common.stream')"
     >
@@ -75,6 +80,8 @@ defineExpose({
           </CommonWithErrors>
         </div>
       </CommonWithButtonIcon>
+
+      <CommonVideoEmbed v-if="canShowStream(index)" :src="stream.url" class="mt" />
     </CommonWithLabel>
 
     <Button

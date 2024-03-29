@@ -1,10 +1,14 @@
 const getLocalData = <T>(key: string, defaultValue: T): T => {
   let finalValue = defaultValue
-  
+
   try {
     const stringValue = localStorage.getItem(key)
     if (stringValue) {
-      finalValue = JSON.parse(stringValue)
+      try {
+        finalValue = JSON.parse(stringValue) as T
+      } catch {
+        finalValue = stringValue as T
+      }
     }
   } catch (e) {
     console.error(e)

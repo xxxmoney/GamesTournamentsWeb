@@ -84,7 +84,7 @@ export default {
   },
 
   validations: {
-    undefined: 'Pole je nevalidn9',
+    undefined: 'Pole je nevalidní',
     error: 'Chyba při validaci',
     required: 'Pole je povinné',
     requiredIf: 'Pole je povinné',
@@ -200,7 +200,10 @@ export default {
     admin: 'Admin'
   },
   tournament_matches: {
-    no_matches: 'There are no matches right now'
+    no_matches: 'Nyní neprobíhají žádné zápasy'
+  },
+  tournament_streams: {
+    no_streams: 'Nejsou k dispozici žádné streamy'
   },
   tournament_prizes: {
     place: 'Místo',
