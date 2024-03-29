@@ -24,6 +24,8 @@ const changePassword = async () => {
 
     await mainStore.changePassword(changePasswordValue.value)
 
+    await router.push('logout')
+
     successToast('change_password.success')
     emit('passwordChanged')
 

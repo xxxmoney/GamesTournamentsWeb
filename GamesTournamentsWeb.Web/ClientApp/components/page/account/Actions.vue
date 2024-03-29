@@ -5,43 +5,20 @@ const tournamentsStore = useTournamentsStore()
 
 const router = useRouter()
 const { t } = useI18n()
-const successToast = useSuccessToast()
-const errorToast = useErrorToast()
-
-//const accountId = computed(() => mainStore.account!.id)
-
-const confirm = useConfirm()
 
 const goToTournaments = async () => {
   tournamentsStore.resetFilter()
   tournamentsStore.filter.withMyTournaments = true
   await router.push('/tournaments')
 }
-const goToDashboard = () => {
-  // TODO: go to dashboard page
+const goToDashboard = async () => {
+  await router.push('/dashboard')
 }
 const showHistory = () => {
   accountStore.openHistoryModal()
 }
 const showChangePassword = () => {
   accountStore.openPasswordChangeModal()
-}
-const onDeleteAccount = () => {
-  confirm.require({
-    message: t('account_delete.prompt'),
-    header: 'Confirmation',
-    accept: () => {
-      try {
-        // TODO: add delete account method
-
-        successToast('account_delete.success')
-
-        router.push('/logout')
-      } catch (e) {
-        errorToast(e)
-      }
-    }
-  })
 }
 
 </script>
@@ -60,12 +37,6 @@ const onDeleteAccount = () => {
         icon="pi pi-history"
         severity="secondary"
         @click="showHistory"
-      />
-      <Button
-        v-tooltip="$t('common.delete_account')"
-        icon="pi pi-trash"
-        severity="danger"
-        @click="onDeleteAccount"
       />
     </div>
   </div>
