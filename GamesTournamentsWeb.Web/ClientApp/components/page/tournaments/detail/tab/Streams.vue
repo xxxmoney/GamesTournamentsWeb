@@ -4,14 +4,19 @@ const detail = useTournamentDetail()
 
 <template>
   <div class="container-gap-lg w-full">
-    <Panel
-      v-for="stream in detail.streams"
-      :key="`stream-${stream.url}}`"
-      :header="stream.name ?? $t('common.stream')"
-      collapsed
-      toggleable
-    >
-      <CommonVideoEmbed :src="stream.url" />
-    </Panel>
+    <template v-if="detail.streams.length">
+      <Panel
+        v-for="stream in detail.streams"
+        :key="`stream-${stream.url}}`"
+        :header="stream.name ?? $t('common.stream')"
+        collapsed
+        toggleable
+      >
+        <CommonVideoEmbed :src="stream.url" />
+      </Panel>
+    </template>
+    <span v-else>
+      {{ $t('tournament_streams.no_streams') }}
+    </span>
   </div>
 </template>

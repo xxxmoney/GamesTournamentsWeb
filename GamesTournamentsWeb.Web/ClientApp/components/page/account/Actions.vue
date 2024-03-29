@@ -17,6 +17,9 @@ const goToDashboard = async () => {
 const showHistory = () => {
   accountStore.openHistoryModal()
 }
+const showInvitations = () => {
+  accountStore.openInvitationsModal()
+}
 const showChangePassword = () => {
   accountStore.openPasswordChangeModal()
 }
@@ -31,7 +34,16 @@ const showChangePassword = () => {
     </div>
 
     <div class="container-row-gap-sm">
-      <Button v-tooltip="$t('common.change_password')" icon="pi pi-wrench" @click="showChangePassword" />
+      <Button
+        v-tooltip="$t('common.change_password')"
+        icon="pi pi-wrench"
+        @click="showChangePassword"
+      />
+      <Button
+        v-tooltip="$t('common.invitations')"
+        icon="pi pi-envelope"
+        @click="showInvitations"
+      />
       <Button
         v-tooltip="$t('common.history')"
         icon="pi pi-history"

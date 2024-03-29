@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import useVuelidate from '@vuelidate/core'
 
-const { required, email } = useValidators()
-const successToast = useSuccessToast()
+const router = useRouter()
+const store = useMainStore()
 const errorToast = useErrorToast()
+const { required, email } = useValidators()
 
 const { showTryNow } = defineProps({
   showTryNow: {
@@ -22,9 +23,9 @@ const trySubmit = async () => {
       return
     }
 
-    // TODO: submit try
+    store.registerValue.email = tryModel.value.email
 
-    successToast()
+    await router.push('/register')
   } catch (e) {
     errorToast(e)
   }

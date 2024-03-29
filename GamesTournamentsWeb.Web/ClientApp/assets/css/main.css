@@ -287,8 +287,40 @@ body {
     @apply max-w-xs;
 }
 
+.max-w\! {
+    @apply max-w-full !important;
+}
+
+.max-w-lg {
+    @apply max-w-md;
+}
+
+.max-w-lg\! {
+    @apply max-w-lg !important;
+}
+
+.max-w-xl {
+    @apply max-w-lg;
+}
+
+.max-w-2xl {
+    @apply max-w-xl;
+}
+
 .container-width {
     @apply w-full max-w
+}
+
+.container-width-lg {
+    @apply w-full max-w-lg
+}
+
+.container-width-xl {
+    @apply w-full max-w-xl
+}
+
+.container-width-2xl {
+    @apply w-full max-w-2xl
 }
 
 .aspect-card {
@@ -343,8 +375,16 @@ body {
     @apply container-width container gap;
 }
 
+.form-lg-container {
+    @apply container-width-lg container-gap-lg;
+}
+
 .form-container-lg {
     @apply container-width container gap-lg;
+}
+
+.form-lg-container-lg {
+    @apply container-width-lg container-gap-lg;
 }
 
 .form-container-xl {

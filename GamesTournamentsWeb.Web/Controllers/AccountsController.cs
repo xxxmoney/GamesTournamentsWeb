@@ -1,21 +1,67 @@
-﻿using GamesTournamentsWeb.Infrastructure.Operations.Users;
+﻿using GamesTournamentsWeb.Common.Enums.Tournament;
+using GamesTournamentsWeb.Infrastructure.Exceptions;
+using GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
+using GamesTournamentsWeb.Infrastructure.Operations.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
 
-public class AccountsController(IAccountOperation accountOperation) : BaseController
+public class AccountsController(IAccountOperation accountOperation, ITournamentPlayerOperation tournamentPlayerOperation) : BaseController
 {
-    [HttpGet("{accountId}/info")]
-    public async Task<IActionResult> GetAccountInfo([FromQuery] int accountId)
+    [HttpGet("mine/info")]
+    public async Task<IActionResult> GetAccountInfo()
     {
-        return Ok(await accountOperation.GetAccountInfoByIdAsync(accountId));
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await accountOperation.GetAccountInfoByIdAsync(this.AccountId.Value));
     }
     
-    [HttpGet("{accountId}/history")]
-    public async Task<IActionResult> GetHistory([FromQuery] int accountId)
+    [HttpGet("mine/history")]
+    public async Task<IActionResult> GetHistory()
     {
-        return Ok(await accountOperation.GetHistoryItemsByIdAsync(accountId));
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }   
+        
+        return Ok(await accountOperation.GetHistoryItemsByIdAsync(this.AccountId.Value));
+    }
+    
+    [HttpGet("mine/invitations")]
+    public async Task<IActionResult> GetTournamentInvitations()
+    {
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await tournamentPlayerOperation.GetTournamentPlayersForAccountAsync(this.AccountId.Value));
+    }
+    
+    [HttpPut("mine/invitations/{invitationId}/accept/{gameUsername}")]
+    public async Task<IActionResult> AcceptTournamentInvitation(int invitationId, string gameUsername)
+    {
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername));
+    }
+    
+    [HttpPut("mine/invitations/{invitationId}/reject")]
+    public async Task<IActionResult> RejectTournamentInvitation(int invitationId)
+    {
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Rejected));
     }
     
     [AllowAnonymous]

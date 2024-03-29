@@ -124,9 +124,9 @@ export const useTournamentsStore = defineStore({
       }
     },
 
-    mapTournamentDetailToEdit () {
+    mapTournamentDetailToEdit (accountId: number) {
       const match = this.tournamentDetailCurrentMatch
-      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, match)
+      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, match, accountId)
     },
 
     resetTournamentEdit (): void {

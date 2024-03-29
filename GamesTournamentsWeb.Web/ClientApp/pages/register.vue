@@ -9,7 +9,7 @@ const store = useMainStore()
 const successToast = useSuccessToast()
 const errorToast = useErrorToast()
 
-const registerValue = ref(new Register())
+const registerValue = computed(() => store.registerValue)
 const password = computed(() => registerValue.value.password)
 
 const goToLogin = () => {
@@ -31,6 +31,10 @@ const register = async () => {
     errorToast(e)
   }
 }
+
+onUnmounted(() => {
+  store.resetRegisterValue()
+})
 
 const sameAsPassword = useSameAs(password)
 

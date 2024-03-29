@@ -77,12 +77,12 @@ defineExpose({
         <CommonWithLabel :label="$t('common.choose_regions')">
           <MultiSelect
             v-model="edit.regionIds"
+            :optionLabel="item => $t(`enums.region.${toSnakeCase(item.name)}`)"
             :options="regions"
             :placeholder="$t('common.choose_regions')"
             :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
             class="w-full"
             display="chip"
-            optionLabel="name"
             optionValue="id"
           />
         </CommonWithLabel>

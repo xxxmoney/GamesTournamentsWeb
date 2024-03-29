@@ -12,6 +12,6 @@ const players = computed(() => detail.value.players)
         <PageTournamentsGameUserStatus :statusId="slotProps.data.statusId" />
       </template>
     </Column>
-    <Column :header="$t('tournament_players.game_username')" field="gameUsername"></Column>
+    <Column :header="$t('common.game_username')" field="gameUsername"></Column>
   </DataTable>
 </template>

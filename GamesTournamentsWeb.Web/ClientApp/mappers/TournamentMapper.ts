@@ -4,7 +4,7 @@ import type { Match } from '~/models/tournaments/Match'
 import { copyObject } from '~/utils/objectUtils'
 
 export const TournamentMapper = {
-  mapTournamenDetailToEdit (tournamentDetail: Tournament | null, match: Match | null): TournamentEdit {
+  mapTournamenDetailToEdit (tournamentDetail: Tournament | null, match: Match | null, accountId: number): TournamentEdit {
     const edit = new TournamentEdit()
     edit.id = tournamentDetail?.id ?? null
     edit.name = tournamentDetail?.name ?? null
@@ -26,7 +26,7 @@ export const TournamentMapper = {
       edit.currencyId = tournamentDetail.prizes[0].currencyId
     }
     edit.anyoneCanJoin = tournamentDetail?.anyoneCanJoin ?? false
-    edit.adminIds = [...tournamentDetail?.admins.map(admin => admin.id) ?? []]
+    edit.adminIds = [...tournamentDetail?.admins.map(admin => admin.id) ?? [accountId]]
 
     return edit.toJson() as TournamentEdit
   }

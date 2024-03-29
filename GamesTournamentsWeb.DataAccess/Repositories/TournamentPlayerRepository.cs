@@ -6,13 +6,39 @@ namespace GamesTournamentsWeb.DataAccess.Repositories;
 
 public interface ITournamentPlayerRepository : IRepository
 {
-    Task<List<TournamentPlayer>> GetCurrenciesAsync();
+    ValueTask<TournamentPlayer> GetTournamentPlayerByIdAsync(int tournamentPlayerId);
+    
+    Task<List<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId);
+    
+    Task<List<TournamentPlayer>> GetTournamentPlayersForAccountAsync(int accountId);
+    
+    void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer);
 }
 
 public class TournamentPlayerRepository(WebContext context) : ITournamentPlayerRepository
 {
-    public Task<List<TournamentPlayer>> GetCurrenciesAsync()
+    public Task<List<TournamentPlayer>> GetTournamentPlayersForTournamentAsync()
     {
         return context.TournamentPlayers.ToListAsync();
+    }
+
+    public ValueTask<TournamentPlayer> GetTournamentPlayerByIdAsync(int tournamentPlayerId)
+    {
+        return context.TournamentPlayers.FindAsync(tournamentPlayerId);
+    }
+
+    public Task<List<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId)
+    {
+        return context.TournamentPlayers.Include(tp => tp.Tournament).Where(tp => tp.TournamentId == tournamentId).ToListAsync();
+    }
+
+    public Task<List<TournamentPlayer>> GetTournamentPlayersForAccountAsync(int accountId)
+    {
+        return context.TournamentPlayers.Include(tp => tp.Tournament).Where(tp => tp.AccountId == accountId).ToListAsync();
+    }
+
+    public void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer)
+    {
+        context.TournamentPlayers.Update(tournamentPlayer);
     }
 }

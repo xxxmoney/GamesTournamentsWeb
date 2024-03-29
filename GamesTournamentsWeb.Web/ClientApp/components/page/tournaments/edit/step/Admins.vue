@@ -4,10 +4,12 @@ import constants from '~/constants'
 
 const { required } = useValidators()
 
+const mainStore = useMainStore()
 const edit = useTournamentEdit()
 const adminIds = computed(() => edit.value.adminIds)
 const selectedAccountId = ref(null)
 
+const accountId = computed(() => mainStore.account!.id)
 const accounts = useAccounts()
 const accountsFiltered = computed(() => accounts.value.filter((account) => !adminIds.value.includes(account.id)))
 
@@ -26,6 +28,8 @@ const addAdmin = () => {
 const removeAdmin = (index: number) => {
   edit.value.adminIds.splice(index, 1)
 }
+
+const canRemoveAdmin = (adminId: number) => adminId !== accountId.value
 
 const rules = {
   adminIds: { required, $autoDirty: true }
@@ -73,6 +77,7 @@ defineExpose({
       :label="$t('common.admin')"
     >
       <CommonWithButtonIcon
+        :iconDisabled="!canRemoveAdmin(adminId)"
         icon="pi pi-trash"
         severity="danger"
         @iconClick="() => removeAdmin(index)"

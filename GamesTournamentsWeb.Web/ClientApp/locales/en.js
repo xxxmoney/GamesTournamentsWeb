@@ -80,7 +80,15 @@ export default {
     choose_platform: 'Choose platform',
     choose_regions: 'Choose regions',
     choose_team_size: 'Choose team size',
-    choose_account: 'Choose account'
+    choose_account: 'Choose account',
+    status: 'Status',
+    game_username: 'Game username',
+    tournament_name: 'Tournament name',
+    invitations: 'Invitations',
+    accept: 'Accept',
+    reject: 'Reject',
+    actions: 'Actions',
+    set_nickname: 'Set nickname'
   },
 
   validations: {
@@ -165,7 +173,7 @@ export default {
       stats_insights: {
         icon: 'pi-star',
         title: 'Stats & Insights',
-        description: 'Dive deep into past tournaments with comprehensive stats and insights, helping you make informed decisions'
+        description: 'Dive deep into past tournaments with stats and insights, helping you make informed decisions'
       }
     },
     contact_form: {
@@ -190,6 +198,11 @@ export default {
     prompt: 'Are you sure you want to delete your account?'
   },
 
+  account_detail: {
+    invitation_accept_confirm: 'Are you sure you want to accept the invitation?',
+    invitation_reject_confirm: 'Are you sure you want to reject the invitation?'
+  },
+
   tournament_detail: {
     overview: 'Overview',
     rules: 'Rules',
@@ -202,6 +215,9 @@ export default {
   tournament_matches: {
     no_matches: 'There are no matches right now'
   },
+  tournament_streams: {
+    no_streams: 'There are no streams available'
+  },
   tournament_prizes: {
     place: 'Place',
     first_place: 'First place',
@@ -212,8 +228,7 @@ export default {
   },
   tournament_players: {
     username: 'Username',
-    status: 'Status',
-    game_username: 'Game username'
+    status: 'Status'
   },
   tournament_player_status: {
     pending: 'Pending',

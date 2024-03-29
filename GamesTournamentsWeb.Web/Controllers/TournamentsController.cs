@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
 
-public class TournamentsController(ITournamentOperation tournamentOperation) : BaseController
+public class TournamentsController(ITournamentOperation tournamentOperation, ITournamentPlayerOperation tournamentPlayerOperation) : BaseController
 {
     [AllowAnonymous]
     [HttpPost("overviews")]
@@ -20,6 +20,13 @@ public class TournamentsController(ITournamentOperation tournamentOperation) : B
     public async Task<IActionResult> GetTournament(int tournamentId)
     {
         return Ok(await tournamentOperation.GetTournamentByIdAsync(tournamentId));
+    }
+    
+    [AllowAnonymous]
+    [HttpGet("{tournamentId}/players")]
+    public async Task<IActionResult> GetTournamentPlayers(int tournamentId)
+    {
+        return Ok(await tournamentPlayerOperation.GetTournamentPlayersForTournamentAsync(tournamentId));
     }
     
     [HttpPost("upsert")]
