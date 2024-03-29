@@ -38,8 +38,8 @@ public class GameOperation(IRepositoryProvider repositoryProvider, IMapper mappe
 
     private static Expression<Func<DataAccess.Models.Games.Game, bool>> FilterGames(GameFilter filter)
     {
-        // TODO: add owner to db and other filters
-        return game => string.IsNullOrWhiteSpace(filter.Name) || game.Name.Contains(filter.Name);
+        return game => (string.IsNullOrWhiteSpace(filter.Name) || game.Name.Contains(filter.Name))
+            && (filter.GenreIds == null || !filter.GenreIds.Any() || filter.GenreIds.Contains(game.GenreId));
     }
 
     public async Task<Game> GetGameByIdAsync(int gameId)

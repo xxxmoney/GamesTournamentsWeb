@@ -32,10 +32,6 @@ const getGames = async () => {
       />
     </CommonWithLabel>
 
-    <CommonWithLabel v-if="isLoggedIn" :label="$t('common.my_tournaments')">
-      <Checkbox v-model="filter.withMyTournaments" :binary="true" />
-    </CommonWithLabel>
-
     <Button :label="$t('common.search')" icon="pi pi-search" @click="getGames" />
   </div>
 </template>

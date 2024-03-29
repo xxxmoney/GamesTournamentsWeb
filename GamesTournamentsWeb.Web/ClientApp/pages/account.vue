@@ -8,16 +8,14 @@ const router = useRouter()
 const mainStore = useMainStore()
 const accountStore = useAccountStore()
 
-const account = mainStore.account
-if (!account) {
-  await router.push('/login')
-} else {
-  await accountStore.getAccountInfo(account.id)
+const account = computed(() => mainStore.account)
+if (account.value) {
+  await accountStore.getAccountInfo(account.value.id)
 }
 </script>
 
 <template>
-  <div class="form-container-lg mx-auto">
+  <div v-if="account" class="form-container-lg mx-auto">
     <PageAccountUserInfo />
     <PageAccountActions />
 

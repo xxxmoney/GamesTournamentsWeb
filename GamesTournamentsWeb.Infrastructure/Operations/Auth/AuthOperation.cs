@@ -12,6 +12,8 @@ public interface IAuthOperation : IOperation
 {
     Task<LoginResult> LoginAsync(Login login);
     Task<RegisterResult> RegisterAsync(Register register);
+    
+    Task ChangePasswordAsync(int accountId, ChangePassword changePassword);
 }
 
 public class AuthOperation(IRepositoryProvider repositoryProvider, TimeProvider timeProvider, IMapper mapper, ITokenOperation tokenOperation) : IAuthOperation
@@ -68,5 +70,30 @@ public class AuthOperation(IRepositoryProvider repositoryProvider, TimeProvider 
         {
             Account = mapper.Map<Account>(account)
         };
+    }
+
+    public async Task ChangePasswordAsync(int accountId, ChangePassword changePassword)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var accountRepository = scope.Provide<IAccountRepository>();
+        
+        var account = await accountRepository.GetAccountByIdAsync(accountId);
+
+        if (account == null)
+        {
+            throw new AccountNotFoundException();
+        }
+        
+        if (!PasswordHashHelper.VerifyPasswordHash(changePassword.CurrentPassword, account.PasswordHash, account.PasswordSalt))
+        {
+            throw new AccountAuthenticationInvalid();
+        }
+        
+        var hashResult = PasswordHashHelper.CreatePasswordHash(changePassword.NewPassword);
+        
+        account.PasswordHash = hashResult.PasswordHash;
+        account.PasswordSalt = hashResult.PasswordSalt;
+        
+        await scope.SaveChangesAsync();
     }
 }

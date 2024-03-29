@@ -102,8 +102,7 @@ export const useMainStore = defineStore({
       try {
         this.loading = true
 
-        const result = await AuthService.changePassword(request)
-        return result
+        await AuthService.changePassword(request)
       } finally {
         this.loading = false
       }

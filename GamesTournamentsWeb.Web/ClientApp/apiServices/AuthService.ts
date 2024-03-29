@@ -27,7 +27,8 @@ export const AuthService = {
     return true
   },
 
-  changePassword (request: ChangePassword): Promise<void> {
-    return Promise.resolve()
+  async changePassword (request: ChangePassword): Promise<void> {
+    const api = useApi()
+    await api.put('auth/changePassword', request)
   }
 }

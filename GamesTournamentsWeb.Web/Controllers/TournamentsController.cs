@@ -12,7 +12,7 @@ public class TournamentsController(ITournamentOperation tournamentOperation) : B
     [HttpPost("overviews")]
     public async Task<IActionResult> GetTournamentOverviews(TournamentFilter filter)
     {
-        return Ok(await tournamentOperation.GetTournamentOverviewsPagedAsync(filter));
+        return Ok(await tournamentOperation.GetTournamentOverviewsPagedAsync(this.AccountId, filter));
     }
     
     [AllowAnonymous]
