@@ -5,6 +5,7 @@ import { ChangePassword } from '~/models/user/ChangePassword'
 const { required, useSameAs } = useValidators()
 
 const mainStore = useMainStore()
+const accountsStore = useAccountStore()
 const changePasswordValue = ref(new ChangePassword())
 
 const newPassword = computed(() => changePasswordValue.value.newPassword)
@@ -23,6 +24,8 @@ const changePassword = async () => {
     }
 
     await mainStore.changePassword(changePasswordValue.value)
+
+    accountsStore.closePasswordChangeModal()
 
     await router.push('logout')
 
@@ -52,7 +55,7 @@ const { validate } = useValidate(v$.value.$validate)
   <div class="form-container-lg">
     <div class="container-gap">
       <CommonWithErrors :errors="v$.currentPassword.$errors">
-        <CommonInputText v-model="changePasswordValue.currentPassword" :label="$t('common.current_password')" />
+        <CommonPassword v-model="changePasswordValue.currentPassword" :label="$t('common.current_password')" />
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.newPassword.$errors">
