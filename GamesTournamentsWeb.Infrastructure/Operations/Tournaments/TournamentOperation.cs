@@ -10,7 +10,7 @@ namespace GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
 
 public interface ITournamentOperation : IOperation
 {
-    Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(TournamentFilter filter);
+    Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(int? accountId, TournamentFilter filter);
     
     Task<Tournament> GetTournamentByIdAsync(int tournamentId);
     
@@ -23,18 +23,19 @@ public interface ITournamentOperation : IOperation
 
 public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentOperation
 {
-    public async Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(TournamentFilter filter)
+    public async Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(int? accountId, TournamentFilter filter)
     {
         using var scope = repositoryProvider.CreateScope();
         var tournamentRepository = scope.Provide<ITournamentRepository>();
-        var pagedModels = await tournamentRepository.GetTournamentOverviewsFilteredPagedAsync(FilterTournaments(filter), filter.Page, Constants.PerPageCount);
+        var pagedModels = await tournamentRepository.GetTournamentOverviewsFilteredPagedAsync(FilterTournaments(accountId, filter), filter.Page, Constants.PerPageCount);
         
         return pagedModels.WithData(mapper.Map<List<TournamentOverview>>(pagedModels.Results));
     }
 
-    private static Expression<Func<DataAccess.Models.Tournaments.Tournament, bool>> FilterTournaments(TournamentFilter filter)
+    private static Expression<Func<DataAccess.Models.Tournaments.Tournament, bool>> FilterTournaments(int? accountId, TournamentFilter filter)
     {
-        return tournament => (string.IsNullOrWhiteSpace(filter.Name) || tournament.Name.Contains(filter.Name))
+        return tournament => (!accountId.HasValue || !filter.WithMyTournaments || tournament.Admins.Any(admin => admin.Id == accountId.Value))
+            && (string.IsNullOrWhiteSpace(filter.Name) || tournament.Name.Contains(filter.Name))
             && (filter.GameId == null || tournament.GameId == filter.GameId)
             && (filter.TeamSizes == null || filter.TeamSizes.Length == 0 || filter.TeamSizes.Contains(tournament.TeamSize))
             && (filter.RegionIds == null || filter.RegionIds.Length == 0 || tournament.Regions.Any(region => filter.RegionIds.Contains(region.Id)))
