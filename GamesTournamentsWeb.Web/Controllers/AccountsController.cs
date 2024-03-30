@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
 
-public class AccountsController(IAccountOperation accountOperation, ITournamentPlayerOperation tournamentPlayerOperation) : BaseController
+public class AccountsController(IAccountOperation accountOperation, ITournamentPlayerOperation tournamentPlayerOperation, ITournamentOperation tournamentOperation) : BaseController
 {
     [HttpGet("mine/info")]
     public async Task<IActionResult> GetAccountInfo()
@@ -49,8 +49,13 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
         {
             return Unauthorized();
         }
+
+        var result = await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId,
+            this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername);
+        // Tournament player accepted, update matches
+        await tournamentOperation.UpdateTournamentMatchesAsync(result.TournamentId);
         
-        return Ok(await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername));
+        return Ok();
     }
     
     [HttpPut("mine/invitations/{invitationId}/reject")]

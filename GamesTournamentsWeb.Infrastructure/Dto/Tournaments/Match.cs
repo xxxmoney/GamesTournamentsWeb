@@ -8,7 +8,7 @@ public class Match
     public Team FirstTeam { get; set; }
     public Team SecondTeam { get; set; }
     public Team Winner { get; set; }
-    public DateTimeOffset StartDate { get; set; }
+    public DateTimeOffset? StartDate { get; set; }
     public DateTimeOffset? EndDate { get; set; }
     public bool IsRunning { get; set; }
 }

@@ -261,7 +261,7 @@ public class WebContext(IConfiguration configuration) : DbContext
             match.ToTable(nameof(Match), Constants.DboSchema);
             
             match.Property(e => e.StartDate)
-                .IsRequired();
+                .IsRequired(false);
 
             match.Property(e => e.EndDate)
                 .IsRequired(false);

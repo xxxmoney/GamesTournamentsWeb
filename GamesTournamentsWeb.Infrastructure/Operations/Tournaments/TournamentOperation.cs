@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
+using GamesTournamentsWeb.Common.Enums.Tournament;
 using GamesTournamentsWeb.Common.Models;
 using GamesTournamentsWeb.DataAccess.Repositories;
 using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
@@ -97,11 +98,104 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         return mapper.Map<Tournament>(tournament);
     }
 
-    public Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId)
+    public async Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId)
     {
-        // TODO: update tournament matches (brackets) based on current accepted tournament players
+        using var scope = repositoryProvider.CreateScope();
+        var tournamentRepository = scope.Provide<ITournamentRepository>();
+        var matchRepository = scope.Provide<IMatchRepository>();
+        var teamRepository = scope.Provide<ITeamRepository>();
         
-        throw new NotImplementedException();
+        var tournament = await tournamentRepository.GetTournamentByIdAsync(tournamentId);
+        
+        // Get current teams
+        var currentTeamIds = tournament.Matches.SelectMany(m => new [] { m.FirstTeamId, m.SecondTeamId }).Distinct()
+            .Where(id => id.HasValue).Select(id => id.Value).ToArray();
+        var currentTeams = await teamRepository.GetTeamsByIdsAsync(currentTeamIds);
+        
+        // Clear current matches
+        tournament.Matches.Clear();
+        
+        // Clear current teams
+        teamRepository.RemoveTeams(currentTeams);
+        
+        // Save removal of teams and matches
+        await scope.SaveChangesAsync();
+
+        // Create teams from players
+        var teams = new List<DataAccess.Models.Tournaments.Team>();
+        var acceptedPlayers = tournament.Players.Where(player => player.StatusId == (int)TournamentPlayerStatusEnum.Accepted).ToList();
+        for (var i = 0; i < acceptedPlayers.Count; i += tournament.TeamSize)
+        {
+            var players = acceptedPlayers.Skip(i).Take(tournament.TeamSize).ToList();
+            var team = new DataAccess.Models.Tournaments.Team
+            {
+                Name = tournament.TeamSize == 1 ? players.Single().GameUsername : $"Team {i / tournament.TeamSize + 1}",
+                Players = players
+            };
+            teams.Add(team);
+            await teamRepository.AddTeamAsync(team);
+        }
+        
+        // Save teams
+        await scope.SaveChangesAsync();
+        tournamentRepository.UpdateTournament(tournament);
+        
+        // Create initial matches
+        foreach (var teamPair in teams.Chunk(2))
+        {
+            var firstTeam = teamPair[0];
+            var secondTeam = teamPair.Count() == 2 ? teamPair[1] : null;
+            tournament.Matches.Add(new DataAccess.Models.Tournaments.Match
+            {
+                TournamentId = tournament.Id,
+                Tournament = tournament,
+                FirstTeamId = firstTeam.Id,
+                SecondTeamId = secondTeam?.Id
+            });
+        }
+        
+        // Create new matches that will be used as subsequent matches
+        var subsequentMatchesCount = TournamentHelper.CalculateTotalMatchesCount(tournament.Matches.Count) - tournament.Matches.Count;   
+        var subsequentMatches = Enumerable.Range(0, subsequentMatchesCount).Select(_ => new DataAccess.Models.Tournaments.Match
+        {
+            TournamentId = tournament.Id,
+            Tournament = tournament
+        }).ToList();
+        
+        // Create subsequent matches
+        foreach (var match in subsequentMatches)
+        {
+            tournament.Matches.Add(match);
+        }
+        
+        // Save matches
+        await scope.SaveChangesAsync();
+
+        // Create subsequent matches for matches that have both teams
+        List<DataAccess.Models.Tournaments.Match> previousMatches;
+        while ((previousMatches = tournament.Matches.Where(m => m.NextMatchId == null && m.FirstTeamId != null && m.SecondTeamId != null).ToList()).Count != 0)
+        {
+            // Create subsequent matches - each subsequent match has previous two matches
+            foreach (var matchPair in previousMatches.Chunk(2))
+            {
+                var firstMatch = matchPair[0];
+                var secondMatch = matchPair[1];
+                
+                var nextMatch = new DataAccess.Models.Tournaments.Match
+                {
+                    TournamentId = tournament.Id,
+                    Tournament = tournament,
+                };
+                tournament.Matches.Add(nextMatch);
+                firstMatch.NextMatchId = nextMatch.Id;
+                secondMatch.NextMatchId = nextMatch.Id;
+            }
+        }
+        
+        // Save matches
+        await scope.SaveChangesAsync();
+        
+        return mapper.Map<Tournament>(tournament);
     }
 
     public async Task DeleteTournamentByIdAsync(int tournamentId)
@@ -114,4 +208,6 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         
         await scope.SaveChangesAsync();
     }
+    
+    
 }
