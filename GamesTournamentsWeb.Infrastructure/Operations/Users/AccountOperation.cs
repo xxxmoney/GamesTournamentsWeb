@@ -12,6 +12,8 @@ public interface IAccountOperation : IOperation
     Task<AccountInfo> GetAccountInfoByIdAsync(int accountId);
     
     Task<ICollection<HistoryItem>> GetHistoryItemsByIdAsync(int accountId);
+    
+    Task DeleteAccountByIdAsync(int accountId);
 }
 
 public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : IAccountOperation
@@ -62,5 +64,16 @@ public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper ma
             GameName = match.Tournament.Game.Name,
             TournamentId = match.TournamentId
         }).ToList();
+    }
+
+    public async Task DeleteAccountByIdAsync(int accountId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var accountRepository = scope.Provide<IAccountRepository>();
+        
+        var account = await accountRepository.GetAccountByIdAsync(accountId);
+        accountRepository.DeleteAccount(account);
+        
+        await scope.SaveChangesAsync();
     }
 }

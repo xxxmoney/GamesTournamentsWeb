@@ -23,6 +23,5 @@ public class TournamentEdit
     public int MaximumPlayers { get; set; }
     public bool AnyoneCanJoin { get; set; }
     public List<int> AdminIds { get; set; }
-    public int CurrencyId { get; set; }
     
 }

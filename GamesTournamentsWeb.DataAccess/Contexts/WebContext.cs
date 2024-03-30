@@ -270,7 +270,7 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .WithMany(e => e.Matches)
                 .HasForeignKey(e => e.TournamentId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             match.HasIndex(e => e.NextMatchId)
                 .IsUnique(false)

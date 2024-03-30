@@ -25,4 +25,15 @@
       <ProjectReference Include="..\GamesTournamentsWeb.Infrastructure\GamesTournamentsWeb.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\GamesTournamentsWeb.Web\appsettings.Development.json">
+        <Link>appsettings.Development.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\GamesTournamentsWeb.Web\appsettings.json">
+        <Link>appsettings.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

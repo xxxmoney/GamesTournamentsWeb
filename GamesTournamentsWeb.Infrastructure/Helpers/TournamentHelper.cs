@@ -19,6 +19,12 @@ public static class TournamentHelper
             // Next round has half the matches
             matchesInRound = (int)Math.Floor((double)matchesInRound / 2);
         }
+    
+        // Add 1 if the initial matches count is odd
+        if (initialMatchesCount % 2 != 0)
+        {
+            totalMatches++;
+        }
 
         return totalMatches;
     }
