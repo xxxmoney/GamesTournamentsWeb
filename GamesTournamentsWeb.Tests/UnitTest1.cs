@@ -1,4 +1,4 @@
-namespace GamesTournamentsWeb.Tests2;
+namespace GamesTournamentsWeb.Tests;
 
 public class Tests
 {

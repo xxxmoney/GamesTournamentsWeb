@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesTournamentsWeb.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesTournamentsWeb.Common", "GamesTournamentsWeb.Common\GamesTournamentsWeb.Common.csproj", "{356D5FCA-4EC8-451A-85BE-A127E95815CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesTournamentsWeb.Tests2", "GamesTournamentsWeb.Tests2\GamesTournamentsWeb.Tests2.csproj", "{C9CD4955-8E01-4A21-9D83-14C44EC208E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesTournamentsWeb.Tests", "GamesTournamentsWeb.Tests\GamesTournamentsWeb.Tests.csproj", "{C9CD4955-8E01-4A21-9D83-14C44EC208E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
