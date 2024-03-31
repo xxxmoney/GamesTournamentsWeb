@@ -2,6 +2,7 @@
 import type { Team } from '~/models/tournaments/Team'
 
 const detail = useTournamentDetail()
+const isAdmin = useIsTournamentAdmin()
 
 const { matchId } = defineProps({
   matchId: {
@@ -26,7 +27,7 @@ const getClass = (team: Team | null | undefined) => {
 
 const firstTeamClass = computed(() => getClass(match.value.firstTeam))
 const secondTeamClass = computed(() => getClass(match.value.secondTeam))
-const canShowSettings = computed(() => !match.value.winner && (match.value.firstTeam || match.value.secondTeam))
+const canShowSettings = computed(() => isAdmin.value && !match.value.winner && match.value.firstTeam && match.value.secondTeam)
 </script>
 
 <template>
@@ -38,14 +39,12 @@ const canShowSettings = computed(() => !match.value.winner && (match.value.first
       {{ match.firstTeam?.name ?? '?' }}
     </span>
     <div
-      v-if="match.nextMatchId"
       :class="{'animate-bounce': match.isRunning, 'invisible': match.winner}"
       class="flex-grow-0 flex-shrink-0"
     >
       x
     </div>
     <span
-      v-if="match.nextMatchId"
       v-tooltip="match.secondTeam?.name"
       :class="secondTeamClass"
       class="flex-1 truncate"
@@ -60,7 +59,7 @@ const canShowSettings = computed(() => !match.value.winner && (match.value.first
         severity="secondary"
       >
         <div class="container-gap">
-          <template v-if="match.isRunning && match.firstTeam && match.secondTeam">
+          <template v-if="match.isRunning">
             <PageTournamentsDetailTabMatchesSelectWinner :matchId="match.id" />
           </template>
           <template v-else>

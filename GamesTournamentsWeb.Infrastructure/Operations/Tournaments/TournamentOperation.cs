@@ -243,7 +243,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
                 {
                     nextMatchModel.FirstTeamId = matchModel.WinnerId;
                 }
-                if (!nextMatchModel.SecondTeamId.HasValue)
+                else if (!nextMatchModel.SecondTeamId.HasValue)
                 {
                     nextMatchModel.SecondTeamId = matchModel.WinnerId;
                 }

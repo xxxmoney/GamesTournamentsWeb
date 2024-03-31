@@ -2,8 +2,7 @@
 const mainStore = useMainStore()
 const tournamentsStore = useTournamentsStore()
 
-const tournamentDetail = computed(() => tournamentsStore.tournamentDetail)
-const isAdmin = computed(() => tournamentDetail.value?.admins?.some(admin => admin.id === mainStore.account?.id) ?? false)
+const isAdmin = useIsTournamentAdmin()
 
 </script>
 

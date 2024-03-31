@@ -7,7 +7,7 @@ const node = computed(() => toMatchTreeNode(detail.value.matches))
 <template>
   <div v-if="node">
     <ScrollPanel>
-      <OrganizationChart :value="node" collapsible>
+      <OrganizationChart :value="node" class="mt-lg" collapsible>
         <template #default="slotProps">
           <PageTournamentsDetailTabMatchesMatch :matchId="slotProps.node.key" />
         </template>
