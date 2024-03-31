@@ -11,6 +11,7 @@ import type { Currency } from '~/models/tournaments/Currency'
 import type { Match } from '~/models/tournaments/Match'
 import { TournamentMapper } from '~/mappers/TournamentMapper'
 import type { PagedResult } from '~/models/PagedResult'
+import type { MatchEdit } from '~/models/tournaments/MatchEdit'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -119,6 +120,23 @@ export const useTournamentsStore = defineStore({
         this.loading = true
 
         await TournamentsService.deleteTournamentById(tournamentId)
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async updateMatch (match: MatchEdit): Promise<Match[]> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.updateMatch(match)
+        for (const updatedMatch of result) {
+          const index = this.tournamentDetail!.matches.findIndex(m => m.id === updatedMatch.id)
+          if (index !== undefined && index !== -1) {
+                        this.tournamentDetail!.matches![index] = updatedMatch
+          }
+        }
+        return result
       } finally {
         this.loading = false
       }

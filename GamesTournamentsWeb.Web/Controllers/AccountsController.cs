@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
 
-public class AccountsController(IAccountOperation accountOperation, ITournamentPlayerOperation tournamentPlayerOperation) : BaseController
+public class AccountsController(IAccountOperation accountOperation, ITournamentPlayerOperation tournamentPlayerOperation, ITournamentOperation tournamentOperation) : BaseController
 {
     [HttpGet("mine/info")]
     public async Task<IActionResult> GetAccountInfo()
@@ -42,18 +42,23 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
         return Ok(await tournamentPlayerOperation.GetTournamentPlayersForAccountAsync(this.AccountId.Value));
     }
     
-    [HttpPut("mine/invitations/{invitationId}/accept/{gameUsername}")]
+    [HttpPut("mine/invitations/{invitationId:int}/accept/{gameUsername}")]
     public async Task<IActionResult> AcceptTournamentInvitation(int invitationId, string gameUsername)
     {
         if (!this.AccountId.HasValue)
         {
             return Unauthorized();
         }
+
+        var result = await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId,
+            this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername);
+        // Tournament player accepted, update matches
+        await tournamentOperation.SetBracketsFromTournamentMatchesAsync(result.TournamentId);
         
-        return Ok(await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername));
+        return Ok(result);
     }
     
-    [HttpPut("mine/invitations/{invitationId}/reject")]
+    [HttpPut("mine/invitations/{invitationId:int}/reject")]
     public async Task<IActionResult> RejectTournamentInvitation(int invitationId)
     {
         if (!this.AccountId.HasValue)

@@ -21,7 +21,7 @@ const goToTournament = (tournamentId: number) => {
   return router.push(`/tournaments/detail/${tournamentId}`)
 }
 
-const acceptInvitation = async (invitation: TournamentPlayer) => {
+const acceptInvitation = (invitation: TournamentPlayer) => {
   confirm.require({
     message: t('account_detail.invitation_accept_confirm'),
     header: t('common.confirmation'),
@@ -40,7 +40,7 @@ const acceptInvitation = async (invitation: TournamentPlayer) => {
     }
   })
 }
-const rejectInvitation = async (invitation: TournamentPlayer) => {
+const rejectInvitation = (invitation: TournamentPlayer) => {
   confirm.require({
     message: t('account_detail.invitation_reject_confirm'),
     header: t('common.confirmation'),
@@ -62,14 +62,6 @@ const rejectInvitation = async (invitation: TournamentPlayer) => {
 
 const isInvitationPending = (invitation: TournamentPlayer) => {
   return invitation.statusId === tournamentPlayerStatus.pending
-}
-
-const isInvitationAccepted = (invitation: TournamentPlayer) => {
-  return invitation.statusId === tournamentPlayerStatus.accepted
-}
-
-const isInvitationRejected = (invitation: TournamentPlayer) => {
-  return invitation.statusId === tournamentPlayerStatus.rejected
 }
 </script>
 

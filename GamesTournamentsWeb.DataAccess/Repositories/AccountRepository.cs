@@ -17,6 +17,8 @@ public interface IAccountRepository : IRepository
     Task AddAccountAsync(Account account);
     
     void UpdateAccount(Account account);
+    
+    void DeleteAccount(Account account);
 }
 
 public class AccountRepository(WebContext context) : IAccountRepository
@@ -49,5 +51,10 @@ public class AccountRepository(WebContext context) : IAccountRepository
     public void UpdateAccount(Account account)
     {
         context.Accounts.Update(account);
+    }
+
+    public void DeleteAccount(Account account)
+    {
+        context.Accounts.Remove(account);
     }
 }

@@ -261,7 +261,7 @@ public class WebContext(IConfiguration configuration) : DbContext
             match.ToTable(nameof(Match), Constants.DboSchema);
             
             match.Property(e => e.StartDate)
-                .IsRequired();
+                .IsRequired(false);
 
             match.Property(e => e.EndDate)
                 .IsRequired(false);
@@ -270,7 +270,7 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .WithMany(e => e.Matches)
                 .HasForeignKey(e => e.TournamentId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             match.HasIndex(e => e.NextMatchId)
                 .IsUnique(false)

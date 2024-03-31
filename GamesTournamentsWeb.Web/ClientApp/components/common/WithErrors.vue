@@ -2,8 +2,6 @@
 import type { ErrorObject } from '@vuelidate/core'
 import type { PropType } from 'vue'
 
-const { t } = useI18n()
-
 const { errors } = defineProps({
   errors: {
     type: Array as PropType<ErrorObject[]>,

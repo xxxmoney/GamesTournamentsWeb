@@ -3,8 +3,6 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const router = useRouter()
-
 const mainStore = useMainStore()
 const accountStore = useAccountStore()
 

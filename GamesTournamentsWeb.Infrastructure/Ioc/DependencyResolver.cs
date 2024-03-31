@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using AutoMapper.EquivalencyExpression;
+using FoolProof.Core;
 using GamesTournamentsWeb.Common.Enums.Account;
 using GamesTournamentsWeb.DataAccess.Contexts;
 using GamesTournamentsWeb.DataAccess.Repositories;
@@ -26,6 +27,9 @@ public static class DependencyResolver
         
         // Register app settings as options
         services.Configure<AppSettings>(appSettingsSection);
+        
+        // Foolproof validation
+        services.AddFoolProof();
         
         // Time provider
         services.AddSingleton(TimeProvider.System);

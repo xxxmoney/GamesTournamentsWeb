@@ -11,18 +11,18 @@ public class Tournament
     public int GameId { get; set; }
     public Game Game { get; set; }
     public Platform Platform { get; set; }
-    public ICollection<Region> Regions { get; set; }
+    public ICollection<Region> Regions { get; set; } = new List<Region>();
     public DateTimeOffset StartDate { get; set; }
     public DateTimeOffset? EndDate { get; set; }
     public string Info { get; set; }
     public string Rules { get; set; }
-    public ICollection<Prize> Prizes { get; set; }
-    public ICollection<Match> Matches { get; set; }
-    public ICollection<Stream> Streams { get; set; }
+    public ICollection<Prize> Prizes { get; set; } = new List<Prize>();
+    public ICollection<Match> Matches { get; set; } = new List<Match>();
+    public ICollection<Stream> Streams { get; set; } = new List<Stream>();
     public int MinimumPlayers { get; set; }   
     public int MaximumPlayers { get; set; }   
     public bool AnyoneCanJoin { get; set; }   
-    public ICollection<TournamentPlayer> Players { get; set; }   
-    public ICollection<Account> Admins { get; set; }   
+    public ICollection<TournamentPlayer> Players { get; set; } = new List<TournamentPlayer>();
+    public ICollection<Account> Admins { get; set; }  = new List<Account>();
 }
 

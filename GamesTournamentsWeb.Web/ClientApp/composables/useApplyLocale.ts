@@ -6,6 +6,7 @@ const useApplyLocale = () => {
 
   const applyLocale = (locale: string) => {
     setLocale(locale)
+    // @ts-ignore
     primeVue.config.locale = PrimeVueLocales[locale]
   }
 
