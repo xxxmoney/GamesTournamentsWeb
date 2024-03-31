@@ -232,7 +232,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             }
             matchModel.WinnerId = matchEdit.WinnerId.Value;
             // Match has finished, set end date
-            matchModel.EndDate = timeProvider.GetUtcNow();
+            matchModel.EndDate = timeProvider.GetLocalNow();
             
             // Set winner as one of participants to next match if there is any
             if (matchModel.NextMatchId.HasValue)
@@ -254,14 +254,14 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             {
                 var tournament = await tournamentRepository.GetTournamentByIdAsync(matchModel.TournamentId);
                 tournamentRepository.UpdateTournament(tournament);
-                tournament.EndDate = timeProvider.GetUtcNow();
+                tournament.EndDate = timeProvider.GetLocalNow();
             }
         }
         // Start match
         else if (matchEdit.StartMatch)
         {
             // Match has started, set start date
-            matchModel.StartDate = timeProvider.GetUtcNow();
+            matchModel.StartDate = timeProvider.GetLocalNow();
         }
 
         // Save changes
