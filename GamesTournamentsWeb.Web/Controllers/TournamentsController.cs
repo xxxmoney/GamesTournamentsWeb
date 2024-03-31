@@ -16,14 +16,14 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
     }
     
     [AllowAnonymous]
-    [HttpGet("{tournamentId}")]
+    [HttpGet("{tournamentId:int}")]
     public async Task<IActionResult> GetTournament(int tournamentId)
     {
         return Ok(await tournamentOperation.GetTournamentByIdAsync(tournamentId));
     }
     
     [AllowAnonymous]
-    [HttpGet("{tournamentId}/players")]
+    [HttpGet("{tournamentId:int}/players")]
     public async Task<IActionResult> GetTournamentPlayers(int tournamentId)
     {
         return Ok(await tournamentPlayerOperation.GetTournamentPlayersForTournamentAsync(tournamentId));
@@ -35,7 +35,7 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
         return Ok(await tournamentOperation.UpsertTournamentAsync(tournamentEdit));
     }
     
-    [HttpDelete("{tournamentId}/delete")]
+    [HttpDelete("{tournamentId:int}/delete")]
     public async Task<IActionResult> DeleteTournament(int tournamentId)
     {
         await tournamentOperation.DeleteTournamentByIdAsync(tournamentId);

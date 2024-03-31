@@ -28,7 +28,7 @@ public class DashboardController(ILayoutOperation layoutOperation) : BaseControl
         return Ok(await layoutOperation.UpsertLayoutAsync(this.AccountId.Value, layoutEdit));
     }
     
-    [HttpDelete("layouts/{layoutId}/remove")]
+    [HttpDelete("layouts/{layoutId:int}/remove")]
     public async Task<IActionResult> RemoveLayout(int layoutId)
     {
         await layoutOperation.RemoveLayoutAsync(layoutId);

@@ -42,7 +42,7 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
         return Ok(await tournamentPlayerOperation.GetTournamentPlayersForAccountAsync(this.AccountId.Value));
     }
     
-    [HttpPut("mine/invitations/{invitationId}/accept/{gameUsername}")]
+    [HttpPut("mine/invitations/{invitationId:int}/accept/{gameUsername}")]
     public async Task<IActionResult> AcceptTournamentInvitation(int invitationId, string gameUsername)
     {
         if (!this.AccountId.HasValue)
@@ -55,10 +55,10 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
         // Tournament player accepted, update matches
         await tournamentOperation.UpdateTournamentMatchesAsync(result.TournamentId);
         
-        return Ok();
+        return Ok(result);
     }
     
-    [HttpPut("mine/invitations/{invitationId}/reject")]
+    [HttpPut("mine/invitations/{invitationId:int}/reject")]
     public async Task<IActionResult> RejectTournamentInvitation(int invitationId)
     {
         if (!this.AccountId.HasValue)
