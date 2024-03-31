@@ -9,9 +9,7 @@ const node = computed(() => toMatchTreeNode(detail.value.matches))
     <ScrollPanel>
       <OrganizationChart :value="node" collapsible>
         <template #default="slotProps">
-          <div class="px py border">
-            <PageTournamentsDetailTabMatchesMatch :matchId="slotProps.node.key" />
-          </div>
+          <PageTournamentsDetailTabMatchesMatch :matchId="slotProps.node.key" />
         </template>
       </OrganizationChart>
     </ScrollPanel>

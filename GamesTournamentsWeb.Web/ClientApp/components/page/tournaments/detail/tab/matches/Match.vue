@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Team } from '~/models/tournaments/Team'
+
 const detail = useTournamentDetail()
 
 const { matchId } = defineProps({
@@ -9,17 +11,44 @@ const { matchId } = defineProps({
 })
 
 const match = computed(() => detail.value.matches.find(m => m.id === matchId)!)
+
+const getClass = (team: Team | null | undefined) => {
+  if (match.value.isRunning) {
+    return 'text-yellow-500'
+  }
+
+  if (!match.value.winner || !team) {
+    return 'text-gray-400'
+  }
+
+  return match.value.winner!.id === team.id ? 'text-green-500 font-bold' : 'text-red-500 line-through'
+}
+
+const firstTeamClass = computed(() => getClass(match.value.firstTeam))
+const secondTeamClass = computed(() => getClass(match.value.secondTeam))
 </script>
 
 <template>
-  <div class="container-row-gap items-center max-w-32 md:max-w-52 lg:max-w-80 min-h-8">
-    <span v-tooltip="match.firstTeam?.name" class="flex-1 truncate">
+  <div
+    :class="{'border border-yellow-500': match.isRunning, 'border border-gray-200': !match.isRunning && !match.winner, 'border': match.winner}"
+    class="container-row-gap items-center max-w-32 px py md:max-w-52 lg:max-w-80 min-h-8"
+  >
+    <span v-tooltip="match.firstTeam?.name" :class="firstTeamClass" class="flex-1 truncate">
       {{ match.firstTeam?.name ?? '?' }}
     </span>
-    <div v-if="match.nextMatchId" class="flex-grow-0 flex-shrink-0">
+    <div
+      v-if="match.nextMatchId"
+      :class="{'animate-bounce': match.isRunning, 'invisible': match.winner}"
+      class="flex-grow-0 flex-shrink-0"
+    >
       x
     </div>
-    <span v-if="match.nextMatchId" v-tooltip="match.secondTeam?.name" class="flex-1 truncate">
+    <span
+      v-if="match.nextMatchId"
+      v-tooltip="match.secondTeam?.name"
+      :class="secondTeamClass"
+      class="flex-1 truncate"
+    >
       {{ match.secondTeam?.name ?? '?' }}
     </span>
   </div>
