@@ -42,6 +42,12 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
         return Ok();
     }
     
+    [HttpPut("match/update")]
+    public async Task<IActionResult> UpdateTournamentMatch(MatchEdit matchEdit)
+    { ;
+        return Ok(await tournamentOperation.UpdateTournamentMatchAsync(matchEdit));
+    }
+    
     
     
 }

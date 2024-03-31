@@ -53,7 +53,7 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
         var result = await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId,
             this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername);
         // Tournament player accepted, update matches
-        await tournamentOperation.UpdateTournamentMatchesAsync(result.TournamentId);
+        await tournamentOperation.SetBracketsFromTournamentMatchesAsync(result.TournamentId);
         
         return Ok(result);
     }

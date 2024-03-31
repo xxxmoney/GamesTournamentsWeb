@@ -17,12 +17,14 @@ public interface ITournamentOperation : IOperation
     
     Task<Tournament> UpsertTournamentAsync(TournamentEdit tournamentEdit);
     
-    Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId);
+    Task<Tournament> SetBracketsFromTournamentMatchesAsync(int tournamentId);
+
+    Task<ICollection<Match>> UpdateTournamentMatchAsync(MatchEdit matchEdit);
     
     Task DeleteTournamentByIdAsync(int tournamentId);
 }
 
-public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentOperation
+public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper, TimeProvider timeProvider) : ITournamentOperation
 {
     public async Task<PagedResult<TournamentOverview>> GetTournamentOverviewsPagedAsync(int? accountId, TournamentFilter filter)
     {
@@ -98,7 +100,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         return await MapToTournamentAsync(tournamentModel);
     }
 
-    public async Task<Tournament> UpdateTournamentMatchesAsync(int tournamentId)
+    public async Task<Tournament> SetBracketsFromTournamentMatchesAsync(int tournamentId)
     {
         using var scope = repositoryProvider.CreateScope();
         var tournamentRepository = scope.Provide<ITournamentRepository>();
@@ -208,6 +210,78 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         tournamentRepository.UpdateTournament(tournamentModel);
 
         return await MapToTournamentAsync(tournamentModel);
+    }
+
+    public async Task<ICollection<Match>> UpdateTournamentMatchAsync(MatchEdit matchEdit)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var matchRepository = scope.Provide<IMatchRepository>();
+        var teamRepository = scope.Provide<ITeamRepository>();
+
+        var matchModel = await matchRepository.GetMatchByIdAsync(matchEdit.MatchId);
+        DataAccess.Models.Tournaments.Match nextMatchModel = null;
+        matchRepository.UpdateMatch(matchModel);
+
+        // Set winner of match
+        if (matchEdit.EndMatch)
+        {
+            if (!matchEdit.WinnerId.HasValue)
+            {
+                throw new InvalidOperationException("Winner must be set when ending match");
+            }
+            matchModel.WinnerId = matchEdit.WinnerId.Value;
+            // Match has finished, set end date
+            matchModel.EndDate = timeProvider.GetUtcNow();
+            
+            // Set winner as one of participants to next match if there is any
+            if (matchModel.NextMatchId.HasValue)
+            {
+                nextMatchModel = await matchRepository.GetMatchByIdAsync(matchModel.NextMatchId.Value);
+                matchRepository.UpdateMatch(nextMatchModel);
+
+                if (!nextMatchModel.FirstTeamId.HasValue)
+                {
+                    nextMatchModel.FirstTeamId = matchModel.WinnerId;
+                }
+                if (!nextMatchModel.SecondTeamId.HasValue)
+                {
+                    nextMatchModel.SecondTeamId = matchModel.WinnerId;
+                }
+            }
+        }
+        // Start match
+        else if (matchEdit.StartMatch)
+        {
+            // Match has started, set start date
+            matchModel.StartDate = timeProvider.GetUtcNow();
+        }
+
+        // Save changes
+        await scope.SaveChangesAsync();
+        
+        var match = mapper.Map<Match>(matchModel);
+        var nextMatch = nextMatchModel != null ? mapper.Map<Match>(nextMatchModel) : null;
+        
+        // Get teams for match
+        var teamIds = new [] {match.FirstTeamId, match.SecondTeamId, match.WinnerId, nextMatch?.FirstTeamId, nextMatch?.SecondTeamId, nextMatch?.WinnerId}.Where(id => id.HasValue).Select(id => id.Value).ToArray();
+        var teamModels = await teamRepository.GetTeamsByIdsAsync(teamIds);
+        var teamByTeamId = mapper.Map<List<Team>>(teamModels).ToDictionary(key => key.Id);
+        
+        // Set teams to match
+        match.FirstTeam = match.FirstTeamId.HasValue ? teamByTeamId[match.FirstTeamId.Value] : null;
+        match.SecondTeam = match.SecondTeamId.HasValue ? teamByTeamId[match.SecondTeamId.Value] : null;
+        match.Winner = match.WinnerId.HasValue ? teamByTeamId[match.WinnerId.Value] : null;
+        
+        // Set teams to next match if exists
+        if (nextMatch != null)
+        {
+            nextMatch.FirstTeam = nextMatch.FirstTeamId.HasValue ? teamByTeamId[nextMatch.FirstTeamId.Value] : null;
+            nextMatch.SecondTeam = nextMatch.SecondTeamId.HasValue ? teamByTeamId[nextMatch.SecondTeamId.Value] : null;
+            nextMatch.Winner = nextMatch.WinnerId.HasValue ? teamByTeamId[nextMatch.WinnerId.Value] : null;
+        }
+        
+        // Return all updated matches
+        return new [] { match, nextMatch }.Where(m => m != null).ToList();
     }
 
     public async Task DeleteTournamentByIdAsync(int tournamentId)

@@ -88,7 +88,8 @@ export default {
     accept: 'Accept',
     reject: 'Reject',
     actions: 'Actions',
-    set_nickname: 'Set nickname'
+    set_nickname: 'Set nickname',
+    settings: 'Settings'
   },
 
   validations: {
@@ -213,7 +214,8 @@ export default {
     admin: 'Admin'
   },
   tournament_matches: {
-    no_matches: 'There are no matches right now'
+    no_matches: 'There are no matches right now',
+    start_match: 'Start match'
   },
   tournament_streams: {
     no_streams: 'There are no streams available'

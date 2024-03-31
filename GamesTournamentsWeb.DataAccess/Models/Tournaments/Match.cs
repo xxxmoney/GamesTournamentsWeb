@@ -11,5 +11,4 @@ public class Match
     public int? WinnerId { get; set; }
     public DateTimeOffset? StartDate { get; set; }
     public DateTimeOffset? EndDate { get; set; }
-    public bool IsRunning => StartDate.HasValue && !EndDate.HasValue;
 }

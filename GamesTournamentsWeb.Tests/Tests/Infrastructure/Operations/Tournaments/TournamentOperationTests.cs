@@ -11,10 +11,13 @@ namespace GamesTournamentsWeb.Tests.Tests.Infrastructure.Operations.Tournaments;
 
 public class TournamentOperationTests
 {
+    private const bool ShouldClean = true;
+    
     [Test]
     [TestCase(5, 1, 5, 5)]
     [TestCase(6, 1, 6, 5)]
     [TestCase(6, 2, 3, 3)]
+    [TestCase(8, 1, 8, 7)]
     public async Task UpdateTournamentMatchesAsync_IntegrationTest(int playersCount, int teamSize, int expectedTeamsCount, int expectedMatchesCount)
     {
         // Arrange
@@ -54,7 +57,7 @@ public class TournamentOperationTests
         // Act
         try
         {
-            var result = await tournamentOperation.UpdateTournamentMatchesAsync(tournament.Id);
+            var result = await tournamentOperation.SetBracketsFromTournamentMatchesAsync(tournament.Id);
             
             // Assert
             Assert.That(result, Is.Not.Null);
@@ -63,11 +66,14 @@ public class TournamentOperationTests
         }
         finally
         {
-            // Cleanup
-            await tournamentOperation.DeleteTournamentByIdAsync(tournament.Id);
-            foreach (var account in accounts)
+            if (ShouldClean)
             {
-                await accountOperation.DeleteAccountByIdAsync(account.Id);
+                // Cleanup
+                await tournamentOperation.DeleteTournamentByIdAsync(tournament.Id);
+                foreach (var account in accounts)
+                {
+                    await accountOperation.DeleteAccountByIdAsync(account.Id);
+                }
             }
         }
 

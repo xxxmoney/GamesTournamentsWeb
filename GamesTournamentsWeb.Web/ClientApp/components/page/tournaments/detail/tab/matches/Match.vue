@@ -26,12 +26,13 @@ const getClass = (team: Team | null | undefined) => {
 
 const firstTeamClass = computed(() => getClass(match.value.firstTeam))
 const secondTeamClass = computed(() => getClass(match.value.secondTeam))
+const canShowSettings = computed(() => !match.value.winner && (match.value.firstTeam || match.value.secondTeam))
 </script>
 
 <template>
   <div
     :class="{'border border-yellow-500': match.isRunning, 'border border-gray-200': !match.isRunning && !match.winner, 'border': match.winner}"
-    class="container-row-gap items-center max-w-32 px py md:max-w-52 lg:max-w-80 min-h-8"
+    class="container-row-gap items-center max-w-32 px py md:max-w-52 lg:max-w-80 min-h-8 relative"
   >
     <span v-tooltip="match.firstTeam?.name" :class="firstTeamClass" class="flex-1 truncate">
       {{ match.firstTeam?.name ?? '?' }}
@@ -51,5 +52,22 @@ const secondTeamClass = computed(() => getClass(match.value.secondTeam))
     >
       {{ match.secondTeam?.name ?? '?' }}
     </span>
+
+    <div v-if="canShowSettings" class="absolute right-0 top-0 translate-x-4 -translate-y-4">
+      <CommonButtonPopover
+        v-tooltip="$t('common.settings')"
+        icon="pi pi-wrench"
+        severity="secondary"
+      >
+        <div class="container-gap">
+          <template v-if="match.isRunning && match.firstTeam && match.secondTeam">
+            <PageTournamentsDetailTabMatchesSelectWinner :matchId="match.id" />
+          </template>
+          <template v-else>
+            <PageTournamentsDetailTabMatchesStartMatch :matchId="match.id" />
+          </template>
+        </div>
+      </CommonButtonPopover>
+    </div>
   </div>
 </template>

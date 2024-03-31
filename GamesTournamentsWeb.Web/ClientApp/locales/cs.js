@@ -88,7 +88,8 @@ export default {
     accept: 'Přijmout',
     reject: 'Odmítnout',
     actions: 'Akce',
-    set_nickname: 'Nastavit přezdívku'
+    set_nickname: 'Nastavit přezdívku',
+    settings: 'Nastavení'
   },
 
   validations: {
@@ -213,7 +214,8 @@ export default {
     admin: 'Admin'
   },
   tournament_matches: {
-    no_matches: 'Nyní neprobíhají žádné zápasy'
+    no_matches: 'Nyní neprobíhají žádné zápasy',
+    start_match: 'Začít zápas'
   },
   tournament_streams: {
     no_streams: 'Nejsou k dispozici žádné streamy'
