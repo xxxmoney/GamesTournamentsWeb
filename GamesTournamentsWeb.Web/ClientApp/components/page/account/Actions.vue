@@ -4,7 +4,6 @@ const accountStore = useAccountStore()
 const tournamentsStore = useTournamentsStore()
 
 const router = useRouter()
-const { t } = useI18n()
 
 const goToTournaments = async () => {
   tournamentsStore.resetFilter()

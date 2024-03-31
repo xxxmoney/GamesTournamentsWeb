@@ -83,6 +83,8 @@ const getTournamentOverviews = async () => {
       <Checkbox v-model="filter.withMyTournaments" :binary="true" />
     </CommonWithLabel>
 
-    <Button :label="$t('common.search')" icon="pi pi-search" @click="getTournamentOverviews" />
+    <div class="inline-flex flex-col justify-center">
+      <Button :label="$t('common.search')" icon="pi pi-search" @click="getTournamentOverviews" />
+    </div>
   </div>
 </template>

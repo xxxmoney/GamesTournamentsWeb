@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import constants from '~/constants'
 
-const edit = useTournamentEdit()
-
 const info = ref<HTMLElement | null>(null)
 const rules = ref<HTMLElement | null>(null)
 const prizes = ref<HTMLElement | null>(null)

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { LayoutItem } from '~/models/dashboard/LayoutItem'
-
 const dashboardStore = useDashboardStore()
 
 const selectedLayoutId = computed({

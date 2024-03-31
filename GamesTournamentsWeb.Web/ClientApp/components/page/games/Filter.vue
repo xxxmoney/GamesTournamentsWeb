@@ -3,8 +3,6 @@ import constants from '~/constants'
 
 const gamesStore = useGamesStore()
 
-const isLoggedIn = useIsLoggedIn()
-
 const filter = computed(() => gamesStore.filter)
 const genres = computed(() => gamesStore.genres)
 
@@ -32,6 +30,8 @@ const getGames = async () => {
       />
     </CommonWithLabel>
 
-    <Button :label="$t('common.search')" icon="pi pi-search" @click="getGames" />
+    <div class="inline-flex flex-col justify-center">
+      <Button :label="$t('common.search')" icon="pi pi-search" @click="getGames" />
+    </div>
   </div>
 </template>

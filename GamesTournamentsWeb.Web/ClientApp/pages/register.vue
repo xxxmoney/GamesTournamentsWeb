@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import useVuelidate from '@vuelidate/core'
-import { Register } from '~/models/user/Register'
 
 const { required, email, useSameAs } = useValidators()
 
