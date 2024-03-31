@@ -217,6 +217,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         using var scope = repositoryProvider.CreateScope();
         var matchRepository = scope.Provide<IMatchRepository>();
         var teamRepository = scope.Provide<ITeamRepository>();
+        var tournamentRepository = scope.Provide<ITournamentRepository>();
 
         var matchModel = await matchRepository.GetMatchByIdAsync(matchEdit.MatchId);
         DataAccess.Models.Tournaments.Match nextMatchModel = null;
@@ -247,6 +248,13 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
                 {
                     nextMatchModel.SecondTeamId = matchModel.WinnerId;
                 }
+            }
+            // This is final match, finish tournament
+            else
+            {
+                var tournament = await tournamentRepository.GetTournamentByIdAsync(matchModel.TournamentId);
+                tournamentRepository.UpdateTournament(tournament);
+                tournament.EndDate = timeProvider.GetUtcNow();
             }
         }
         // Start match
