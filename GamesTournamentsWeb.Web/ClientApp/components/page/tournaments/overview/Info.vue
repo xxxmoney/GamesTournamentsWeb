@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { name, gameName, regionNames, platformName, startDate } = defineProps({
+const { name, gameName, regionNames, platformName, startDate, endDate } = defineProps({
   name: {
     type: String,
     required: true
@@ -19,7 +19,20 @@ const { name, gameName, regionNames, platformName, startDate } = defineProps({
   startDate: {
     type: Date,
     required: true
+  },
+  endDate: {
+    type: Date,
+    required: false
   }
+})
+
+const startDateClass = computed(() => {
+  if (endDate) {
+    return 'text-gray-400'
+  }
+
+  const nowUtc = new Date().getUTCDate()
+  return new Date(startDate).getUTCDate() > nowUtc ? 'color-primary animate-pulse' : ''
 })
 </script>
 
@@ -33,11 +46,13 @@ const { name, gameName, regionNames, platformName, startDate } = defineProps({
   </div>
 
   <div class="container gap">
-    <span>{{ formatJsDate(startDate) }}</span>
-    <span>{{ $t('common.starts_in') }}: {{ timeDifferenceJs(startDate) }}</span>
+    <span :class="startDateClass">{{ formatJsDate(startDate) }}</span>
+
+    <div v-if="!endDate">
+      <span>{{ $t('common.starts_in') }}: {{ timeDifferenceJs(startDate) }}</span>
+    </div>
+    <div v-else>
+      <span v-tooltip="formatJsDate(endDate)">{{ $t('common.has_ended') }}</span>
+    </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -89,7 +89,8 @@ export default {
     reject: 'Odmítnout',
     actions: 'Akce',
     set_nickname: 'Nastavit přezdívku',
-    settings: 'Nastavení'
+    settings: 'Nastavení',
+    has_ended: 'Skončil'
   },
 
   validations: {

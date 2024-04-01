@@ -89,7 +89,8 @@ export default {
     reject: 'Reject',
     actions: 'Actions',
     set_nickname: 'Set nickname',
-    settings: 'Settings'
+    settings: 'Settings',
+    has_ended: 'Has ended'
   },
 
   validations: {
