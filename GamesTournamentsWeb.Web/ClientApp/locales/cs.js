@@ -82,7 +82,7 @@ export default {
     choose_team_size: 'Vyberte velikost týmu',
     choose_account: 'Vyberte účet',
     status: 'Stav',
-    game_username: 'Herní jméno',
+    game_username: 'Herní přezdívka',
     tournament_name: 'Název turnaje',
     invitations: 'Pozvánky',
     accept: 'Přijmout',

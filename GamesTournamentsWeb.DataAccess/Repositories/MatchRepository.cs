@@ -8,7 +8,7 @@ public interface IMatchRepository : IRepository
 {
     Task<List<Match>> GetMatchesAsync();
     
-    Task<List<Match>> GetMatchesByAccountIdAsync(int accountId);
+    Task<List<MatchWithPlayers>> GetMatchesWithPlayersByAccountIdAsync(int accountId);
     
     ValueTask<Match> GetMatchByIdAsync(int matchId);
     
@@ -22,15 +22,22 @@ public class MatchRepository(WebContext context) : IMatchRepository
         return context.Matches.ToListAsync();
     }
 
-    public Task<List<Match>> GetMatchesByAccountIdAsync(int accountId)
+    public async Task<List<MatchWithPlayers>> GetMatchesWithPlayersByAccountIdAsync(int accountId)
     {
-        var teamIds = context.Teams.Include(team => team.Players)
+        var teams = await context.Teams.Include(team => team.Players)
             .Where(team => team.Players.Any(player => player.AccountId == accountId))
-            .Select(team => team.Id)
+            .ToListAsync();
+        var teamIds = teams.Select(team => team.Id)
             .ToArray();
 
-        return context.Matches.Include(match => match.Tournament).Include(match => match.Tournament.Game).Where(match =>
+        var matches = await context.Matches.Include(match => match.Tournament).Include(match => match.Tournament.Game).Where(match =>
             teamIds.Contains(match.FirstTeamId ?? -1) || teamIds.Contains(match.SecondTeamId ?? -1)).ToListAsync();
+
+        return matches.Select(m => new MatchWithPlayers
+        {
+            Match = m,
+            Players = teams.Where(t => m.FirstTeamId == t.Id || m.SecondTeamId == t.Id).SelectMany(t => t.Players).ToList()
+        }).ToList();
     }
 
     public ValueTask<Match> GetMatchByIdAsync(int matchId)

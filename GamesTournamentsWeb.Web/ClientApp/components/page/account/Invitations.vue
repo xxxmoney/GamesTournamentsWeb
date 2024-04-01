@@ -71,11 +71,15 @@ const isInvitationPending = (invitation: TournamentPlayer) => {
       <DataTable :value="invitations" size="small">
         <Column :header="$t('common.nickname')" field="gameUsername">
           <template #body="{ data }">
-            <span v-if="!isInvitationPending(data) || (data as TournamentPlayer).gameUsername">{{
+            <span v-if="!isInvitationPending(data) && (data as TournamentPlayer).gameUsername">{{
               (data as TournamentPlayer).gameUsername
             }}</span>
             <Inplace v-else>
-              <template #display>{{ $t('common.set_nickname') }}</template>
+              <template #display>
+                <div class="animate-bounce">
+                  <span class="animate-pulse">{{ $t('common.set_nickname') }}</span>
+                </div>
+              </template>
               <template #content>
                 <InputText v-model="(data as TournamentPlayer).gameUsername" />
               </template>

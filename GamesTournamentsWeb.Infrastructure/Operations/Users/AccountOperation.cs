@@ -41,12 +41,12 @@ public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper ma
         using var scope = repositoryProvider.CreateScope();
         var matchRepository = scope.Provide<IMatchRepository>();
         
-        var matches = await matchRepository.GetMatchesByAccountIdAsync(accountId);
+        var matches = await matchRepository.GetMatchesWithPlayersByAccountIdAsync(accountId);
         
         return new AccountInfo
         {
             MatchesPlayed = matches.Count,
-            WinRateRatio = matches.Count == 0 ? 0 : (decimal) matches.Count(match => match.WinnerId == accountId) / matches.Count
+            WinRateRatio = matches.Count == 0 ? 0 : (decimal) matches.Count(item => item.Match.WinnerId == accountId) / matches.Count
         };
     }
 
@@ -55,14 +55,16 @@ public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper ma
         using var scope = repositoryProvider.CreateScope();
         var matchRepository = scope.Provide<IMatchRepository>();
         
-        var matches = await matchRepository.GetMatchesByAccountIdAsync(accountId);
+        var matches = await matchRepository.GetMatchesWithPlayersByAccountIdAsync(accountId);
         
-        return matches.Select(match => new HistoryItem
+        return matches.Select(item => new HistoryItem
         {
             AccountId = accountId,
-            GameId = match.Tournament.GameId,
-            GameName = match.Tournament.Game.Name,
-            TournamentId = match.TournamentId
+            GameId = item.Match.Tournament.GameId,
+            GameName = item.Match.Tournament.Game.Name,
+            GameUsername = item.Players.Single(p => p.AccountId == accountId).GameUsername,
+            TournamentId = item.Match.TournamentId,
+            TournamentName = item.Match.Tournament.Name
         }).ToList();
     }
 
