@@ -8,6 +8,8 @@ interface Match {
     secondTeam: Team | null
     winner: Team | null,
     isRunning: boolean
+    startDate: Date | null
+    endDate: Date | null
 }
 
 export type { Match }

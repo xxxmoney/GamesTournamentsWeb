@@ -12,13 +12,15 @@ const { matchId } = defineProps({
 })
 
 const match = computed(() => detail.value.matches.find(m => m.id === matchId)!)
+const matchHasDefaultWinner = computed(() => match.value.winner && !match.value.startDate && !match.value.endDate)
+const canShowSettings = computed(() => isAdmin.value && ((!match.value.winner && match.value.firstTeam && match.value.secondTeam) || matchHasDefaultWinner.value))
 
 const getClass = (team: Team | null | undefined) => {
   if (match.value.isRunning) {
     return 'text-yellow-500'
   }
 
-  if (!match.value.winner || !team) {
+  if (!match.value.winner || !team || matchHasDefaultWinner.value) {
     return 'text-gray-400'
   }
 
@@ -27,7 +29,6 @@ const getClass = (team: Team | null | undefined) => {
 
 const firstTeamClass = computed(() => getClass(match.value.firstTeam))
 const secondTeamClass = computed(() => getClass(match.value.secondTeam))
-const canShowSettings = computed(() => isAdmin.value && !match.value.winner && match.value.firstTeam && match.value.secondTeam)
 </script>
 
 <template>
@@ -59,7 +60,7 @@ const canShowSettings = computed(() => isAdmin.value && !match.value.winner && m
         severity="secondary"
       >
         <div class="container-gap">
-          <template v-if="match.isRunning">
+          <template v-if="match.isRunning || matchHasDefaultWinner">
             <PageTournamentsDetailTabMatchesSelectWinner :matchId="match.id" />
           </template>
           <template v-else>
