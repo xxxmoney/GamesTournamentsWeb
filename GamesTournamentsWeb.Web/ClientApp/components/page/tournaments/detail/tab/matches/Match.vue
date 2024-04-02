@@ -25,7 +25,7 @@ const getClass = (team: Team | null | undefined) => {
   }
 
   if (match.value.winner!.id === team.id) {
-    return match.value.nextMatchId ? 'text-green-500 font-bold' : 'text-green-500 font-bold animate-bounce'
+    return match.value.nextMatchId ? 'text-green-500' : 'text-green-500 font-bold animate-bounce'
   } else {
     return 'text-red-500 line-through'
   }

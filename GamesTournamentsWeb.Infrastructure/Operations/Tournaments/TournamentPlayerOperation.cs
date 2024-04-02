@@ -60,7 +60,7 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
         using var scope = repositoryProvider.CreateScope();
         var repository = scope.Provide<ITournamentPlayerRepository>();
         
-        var models = await repository.GetTournamentPlayersForAccountAsync(accountId);
+        var models = await repository.GetActiveTournamentPlayersForAccountAsync(accountId);
 
         return mapper.Map<List<TournamentPlayer>>(models);
     }

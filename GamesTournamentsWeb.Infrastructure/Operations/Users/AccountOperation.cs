@@ -65,7 +65,7 @@ public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper ma
             GameUsername = item.Players.Single(p => p.AccountId == accountId).GameUsername,
             TournamentId = item.Match.TournamentId,
             TournamentName = item.Match.Tournament.Name
-        }).ToList();
+        }).DistinctBy(i => i.TournamentId).ToList();
     }
 
     public async Task DeleteAccountByIdAsync(int accountId)

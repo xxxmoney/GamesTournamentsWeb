@@ -5,6 +5,8 @@ const router = useRouter()
 const mainStore = useMainStore()
 const accountStore = useAccountStore()
 const detail = useTournamentDetail()
+const isTournamentFinished = useIsTournamentDetailFinished()
+const isTournamentStarted = useIsTournamentDetailStarted()
 
 const account = computed(() => mainStore.account)
 const players = computed(() => detail.value.players)
@@ -43,6 +45,7 @@ const goToInvitations = async () => {
       <template #body="slotProps">
         <Button
           v-if="slotProps.data.account?.id == account?.id && slotProps.data?.statusId == tournamentPlayerStatus.pending"
+          :disabled="isTournamentFinished || isTournamentStarted"
           icon="pi pi-check"
           @click="goToInvitations"
         />
