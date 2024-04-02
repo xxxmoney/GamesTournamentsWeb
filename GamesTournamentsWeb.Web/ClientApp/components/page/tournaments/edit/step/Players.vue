@@ -6,6 +6,9 @@ import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStat
 const { useRequiredUnless } = useValidators()
 
 const edit = useTournamentEdit()
+const isTournamentFinished = useIsTournamentDetailFinished()
+const isTournamentStarted = useIsTournamentDetailStarted()
+
 const accountsIds = computed(() => edit.value?.players.map((player) => player.accountId) ?? [])
 const selectedAccountId = ref(null)
 const anyoneCanJoin = computed(() => edit.value.anyoneCanJoin)
@@ -55,19 +58,20 @@ defineExpose({
 
   <div class="form-container">
     <CommonWithLabel :label="$t('tournament_edit.can_anyone_join')">
-      <Checkbox v-model="edit.anyoneCanJoin" binary />
+      <Checkbox v-model="edit.anyoneCanJoin" :disabled="isTournamentFinished || isTournamentStarted" binary />
     </CommonWithLabel>
 
     <CommonWithErrors :errors="v$.players.$errors">
       <CommonWithLabel :label="$t('common.choose_account')">
         <CommonWithButtonIcon
           :iconClass="{'animate-pulse': invalid}"
-          :iconDisabled="!selectedAccountId"
+          :iconDisabled="!selectedAccountId || isTournamentFinished || isTournamentStarted"
           icon="pi pi-plus"
           @iconClick="addAccount"
         >
           <Dropdown
             v-model="selectedAccountId"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :options="accountsFiltered"
             :placeholder="$t('common.choose_account')"
             :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
@@ -87,11 +91,13 @@ defineExpose({
     >
       <CommonWithButtonIcon
         v-tooltip="getAccountName(player.accountId)"
+        :iconDisabled="isTournamentFinished || isTournamentStarted"
         icon="pi pi-trash"
         severity="danger"
         @iconClick="() => removeAccount(index)"
       >
         <InputText
+          :disabled="isTournamentFinished || isTournamentStarted"
           :modelValue="player.gameUsername ?? `? (${getAccountName(player.accountId)})`"
           readonly
         />

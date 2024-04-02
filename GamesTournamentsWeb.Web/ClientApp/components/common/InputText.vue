@@ -19,6 +19,10 @@ const { modelValue, label, showLabel, inputClass, invalid } = defineProps({
   invalid: {
     type: Boolean,
     default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -32,6 +36,7 @@ const computedValue = useComputedWithEmit(modelValue, emit, 'modelValue')
     <InputText
       v-model="computedValue"
       :class="inputClass"
+      :disabled="disabled"
       :invalid="invalid"
       :placeholder="label as string"
     />

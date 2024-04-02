@@ -254,7 +254,7 @@ export default {
       players: 'Hráči',
       match: 'Zápas',
       streams: 'Streamy',
-      admins: 'Admini',
+      admins: 'Správci',
       overview: 'Přehled',
       finish: 'Dokončit'
     },

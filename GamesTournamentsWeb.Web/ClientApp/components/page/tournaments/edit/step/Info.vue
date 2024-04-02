@@ -7,6 +7,8 @@ const { required } = useValidators()
 
 const gamesStore = useGamesStore()
 const tournamentsStore = useTournamentsStore()
+const isTournamentFinished = useIsTournamentDetailFinished()
+const isTournamentStarted = useIsTournamentDetailStarted()
 
 const edit = useTournamentEdit()
 
@@ -43,13 +45,18 @@ defineExpose({
   <div class="form-container">
     <div class="container-gap">
       <CommonWithErrors :errors="v$.name.$errors">
-        <CommonInputText v-model="edit.name" :label="$t('common.name')" />
+        <CommonInputText
+          v-model="edit.name"
+          :disabled="isTournamentFinished || isTournamentStarted"
+          :label="$t('common.name')"
+        />
       </CommonWithErrors>
 
       <CommonWithErrors :errors="v$.gameId.$errors">
         <CommonWithLabel :label="$t('common.choose_game')">
           <Dropdown
             v-model:modelValue="edit.gameId"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :options="gameOverviews"
             :placeholder="$t('common.choose_game')"
             :virtualScrollerOptions="{ itemSize: constants.virtualScrollHeight }"
@@ -64,6 +71,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.choose_platform')">
           <Dropdown
             v-model:modelValue="edit.platformId"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :options="platforms"
             :placeholder="$t('common.choose_platform')"
             class=""
@@ -77,6 +85,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.choose_regions')">
           <MultiSelect
             v-model="edit.regionIds"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :optionLabel="item => $t(`enums.region.${toSnakeCase(item.name)}`)"
             :options="regions"
             :placeholder="$t('common.choose_regions')"
@@ -92,6 +101,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.choose_team_size')">
           <Dropdown
             v-model:modelValue="edit.teamSize"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :options="teamSizes"
             :placeholder="$t('common.choose_team_size')"
             class=""
@@ -106,6 +116,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.start_date')">
           <Calendar
             v-model="edit.startDate"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :minDate="new Date()"
             hourFormat="24"
             showIcon
@@ -118,6 +129,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.minimum_players')">
           <InputNumber
             v-model="edit.minimumPlayers"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"
             :min="1"
             :placeholder="$t('common.minimum_players')"
@@ -130,6 +142,7 @@ defineExpose({
         <CommonWithLabel :label="$t('common.maximum_players')">
           <InputNumber
             v-model="edit.maximumPlayers"
+            :disabled="isTournamentFinished || isTournamentStarted"
             :max="constants.tournamentEditMaximumPlayers"
             :min="edit.minimumPlayers ?? 1"
             :placeholder="$t('common.maximum_players')"
@@ -146,7 +159,7 @@ defineExpose({
           :label="$t('common.description')"
           class="gap"
         >
-          <CommonTextEditor v-model="edit.info" />
+          <CommonTextEditor v-model="edit.info" :disabled="isTournamentFinished || isTournamentStarted" />
         </commonwithlabel>
       </CommonWithErrors>
     </div>

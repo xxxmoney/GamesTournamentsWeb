@@ -193,6 +193,9 @@ export const useTournamentsStore = defineStore({
     isTournamentDetailFinished: (state): boolean => {
       return !!state.tournamentDetail?.endDate
     },
+    isTournamentDetailStarted: (state): boolean => {
+      return !!state.tournamentDetail?.startDate && new Date(state.tournamentDetail.startDate).getUTCDate() < new Date().getUTCDate()
+    },
     currencyById: (state) => (id: number): Currency => {
       return state.currencies.find(currency => currency.id === id) as Currency
     },

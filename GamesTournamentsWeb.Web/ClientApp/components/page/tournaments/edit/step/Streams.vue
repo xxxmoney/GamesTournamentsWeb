@@ -5,6 +5,7 @@ import constants from '~/constants'
 const { helpers, required, url } = useValidators()
 
 const edit = useTournamentEdit()
+
 const streams = computed(() => edit.value.streams)
 
 const addStream = () => {
@@ -63,7 +64,11 @@ defineExpose({
       :key="`stream-${index}`"
       :label="$t('common.stream')"
     >
-      <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removeStream(index)">
+      <CommonWithButtonIcon
+        icon="pi pi-trash"
+        severity="danger"
+        @iconClick="() => removeStream(index)"
+      >
         <div class="inline-flex flex-col md:flex-row">
           <CommonWithErrors :errors="v$.streams.$each.$response.$errors[index].name">
             <InputText
