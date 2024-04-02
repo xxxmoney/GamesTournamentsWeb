@@ -136,6 +136,13 @@ export const useTournamentsStore = defineStore({
                         this.tournamentDetail!.matches![index] = updatedMatch
           }
         }
+
+        // Set end date if any updated next match winner
+        const finalMatch = result.find(m => m.nextMatchId === null)
+        if (finalMatch?.winner) {
+                    this.tournamentDetail!.endDate = new Date()
+        }
+
         return result
       } finally {
         this.loading = false
@@ -182,6 +189,9 @@ export const useTournamentsStore = defineStore({
     },
     tournamentDetailCurrentMatch: (state): Match | null => {
       return state.tournamentDetail?.matches?.find(match => match.isRunning) ?? null
+    },
+    isTournamentDetailFinished: (state): boolean => {
+      return !!state.tournamentDetail?.endDate
     },
     currencyById: (state) => (id: number): Currency => {
       return state.currencies.find(currency => currency.id === id) as Currency
