@@ -13,12 +13,13 @@ const { matchId } = defineProps({
 })
 
 const match = computed(() => detail.value.matches.find(m => m.id === matchId)!)
-const winnerId = ref<number | null>(null)
+const winnerId = ref<number | null>(match.value.winner?.id ?? null)
+const forceWinner = computed(() => match.value.winner && !match.value.startDate && !match.value.endDate)
 
 const options = computed(() => {
   const options = [
-    { label: match.value.firstTeam!.name, value: match.value.firstTeam!.id },
-    { label: match.value?.secondTeam!.name, value: match.value.secondTeam!.id }
+    { label: match.value.firstTeam?.name, value: match.value.firstTeam?.id },
+    { label: match.value?.secondTeam?.name, value: match.value.secondTeam?.id }
   ]
 
   return options
@@ -40,6 +41,7 @@ const submit = async () => {
     <span>{{ $t('common.winner') }}:</span>
     <SelectButton
       v-model.number="winnerId"
+      :disabled="forceWinner"
       :options="options"
       optionLabel="label"
       optionValue="value"

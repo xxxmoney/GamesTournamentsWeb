@@ -93,9 +93,20 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             tournamentModel.Regions.Add(region);
         }
         
+        var editPlayerNames = tournamentEdit.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        var modelPlayerNames = tournamentModel.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        // Check whether there was a change in player names
+        var arePlayersUpdated = !editPlayerNames.SequenceEqual(modelPlayerNames);
+        
         mapper.Map(tournamentEdit, tournamentModel);
         
         await scope.SaveChangesAsync();
+
+        // Recalculate matches if this is update (not insert) and players were updated
+        if (UpsertHelper.EntityExists(tournamentEdit.Id) && arePlayersUpdated)
+        {
+            return await SetBracketsFromTournamentMatchesAsync(tournamentEdit.Id!.Value);
+        }
 
         return await MapToTournamentAsync(tournamentModel);
     }

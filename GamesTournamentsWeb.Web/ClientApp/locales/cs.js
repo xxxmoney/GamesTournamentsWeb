@@ -82,14 +82,15 @@ export default {
     choose_team_size: 'Vyberte velikost týmu',
     choose_account: 'Vyberte účet',
     status: 'Stav',
-    game_username: 'Herní jméno',
+    game_username: 'Herní přezdívka',
     tournament_name: 'Název turnaje',
     invitations: 'Pozvánky',
     accept: 'Přijmout',
     reject: 'Odmítnout',
     actions: 'Akce',
     set_nickname: 'Nastavit přezdívku',
-    settings: 'Nastavení'
+    settings: 'Nastavení',
+    has_ended: 'Skončil'
   },
 
   validations: {
@@ -253,7 +254,7 @@ export default {
       players: 'Hráči',
       match: 'Zápas',
       streams: 'Streamy',
-      admins: 'Admini',
+      admins: 'Správci',
       overview: 'Přehled',
       finish: 'Dokončit'
     },

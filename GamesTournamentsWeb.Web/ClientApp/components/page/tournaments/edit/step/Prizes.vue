@@ -7,6 +7,9 @@ const { required } = useValidators()
 
 const tournamentsStore = useTournamentsStore()
 const edit = useTournamentEdit()
+const isTournamentFinished = useIsTournamentDetailFinished()
+const isTournamentStarted = useIsTournamentDetailStarted()
+
 const prizes = computed({
   get: () => edit.value.prizes,
   set: (value: Prize[]) => {
@@ -36,6 +39,7 @@ const removePrize = (index: number) => {
 
 const addPrize = () => {
   prizes.value.push({
+    id: 0,
     place: prizes.value.length + 1,
     amount: 0,
     currencyId: currentCurrencyId.value
@@ -65,6 +69,7 @@ defineExpose({
       <CommonWithLabel :label="$t('common.currency')">
         <Dropdown
           v-model="currentCurrencyId"
+          :disabled="isTournamentFinished || isTournamentStarted"
           :optionLabel="item => $t(`currencies.${item.code.toLowerCase()}`) + ' - ' + item.symbol"
           :options="currencies"
           class=""
@@ -78,10 +83,16 @@ defineExpose({
       :key="`prize-${prize.place}-${prize.amount}`"
       :label="$t('common.place') + ': ' + prize.place.toString()"
     >
-      <CommonWithButtonIcon icon="pi pi-trash" severity="danger" @iconClick="() => removePrize(index)">
+      <CommonWithButtonIcon
+        :iconDisabled="isTournamentFinished || isTournamentStarted"
+        icon="pi pi-trash"
+        severity="danger"
+        @iconClick="() => removePrize(index)"
+      >
         <InputNumber
           v-model="prize.amount"
           :currency="currentCurrency.code"
+          :disabled="isTournamentFinished || isTournamentStarted"
           :locale="currentCurrency.locale"
           :min="0"
           :placeholder="$t('common.prize')"
@@ -94,6 +105,7 @@ defineExpose({
     <Button
       v-tooltip="$t('tournament_edit.add_prize_tooltip')"
       :class="{'animate-pulse': invalid}"
+      :disabled="isTournamentFinished || isTournamentStarted"
       icon="pi pi-plus"
       @click="addPrize"
     />

@@ -3,6 +3,7 @@ interface HistoryItem {
     gameId: number
     gameName: string,
     tournamentId: number
+    tournamentName: string
 }
 
 export type { HistoryItem }

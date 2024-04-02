@@ -20,6 +20,7 @@ const detail = computed(() => tournamentsStore.tournamentDetail)
     </div>
 
     <PageTournamentsOverviewInfo
+      :endDate="detail.endDate"
       :gameName="detail.game.name"
       :name="detail.name"
       :platformName="detail.platform.name"

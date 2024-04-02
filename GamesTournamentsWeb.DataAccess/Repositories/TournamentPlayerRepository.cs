@@ -10,12 +10,14 @@ public interface ITournamentPlayerRepository : IRepository
     
     Task<List<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId);
     
-    Task<List<TournamentPlayer>> GetTournamentPlayersForAccountAsync(int accountId);
+    Task<List<TournamentPlayer>> GetActiveTournamentPlayersForAccountAsync(int accountId);
+
+    Task<TournamentPlayer> GetTournamentPlayerByAccountAndTournamentAsync(int accountId, int tournamentId);
     
     void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer);
 }
 
-public class TournamentPlayerRepository(WebContext context) : ITournamentPlayerRepository
+public class TournamentPlayerRepository(WebContext context, TimeProvider timeProvider) : ITournamentPlayerRepository
 {
     public Task<List<TournamentPlayer>> GetTournamentPlayersForTournamentAsync()
     {
@@ -32,9 +34,14 @@ public class TournamentPlayerRepository(WebContext context) : ITournamentPlayerR
         return context.TournamentPlayers.Include(tp => tp.Tournament).Where(tp => tp.TournamentId == tournamentId).ToListAsync();
     }
 
-    public Task<List<TournamentPlayer>> GetTournamentPlayersForAccountAsync(int accountId)
+    public Task<List<TournamentPlayer>> GetActiveTournamentPlayersForAccountAsync(int accountId)
     {
-        return context.TournamentPlayers.Include(tp => tp.Tournament).Where(tp => tp.AccountId == accountId).ToListAsync();
+        return context.TournamentPlayers.Include(tp => tp.Tournament).Where(tp => tp.Tournament.StartDate > timeProvider.GetLocalNow() && tp.AccountId == accountId).ToListAsync();
+    }
+
+    public Task<TournamentPlayer> GetTournamentPlayerByAccountAndTournamentAsync(int accountId, int tournamentId)
+    {
+        return context.TournamentPlayers.Include(tp => tp.Tournament).SingleOrDefaultAsync(tp => tp.AccountId == accountId && tp.TournamentId == tournamentId);
     }
 
     public void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer)

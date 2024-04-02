@@ -20,12 +20,12 @@ const goToTournament = (tournamentId: number) => {
 </script>
 
 <template>
-  <div v-if="account" class="form-container-lg">
+  <div v-if="account" class="lg-form-container-lg">
     <div class="container">
       <DataTable :value="history" size="small">
         <Column :header="$t('common.tournament_name')" field="tournamentName"></Column>
         <Column :header="$t('common.game_username')" field="gameUsername"></Column>
-        <Column :header="$t('common.place')" field="place"></Column>
+        <Column :header="$t('common.game')" field="gameName"></Column>
         <Column :header="$t('common.link')">
           <template #body="{ data }">
             <Button :label="$t('common.link')" link @click="goToTournament((data as HistoryItem).tournamentId)" />

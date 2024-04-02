@@ -6,6 +6,7 @@ const { required } = useValidators()
 
 const mainStore = useMainStore()
 const edit = useTournamentEdit()
+
 const adminIds = computed(() => edit.value.adminIds)
 const selectedAccountId = ref(null)
 

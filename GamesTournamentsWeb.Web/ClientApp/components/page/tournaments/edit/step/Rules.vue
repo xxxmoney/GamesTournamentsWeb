@@ -5,6 +5,8 @@ import constants from '~/constants'
 const { required } = useValidators()
 
 const edit = useTournamentEdit()
+const isTournamentFinished = useIsTournamentDetailFinished()
+const isTournamentStarted = useIsTournamentDetailStarted()
 
 const rules = {
   rules: { required, $autoDirty: true }
@@ -30,7 +32,7 @@ defineExpose({
         :label="$t('common.rules')"
         class="gap"
       >
-        <CommonTextEditor v-model="edit.rules" />
+        <CommonTextEditor v-model="edit.rules" :disabled="isTournamentFinished || isTournamentStarted" />
       </Commonwithlabel>
     </CommonWithErrors>
   </div>

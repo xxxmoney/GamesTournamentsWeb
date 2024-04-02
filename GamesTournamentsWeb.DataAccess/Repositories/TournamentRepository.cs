@@ -26,11 +26,11 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
         .Include(t => t.Game)
         .Include(t => t.Platform)
         .Include(t => t.Regions)
-        .Include(t => t.Players)
         .Include(t => t.Matches)
         .Include(t => t.Streams)
         .Include(t => t.Admins)
-        .Include(t => t.Prizes).ThenInclude(p => p.Currency);
+        .Include(t => t.Prizes).ThenInclude(p => p.Currency)
+        .Include(t => t.Players).ThenInclude(p => p.Account);
     
     public Task<PagedResult<TournamentOverview>> GetTournamentOverviewsFilteredPagedAsync(Expression<Func<Tournament, bool>> filter, int page, int count)
     {
