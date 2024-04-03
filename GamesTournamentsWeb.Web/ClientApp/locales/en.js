@@ -231,7 +231,8 @@ export default {
   },
   tournament_players: {
     username: 'Username',
-    status: 'Status'
+    status: 'Status',
+    join_tournament: 'Join tournament'
   },
   tournament_player_status: {
     pending: 'Pending',
@@ -252,7 +253,6 @@ export default {
       rules: 'Rules',
       prizes: 'Prizes',
       players: 'Players',
-      match: 'Match',
       streams: 'Streams',
       admins: 'Admins',
       overview: 'Overview',

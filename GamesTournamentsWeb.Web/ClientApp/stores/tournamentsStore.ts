@@ -12,6 +12,7 @@ import type { Match } from '~/models/tournaments/Match'
 import { TournamentMapper } from '~/mappers/TournamentMapper'
 import type { PagedResult } from '~/models/PagedResult'
 import type { MatchEdit } from '~/models/tournaments/MatchEdit'
+import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -115,7 +116,7 @@ export const useTournamentsStore = defineStore({
       }
     },
 
-    async deleteTournamenById (tournamentId: number): Promise<void> {
+    async deleteTournamentById (tournamentId: number): Promise<void> {
       try {
         this.loading = true
 
@@ -149,14 +150,29 @@ export const useTournamentsStore = defineStore({
       }
     },
 
+    async joinTournament (tournamentId: number, gameUsername: string): Promise<Tournament> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.joinTournament(tournamentId, gameUsername)
+        this.tournamentDetail = result
+        return result
+      } finally {
+        this.loading = false
+      }
+    },
+
     mapTournamentDetailToEdit (accountId: number) {
-      const match = this.tournamentDetailCurrentMatch
-      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, match, accountId)
+      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, accountId)
     },
 
     resetTournamentEdit (): void {
       this.tournamentEditStep = 0
       this.tournamentEdit = new TournamentEdit().toJson() as TournamentEdit
+    },
+
+    resetTournamentDetail (): void {
+      this.tournamentDetail = null
     },
 
     decreaseTournamentEditStep (): void {
@@ -169,6 +185,10 @@ export const useTournamentsStore = defineStore({
       if (this.canIncreaseTournamentEditStep) {
         this.tournamentEditStep++
       }
+    },
+
+    setTournamentEditStepToLast (): void {
+      this.tournamentEditStep = constants.tournamentEditStepCount - 1
     },
 
     resetTournamentEditStep (): void {

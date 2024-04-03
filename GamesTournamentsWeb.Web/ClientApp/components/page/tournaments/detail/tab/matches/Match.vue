@@ -11,11 +11,16 @@ const { matchId } = defineProps({
   }
 })
 
-const match = computed(() => detail.value.matches.find(m => m.id === matchId)!)
-const matchHasDefaultWinner = computed(() => match.value.winner && !match.value.startDate && !match.value.endDate)
-const canShowSettings = computed(() => isAdmin.value && ((!match.value.winner && match.value.firstTeam && match.value.secondTeam) || matchHasDefaultWinner.value))
+const match = computed(() => detail.value?.matches.find(m => m.id === matchId))
+const matchHasDefaultWinner = computed(() => match.value?.winner && !match?.value.startDate && !match?.value.endDate)
+const isTournamentStarted = useIsTournamentDetailStarted()
+const canShowSettings = computed(() => isAdmin.value && isTournamentStarted.value && ((!match.value?.winner && match.value?.firstTeam && match.value?.secondTeam) || matchHasDefaultWinner.value))
 
 const getClass = (team: Team | null | undefined) => {
+  if (!match.value) {
+    return ''
+  }
+
   if (match.value.isRunning) {
     return 'text-yellow-500'
   }
@@ -24,19 +29,20 @@ const getClass = (team: Team | null | undefined) => {
     return 'text-gray-400'
   }
 
-  if (match.value.winner!.id === team.id) {
+  if (match.value.winner!.id === team?.id) {
     return match.value.nextMatchId ? 'text-green-500' : 'text-green-500 font-bold animate-bounce'
   } else {
     return 'text-red-500 line-through'
   }
 }
 
-const firstTeamClass = computed(() => getClass(match.value.firstTeam))
-const secondTeamClass = computed(() => getClass(match.value.secondTeam))
+const firstTeamClass = computed(() => getClass(match.value?.firstTeam))
+const secondTeamClass = computed(() => getClass(match.value?.secondTeam))
 </script>
 
 <template>
   <div
+    v-if="match"
     :class="{'border border-yellow-500': match.isRunning, 'border border-gray-200': !match.isRunning && !match.winner, 'border': match.winner}"
     class="container-row-gap items-center max-w-32 px py md:max-w-52 lg:max-w-80 min-h-8 relative"
   >

@@ -93,8 +93,8 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             tournamentModel.Regions.Add(region);
         }
         
-        var editPlayerNames = tournamentEdit.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
-        var modelPlayerNames = tournamentModel.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        var editPlayerNames = (tournamentEdit.Players ?? Array.Empty<TournamentPlayerEdit>().ToList()).Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        var modelPlayerNames = (tournamentModel.Players ?? Array.Empty<DataAccess.Models.Tournaments.TournamentPlayer>().ToList()).Select(p => p.GameUsername).OrderBy(_ => _).ToList();
         // Check whether there was a change in player names
         var arePlayersUpdated = !editPlayerNames.SequenceEqual(modelPlayerNames);
         
@@ -188,6 +188,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         
         // Set initial matches as previous for first round
         var previousMatches = initialMatches;
+        var initialSubsequentMatchesCount = subsequentMatches.Count;
         // Set subsequent matches to previous matches while there are subsequent matches
         while (subsequentMatches.Count != 0)
         {
@@ -214,6 +215,12 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             // Recalculate previous matches for next round
             previousMatches = tournamentModel.Matches
                 .Where(m => m.NextMatchId == null && tournamentModel.Matches.Any(m2 => m2.NextMatchId == m.Id)).ToList();
+
+            // Check for preventing cycling while checking firstMatch == secondMatch when adding first match
+            if (initialSubsequentMatchesCount <= 1 && initialMatches.Count <= 1)
+            {
+                break;
+            }
         }
         
         // Save matches

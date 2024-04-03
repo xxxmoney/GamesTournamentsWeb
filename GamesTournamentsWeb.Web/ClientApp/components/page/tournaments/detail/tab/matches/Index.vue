@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const detail = useTournamentDetail()
 
-const node = computed(() => toMatchTreeNode(detail.value.matches))
+const node = computed(() => toMatchTreeNode(detail.value?.matches))
 </script>
 
 <template>

@@ -15,6 +15,8 @@ public interface ITournamentPlayerRepository : IRepository
     Task<TournamentPlayer> GetTournamentPlayerByAccountAndTournamentAsync(int accountId, int tournamentId);
     
     void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer);
+    
+    Task AddTournamentPlayerAsync(TournamentPlayer tournamentPlayer);
 }
 
 public class TournamentPlayerRepository(WebContext context, TimeProvider timeProvider) : ITournamentPlayerRepository
@@ -47,5 +49,10 @@ public class TournamentPlayerRepository(WebContext context, TimeProvider timePro
     public void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer)
     {
         context.TournamentPlayers.Update(tournamentPlayer);
+    }
+
+    public Task AddTournamentPlayerAsync(TournamentPlayer tournamentPlayer)
+    {
+        return context.TournamentPlayers.AddAsync(tournamentPlayer).AsTask();
     }
 }

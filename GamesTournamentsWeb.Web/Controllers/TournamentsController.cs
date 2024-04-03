@@ -1,4 +1,5 @@
-﻿using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
+﻿using GamesTournamentsWeb.Common.Enums.Tournament;
+using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
 using GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
 using GamesTournamentsWeb.Infrastructure.ViewModels.Tournaments;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,16 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
     public async Task<IActionResult> GetTournamentPlayers(int tournamentId)
     {
         return Ok(await tournamentPlayerOperation.GetTournamentPlayersForTournamentAsync(tournamentId));
+    }
+    
+    [AllowAnonymous]
+    [HttpPost("{tournamentId:int}/join/{gameUsername}")]
+    public async Task<IActionResult> JoinTournament(int tournamentId, string gameUsername)
+    {
+        await tournamentPlayerOperation.UpsertTournamentPlayerStatusAsync(null, this.AccountId!.Value,
+            TournamentPlayerStatusEnum.Accepted, Uri.UnescapeDataString(gameUsername), tournamentId);
+        var tournament = await tournamentOperation.SetBracketsFromTournamentMatchesAsync(tournamentId);
+        return Ok(tournament);
     }
     
     [HttpPost("upsert")]

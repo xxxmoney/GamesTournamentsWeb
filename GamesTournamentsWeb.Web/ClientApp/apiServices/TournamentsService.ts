@@ -8,6 +8,7 @@ import type { PagedResult } from '~/models/PagedResult'
 import type { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import type { MatchEdit } from '~/models/tournaments/MatchEdit'
 import type { Match } from '~/models/tournaments/Match'
+import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 
 export const TournamentsService = {
   async getTournamentOverviews (filter: TournamentFilter): Promise<PagedResult<TournamentOverview>> {
@@ -48,6 +49,12 @@ export const TournamentsService = {
   async upsertTournament (tournament: TournamentEdit): Promise<Tournament> {
     const api = useApi()
     const result = await api.post('tournaments/upsert', tournament)
+    return result.data
+  },
+
+  async joinTournament (tournamentId: number, gameUsername: string): Promise<Tournament> {
+    const api = useApi()
+    const result = await api.post<Tournament>(`tournaments/${tournamentId}/join/${encodeURIComponent(gameUsername)}`)
     return result.data
   },
 
