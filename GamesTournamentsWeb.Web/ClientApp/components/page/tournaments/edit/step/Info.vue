@@ -21,7 +21,7 @@ const rules = {
   name: { required, $autoDirty: true },
   gameId: { required, $autoDirty: true },
   platformId: { required, $autoDirty: true },
-  regionIds: { required, $autoDirty: true },
+  regionIds: { required, $autoDirty: false },
   teamSize: { required, $autoDirty: true },
   startDate: { required, $autoDirty: true },
   minimumPlayers: { required, $autoDirty: true },

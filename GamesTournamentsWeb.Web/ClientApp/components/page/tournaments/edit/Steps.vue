@@ -55,6 +55,9 @@ const onFinalize = () => {
     },
     reject: () => {
       store.decreaseTournamentEditStep()
+    },
+    onHide: () => {
+      store.decreaseTournamentEditStep()
     }
   })
 }

@@ -158,6 +158,10 @@ export const useTournamentsStore = defineStore({
       this.tournamentEdit = new TournamentEdit().toJson() as TournamentEdit
     },
 
+    resetTournamentDetail (): void {
+      this.tournamentDetail = null
+    },
+
     decreaseTournamentEditStep (): void {
       if (this.canDecreaseTournamentEditStep) {
         this.tournamentEditStep--
