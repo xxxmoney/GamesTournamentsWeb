@@ -93,8 +93,8 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             tournamentModel.Regions.Add(region);
         }
         
-        var editPlayerNames = tournamentEdit.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
-        var modelPlayerNames = tournamentModel.Players.Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        var editPlayerNames = (tournamentEdit.Players ?? Array.Empty<TournamentPlayerEdit>().ToList()).Select(p => p.GameUsername).OrderBy(_ => _).ToList();
+        var modelPlayerNames = (tournamentModel.Players ?? Array.Empty<DataAccess.Models.Tournaments.TournamentPlayer>().ToList()).Select(p => p.GameUsername).OrderBy(_ => _).ToList();
         // Check whether there was a change in player names
         var arePlayersUpdated = !editPlayerNames.SequenceEqual(modelPlayerNames);
         

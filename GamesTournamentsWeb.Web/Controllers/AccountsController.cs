@@ -50,8 +50,8 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
             return Unauthorized();
         }
 
-        var result = await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId,
-            this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, gameUsername);
+        var result = await tournamentPlayerOperation.UpsertTournamentPlayerStatusAsync(invitationId,
+            this.AccountId.Value, TournamentPlayerStatusEnum.Accepted, Uri.UnescapeDataString(gameUsername));
         // Tournament player accepted, update matches
         await tournamentOperation.SetBracketsFromTournamentMatchesAsync(result.TournamentId);
         
@@ -66,7 +66,7 @@ public class AccountsController(IAccountOperation accountOperation, ITournamentP
             return Unauthorized();
         }
         
-        return Ok(await tournamentPlayerOperation.ChangeTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Rejected));
+        return Ok(await tournamentPlayerOperation.UpsertTournamentPlayerStatusAsync(invitationId, this.AccountId.Value, TournamentPlayerStatusEnum.Rejected));
     }
     
     [AllowAnonymous]

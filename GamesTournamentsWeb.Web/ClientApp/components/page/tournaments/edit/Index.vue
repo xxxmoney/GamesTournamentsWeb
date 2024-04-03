@@ -13,6 +13,7 @@ const { id } = defineProps({
 const mainStore = useMainStore()
 const tournamentsStore = useTournamentsStore()
 const account = computed(() => mainStore.account)
+const tournamentExists = computed(() => !!tournamentsStore.tournamentDetail?.id)
 
 onMounted(async () => {
   tournamentsStore.resetTournamentEdit()
@@ -24,6 +25,13 @@ onMounted(async () => {
     }
 
     tournamentsStore.mapTournamentDetailToEdit(account.value!.id)
+
+    // Go to overview step if tournament exists
+    if (tournamentExists.value) {
+      tournamentsStore.setTournamentEditStepToLast()
+    } else {
+      tournamentsStore.resetTournamentEditStep()
+    }
   }
 })
 

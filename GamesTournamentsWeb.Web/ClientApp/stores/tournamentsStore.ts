@@ -12,6 +12,7 @@ import type { Match } from '~/models/tournaments/Match'
 import { TournamentMapper } from '~/mappers/TournamentMapper'
 import type { PagedResult } from '~/models/PagedResult'
 import type { MatchEdit } from '~/models/tournaments/MatchEdit'
+import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -115,7 +116,7 @@ export const useTournamentsStore = defineStore({
       }
     },
 
-    async deleteTournamenById (tournamentId: number): Promise<void> {
+    async deleteTournamentById (tournamentId: number): Promise<void> {
       try {
         this.loading = true
 
@@ -144,6 +145,18 @@ export const useTournamentsStore = defineStore({
         }
 
         return result
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async joinTournament (tournamentId: number, gameUsername: string): Promise<TournamentPlayer> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.joinTournament(tournamentId, gameUsername)
+                this.tournamentDetail!.players.push(result)
+                return result
       } finally {
         this.loading = false
       }

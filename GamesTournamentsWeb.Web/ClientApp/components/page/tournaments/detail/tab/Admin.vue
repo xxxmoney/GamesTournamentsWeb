@@ -17,7 +17,7 @@ const deleteTournament = () => {
     header: t('common.confirmation'),
     accept: async () => {
       try {
-        await store.deleteTournamenById(detail.value.id)
+        await store.deleteTournamentById(detail.value.id)
 
         await router.push('/tournaments')
 

@@ -32,7 +32,7 @@ const startDateClass = computed(() => {
   }
 
   const nowUtc = new Date().getUTCDate()
-  return new Date(startDate).getUTCDate() > nowUtc ? 'color-primary animate-pulse' : ''
+  return new Date(startDate).getUTCDate() < nowUtc ? 'color-primary animate-pulse' : ''
 })
 </script>
 

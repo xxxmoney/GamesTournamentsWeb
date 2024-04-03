@@ -61,15 +61,6 @@ const onFinalize = () => {
     }
   })
 }
-
-onMounted(() => {
-  // If tournament is being edited, set the step to the last step - overview
-  if (tournamentExists.value) {
-    store.setTournamentEditStepToLast()
-  } else {
-    store.resetTournamentEditStep()
-  }
-})
 </script>
 
 <template>

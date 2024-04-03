@@ -231,7 +231,8 @@ export default {
   },
   tournament_players: {
     username: 'Uživatelské jméno',
-    status: 'Stav'
+    status: 'Stav',
+    join_tournament: 'Připojit se k turnaji'
   },
   tournament_player_status: {
     pending: 'Čeká se na schválení',

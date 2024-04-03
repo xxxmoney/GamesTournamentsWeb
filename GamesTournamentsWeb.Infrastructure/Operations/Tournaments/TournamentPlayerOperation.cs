@@ -3,12 +3,13 @@ using GamesTournamentsWeb.Common.Enums.Tournament;
 using GamesTournamentsWeb.DataAccess.Repositories;
 using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
 using GamesTournamentsWeb.Infrastructure.Exceptions;
+using GamesTournamentsWeb.Infrastructure.Helpers;
 
 namespace GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
 
 public interface ITournamentPlayerOperation : IOperation
 {
-    Task<TournamentPlayer> ChangeTournamentPlayerStatusAsync(int id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null);
+    Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null);
     
     Task<ICollection<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId);
     
@@ -17,18 +18,40 @@ public interface ITournamentPlayerOperation : IOperation
 
 public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentPlayerOperation
 {
-    public async Task<TournamentPlayer> ChangeTournamentPlayerStatusAsync(int id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null)
+    public async Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null)
     {
         using var scope = repositoryProvider.CreateScope();
         var repository = scope.Provide<ITournamentPlayerRepository>();
-        
-        var model = await repository.GetTournamentPlayerByIdAsync(id);
-        if (model.AccountId != accountId)
+
+        DataAccess.Models.Tournaments.TournamentPlayer tournamentPlayer;
+        if (UpsertHelper.EntityExists(id))
         {
-            throw new UnauthorizedUpdateException();
+            tournamentPlayer = await repository.GetTournamentPlayerByIdAsync(id!.Value);
+            repository.UpdateTournamentPlayer(tournamentPlayer);
+            
+            if (tournamentPlayer.AccountId != accountId)
+            {
+                throw new UnauthorizedUpdateException();
+            }
+        }
+        else
+        {
+            if (!tournamentId.HasValue)
+            {
+                throw new ArgumentException("Tournament ID is required for new tournament player");
+            }
+            
+            tournamentPlayer = new DataAccess.Models.Tournaments.TournamentPlayer
+            {
+                AccountId = accountId,
+                GameUsername = gameUsername,
+                StatusId = (int)status,
+                TournamentId = tournamentId.Value
+            };
+            await repository.AddTournamentPlayerAsync(tournamentPlayer);
         }
         
-        model.StatusId = (int)status;
+        tournamentPlayer.StatusId = (int)status;
         if (status == TournamentPlayerStatusEnum.Accepted)
         {
             if (string.IsNullOrWhiteSpace(gameUsername))
@@ -36,13 +59,12 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
                 throw new AccountInvitationGameUsernameEmpty();
             }
             
-            model.GameUsername = gameUsername;
+            tournamentPlayer.GameUsername = gameUsername;
         }
-        repository.UpdateTournamentPlayer(model);
 
         await scope.SaveChangesAsync();
         
-        return mapper.Map<TournamentPlayer>(model);
+        return mapper.Map<TournamentPlayer>(tournamentPlayer);
     }
 
     public async Task<ICollection<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId)
