@@ -188,6 +188,7 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         
         // Set initial matches as previous for first round
         var previousMatches = initialMatches;
+        var initialSubsequentMatchesCount = subsequentMatches.Count;
         // Set subsequent matches to previous matches while there are subsequent matches
         while (subsequentMatches.Count != 0)
         {
@@ -214,6 +215,12 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             // Recalculate previous matches for next round
             previousMatches = tournamentModel.Matches
                 .Where(m => m.NextMatchId == null && tournamentModel.Matches.Any(m2 => m2.NextMatchId == m.Id)).ToList();
+
+            // Check for preventing cycling while checking firstMatch == secondMatch when adding first match
+            if (initialSubsequentMatchesCount <= 1 && initialMatches.Count <= 1)
+            {
+                break;
+            }
         }
         
         // Save matches

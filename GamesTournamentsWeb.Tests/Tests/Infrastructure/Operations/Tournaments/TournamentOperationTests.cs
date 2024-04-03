@@ -14,6 +14,7 @@ public class TournamentOperationTests
     private const bool ShouldClean = true;
     
     [Test]
+    [TestCase(1, 1, 1, 1)]
     [TestCase(5, 1, 5, 5)]
     [TestCase(6, 1, 6, 5)]
     [TestCase(6, 2, 3, 3)]

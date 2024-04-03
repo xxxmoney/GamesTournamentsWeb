@@ -150,13 +150,13 @@ export const useTournamentsStore = defineStore({
       }
     },
 
-    async joinTournament (tournamentId: number, gameUsername: string): Promise<TournamentPlayer> {
+    async joinTournament (tournamentId: number, gameUsername: string): Promise<Tournament> {
       try {
         this.loading = true
 
         const result = await TournamentsService.joinTournament(tournamentId, gameUsername)
-                this.tournamentDetail!.players.push(result)
-                return result
+        this.tournamentDetail = result
+        return result
       } finally {
         this.loading = false
       }

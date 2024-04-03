@@ -17,17 +17,17 @@ const players = computed(() => detail.value.players)
 const gameUsername = ref<string | null>(null)
 const triedToClickJoinTournament = ref(false)
 const canJoinTournament = computed(() => {
-  return account.value && !isTournamentStarted.value && detail.value.anyoneCanJoin && !players.value.some(p => p.account.id === account.value?.id)
+  return account.value && !isTournamentStarted.value && detail.value.anyoneCanJoin && !players.value.some(p => p.accountId === account.value!.id)
 })
 
 // Ordered players so that the logged-in user is always first
 const orderedPlayers = computed(() => {
   const accountValue = account.value
   return players.value.sort((a, b) => {
-    if (a.account.id === accountValue?.id) {
+    if (a.accountId === accountValue?.id) {
       return -1
     }
-    if (b.account.id === accountValue?.id) {
+    if (b.accountId === accountValue?.id) {
       return 1
     }
     return 0
@@ -42,6 +42,9 @@ const goToInvitations = async () => {
 const joinTournament = async () => {
   try {
     await tournamentsStore.joinTournament(detail.value.id, gameUsername.value as string)
+
+    // Hotfix
+    location.reload()
 
     successToast()
   } catch (e) {

@@ -52,9 +52,9 @@ export const TournamentsService = {
     return result.data
   },
 
-  async joinTournament (tournamentId: number, gameUsername: string): Promise<TournamentPlayer> {
+  async joinTournament (tournamentId: number, gameUsername: string): Promise<Tournament> {
     const api = useApi()
-    const result = await api.post<TournamentPlayer>(`tournaments/${tournamentId}/join/${encodeURIComponent(gameUsername)}`)
+    const result = await api.post<Tournament>(`tournaments/${tournamentId}/join/${encodeURIComponent(gameUsername)}`)
     return result.data
   },
 
