@@ -2,6 +2,7 @@
 using GamesTournamentsWeb.Common.Enums.Tournament;
 using GamesTournamentsWeb.DataAccess.Repositories;
 using GamesTournamentsWeb.Infrastructure.Dto.Tournaments;
+using GamesTournamentsWeb.Infrastructure.Dto.Users;
 using GamesTournamentsWeb.Infrastructure.Exceptions;
 using GamesTournamentsWeb.Infrastructure.Helpers;
 
@@ -21,15 +22,16 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
     public async Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null)
     {
         using var scope = repositoryProvider.CreateScope();
-        var repository = scope.Provide<ITournamentPlayerRepository>();
+        var tournamentPlayerRepository = scope.Provide<ITournamentPlayerRepository>();
+        var accountRepository = scope.Provide<IAccountRepository>();
 
-        DataAccess.Models.Tournaments.TournamentPlayer tournamentPlayer;
+        DataAccess.Models.Tournaments.TournamentPlayer tournamentPlayerModel;
         if (UpsertHelper.EntityExists(id))
         {
-            tournamentPlayer = await repository.GetTournamentPlayerByIdAsync(id!.Value);
-            repository.UpdateTournamentPlayer(tournamentPlayer);
+            tournamentPlayerModel = await tournamentPlayerRepository.GetTournamentPlayerByIdAsync(id!.Value);
+            tournamentPlayerRepository.UpdateTournamentPlayer(tournamentPlayerModel);
             
-            if (tournamentPlayer.AccountId != accountId)
+            if (tournamentPlayerModel.AccountId != accountId)
             {
                 throw new UnauthorizedUpdateException();
             }
@@ -41,17 +43,17 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
                 throw new ArgumentException("Tournament ID is required for new tournament player");
             }
             
-            tournamentPlayer = new DataAccess.Models.Tournaments.TournamentPlayer
+            tournamentPlayerModel = new DataAccess.Models.Tournaments.TournamentPlayer
             {
                 AccountId = accountId,
                 GameUsername = gameUsername,
                 StatusId = (int)status,
                 TournamentId = tournamentId.Value
             };
-            await repository.AddTournamentPlayerAsync(tournamentPlayer);
+            await tournamentPlayerRepository.AddTournamentPlayerAsync(tournamentPlayerModel);
         }
         
-        tournamentPlayer.StatusId = (int)status;
+        tournamentPlayerModel.StatusId = (int)status;
         if (status == TournamentPlayerStatusEnum.Accepted)
         {
             if (string.IsNullOrWhiteSpace(gameUsername))
@@ -59,12 +61,16 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
                 throw new AccountInvitationGameUsernameEmpty();
             }
             
-            tournamentPlayer.GameUsername = gameUsername;
+            tournamentPlayerModel.GameUsername = gameUsername;
         }
 
         await scope.SaveChangesAsync();
+
+        var accountModel = await accountRepository.GetAccountByIdAsync(tournamentPlayerModel.AccountId);
         
-        return mapper.Map<TournamentPlayer>(tournamentPlayer);
+        var result = mapper.Map<TournamentPlayer>(tournamentPlayerModel);
+        result.Account = mapper.Map<Account>(accountModel);
+        return result;
     }
 
     public async Task<ICollection<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId)

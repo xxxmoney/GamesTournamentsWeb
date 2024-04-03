@@ -34,7 +34,10 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
     [HttpPost("{tournamentId:int}/join/{gameUsername}")]
     public async Task<IActionResult> JoinTournament(int tournamentId, string gameUsername)
     {
-        return Ok(await tournamentPlayerOperation.UpsertTournamentPlayerStatusAsync(null, this.AccountId!.Value, TournamentPlayerStatusEnum.Accepted, Uri.UnescapeDataString(gameUsername), tournamentId));
+        await tournamentPlayerOperation.UpsertTournamentPlayerStatusAsync(null, this.AccountId!.Value,
+            TournamentPlayerStatusEnum.Accepted, Uri.UnescapeDataString(gameUsername), tournamentId);
+        var tournament = await tournamentOperation.SetBracketsFromTournamentMatchesAsync(tournamentId);
+        return Ok(tournament);
     }
     
     [HttpPost("upsert")]
