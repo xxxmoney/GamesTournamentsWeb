@@ -1,6 +1,5 @@
 import type { Prize } from '~/models/tournaments/Prize'
 import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
-import type { Match } from '~/models/tournaments/Match'
 import type { Stream } from '~/models/tournaments/Stream'
 import { ConvertableToJson } from '~/models/ConvertableToJson'
 import constants from '~/constants'
@@ -18,7 +17,6 @@ class TournamentEdit extends ConvertableToJson {
   rules: string | null
   prizes: Prize[]
   players: TournamentPlayer[]
-  match: Match | null
   streams: Stream[]
   minimumPlayers: number | null
   maximumPlayers: number | null
@@ -41,7 +39,6 @@ class TournamentEdit extends ConvertableToJson {
     this.rules = null
     this.prizes = []
     this.players = []
-    this.match = null
     this.streams = []
     this.minimumPlayers = null
     this.maximumPlayers = null

@@ -5,11 +5,10 @@ const info = ref<HTMLElement | null>(null)
 const rules = ref<HTMLElement | null>(null)
 const prizes = ref<HTMLElement | null>(null)
 const players = ref<HTMLElement | null>(null)
-const match = ref<HTMLElement | null>(null)
 const streams = ref<HTMLElement | null>(null)
 const admins = ref<HTMLElement | null>(null)
 
-// Validte component - each should have exposed validate method
+// Validate component - each should have exposed validate method
 const validateComponents = (component: { validate: (withToast: boolean) => Promise<boolean> }): Promise<boolean> => {
   if (component) {
     return component.validate(false)
@@ -26,7 +25,6 @@ const { validate } = useValidate(async () => {
     validateComponents(rules.value as any),
     validateComponents(prizes.value as any),
     validateComponents(players.value as any),
-    validateComponents(match.value as any),
     validateComponents(streams.value as any),
     validateComponents(admins.value as any)
   ])
@@ -39,7 +37,6 @@ defineExpose({
   rules,
   prizes,
   players,
-  match,
   streams,
   admins
 })
@@ -60,9 +57,6 @@ useTournamentEditNextStepRequestWithValidate(constants.tournamentEditSteps.overv
     </div>
     <div>
       <PageTournamentsEditStepPlayers ref="players" class="text-area" />
-    </div>
-    <div>
-      <PageTournamentsEditStepMatch ref="match" class="text-area" />
     </div>
     <div>
       <PageTournamentsEditStepStreams ref="streams" class="text-area" />

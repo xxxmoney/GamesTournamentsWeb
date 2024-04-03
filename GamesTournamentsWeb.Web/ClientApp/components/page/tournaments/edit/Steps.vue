@@ -4,6 +4,7 @@ import { TournamentsService } from '~/apiServices/TournamentsService'
 
 const store = useTournamentsStore()
 const edit = useTournamentEdit()
+const tournamentExists = computed(() => !!edit.value.id)
 const step = useTournamentEditStep()
 const { t } = useI18n()
 const router = useRouter()
@@ -23,9 +24,6 @@ const steps = ref([
   },
   {
     label: () => t('tournament_edit.steps.players')
-  },
-  {
-    label: () => t('tournament_edit.steps.match')
   },
   {
     label: () => t('tournament_edit.steps.streams')
@@ -62,20 +60,27 @@ const onFinalize = () => {
 }
 
 onMounted(() => {
-  store.resetTournamentEditStep()
+  // If tournament is being edited, set the step to the last step - overview
+  if (tournamentExists.value) {
+    store.setTournamentEditStepToLast()
+  } else {
+    store.resetTournamentEditStep()
+  }
 })
 </script>
 
 <template>
   <div class="container-gap">
-    <div class="flex overflow-auto">
-      <Steps
-        v-model:activeStep="step"
-        :model="steps"
-        :readonly="isInsert"
-        class="mx-auto"
-      />
-    </div>
+    <template v-if="!tournamentExists">
+      <div class="flex overflow-auto">
+        <Steps
+          v-model:activeStep="step"
+          :model="steps"
+          :readonly="isInsert"
+          class="mx-auto"
+        />
+      </div>
+    </template>
 
     <Divider />
 
@@ -105,12 +110,6 @@ onMounted(() => {
         />
       </TabPanel>
       <TabPanel>
-        <PageTournamentsEditStepMatch
-          v-if="constants.tournamentEditSteps.match === step"
-          class="text-area"
-        />
-      </TabPanel>
-      <TabPanel>
         <PageTournamentsEditStepStreams
           v-if="constants.tournamentEditSteps.streams === step"
           class="text-area"
@@ -133,9 +132,11 @@ onMounted(() => {
     <Divider />
 
     <div class="flex flex-row justify-between">
-      <PageTournamentsEditPreviousStepButton />
+      <PageTournamentsEditPreviousStepButton :class="{'invisible': tournamentExists}" />
       <PageTournamentsEditNextStepButton @finalize="onFinalize" />
     </div>
+
+    <Divider />
   </div>
 </template>
 

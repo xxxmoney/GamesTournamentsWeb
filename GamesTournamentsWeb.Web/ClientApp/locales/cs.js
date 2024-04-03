@@ -252,7 +252,6 @@ export default {
       rules: 'Pravidla',
       prizes: 'Ceny',
       players: 'Hráči',
-      match: 'Zápas',
       streams: 'Streamy',
       admins: 'Správci',
       overview: 'Přehled',

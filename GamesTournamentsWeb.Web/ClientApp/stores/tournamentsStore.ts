@@ -150,8 +150,7 @@ export const useTournamentsStore = defineStore({
     },
 
     mapTournamentDetailToEdit (accountId: number) {
-      const match = this.tournamentDetailCurrentMatch
-      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, match, accountId)
+      this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, accountId)
     },
 
     resetTournamentEdit (): void {
@@ -169,6 +168,10 @@ export const useTournamentsStore = defineStore({
       if (this.canIncreaseTournamentEditStep) {
         this.tournamentEditStep++
       }
+    },
+
+    setTournamentEditStepToLast (): void {
+      this.tournamentEditStep = constants.tournamentEditStepCount - 1
     },
 
     resetTournamentEditStep (): void {

@@ -38,12 +38,11 @@ export default {
     rules: 1,
     prizes: 2,
     players: 3,
-    match: 4,
-    streams: 5,
-    admins: 6,
-    overview: 7
+    streams: 4,
+    admins: 5,
+    overview: 6
   },
-  tournamentEditStepCount: 8,
+  tournamentEditStepCount: 7,
 
   defaultCurrencyId: 1,
 

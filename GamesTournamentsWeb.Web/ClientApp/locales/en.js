@@ -252,7 +252,6 @@ export default {
       rules: 'Rules',
       prizes: 'Prizes',
       players: 'Players',
-      match: 'Match',
       streams: 'Streams',
       admins: 'Admins',
       overview: 'Overview',

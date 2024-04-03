@@ -14,14 +14,16 @@ const mainStore = useMainStore()
 const tournamentsStore = useTournamentsStore()
 const account = computed(() => mainStore.account)
 
-if (account.value) {
-  if (id) {
-    await tournamentsStore.getTournamentById(id)
-  }
+onMounted(async () => {
+  if (account.value) {
+    if (id) {
+      await tournamentsStore.getTournamentById(id)
+    }
 
-  tournamentsStore.resetTournamentEdit()
-  tournamentsStore.mapTournamentDetailToEdit(account.value!.id)
-}
+    tournamentsStore.resetTournamentEdit()
+    tournamentsStore.mapTournamentDetailToEdit(account.value!.id)
+  }
+})
 </script>
 
 <template>
