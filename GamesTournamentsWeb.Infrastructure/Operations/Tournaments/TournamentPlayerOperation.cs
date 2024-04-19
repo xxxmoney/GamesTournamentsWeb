@@ -10,25 +10,27 @@ namespace GamesTournamentsWeb.Infrastructure.Operations.Tournaments;
 
 public interface ITournamentPlayerOperation : IOperation
 {
-    Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null);
+    Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? tournamentPlayerId, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null);
     
     Task<ICollection<TournamentPlayer>> GetTournamentPlayersForTournamentAsync(int tournamentId);
     
     Task<ICollection<TournamentPlayer>> GetTournamentPlayersForAccountAsync(int accountId);
+    
+    Task<TournamentPlayer> SetExpectedWinnerIdAsync(int tournamentPlayerId, int accountId, int expectedWinnerId);
 }
 
 public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, IMapper mapper) : ITournamentPlayerOperation
 {
-    public async Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? id, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null)
+    public async Task<TournamentPlayer> UpsertTournamentPlayerStatusAsync(int? tournamentPlayerId, int accountId, TournamentPlayerStatusEnum status, string gameUsername = null, int? tournamentId = null)
     {
         using var scope = repositoryProvider.CreateScope();
         var tournamentPlayerRepository = scope.Provide<ITournamentPlayerRepository>();
         var accountRepository = scope.Provide<IAccountRepository>();
 
         DataAccess.Models.Tournaments.TournamentPlayer tournamentPlayerModel;
-        if (UpsertHelper.EntityExists(id))
+        if (UpsertHelper.EntityExists(tournamentPlayerId))
         {
-            tournamentPlayerModel = await tournamentPlayerRepository.GetTournamentPlayerByIdAsync(id!.Value);
+            tournamentPlayerModel = await tournamentPlayerRepository.GetTournamentPlayerByIdAsync(tournamentPlayerId!.Value);
             tournamentPlayerRepository.UpdateTournamentPlayer(tournamentPlayerModel);
             
             if (tournamentPlayerModel.AccountId != accountId)
@@ -91,5 +93,24 @@ public class TournamentPlayerOperation(IRepositoryProvider repositoryProvider, I
         var models = await repository.GetActiveTournamentPlayersForAccountAsync(accountId);
 
         return mapper.Map<List<TournamentPlayer>>(models);
+    }
+
+    public async Task<TournamentPlayer> SetExpectedWinnerIdAsync(int tournamentPlayerId, int accountId, int expectedWinnerId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var tournamentPlayerRepository = scope.Provide<ITournamentPlayerRepository>();
+        
+        var tournamentPlayerModel = await tournamentPlayerRepository.GetTournamentPlayerByIdAsync(tournamentPlayerId);
+        
+        if (tournamentPlayerModel.AccountId != accountId)
+        {
+            throw new UnauthorizedUpdateException();
+        }
+        
+        tournamentPlayerModel.ExpectedWinnerId = expectedWinnerId;
+        
+        await scope.SaveChangesAsync();
+        
+        return mapper.Map<TournamentPlayer>(tournamentPlayerModel);
     }
 }
