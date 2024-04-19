@@ -11,4 +11,5 @@ public class TournamentComment
     
     public int TournamentId { get; set; }
     public Tournament Tournament { get; set; }
+    public DateTimeOffset CreateDate { get; set; }
 }

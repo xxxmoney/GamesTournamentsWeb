@@ -175,6 +175,9 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .IsRequired()
                 .HasMaxLength(-1);
 
+            tournamentComment.Property(e => e.CreateDate)
+                .IsRequired();
+
             tournamentComment.HasOne(e => e.Account)
                 .WithMany(e => e.TournamentComments)
                 .IsRequired()
