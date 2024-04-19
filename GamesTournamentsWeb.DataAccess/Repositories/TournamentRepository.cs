@@ -29,6 +29,7 @@ public class TournamentRepository(WebContext context) : ITournamentRepository
         .Include(t => t.Matches)
         .Include(t => t.Streams)
         .Include(t => t.Admins)
+        .Include(t => t.Comments)
         .Include(t => t.Prizes).ThenInclude(p => p.Currency)
         .Include(t => t.Players).ThenInclude(p => p.Account);
     

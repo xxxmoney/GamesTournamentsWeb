@@ -15,6 +15,7 @@ public class TournamentMapper : Profile
         CreateMap<DataAccess.Models.Tournaments.Stream, Dto.Tournaments.Stream>();
         CreateMap<DataAccess.Models.Tournaments.Team, Dto.Tournaments.Team>();
         CreateMap<DataAccess.Models.Tournaments.Tournament, Dto.Tournaments.Tournament>();
+        CreateMap<DataAccess.Models.Tournaments.TournamentComment, Dto.Tournaments.TournamentComment>();
         CreateMap<DataAccess.Models.Tournaments.TournamentOverview, Dto.Tournaments.TournamentOverview>();
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayer, Dto.Tournaments.TournamentPlayer>()
             .ForMember(dest => dest.TournamentName, src => src.MapFrom(item => item.Tournament.Name));
@@ -30,6 +31,7 @@ public class TournamentMapper : Profile
             .EqualityComparison((model, dto) => model.Id == dto.Id);
         CreateMap<ViewModels.Tournaments.StreamEdit, DataAccess.Models.Tournaments.Stream>()
             .EqualityComparison((model, dto) => model.Id == dto.Id);
+        CreateMap<ViewModels.Tournaments.TournamentCommentEdit, DataAccess.Models.Tournaments.TournamentComment>();
     }
     
 }

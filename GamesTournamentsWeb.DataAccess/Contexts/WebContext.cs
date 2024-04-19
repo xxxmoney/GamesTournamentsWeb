@@ -21,6 +21,7 @@ public class WebContext(IConfiguration configuration) : DbContext
     public DbSet<Genre> Genres { get; set; }
     
     public DbSet<Tournament> Tournaments { get; set; }
+    public DbSet<TournamentComment> TournamentComments { get; set; }
     public DbSet<Match> Matches { get; set; }
     public DbSet<Platform> Platforms { get; set; }
     public DbSet<Prize> Prizes { get; set; }
@@ -156,9 +157,32 @@ public class WebContext(IConfiguration configuration) : DbContext
                 .WithOne(e => e.Tournament)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+            
+            tournament.HasMany(e => e.Comments)
+                .WithOne(e => e.Tournament)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             tournament.HasMany(e => e.Admins)
                 .WithMany(e => e.AdminTournaments);
+        });
+
+        modelBuilder.Entity<TournamentComment>(tournamentComment =>
+        {
+            tournamentComment.ToTable(nameof(TournamentComment), Constants.DboSchema);
+            
+            tournamentComment.Property(e => e.Text)
+                .IsRequired()
+                .HasMaxLength(-1);
+
+            tournamentComment.Property(e => e.CreateDate)
+                .IsRequired();
+
+            tournamentComment.HasOne(e => e.Account)
+                .WithMany(e => e.TournamentComments)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
         });
         
         modelBuilder.Entity<TournamentPlayer>(tournamentPlayer =>

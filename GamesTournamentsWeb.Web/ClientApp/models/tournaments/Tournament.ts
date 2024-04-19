@@ -6,6 +6,7 @@ import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
 import type { Match } from '~/models/tournaments/Match'
 import type { Stream } from '~/models/tournaments/Stream'
 import type { Account } from '~/models/user/Account'
+import type { TournamentComment } from '~/models/tournaments/TournamentComment'
 
 interface Tournament {
     id: number
@@ -26,6 +27,7 @@ interface Tournament {
     maximumPlayers: number
     anyoneCanJoin: boolean
     admins: Account[]
+    comments: TournamentComment[]
 }
 
 export type { Tournament }

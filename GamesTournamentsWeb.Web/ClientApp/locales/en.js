@@ -90,7 +90,9 @@ export default {
     actions: 'Actions',
     set_nickname: 'Set nickname',
     settings: 'Settings',
-    has_ended: 'Has ended'
+    has_ended: 'Has ended',
+    create_date: 'Create date',
+    text: 'Text'
   },
 
   validations: {
@@ -212,7 +214,8 @@ export default {
     players: 'Players',
     matches: 'Matches',
     streams: 'Streams',
-    admin: 'Admin'
+    admin: 'Admin',
+    comments: 'Comments'
   },
   tournament_matches: {
     no_matches: 'There are no matches right now',
@@ -238,6 +241,9 @@ export default {
     pending: 'Pending',
     accepted: 'Accepted',
     rejected: 'Rejected'
+  },
+  tournament_comments: {
+    add_comment: 'Add comment'
   },
   tournament_admin: {
     edit: 'Edit tournament',

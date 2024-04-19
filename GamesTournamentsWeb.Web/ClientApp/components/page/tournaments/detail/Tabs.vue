@@ -26,6 +26,9 @@ const isAdmin = useIsTournamentAdmin()
     <TabPanel :header="$t('tournament_detail.streams')">
       <PageTournamentsDetailTabStreams class="text-area" />
     </TabPanel>
+    <TabPanel :header="$t('tournament_detail.comments')">
+      <PageTournamentsDetailTabComments class="text-area" />
+    </TabPanel>
     <TabPanel v-if="isAdmin" :header="$t('tournament_detail.admin')">
       <PageTournamentsDetailTabAdmin class="text-area" />
     </TabPanel>

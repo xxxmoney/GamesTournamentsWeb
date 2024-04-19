@@ -9,6 +9,8 @@ import type { TournamentEdit } from '~/models/tournaments/TournamentEdit'
 import type { MatchEdit } from '~/models/tournaments/MatchEdit'
 import type { Match } from '~/models/tournaments/Match'
 import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
+import type { TournamentCommentEdit } from '~/models/tournaments/TournamentCommentEdit'
+import type { TournamentComment } from '~/models/tournaments/TournamentComment'
 
 export const TournamentsService = {
   async getTournamentOverviews (filter: TournamentFilter): Promise<PagedResult<TournamentOverview>> {
@@ -66,6 +68,12 @@ export const TournamentsService = {
   async updateMatch (match: MatchEdit): Promise<Match[]> {
     const api = useApi()
     const result = await api.put('tournaments/match/update', match)
+    return result.data
+  },
+
+  async createTournamentComment (tournamentCommentEdit: TournamentCommentEdit): Promise<TournamentComment> {
+    const api = useApi()
+    const result = await api.post('tournaments/comment/create', tournamentCommentEdit)
     return result.data
   }
 }

@@ -14,7 +14,7 @@ const { icon, label } = defineProps({
   }
 })
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click', 'show', 'hide'])
 
 const overlay = ref<HTMLElement | any | null>(null)
 
@@ -23,10 +23,26 @@ const onClick = (event: any) => {
   emit('click')
 }
 
+const toggle = () => {
+  overlay.value!.toggle()
+}
+
+const onShow = () => {
+  emit('show')
+}
+
+const onHide = () => {
+  emit('hide')
+}
+
+defineExpose({
+  toggle
+})
+
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative inline popover">
     <Button
       :icon="icon"
       :label="label"
@@ -34,7 +50,7 @@ const onClick = (event: any) => {
       @click="onClick"
     />
 
-    <OverlayPanel ref="overlay">
+    <OverlayPanel ref="overlay" @hide="onHide" @show="onShow">
       <slot />
     </OverlayPanel>
   </div>

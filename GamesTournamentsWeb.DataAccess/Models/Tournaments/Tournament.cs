@@ -25,5 +25,6 @@ public class Tournament
     public bool AnyoneCanJoin { get; set; }   
     public ICollection<TournamentPlayer> Players { get; set; } = new List<TournamentPlayer>();   
     public ICollection<Account> Admins { get; set; } = new List<Account>();
+    public ICollection<TournamentComment> Comments { get; set; } = new List<TournamentComment>();
 }
 
