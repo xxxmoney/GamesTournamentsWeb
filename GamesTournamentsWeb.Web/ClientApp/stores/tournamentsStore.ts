@@ -175,7 +175,7 @@ export const useTournamentsStore = defineStore({
         this.loading = false
       }
     },
- 
+
     async setTournamentPlayerExpectedWinner (tournamentPlayerId: number, expectedWinnerId: number): Promise<TournamentPlayer> {
       try {
         this.loading = true
@@ -183,6 +183,15 @@ export const useTournamentsStore = defineStore({
         const result = await TournamentsService.setTournamentPlayerExpectedWinner(tournamentPlayerId, expectedWinnerId)
         const player = this.tournamentDetail!.players.find(p => p.id === tournamentPlayerId)
                 player!.expectedWinnerId = expectedWinnerId
+
+                // Set statistics
+                const statisticsItem = this.tournamentDetail!.expectedWinnerStatistics.find(item => item.expectedWinnerId === expectedWinnerId)
+                if (statisticsItem) {
+                  statisticsItem.voteCount++
+                } else {
+                    this.tournamentDetail!.expectedWinnerStatistics.push({ expectedWinnerId, voteCount: 1 })
+                }
+        
                 return result
       } finally {
         this.loading = false

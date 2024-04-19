@@ -237,7 +237,9 @@ export default {
     status: 'Status',
     join_tournament: 'Join tournament',
     tip_winner: 'I think this will be the winner',
-    confirm_winner: 'Do you really think this will be the winner?'
+    confirm_winner: 'Do you really think this will be the winner?',
+    expected_winner_chart: 'Expected winner chart',
+    no_expected_winner_statistics: 'No expected winner statistics yet'
   },
   tournament_player_status: {
     pending: 'Pending',

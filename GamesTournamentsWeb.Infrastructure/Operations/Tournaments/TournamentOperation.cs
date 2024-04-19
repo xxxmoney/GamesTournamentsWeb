@@ -22,6 +22,8 @@ public interface ITournamentOperation : IOperation
     Task<ICollection<Match>> UpdateTournamentMatchAsync(MatchEdit matchEdit);
     
     Task DeleteTournamentByIdAsync(int tournamentId);
+    
+    Task<ICollection<TournamentExpectedWinnerStatisticsItem>> GetTournamentExpectedWinnerStatisticsAsync(int tournamentId);
 }
 
 public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper mapper, TimeProvider timeProvider) : ITournamentOperation
@@ -330,6 +332,15 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
         await scope.SaveChangesAsync();
     }
 
+    public async Task<ICollection<TournamentExpectedWinnerStatisticsItem>> GetTournamentExpectedWinnerStatisticsAsync(int tournamentId)
+    {
+        using var scope = repositoryProvider.CreateScope();
+        var tournamentRepository = scope.Provide<ITournamentPlayerRepository>();
+        
+        var items = await tournamentRepository.GetTournamentExpectedWinnerStatisticsAsync(tournamentId);
+        return mapper.Map<List<TournamentExpectedWinnerStatisticsItem>>(items);
+    }
+
     private static int[] GetTeamIds(DataAccess.Models.Tournaments.Tournament tournament)
     {
         return (tournament.Matches ?? Array.Empty<DataAccess.Models.Tournaments.Match>()).SelectMany(m => new [] { m.FirstTeamId, m.SecondTeamId }).Distinct()
@@ -338,6 +349,8 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
 
     private async Task<Tournament> MapToTournamentAsync(DataAccess.Models.Tournaments.Tournament tournamentModel)
     {
+        var statisticsTask = this.GetTournamentExpectedWinnerStatisticsAsync(tournamentModel.Id);
+        
         var teamIds = GetTeamIds(tournamentModel);
         
         using var scope = repositoryProvider.CreateScope();
@@ -356,7 +369,12 @@ public class TournamentOperation(IRepositoryProvider repositoryProvider, IMapper
             match.SecondTeam = match.SecondTeamId.HasValue ? teams[match.SecondTeamId.Value] : null;
             match.Winner = match.WinnerId.HasValue ? teams[match.WinnerId.Value] : null;
         }
+        
+        // Set statistics
+        result.ExpectedWinnerStatistics = await statisticsTask;
 
         return result;
     }
+
+  
 }

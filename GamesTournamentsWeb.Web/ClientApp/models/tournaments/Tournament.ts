@@ -7,6 +7,7 @@ import type { Match } from '~/models/tournaments/Match'
 import type { Stream } from '~/models/tournaments/Stream'
 import type { Account } from '~/models/user/Account'
 import type { TournamentComment } from '~/models/tournaments/TournamentComment'
+import type { TournamentExpectedWinnerStatisticsItem } from '~/models/tournaments/TournamentExpectedWinnerStatisticsItem'
 
 interface Tournament {
     id: number
@@ -28,6 +29,7 @@ interface Tournament {
     anyoneCanJoin: boolean
     admins: Account[]
     comments: TournamentComment[]
+    expectedWinnerStatistics: TournamentExpectedWinnerStatisticsItem[]
 }
 
 export type { Tournament }
