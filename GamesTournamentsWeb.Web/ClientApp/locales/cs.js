@@ -235,7 +235,11 @@ export default {
   tournament_players: {
     username: 'Uživatelské jméno',
     status: 'Stav',
-    join_tournament: 'Připojit se k turnaji'
+    join_tournament: 'Připojit se k turnaji',
+    tip_winner: 'Myslím si, že toto bude vítěz',
+    confirm_winner: 'Opravdu si myslíte, že toto bude vítěz?',
+    expected_winner_chart: 'Očekávaný graf vítěze',
+    no_expected_winner_statistics: 'Zatím zde nejsou žádné statistiky o očekávaném vítězi'
   },
   tournament_player_status: {
     pending: 'Čeká se na schválení',

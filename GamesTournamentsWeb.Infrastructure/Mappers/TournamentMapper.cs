@@ -20,6 +20,7 @@ public class TournamentMapper : Profile
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayer, Dto.Tournaments.TournamentPlayer>()
             .ForMember(dest => dest.TournamentName, src => src.MapFrom(item => item.Tournament.Name));
         CreateMap<DataAccess.Models.Tournaments.TournamentPlayerStatus, Dto.Tournaments.TournamentPlayerStatus>();
+        CreateMap<DataAccess.Models.Tournaments.TournamentExpectedWinnerStatisticsItem, Dto.Tournaments.TournamentExpectedWinnerStatisticsItem>();
         
         CreateMap<ViewModels.Tournaments.TournamentEdit, DataAccess.Models.Tournaments.Tournament>()
             .ForMember(dest => dest.Regions, opt => opt.Ignore())

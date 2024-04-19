@@ -176,6 +176,28 @@ export const useTournamentsStore = defineStore({
       }
     },
 
+    async setTournamentPlayerExpectedWinner (tournamentPlayerId: number, expectedWinnerId: number): Promise<TournamentPlayer> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.setTournamentPlayerExpectedWinner(tournamentPlayerId, expectedWinnerId)
+        const player = this.tournamentDetail!.players.find(p => p.id === tournamentPlayerId)
+                player!.expectedWinnerId = expectedWinnerId
+
+                // Set statistics
+                const statisticsItem = this.tournamentDetail!.expectedWinnerStatistics.find(item => item.expectedWinnerId === expectedWinnerId)
+                if (statisticsItem) {
+                  statisticsItem.voteCount++
+                } else {
+                    this.tournamentDetail!.expectedWinnerStatistics.push({ expectedWinnerId, voteCount: 1 })
+                }
+        
+                return result
+      } finally {
+        this.loading = false
+      }
+    },
+
     mapTournamentDetailToEdit (accountId: number) {
       this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, accountId)
     },

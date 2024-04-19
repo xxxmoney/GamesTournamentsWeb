@@ -17,6 +17,8 @@ public interface ITournamentPlayerRepository : IRepository
     void UpdateTournamentPlayer(TournamentPlayer tournamentPlayer);
     
     Task AddTournamentPlayerAsync(TournamentPlayer tournamentPlayer);
+    
+    Task<List<TournamentExpectedWinnerStatisticsItem>> GetTournamentExpectedWinnerStatisticsAsync(int tournamentId);
 }
 
 public class TournamentPlayerRepository(WebContext context, TimeProvider timeProvider) : ITournamentPlayerRepository
@@ -54,5 +56,17 @@ public class TournamentPlayerRepository(WebContext context, TimeProvider timePro
     public Task AddTournamentPlayerAsync(TournamentPlayer tournamentPlayer)
     {
         return context.TournamentPlayers.AddAsync(tournamentPlayer).AsTask();
+    }
+
+    public Task<List<TournamentExpectedWinnerStatisticsItem>> GetTournamentExpectedWinnerStatisticsAsync(int tournamentId)
+    {
+        return context.TournamentPlayers.Where(tp => tp.ExpectedWinnerId.HasValue && tp.TournamentId == tournamentId)
+            .GroupBy(tp => tp.ExpectedWinnerId)
+            .Select(g => new TournamentExpectedWinnerStatisticsItem
+            {
+                ExpectedWinnerId = g.Key.Value,
+                VoteCount = g.Count()
+            })
+            .ToListAsync();
     }
 }

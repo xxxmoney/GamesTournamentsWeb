@@ -75,5 +75,11 @@ export const TournamentsService = {
     const api = useApi()
     const result = await api.post('tournaments/comment/create', tournamentCommentEdit)
     return result.data
+  },
+
+  async setTournamentPlayerExpectedWinner (tournamentPlayerId: number, expectedWinnerId: number): Promise<TournamentPlayer> {
+    const api = useApi()
+    const result = await api.put(`tournaments/player/${tournamentPlayerId}/expected-winner/set/${expectedWinnerId}`)
+    return result.data
   }
 }

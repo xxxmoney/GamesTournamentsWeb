@@ -25,5 +25,6 @@ public class Tournament
     public ICollection<TournamentPlayer> Players { get; set; } = new List<TournamentPlayer>();
     public ICollection<Account> Admins { get; set; }  = new List<Account>();
     public ICollection<TournamentComment> Comments { get; set; }  = new List<TournamentComment>();
+    public ICollection<TournamentExpectedWinnerStatisticsItem> ExpectedWinnerStatistics { get; set; } = new List<TournamentExpectedWinnerStatisticsItem>();
 }
 
