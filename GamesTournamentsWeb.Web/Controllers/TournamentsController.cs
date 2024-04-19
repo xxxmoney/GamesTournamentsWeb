@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GamesTournamentsWeb.Web.Controllers;
 
-public class TournamentsController(ITournamentOperation tournamentOperation, ITournamentPlayerOperation tournamentPlayerOperation) : BaseController
+public class TournamentsController(ITournamentOperation tournamentOperation, ITournamentPlayerOperation tournamentPlayerOperation, ITournamentCommentOperation tournamentCommentOperation) : BaseController
 {
     [AllowAnonymous]
     [HttpPost("overviews")]
@@ -55,10 +55,20 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
     
     [HttpPut("match/update")]
     public async Task<IActionResult> UpdateTournamentMatch(MatchEdit matchEdit)
-    { ;
+    { 
         return Ok(await tournamentOperation.UpdateTournamentMatchAsync(matchEdit));
     }
     
+    [HttpPost("comment/create")]
+    public async Task<IActionResult> CreateTournamentComment(TournamentCommentEdit commentEdit)
+    {
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await tournamentCommentOperation.CreateTournamentCommentAsync(this.AccountId.Value, commentEdit));
+    }
     
     
 }

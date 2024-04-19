@@ -13,6 +13,8 @@ import { TournamentMapper } from '~/mappers/TournamentMapper'
 import type { PagedResult } from '~/models/PagedResult'
 import type { MatchEdit } from '~/models/tournaments/MatchEdit'
 import type { TournamentPlayer } from '~/models/tournaments/TournamentPlayer'
+import type { TournamentCommentEdit } from '~/models/tournaments/TournamentCommentEdit'
+import type { TournamentComment } from '~/models/tournaments/TournamentComment'
 
 export const useTournamentsStore = defineStore({
   id: 'tournaments-store',
@@ -157,6 +159,18 @@ export const useTournamentsStore = defineStore({
         const result = await TournamentsService.joinTournament(tournamentId, gameUsername)
         this.tournamentDetail = result
         return result
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async createTournamentComment (tournamentCommentEdit: TournamentCommentEdit): Promise<TournamentComment> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.createTournamentComment(tournamentCommentEdit)
+                this.tournamentDetail!.comments.push(result)
+                return result
       } finally {
         this.loading = false
       }

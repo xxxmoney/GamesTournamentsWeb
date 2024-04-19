@@ -90,7 +90,9 @@ export default {
     actions: 'Akce',
     set_nickname: 'Nastavit přezdívku',
     settings: 'Nastavení',
-    has_ended: 'Skončil'
+    has_ended: 'Skončil',
+    create_date: 'Datum vytvoření',
+    text: 'Text'
   },
 
   validations: {
@@ -212,7 +214,8 @@ export default {
     players: 'Hráči',
     matches: 'Zápasy',
     streams: 'Streamy',
-    admin: 'Admin'
+    admin: 'Admin',
+    comments: 'Komentáře'
   },
   tournament_matches: {
     no_matches: 'Nyní neprobíhají žádné zápasy',
@@ -238,6 +241,9 @@ export default {
     pending: 'Čeká se na schválení',
     accepted: 'Přijato',
     rejected: 'Odmítnuto'
+  },
+  tournament_comments: {
+    add_comment: 'Přidat komentář'
   },
   tournament_admin: {
     edit: 'Upravit turnaj',
