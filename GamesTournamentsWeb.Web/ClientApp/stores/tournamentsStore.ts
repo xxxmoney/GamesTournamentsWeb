@@ -175,6 +175,19 @@ export const useTournamentsStore = defineStore({
         this.loading = false
       }
     },
+ 
+    async setTournamentPlayerExpectedWinner (tournamentPlayerId: number, expectedWinnerId: number): Promise<TournamentPlayer> {
+      try {
+        this.loading = true
+
+        const result = await TournamentsService.setTournamentPlayerExpectedWinner(tournamentPlayerId, expectedWinnerId)
+        const player = this.tournamentDetail!.players.find(p => p.id === tournamentPlayerId)
+                player!.expectedWinnerId = expectedWinnerId
+                return result
+      } finally {
+        this.loading = false
+      }
+    },
 
     mapTournamentDetailToEdit (accountId: number) {
       this.tournamentEdit = TournamentMapper.mapTournamenDetailToEdit(this.tournamentDetail, accountId)

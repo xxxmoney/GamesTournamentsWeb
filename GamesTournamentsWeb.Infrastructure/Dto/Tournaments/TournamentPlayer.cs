@@ -11,4 +11,5 @@ public class TournamentPlayer
     public int AccountId { get; set; }
     public string GameUsername { get; set; }
     public int StatusId { get; set; }
+    public int? ExpectedWinnerId { get; set; }
 }

@@ -235,7 +235,9 @@ export default {
   tournament_players: {
     username: 'Username',
     status: 'Status',
-    join_tournament: 'Join tournament'
+    join_tournament: 'Join tournament',
+    tip_winner: 'I think this will be the winner',
+    confirm_winner: 'Do you really think this will be the winner?'
   },
   tournament_player_status: {
     pending: 'Pending',

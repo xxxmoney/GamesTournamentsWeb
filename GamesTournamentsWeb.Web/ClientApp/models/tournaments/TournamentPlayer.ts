@@ -6,7 +6,8 @@ interface TournamentPlayer {
     accountId: Number
     tournamentId: number,
     gameUsername: string | null
-    statusId: number
+    statusId: number,
+    expectedWinnerId: number | null
 }
 
 export type { TournamentPlayer }

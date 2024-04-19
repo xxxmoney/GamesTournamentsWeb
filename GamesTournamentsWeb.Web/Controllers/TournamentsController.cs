@@ -70,5 +70,16 @@ public class TournamentsController(ITournamentOperation tournamentOperation, ITo
         return Ok(await tournamentCommentOperation.CreateTournamentCommentAsync(this.AccountId.Value, commentEdit));
     }
     
+    [HttpPut("player/{tournamentPlayerId:int}/expected-winner/set/{expectedWinnerId:int}")]
+    public async Task<IActionResult> SetTournamentPlayerExpectedWinner(int tournamentPlayerId, int expectedWinnerId)
+    {
+        if (!this.AccountId.HasValue)
+        {
+            return Unauthorized();
+        }
+        
+        return Ok(await tournamentPlayerOperation.SetExpectedWinnerIdAsync(tournamentPlayerId, this.AccountId.Value, expectedWinnerId));
+    }
+    
     
 }

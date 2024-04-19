@@ -2,6 +2,8 @@
 import { tournamentPlayerStatus } from '~/enums/tournaments/tournamentPlayerStatus'
 
 const router = useRouter()
+const { t } = useI18n()
+const confirm = useConfirm()
 const mainStore = useMainStore()
 const accountStore = useAccountStore()
 const tournamentsStore = useTournamentsStore()
@@ -16,8 +18,11 @@ const account = computed(() => mainStore.account)
 const players = computed(() => detail.value.players)
 const gameUsername = ref<string | null>(null)
 const triedToClickJoinTournament = ref(false)
+const tournamentPlayer = computed(() => players.value.find(p => p.accountId === account.value?.id))
+const hasNotYetTippedWinner = computed(() => !tournamentPlayer.value?.expectedWinnerId)
+const isPartOfTournament = computed(() => !!tournamentPlayer)
 const canJoinTournament = computed(() => {
-  return account.value && !isTournamentStarted.value && detail.value.anyoneCanJoin && !players.value.some(p => p.accountId === account.value!.id)
+  return !isTournamentStarted.value && detail.value.anyoneCanJoin && isPartOfTournament.value
 })
 
 // Ordered players so that the logged-in user is always first
@@ -52,6 +57,21 @@ const joinTournament = async () => {
   }
 }
 
+const tipWinner = (expectedWinnerId: number) => {
+  confirm.require({
+    message: t('tournament_players.confirm_winner'),
+    header: t('common.confirmation'),
+    accept: async () => {
+      try {
+        await tournamentsStore.setTournamentPlayerExpectedWinner(tournamentPlayer.value!.id, expectedWinnerId)
+        successToast()
+      } catch (e) {
+        errorToast(e)
+      }
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -78,6 +98,19 @@ const joinTournament = async () => {
     <Column :header="$t('common.game_username')" field="gameUsername"></Column>
     <Column header="">
       <template #body="slotProps">
+        <Button
+          v-if="isPartOfTournament && hasNotYetTippedWinner && !isTournamentFinished"
+          v-tooltip="$t('tournament_players.tip_winner')"
+          icon="pi pi-check-square"
+          @click="tipWinner(slotProps.data.id)"
+        />
+        <div v-if="tournamentPlayer?.expectedWinnerId == slotProps.data.id">
+          <span
+            v-tooltip="$t('tournament_players.tip_winner')"
+            class="pi pi-check text-xl text-green-500"
+          ></span>
+        </div>
+
         <Button
           v-if="slotProps.data.account?.id == account?.id && slotProps.data?.statusId == tournamentPlayerStatus.pending"
           :disabled="isTournamentFinished || isTournamentStarted"
