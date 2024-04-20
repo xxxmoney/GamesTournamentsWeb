@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 const isLoggedIn = useIsLoggedIn()
+
+// For now disable contact form
+const enableContactForm = ref(false)
 </script>
 
 <template>
@@ -7,6 +10,6 @@ const isLoggedIn = useIsLoggedIn()
     <PageHomeHero :showTryNow="!isLoggedIn" />
     <PageHomeFeatures />
     <PageHomeCarousel />
-    <PageHomeContactForm v-if="!isLoggedIn" />
+    <PageHomeContactForm v-if="enableContactForm && !isLoggedIn" />
   </div>
 </template>
