@@ -40,13 +40,19 @@ public class AccountOperation(IRepositoryProvider repositoryProvider, IMapper ma
     {
         using var scope = repositoryProvider.CreateScope();
         var matchRepository = scope.Provide<IMatchRepository>();
+
+        var matchesWithPlayers = await matchRepository.GetMatchesWithPlayersByAccountIdAsync(accountId);
+        var matchesWithWinner = matchesWithPlayers.Select(mp => mp.Match).Where(m => m.WinnerId.HasValue).ToList();
+        var playersByMatchId = matchesWithPlayers.ToDictionary(key => key.Match.Id, value => value.Players);
         
-        var matches = await matchRepository.GetMatchesWithPlayersByAccountIdAsync(accountId);
-        
+        // Get win count of matches where winner team includes the account
+        var winCount = matchesWithWinner.Count(m => playersByMatchId[m.WinnerId!.Value].Any(p => p.AccountId == accountId));
         return new AccountInfo
         {
-            MatchesPlayed = matches.Count,
-            WinRateRatio = matches.Count == 0 ? 0 : (decimal) matches.Count(item => item.Match.WinnerId == accountId) / matches.Count
+            MatchesPlayed = matchesWithWinner.Count,
+            WinRateRatio = matchesWithWinner.Count == 0 ? 0 : (decimal)winCount / matchesWithWinner.Count,
+            WinCount = winCount,
+            LossCount = matchesWithWinner.Count - winCount
         };
     }
 

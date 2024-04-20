@@ -4,13 +4,15 @@ const useAllStores = () => {
   const gamesStore = useGamesStore()
   const mainStore = useMainStore()
   const tournamentsStore = useTournamentsStore()
+  const modulesStore = useModulesStore()
 
   return {
     accountStore,
     dashboardStore,
     gamesStore,
     mainStore,
-    tournamentsStore
+    tournamentsStore,
+    modulesStore
   }
 }
 

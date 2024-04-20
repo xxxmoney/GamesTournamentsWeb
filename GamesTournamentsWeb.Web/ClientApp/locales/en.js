@@ -285,7 +285,15 @@ export default {
       subtitle: 'Don\'t be afarid to select or {create} a view'
     },
     modules: {
-      tournament_history: 'Tournament history'
+      tournament_history: {
+        title: 'Tournament history'
+      },
+      win_loss_ratio: {
+        title: 'Win loss ratio',
+        win_count: 'Win count',
+        loss_count: 'Loss count',
+        player_no_matches: 'Player has not finished any matches yet'
+      }
     }
   }
 

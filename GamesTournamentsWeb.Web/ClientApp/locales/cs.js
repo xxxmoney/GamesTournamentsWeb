@@ -285,7 +285,15 @@ export default {
       subtitle: 'Neváhejte vybrat nebo {create} pohled'
     },
     modules: {
-      tournament_history: 'Historie turnajů'
+      tournament_history: {
+        title: 'Historie turnajů'
+      },
+      win_loss_ratio: {
+        title: 'Poměr výher a proher',
+        win_count: 'Počet výher',
+        loss_count: 'Počet proher',
+        player_no_matches: 'Zatím hráč nedohrál žádný zápas'
+      }
     }
   }
 

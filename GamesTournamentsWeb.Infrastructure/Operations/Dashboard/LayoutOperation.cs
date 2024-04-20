@@ -26,7 +26,14 @@ public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper map
 
         var models = await layoutRepository.GetLayoutByAccountIdAsync(accountId);
         
-        return mapper.Map<List<Layout>>(models);
+        var result = mapper.Map<List<Layout>>(models);
+        // Set indexes for layout items
+        foreach (var layout in result)
+        {
+            CalculateIndexesForLayoutItems(layout.Items);
+        }
+        
+        return result;
     }
 
     public async Task<LayoutOverview> UpsertLayoutAsync(int accountId, LayoutEdit layoutEdit)
@@ -77,6 +84,18 @@ public class LayoutOperation(IRepositoryProvider repositoryProvider, IMapper map
         
         await scope.SaveChangesAsync();
         
-        return mapper.Map<List<LayoutItem>>(newModels);
+        var result = mapper.Map<List<LayoutItem>>(newModels);
+        CalculateIndexesForLayoutItems(result);
+        
+        return result;
+    }
+    
+    
+    private static void CalculateIndexesForLayoutItems(ICollection<LayoutItem> items)
+    {
+        for (var i = 0; i < items.Count; i++)
+        {
+            items.ElementAt(i).Index = i;
+        }
     }
 }
