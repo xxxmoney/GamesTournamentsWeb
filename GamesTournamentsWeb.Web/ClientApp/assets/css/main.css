@@ -39,7 +39,7 @@
     --margin-y-xl: calc(var(--margin-y-lg) * 2);
 
     --active-area: 1200px;
-    --text-area: 700px;
+    --text-area: 900px;
 }
 
 .heading {

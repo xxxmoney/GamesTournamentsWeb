@@ -18,7 +18,7 @@ const first = computed({
 })
 
 const onPage = async (value: PageState) => {
-  tournamentsStore.filter.page = value.page
+  tournamentsStore.filter.page = value.page + 1
   await tournamentsStore.getTournamentOverviews()
 }
 

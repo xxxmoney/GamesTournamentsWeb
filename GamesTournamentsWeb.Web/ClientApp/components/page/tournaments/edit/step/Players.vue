@@ -16,7 +16,7 @@ const anyoneCanJoin = computed(() => edit.value.anyoneCanJoin)
 const accounts = useAccounts()
 const accountsFiltered = computed(() => accounts.value.filter((account) => !accountsIds.value.includes(account.id)))
 
-const { getAccountsName } = useGetAccountName()
+const { getAccountName } = useGetAccountName()
 
 const addAccount = () => {
   if (selectedAccountId.value) {

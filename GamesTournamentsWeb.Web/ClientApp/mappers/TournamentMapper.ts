@@ -19,7 +19,7 @@ export const TournamentMapper = {
     edit.prizes = tournamentDetail?.prizes.map(prize => copyObject(prize)) ?? []
     edit.players = tournamentDetail?.players.map(player => copyObject(player)) ?? []
     edit.streams = tournamentDetail?.streams.map(stream => copyObject(stream)) ?? []
-    edit.minimumPlayers = tournamentDetail?.minimumPlayers ?? null
+    edit.minimumPlayers = tournamentDetail?.minimumPlayers ?? 1
     edit.maximumPlayers = tournamentDetail?.maximumPlayers ?? null
     if (tournamentDetail?.prizes.length) {
       edit.currencyId = tournamentDetail.prizes[0].currencyId
