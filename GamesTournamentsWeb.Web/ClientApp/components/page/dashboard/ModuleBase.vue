@@ -61,7 +61,7 @@ const removeLayoutItem = async () => {
       :is="resolvedModule"
       v-if="resolvedModule"
       :moduleId="moduleId"
-      class="flex-1"
+      class="flex-1 overflow-auto"
     />
   </div>
 </template>
