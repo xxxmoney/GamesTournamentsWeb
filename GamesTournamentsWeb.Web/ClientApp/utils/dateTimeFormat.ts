@@ -12,9 +12,13 @@ const timeDifferenceJs = (date: Date, otherDate: Date | null = null): string => 
     otherDate = DateTime.now().toUTC().toJSDate()
   }
 
-  const difference = DateTime
+  let difference = DateTime
     .fromJSDate(new Date(date))
     .diff(DateTime.fromJSDate(otherDate))
+
+  if (difference.as('milliseconds') < 0) {
+    difference = difference.negate()
+  }
 
   return difference.toFormat("h'h' m'm'")
 }

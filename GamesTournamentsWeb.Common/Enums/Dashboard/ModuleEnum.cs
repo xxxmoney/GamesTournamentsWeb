@@ -2,5 +2,6 @@
 
 public enum ModuleEnum
 {
-    TournamentHistory = 1
+    TournamentHistory = 1,
+    WinLossRatio = 2,
 }

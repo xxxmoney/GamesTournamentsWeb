@@ -1,18 +1,27 @@
 <script lang="ts" setup>
 const store = useDashboardStore()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
 
 const selectedModuleId = ref<number | null>(null)
 const modules = computed(() => store.modules)
 
 const emit = defineEmits(['selected'])
 
-const selectModule = () => {
+const selectModule = async () => {
   if (!selectedModuleId.value) {
     throw new Error('Module Id is not selected')
   }
+  
+  try {
+    store.updateOrAddSelectedLayoutItem(selectedModuleId.value)
+    await store.upsertSelectedLayoutItems(store.selectedLayout!.items)
+    emit('selected', selectedModuleId.value)
 
-  store.updateOrAddSelectedLayoutItem(selectedModuleId.value)
-  emit('selected', selectedModuleId.value)
+    successToast()
+  } catch (e) {
+    errorToast(e)
+  }
 }
 </script>
 
@@ -21,7 +30,7 @@ const selectModule = () => {
     <CommonWithLabel :label="$t('common.choose_module')">
       <Dropdown
         v-model:modelValue="selectedModuleId"
-        :optionLabel="value => $t(`dashboard.modules.${toSnakeCase(value.name)}`)"
+        :optionLabel="value => $t(`dashboard.modules.${toSnakeCase(value.name)}.title`)"
         :options="modules"
         :placeholder="$t('common.choose_module')"
         optionValue="id"

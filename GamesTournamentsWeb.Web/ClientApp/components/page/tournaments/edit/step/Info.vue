@@ -125,18 +125,18 @@ defineExpose({
         </CommonWithLabel>
       </CommonWithErrors>
 
-      <CommonWithErrors :errors="v$.minimumPlayers.$errors">
-        <CommonWithLabel :label="$t('common.minimum_players')">
-          <InputNumber
-            v-model="edit.minimumPlayers"
-            :disabled="isTournamentFinished || isTournamentStarted"
-            :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"
-            :min="1"
-            :placeholder="$t('common.minimum_players')"
-            showButtons
-          />
-        </Commonwithlabel>
-      </CommonWithErrors>
+      <!--      <CommonWithErrors :errors="v$.minimumPlayers.$errors">-->
+      <!--        <CommonWithLabel :label="$t('common.minimum_players')">-->
+      <!--          <InputNumber-->
+      <!--            v-model="edit.minimumPlayers"-->
+      <!--            :disabled="isTournamentFinished || isTournamentStarted"-->
+      <!--            :max="edit.maximumPlayers ?? constants.tournamentEditMaximumPlayers"-->
+      <!--            :min="1"-->
+      <!--            :placeholder="$t('common.minimum_players')"-->
+      <!--            showButtons-->
+      <!--          />-->
+      <!--        </Commonwithlabel>-->
+      <!--      </CommonWithErrors>-->
 
       <CommonWithErrors :errors="v$.maximumPlayers.$errors">
         <CommonWithLabel :label="$t('common.maximum_players')">

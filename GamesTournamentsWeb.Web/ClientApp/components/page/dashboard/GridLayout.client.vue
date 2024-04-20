@@ -38,10 +38,10 @@ const onLayoutUpdated = (updatedLayout: LayoutItem[]) => {
       @layoutUpdated="onLayoutUpdated as Function"
     >
       <GridItem
-        v-for="(item, index) in layoutItems"
-        :key="`layout-item-${index}`"
+        v-for="(item) in layoutItems"
+        :key="`layout-item-${item.id}`"
         :h="item.h"
-        :i="index"
+        :i="item.i"
         :minH="constants.defaultLayoutItemHeight"
         :minW="constants.defaultLayoutItemWidth"
         :preserveAspectRatio="false"

@@ -59,5 +59,9 @@ export default {
   events: {
     tournamentEditNextStepRequest: 'tournament-edit-step-next-request',
     tournamentEditNextStepConfirm: 'tournament-edit-step-next-confirm'
+  },
+
+  modules: {
+    winLossRatioKey: 'win-loss-ratio'
   }
 }

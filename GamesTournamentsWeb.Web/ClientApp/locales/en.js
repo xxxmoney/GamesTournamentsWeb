@@ -92,7 +92,8 @@ export default {
     settings: 'Settings',
     has_ended: 'Has ended',
     create_date: 'Create date',
-    text: 'Text'
+    text: 'Text',
+    started_ago: 'Started ago'
   },
 
   validations: {
@@ -285,7 +286,15 @@ export default {
       subtitle: 'Don\'t be afarid to select or {create} a view'
     },
     modules: {
-      tournament_history: 'Tournament history'
+      tournament_history: {
+        title: 'Tournament history'
+      },
+      win_loss_ratio: {
+        title: 'Win loss ratio',
+        win_count: 'Win count',
+        loss_count: 'Loss count',
+        player_no_matches: 'Player has not finished any matches yet'
+      }
     }
   }
 

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const dashboardStore = useDashboardStore()
+const successToast = useSuccessToast()
+const errorToast = useErrorToast()
 
 const selectedLayoutId = computed({
   get: () => dashboardStore.selectedLayoutId,
@@ -12,7 +14,12 @@ const isSelectedLayout = computed(() => !!dashboardStore.selectedLayoutId)
 const layouts = computed(() => dashboardStore.layouts)
 
 const saveItems = async () => {
-  await dashboardStore.upsertSelectedLayoutItems(selectedLayout.value!.items)
+  try {
+    await dashboardStore.upsertSelectedLayoutItems(selectedLayout.value!.items)
+    successToast()
+  } catch (e) {
+    errorToast(e)
+  }
 }
 
 const removeSelectedLayout = async () => {

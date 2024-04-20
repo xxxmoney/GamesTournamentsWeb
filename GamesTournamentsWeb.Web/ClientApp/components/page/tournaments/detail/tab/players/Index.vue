@@ -20,9 +20,9 @@ const gameUsername = ref<string | null>(null)
 const triedToClickJoinTournament = ref(false)
 const tournamentPlayer = computed(() => players.value.find(p => p.accountId === account.value?.id))
 const hasNotYetTippedWinner = computed(() => !tournamentPlayer.value?.expectedWinnerId)
-const isPartOfTournament = computed(() => !!tournamentPlayer)
+const isPartOfTournament = computed(() => !!tournamentPlayer.value)
 const canJoinTournament = computed(() => {
-  return !isTournamentStarted.value && detail.value.anyoneCanJoin && isPartOfTournament.value
+  return !isTournamentStarted.value && detail.value.anyoneCanJoin && !isPartOfTournament.value && players.value.length < detail.value.maximumPlayers
 })
 
 // Ordered players so that the logged-in user is always first
@@ -75,56 +75,60 @@ const tipWinner = (expectedWinnerId: number) => {
 </script>
 
 <template>
-  <div v-if="canJoinTournament" class="container-row-gap items-end mb-lg">
-    <CommonInputText
-      v-model="gameUsername"
-      :class="{'animate-bounce': triedToClickJoinTournament && !gameUsername}"
-      :label="$t('common.game_username')"
-      :showLabel="false"
-    />
+  <div class="inline-flex flex-col gap">
+    <div v-if="canJoinTournament" class="container-row-gap items-end mb-lg">
+      <CommonInputText
+        v-model="gameUsername"
+        :class="{'animate-bounce': triedToClickJoinTournament && !gameUsername}"
+        :label="$t('common.game_username')"
+        :showLabel="false"
+      />
 
-    <div @click="triedToClickJoinTournament = true">
-      <Button :disabled="!gameUsername" :label="$t('tournament_players.join_tournament')" @click="joinTournament" />
+      <div @click="triedToClickJoinTournament = true">
+        <Button :disabled="!gameUsername" :label="$t('tournament_players.join_tournament')" @click="joinTournament" />
+      </div>
     </div>
-  </div>
 
-  <div class="inline-flex gap flex-col lg:flex-row">
-    <DataTable :value="orderedPlayers" size="small">
-      <Column :header="$t('tournament_players.username')" field="account.username"></Column>
-      <Column :header="$t('tournament_players.status')">
-        <template #body="slotProps">
-          <PageTournamentsGameUserStatus :statusId="slotProps.data.statusId" />
-        </template>
-      </Column>
-      <Column :header="$t('common.game_username')" field="gameUsername"></Column>
-      <Column header="">
-        <template #body="slotProps">
-          <Button
-            v-if="isPartOfTournament && hasNotYetTippedWinner && !isTournamentFinished"
-            v-tooltip="$t('tournament_players.tip_winner')"
-            icon="pi pi-check-square"
-            @click="tipWinner(slotProps.data.id)"
-          />
-          <div v-if="tournamentPlayer?.expectedWinnerId == slotProps.data.id">
-            <span
-              v-tooltip="$t('tournament_players.tip_winner')"
-              class="pi pi-check text-xl text-green-500"
-            ></span>
-          </div>
+    <div class="inline-flex gap flex-col lg:flex-row">
+      <DataTable :value="orderedPlayers" size="small">
+        <Column :header="$t('tournament_players.username')" field="account.username"></Column>
+        <Column :header="$t('tournament_players.status')">
+          <template #body="slotProps">
+            <PageTournamentsGameUserStatus :statusId="slotProps.data.statusId" />
+          </template>
+        </Column>
+        <Column :header="$t('common.game_username')" field="gameUsername"></Column>
+        <Column header="">
+          <template #body="slotProps">
+            <div class="container-row-gap-sm">
+              <Button
+                v-if="isPartOfTournament && hasNotYetTippedWinner && !isTournamentFinished"
+                v-tooltip="$t('tournament_players.tip_winner')"
+                icon="pi pi-check-square"
+                @click="tipWinner(slotProps.data.id)"
+              />
+              <div v-if="tournamentPlayer?.expectedWinnerId == slotProps.data.id">
+                <span
+                  v-tooltip="$t('tournament_players.tip_winner')"
+                  class="pi pi-check text-xl text-green-500"
+                ></span>
+              </div>
 
-          <Button
-            v-if="slotProps.data.account?.id == account?.id && slotProps.data?.statusId == tournamentPlayerStatus.pending"
-            :disabled="isTournamentFinished || isTournamentStarted"
-            icon="pi pi-wrench"
-            @click="goToInvitations"
-          />
-        </template>
-      </Column>
-    </DataTable>
+              <Button
+                v-if="slotProps.data.account?.id == account?.id && slotProps.data?.statusId == tournamentPlayerStatus.pending"
+                :disabled="isTournamentFinished || isTournamentStarted"
+                icon="pi pi-wrench"
+                @click="goToInvitations"
+              />
+            </div>
+          </template>
+        </Column>
+      </DataTable>
 
-    <Divider class="hidden lg:block" layout="vertical" />
+      <Divider class="hidden lg:block" layout="vertical" />
 
-    <PageTournamentsDetailTabPlayersChart />
+      <PageTournamentsDetailTabPlayersChart />
+    </div>
   </div>
 </template>
 
