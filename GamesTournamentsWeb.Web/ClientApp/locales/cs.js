@@ -92,7 +92,8 @@ export default {
     settings: 'Nastavení',
     has_ended: 'Skončil',
     create_date: 'Datum vytvoření',
-    text: 'Text'
+    text: 'Text',
+    started_ago: 'Začal před'
   },
 
   validations: {

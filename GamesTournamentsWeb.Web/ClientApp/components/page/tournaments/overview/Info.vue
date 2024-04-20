@@ -26,13 +26,14 @@ const { name, gameName, regionNames, platformName, startDate, endDate } = define
   }
 })
 
+const isRunning = computed(() => new Date(startDate).getUTCDate() < new Date().getUTCDate())
+
 const startDateClass = computed(() => {
   if (endDate) {
     return 'text-gray-400'
   }
 
-  const nowUtc = new Date().getUTCDate()
-  return new Date(startDate).getUTCDate() < nowUtc ? 'color-primary animate-pulse' : ''
+  return isRunning.value ? 'color-primary animate-pulse' : ''
 })
 </script>
 
@@ -46,13 +47,17 @@ const startDateClass = computed(() => {
   </div>
 
   <div class="container gap">
-    <span :class="startDateClass">{{ formatJsDate(startDate) }}</span>
+    <span :class="startDateClass">{{ formatJsDate(startDate as Date) }}</span>
 
     <div v-if="!endDate">
-      <span>{{ $t('common.starts_in') }}: {{ timeDifferenceJs(startDate) }}</span>
+      <span>
+        {{
+          isRunning ? $t('common.started_ago') : $t('common.starts_in')
+        }}: {{ timeDifferenceJs(startDate as Date) }}
+      </span>
     </div>
     <div v-else>
-      <span v-tooltip="formatJsDate(endDate)">{{ $t('common.has_ended') }}</span>
+      <span v-tooltip="formatJsDate(endDate as Date)">{{ $t('common.has_ended') }}</span>
     </div>
   </div>
 </template>

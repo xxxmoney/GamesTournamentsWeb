@@ -92,7 +92,8 @@ export default {
     settings: 'Settings',
     has_ended: 'Has ended',
     create_date: 'Create date',
-    text: 'Text'
+    text: 'Text',
+    started_ago: 'Started ago'
   },
 
   validations: {
