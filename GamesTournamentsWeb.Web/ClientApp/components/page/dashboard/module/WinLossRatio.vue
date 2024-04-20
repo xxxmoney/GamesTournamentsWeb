@@ -25,7 +25,8 @@ const options = computed(() => ({
   chart: {
     id: 'win-loss-ratio-module-chart'
   },
-  labels: [t('dashboard.modules.win_loss_ratio.win_count'), t('dashboard.modules.win_loss_ratio.loss_count')]
+  labels: [t('dashboard.modules.win_loss_ratio.win_count'), t('dashboard.modules.win_loss_ratio.loss_count')],
+  colors: ['#63cb67', '#FF5252']
 }))
 
 const series = computed(() => [data.value?.winCount ?? 0, data.value?.lossCount ?? 0])
