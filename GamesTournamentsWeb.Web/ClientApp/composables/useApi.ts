@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const useApi = () => {
-  // TODO: fix baseURL
-  const baseURL = process.env.API || 'http://localhost:5162/api'
+  const config = useRuntimeConfig()
+  const baseURL = config.public.API_URL as string
 
   const mainStore = useMainStore()
 
