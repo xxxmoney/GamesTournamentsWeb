@@ -6,11 +6,11 @@ const { orientation, bypassMobile } = defineProps({
     default: false
   }
 })
-
-const emit = defineEmits(['linkClick'])
-const onLinkClick = () => {
-  emit('linkClick')
-}
+ 
+// const emit = defineEmits(['linkClick'])
+// const onLinkClick = () => {
+//   emit('linkClick')
+// }
 
 const flexClass = useFlexByOrientationClass(orientation)
 const mobileClass = computed(() => bypassMobile ? '' : 'invisible lg:visible')

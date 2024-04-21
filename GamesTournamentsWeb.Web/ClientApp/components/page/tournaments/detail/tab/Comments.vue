@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import sanitizeHtml from 'sanitize-html'
 import type { TournamentComment } from '~/models/tournaments/TournamentComment'
 
 const successToast = useSuccessToast()
@@ -69,7 +70,8 @@ onMounted(() => {
       </Column>
       <Column :header="$t('common.text')">
         <template #body="{ data }">
-          <div v-html="(data as TournamentComment).text" />
+          <!--  eslint-disable-next-line  -->
+          <div v-html="sanitizeHtml((data as TournamentComment).text)"/>
         </template>
       </Column>
     </DataTable>

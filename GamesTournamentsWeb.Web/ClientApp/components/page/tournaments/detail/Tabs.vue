@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-const mainStore = useMainStore()
-const tournamentsStore = useTournamentsStore()
-
 const isAdmin = useIsTournamentAdmin()
 
 </script>

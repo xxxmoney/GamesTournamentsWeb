@@ -22,7 +22,7 @@ const { name, gameName, regionNames, platformName, startDate, endDate } = define
   },
   endDate: {
     type: Date,
-    required: false
+    default: null
   }
 })
 

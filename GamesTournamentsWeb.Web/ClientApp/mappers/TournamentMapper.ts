@@ -1,6 +1,5 @@
 import type { Tournament } from '~/models/tournaments/Tournament'
 import { TournamentEdit } from '~/models/tournaments/TournamentEdit'
-import type { Match } from '~/models/tournaments/Match'
 import { copyObject } from '~/utils/objectUtils'
 
 export const TournamentMapper = {
